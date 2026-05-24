@@ -1144,8 +1144,8 @@ function init(){
   mi=document.getElementById("modalImg");
   md=document.getElementById("modalDots");
   document.getElementById("modalClose").onclick=close;
-  document.getElementById("modalPrev").onclick=function(e){e.stopPropagation();go(cur-1);};
-  document.getElementById("modalNext").onclick=function(e){e.stopPropagation();go(cur+1);};
+  document.getElementById("modalPrev").onclick=function(e){e.stopPropagation();stopAuto();go(cur-1);startAuto();};
+  document.getElementById("modalNext").onclick=function(e){e.stopPropagation();stopAuto();go(cur+1);startAuto();};
   ov.onclick=function(e){if(e.target===ov)close();};
   document.addEventListener("keydown",function(e){
     if(!ov.classList.contains("open"))return;
@@ -1162,7 +1162,7 @@ function init(){
     c.onclick=function(){openW(k);};
   });
 }
-function openW(k){
+var timer=null;function startAuto(){stopAuto();if(sl.length>1)timer=setInterval(function(){go(cur+1);},2500);}function stopAuto(){if(timer){clearInterval(timer);timer=null;}}function openW(k){
   var w=W[k];
   sl=w.slides; cur=0;
   document.getElementById("modalNum").textContent=k;
@@ -1173,8 +1173,9 @@ function openW(k){
   render();
   ov.classList.add("open");
   document.body.style.overflow="hidden";
+  startAuto();
 }
-function close(){ov.classList.remove("open");document.body.style.overflow="";}
+function close(){stopAuto();ov.classList.remove("open");document.body.style.overflow="";}
 function go(i){cur=(i+sl.length)%sl.length;render();}
 function render(){
   mi.src=sl[cur];
