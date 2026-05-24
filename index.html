@@ -700,6 +700,14 @@
       .hero-scroll { display: none; }
       .client-item { flex: 1 1 50%; }
     }
+  
+    @media (max-width: 640px) {
+      #hero { min-height: 100vh; padding-top: 18vh; padding-bottom: 8vh; }
+      .hero-eyebrow { margin-bottom: 0.3rem !important; font-size: 0.55rem !important; letter-spacing: 0.28em !important; }
+      .hero-brand { font-size: 0.7rem !important; margin-bottom: 1.8rem !important; }
+      .hero-bg-slide.active { opacity: 0.38; }
+      .hero-bg-overlay { background: radial-gradient(ellipse at center, rgba(8,8,6,0.45) 0%, rgba(8,8,6,0.78) 65%, rgba(8,8,6,0.92) 100%); }
+    }
   </style>
 </head>
 <body>
@@ -1088,198 +1096,83 @@
 })();
 </script>
 <script>
-/* ■■ CANVAS: Fire + Water Particles ■■ */
+/* ■■ CANVAS: Flowing Streams (Yuragi/Fluctuation) ■■ */
 (function() {
   const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
+  let W, H, streams = [], t = 0;
 
   function resize() {
     W = canvas.width = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
   resize();
-  window.addEventListener('resize', () => { resize(); initParticles(); });
+  window.addEventListener('resize', () => { resize(); initStreams(); });
 
   function rand(a, b) { return a + Math.random() * (b - a); }
 
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.type = Math.random() < 0.5 ? 'fire' : 'water';
+  class Stream {
+    constructor(i, total) {
+      this.id = i;
+      // 火（金）と水（青緑）を交互に
+      this.type = i % 2 === 0 ? 'fire' : 'water';
+      this.baseY = H * (0.15 + (i / total) * 0.7);
+      this.amplitude = rand(40, 120);
+      this.wavelength = rand(0.003, 0.007);
+      this.phase = rand(0, Math.PI * 2);
+      this.speed = rand(0.0008, 0.0018);
+      this.opacity = rand(0.05, 0.18);
+      this.thickness = rand(0.6, 1.6);
+      this.driftY = rand(-30, 30);
+      this.driftSpeed = rand(0.0003, 0.0008);
+      this.driftPhase = rand(0, Math.PI * 2);
       if (this.type === 'fire') {
-        this.x = rand(W * 0.35, W * 0.95);
-        this.y = rand(H * 0.5, H * 1.1);
-        this.vx = rand(-0.3, 0.3);
-        this.vy = rand(-0.8, -0.25);
-        this.size = rand(1.2, 3.5);
-        this.alpha = rand(0.3, 0.7);
-        this.decay = rand(0.003, 0.008);
-        this.r = rand(200, 220); this.g = rand(130, 165); this.b = rand(40, 90);
-        this.wobble = rand(0, Math.PI * 2);
-        this.wobbleSpeed = rand(0.02, 0.06);
+        this.color = `197, 165, 90`; // ゴールド
       } else {
-        this.x = rand(-50, W * 0.6);
-        this.y = rand(H * 0.2, H * 0.85);
-        this.vx = rand(0.15, 0.5);
-        this.vy = rand(-0.12, 0.12);
-        this.size = rand(1.0, 2.8);
-        this.alpha = rand(0.2, 0.5);
-        this.decay = rand(0.002, 0.006);
-        this.r = rand(100, 140); this.g = rand(165, 195); this.b = rand(200, 230);
-        this.wobble = rand(0, Math.PI * 2);
-        this.wobbleSpeed = rand(0.01, 0.04);
+        this.color = `120, 175, 200`; // 冷たい水色
       }
-      this.life = this.alpha;
     }
-    update() {
-      this.wobble += this.wobbleSpeed;
-      this.x += this.vx + Math.sin(this.wobble) * 0.3;
-      this.y += this.vy;
-      this.alpha -= this.decay;
-      if (this.alpha <= 0) this.reset();
-    }
-    draw() {
+    draw(time) {
+      const drift = Math.sin(time * this.driftSpeed + this.driftPhase) * this.driftY;
+      const y0 = this.baseY + drift;
       ctx.save();
-      ctx.globalAlpha = Math.max(0, this.alpha);
-      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
-      grad.addColorStop(0, `rgba(${this.r},${this.g},${this.b},1)`);
-      grad.addColorStop(1, `rgba(${this.r},${this.g},${this.b},0)`);
-      ctx.fillStyle = grad;
+      ctx.globalCompositeOperation = 'lighter';
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
-      ctx.fill();
+      for (let x = -20; x <= W + 20; x += 4) {
+        const y = y0 
+          + Math.sin(x * this.wavelength + time * this.speed * 60 + this.phase) * this.amplitude
+          + Math.sin(x * this.wavelength * 2.7 + time * this.speed * 30) * (this.amplitude * 0.3);
+        if (x === -20) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      // グラデーション線
+      const grad = ctx.createLinearGradient(0, 0, W, 0);
+      grad.addColorStop(0, `rgba(${this.color}, 0)`);
+      grad.addColorStop(0.5, `rgba(${this.color}, ${this.opacity})`);
+      grad.addColorStop(1, `rgba(${this.color}, 0)`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = this.thickness;
+      ctx.stroke();
       ctx.restore();
     }
   }
 
-  function initParticles() {
-    particles = [];
-    const count = Math.min(80, Math.floor(W / 18));
-    for (let i = 0; i < count; i++) {
-      const p = new Particle();
-      if (p.type === 'fire') p.y = rand(0, H);
-      else p.x = rand(0, W);
-      p.alpha = rand(0, p.life);
-      particles.push(p);
-    }
+  function initStreams() {
+    streams = [];
+    const count = W < 640 ? 14 : 22;
+    for (let i = 0; i < count; i++) streams.push(new Stream(i, count));
   }
-  initParticles();
 
   function animate() {
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
+    t++;
+    streams.forEach(s => s.draw(t));
     requestAnimationFrame(animate);
   }
+
+  initStreams();
   animate();
-})();
-
-/* ■■ Mouse Parallax on Hero Inner ■■ */
-(function() {
-  const hero = document.getElementById('hero');
-  const inner = document.getElementById('heroInner');
-  let mx = 0, my = 0, cx = 0, cy = 0;
-  hero.addEventListener('mousemove', e => {
-    const r = hero.getBoundingClientRect();
-    mx = (e.clientX - r.left - r.width  / 2) / r.width;
-    my = (e.clientY - r.top  - r.height / 2) / r.height;
-  });
-  hero.addEventListener('mouseleave', () => { mx = 0; my = 0; });
-  (function loop() {
-    cx += (mx - cx) * 0.06;
-    cy += (my - cy) * 0.06;
-    inner.style.transform = `translate(${cx * 12}px, ${cy * 8}px)`;
-    requestAnimationFrame(loop);
-  })();
-})();
-
-/* ■■ Scroll Reveal ■■ */
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-reveals.forEach(el => io.observe(el));
-</script>
-
-  
-
-  <!-- MODAL -->
-  <div class="modal-overlay" id="workModal" role="dialog" aria-modal="true">
-    <div class="modal-inner">
-      <div class="modal-header">
-        <button class="modal-close" id="modalClose">&#x2715;</button>
-        <div class="modal-num" id="modalNum"></div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-meta" id="modalMeta"></div>
-      </div>
-      <div class="modal-gallery">
-        <img id="modalImg" src="" alt="">
-        <button class="modal-prev" id="modalPrev">&#8249;</button>
-        <button class="modal-next" id="modalNext">&#8250;</button>
-        <div class="modal-nav" id="modalDots"></div>
-      </div>
-      <div class="modal-body">
-        <div class="modal-desc" id="modalDesc"></div>
-        <div class="modal-credit" id="modalCredit"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-(function(){
-var W={"01":{title:"キャノピーbyヒルトン<br>沖縄宮古島リゾート",meta:"Hotel · 2026 · Miyakojima",desc:"光は、揺れることで場所になる。<br><br>和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。<br><br>アジア太平洋初のリゾートブランドとして2026年4月開業。内装デザインはHBAが手がけた。",credit:"Interior Design: HBA (Hirsch Bedner Associates)<br>Lighting Installation: atelier TECNO FORM",slides:["images/hilton-okinawa-01.jpg","images/hilton-okinawa-02.jpg","images/hilton-okinawa-03.jpg","images/hilton-okinawa-04.jpg","images/hilton-okinawa-05.jpg","images/hilton-okinawa-07.jpg","images/hilton-okinawa-08.jpg"]},"09":{title:"シスメックス株式会社<br>本社",meta:"Corporate · 2005 · Kobe",desc:"ガラスに封じ込めた、細胞の記憶。<br><br>血球計数装置の世界的メーカーであるシスメックス。その本社エントランスに、細胞・水・生命のゆらぎをモチーフとしたパラメトリックガラスオブジェクトを制作。Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現しました。",credit:"Glass Object Design &amp; Production: atelier TECNO FORM",slides:["images/sysmex.jpg"]},"17":{title:"大丸神戸店<br>クラフトガラス壁面アート",meta:"Retail · 2024 · Sannomiya, Kobe",desc:"山の中に、景色がある。<br><br>六甲山系・丹生山系——今も昔も変わらず神戸三宮を見守る山々。その稜線をパラメトリック設計でトレースし、データとして壁面に刻む。<br><br>山の中に宿る風、雨、氷、樹木、川、霧。そうした自然の素材風景をひとつひとつのガラスに封じ込めた。複数種のクラフトガラスが重なり、光の角度によって表情を変えながら、大丸神戸店のエントランスに六甲の記憶を静かに映し続ける。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/daimaru-kobe-01.jpg","images/daimaru-kobe-02.jpg","images/daimaru-kobe-03.jpg","images/daimaru-kobe-04.jpg","images/daimaru-kobe-05.jpg","images/daimaru-kobe-06.jpg","images/daimaru-kobe-07.jpg"]},"18":{title:"多可町生涯学習<br>まちづくりプラザ Asmile",meta:"Public · 2024 · Taka-cho, Hyogo",desc:"意匠主題：あふれだす<br><br>「生涯学び続けられる生きがいあふれるまちづくり」——多可町のこの目標から意匠テーマを「あふれだす」と定めました。<br><br>学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。地域の宝・杉原紙を用いた5つのガラスアートで空間全体に織り込んでいます。",credit:"Architecture: 内藤建築事務所<br>Glass Art: atelier TECNO FORM",slides:["images/taka-town-01.jpg","images/taka-town-02.jpg","images/taka-town-03.jpg","images/taka-town-04.jpg","images/taka-town-05.jpg","images/taka-town-06.jpg"]},"12":{title:"パークタワー晴海<br>マンションギャラリー エントランス",meta:"Residential · 2017 · Harumi, Tokyo",desc:"風と光の輝きを、ブロンズミラーに封じ込める。<br><br>「風」をテーマに、ブロンズミラー表面へサンドブラスト加工を施したエントランス壁面ガラスアート。線が織りなす隙間や重なりが自然の情景を生み出し、多数のクリスタルが光と風の輝きを空間に宿す。<br><br>三井不動産レジデンシャルによるパークタワー晴海の最上階プレミアム住戸マンションギャラリー。東京湾を望む眺望と呼応するように、壁面に宇宙的なスケールの風景が広がります。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/park-tower-harumi-01.jpg","images/park-tower-harumi-02.jpg","images/park-tower-harumi-03.jpg","images/park-tower-harumi-04.jpg","images/park-tower-harumi-05.jpg"]},"21":{title:"ホテル京阪<br>天満橋駅前",meta:"Hotel · 2025 · Osaka",desc:"光は、素材を通じてはじめて「存在」する。<br><br>杉原紙は楮の繊維を水と植物性の粘液で漉き、紐で模様を描く——鎌倉時代から続く手仕事の産物。天井パネル、螺旋フロアランプ、壁面アートピースのいずれも杉原紙を立体成形し、川面に揺れる光の粒のような陰影を生み出しています。",credit:"Interior Design: ZYCC Corporation<br>Art Production: atelier TECNO FORM",slots:["images/hotel-keihan-tenmabashi-01.jpg","images/hotel-keihan-tenmabashi-02.jpg","images/hotel-keihan-tenmabashi-03.jpg","images/hotel-keihan-tenmabashi-04.jpg","images/hotel-keihan-tenmabashi-05.jpg","images/hotel-keihan-tenmabashi-06.jpg"]}};
-W["21"].slides=W["21"].slots;
-var ov,mi,md,cur=0,sl=[];
-function init(){
-  ov=document.getElementById("workModal");
-  mi=document.getElementById("modalImg");
-  md=document.getElementById("modalDots");
-  document.getElementById("modalClose").onclick=close;
-  document.getElementById("modalPrev").onclick=function(e){e.stopPropagation();stopAuto();go(cur-1);startAuto();};
-  document.getElementById("modalNext").onclick=function(e){e.stopPropagation();stopAuto();go(cur+1);startAuto();};
-  ov.onclick=function(e){if(e.target===ov)close();};
-  document.addEventListener("keydown",function(e){
-    if(!ov.classList.contains("open"))return;
-    if(e.key==="Escape")close();
-    if(e.key==="ArrowLeft")go(cur-1);
-    if(e.key==="ArrowRight")go(cur+1);
-  });
-  document.querySelectorAll(".work-card").forEach(function(c){
-    var n=c.querySelector(".work-num");
-    if(!n)return;
-    var k=n.textContent.trim();
-    if(!W[k])return;
-    c.style.cursor="pointer";
-    c.onclick=function(){openW(k);};
-  });
-}
-var timer=null;function startAuto(){stopAuto();if(sl.length>1)timer=setInterval(function(){go(cur+1);},2500);}function stopAuto(){if(timer){clearInterval(timer);timer=null;}}function openW(k){
-  var w=W[k];
-  sl=w.slides; cur=0;
-  document.getElementById("modalNum").textContent=k;
-  document.getElementById("modalTitle").innerHTML=w.title;
-  document.getElementById("modalMeta").textContent=w.meta;
-  document.getElementById("modalDesc").innerHTML=w.desc;
-  document.getElementById("modalCredit").innerHTML=w.credit;
-  render();
-  ov.classList.add("open");
-  document.body.style.overflow="hidden";
-  startAuto();
-}
-function close(){stopAuto();ov.classList.remove("open");document.body.style.overflow="";}
-function go(i){cur=(i+sl.length)%sl.length;render();}
-function render(){
-  mi.src=sl[cur];
-  md.innerHTML="";
-  sl.forEach(function(_,i){
-    var d=document.createElement("button");
-    d.className="modal-dot"+(i===cur?" active":"");
-    d.onclick=function(e){e.stopPropagation();go(i);};
-    md.appendChild(d);
-  });
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);
-else init();
 })();
 </script>
 
