@@ -51,6 +51,112 @@
     }
     .work-slideshow img.fade-out { opacity: 0; }
 
+
+    /* ■■ MODAL ■■ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(8,8,6,0.92);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+    .modal-inner {
+      position: relative;
+      max-width: 860px; width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-2);
+      border: 1px solid rgba(197,165,90,0.15);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: translateY(24px);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-overlay.open .modal-inner {
+      transform: translateY(0);
+    }
+    .modal-gallery {
+      position: relative; aspect-ratio: 3/4;
+      overflow: hidden; background: #0a0a07;
+    }
+    .modal-gallery img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease;
+    }
+    .modal-gallery img.hidden { opacity: 0; }
+    .modal-nav {
+      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px;
+    }
+    .modal-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(240,235,224,0.3); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+    }
+    .modal-dot.active { background: var(--accent); transform: scale(1.4); }
+    .modal-prev, .modal-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(14,14,11,0.6); border: 1px solid rgba(197,165,90,0.2);
+      color: var(--accent); font-size: 1.1rem;
+      width: 36px; height: 36px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-prev:hover, .modal-next:hover { background: rgba(197,165,90,0.15); }
+    .modal-prev { left: 0.7rem; }
+    .modal-next { right: 0.7rem; }
+    .modal-body {
+      padding: 2.4rem 2rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow-y: auto;
+    }
+    .modal-num {
+      font-family: var(--font-display); font-size: 3.5rem; font-weight: 300;
+      font-style: italic; color: rgba(197,165,90,0.18); line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .modal-title {
+      font-family: var(--font-jp); font-size: 1.05rem; font-weight: 400;
+      letter-spacing: 0.06em; color: var(--text); margin-bottom: 0.3rem;
+      line-height: 1.6;
+    }
+    .modal-meta {
+      font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.6rem;
+    }
+    .modal-desc {
+      font-family: var(--font-jp); font-size: 0.78rem; line-height: 2.1;
+      color: var(--text-dim); flex: 1;
+      white-space: pre-line;
+    }
+    .modal-credit {
+      margin-top: 1.4rem; padding-top: 1rem;
+      border-top: 1px solid rgba(197,165,90,0.1);
+      font-family: var(--font-ui); font-size: 0.62rem;
+      letter-spacing: 0.1em; color: rgba(197,165,90,0.5);
+      line-height: 1.8;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: 1px solid rgba(197,165,90,0.2);
+      color: var(--text-dim); font-size: 1.1rem;
+      width: 34px; height: 34px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; z-index: 10;
+    }
+    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+    @media (max-width: 640px) {
+      .modal-inner { grid-template-columns: 1fr; }
+      .modal-gallery { aspect-ratio: 16/9; }
+    }
+
     /* ■■ NAV ■■ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -919,5 +1025,163 @@ reveals.forEach(el => io.observe(el));
     card.addEventListener('mouseleave', () => clearInterval(timer));
   });
   </script>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="workModal" role="dialog" aria-modal="true">
+    <div class="modal-inner">
+      <div class="modal-gallery">
+        <img id="modalImg" src="" alt="">
+        <button class="modal-prev" id="modalPrev">&#8249;</button>
+        <button class="modal-next" id="modalNext">&#8250;</button>
+        <div class="modal-nav" id="modalDots"></div>
+      </div>
+      <div class="modal-body">
+        <button class="modal-close" id="modalClose">&#x2715;</button>
+        <div>
+          <div class="modal-num" id="modalNum"></div>
+          <div class="modal-title" id="modalTitle"></div>
+          <div class="modal-meta" id="modalMeta"></div>
+          <div class="modal-desc" id="modalDesc"></div>
+        </div>
+        <div class="modal-credit" id="modalCredit"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ■ 物件データ
+  const WORKS = {
+    '01': {
+      title: 'キャノピーbyヒルトン\n沖縄宮古島リゾート',
+      meta: 'Hotel · 2026 · Miyakojima, Okinawa',
+      desc: `光は、揺れることで場所になる。
+
+和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。
+
+アジア太平洋初のリゾートブランドとして2026年4月に開業したキャノピーbyヒルトン沖縄宮古島リゾート。内装デザインはHBA（Hirsch Bedner Associates）が手がけ、ロビーラウンジの中心に、atelier TECNO FORMの照明インスタレーションが配置された。`,
+      credit: 'Interior Design: HBA (Hirsch Bedner Associates)
+Lighting Installation: atelier TECNO FORM',
+      slides: ['images/hilton-okinawa-01.jpg','images/hilton-okinawa-02.jpg','images/hilton-okinawa-03.jpg','images/hilton-okinawa-04.jpg','images/hilton-okinawa-05.jpg','images/hilton-okinawa-07.jpg','images/hilton-okinawa-08.jpg']
+    },
+    '09': {
+      title: 'シスメックス株式会社\n本社',
+      meta: 'Corporate · 2005 · Kobe',
+      desc: `ガラスに封じ込めた、細胞の記憶。
+
+血球計数装置の世界的メーカーであるシスメックス。その本社エントランスに、細胞・水・生命のゆらぎをモチーフとしたパラメトリックガラスオブジェクトを制作しました。
+
+Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現。企業の核心である「生命科学」を、建築空間のなかで静かに語りかけます。`,
+      credit: 'Glass Object Design & Production: atelier TECNO FORM',
+      slides: ['images/sysmex.jpg']
+    },
+    '18': {
+      title: '多可町生涯学習\nまちづくりプラザ Asmile',
+      meta: 'Public Facility · 2024 · Taka-cho, Hyogo',
+      desc: `意匠主題：あふれだす
+
+「生涯学び続けられる生きがいあふれるまちづくり」——多可町が掲げるこの目標から、意匠のテーマを「あふれだす」と定めました。
+
+学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。その流れを、地域の宝である杉原紙を用いた5つのガラスアートで空間全体に織り込みました。
+
+風除室には流れと泡を重ねた杉原紙合わせ強化ガラス、図書館エントランスには大小の円が浮かぶはさみガラス、児童書架前には緑・黄緑の糸を漉き込んだ「絵本の森」——場所ごとに異なる文様が、学・交・表という3つのゾーンの役割を静かに語ります。`,
+      credit: 'Architecture: 内藤建築事務所
+Glass Art Design & Production: atelier TECNO FORM',
+      slides: ['images/taka-town-01.jpg','images/taka-town-02.jpg','images/taka-town-03.jpg','images/taka-town-04.jpg','images/taka-town-05.jpg','images/taka-town-06.jpg']
+    },
+    '21': {
+      title: 'ホテル京阪\n天満橋駅前',
+      meta: 'Hotel · 2025 · Osaka',
+      desc: `光は、素材を通じてはじめて「存在」する。
+
+杉原紙は、楮の繊維を水と植物性の粘液で漉き、紐で模様を描く——鎌倉時代から続く手仕事の産物です。1983年に兵庫県重要無形文化財に指定されたこの和紙に宿る、不均一な繊維の走りと微細な透光性が、照明と出会うことで空間の表情へと変わります。
+
+天井を覆う曲面パネル、螺旋状に立ち上がるフロアランプ、壁に佇む縦長のアートピース。いずれも杉原紙を立体的に成形し、内側から光を纏わせることで、川面に揺れる光の粒のような陰影を生み出しています。`,
+      credit: 'Interior Design & Construction: ZYCC Corporation
+Lighting & Art Production: atelier TECNO FORM',
+      slides: ['images/hotel-keihan-tenmabashi-01.jpg','images/hotel-keihan-tenmabashi-02.jpg','images/hotel-keihan-tenmabashi-03.jpg','images/hotel-keihan-tenmabashi-04.jpg','images/hotel-keihan-tenmabashi-05.jpg','images/hotel-keihan-tenmabashi-06.jpg']
+    }
+  };
+
+  // ■ モーダル制御
+  const overlay = document.getElementById('workModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalDots = document.getElementById('modalDots');
+  const modalNum = document.getElementById('modalNum');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalCredit = document.getElementById('modalCredit');
+
+  let currentSlides = [], currentIdx = 0;
+
+  function openModal(num) {
+    const w = WORKS[num];
+    if (!w) return;
+    currentSlides = w.slides;
+    currentIdx = 0;
+
+    modalNum.textContent = num;
+    modalTitle.innerHTML = w.title.replace('\n', '<br>');
+    modalMeta.textContent = w.meta;
+    modalDesc.textContent = w.desc;
+    modalCredit.innerHTML = w.credit.replace(/\n/g, '<br>');
+
+    renderSlide();
+    renderDots();
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderSlide() {
+    modalImg.src = currentSlides[currentIdx];
+  }
+
+  function renderDots() {
+    modalDots.innerHTML = '';
+    currentSlides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'modal-dot' + (i === currentIdx ? ' active' : '');
+      d.addEventListener('click', () => { currentIdx = i; renderSlide(); renderDots(); });
+      modalDots.appendChild(d);
+    });
+  }
+
+  function prevSlide() {
+    currentIdx = (currentIdx - 1 + currentSlides.length) % currentSlides.length;
+    renderSlide(); renderDots();
+  }
+  function nextSlide() {
+    currentIdx = (currentIdx + 1) % currentSlides.length;
+    renderSlide(); renderDots();
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalPrev').addEventListener('click', prevSlide);
+  document.getElementById('modalNext').addEventListener('click', nextSlide);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'ArrowRight') nextSlide();
+  });
+
+  // ■ work-cardにクリックイベント
+  document.querySelectorAll('.work-card').forEach(card => {
+    const num = card.querySelector('.work-num');
+    if (!num) return;
+    const n = num.textContent.trim();
+    if (!WORKS[n]) return;
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => openModal(n));
+  });
+  </script>
+
 </body>
 </html>
