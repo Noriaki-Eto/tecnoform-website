@@ -1115,7 +1115,6 @@
   class Stream {
     constructor(i, total) {
       this.id = i;
-      // 火（金）と水（青緑）を交互に
       this.type = i % 2 === 0 ? 'fire' : 'water';
       this.baseY = H * (0.15 + (i / total) * 0.7);
       this.amplitude = rand(40, 120);
@@ -1127,11 +1126,7 @@
       this.driftY = rand(-30, 30);
       this.driftSpeed = rand(0.0003, 0.0008);
       this.driftPhase = rand(0, Math.PI * 2);
-      if (this.type === 'fire') {
-        this.color = `197, 165, 90`; // ゴールド
-      } else {
-        this.color = `120, 175, 200`; // 冷たい水色
-      }
+      this.color = this.type === 'fire' ? '197, 165, 90' : '120, 175, 200';
     }
     draw(time) {
       const drift = Math.sin(time * this.driftSpeed + this.driftPhase) * this.driftY;
@@ -1140,13 +1135,12 @@
       ctx.globalCompositeOperation = 'lighter';
       ctx.beginPath();
       for (let x = -20; x <= W + 20; x += 4) {
-        const y = y0 
+        const y = y0
           + Math.sin(x * this.wavelength + time * this.speed * 60 + this.phase) * this.amplitude
           + Math.sin(x * this.wavelength * 2.7 + time * this.speed * 30) * (this.amplitude * 0.3);
         if (x === -20) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
-      // グラデーション線
       const grad = ctx.createLinearGradient(0, 0, W, 0);
       grad.addColorStop(0, `rgba(${this.color}, 0)`);
       grad.addColorStop(0.5, `rgba(${this.color}, ${this.opacity})`);
@@ -1173,6 +1167,88 @@
 
   initStreams();
   animate();
+})();
+</script>
+
+  
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="workModal" role="dialog" aria-modal="true">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <button class="modal-close" id="modalClose">&#x2715;</button>
+        <div class="modal-num" id="modalNum"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-meta" id="modalMeta"></div>
+      </div>
+      <div class="modal-gallery">
+        <img id="modalImg" src="" alt="">
+        <button class="modal-prev" id="modalPrev">&#8249;</button>
+        <button class="modal-next" id="modalNext">&#8250;</button>
+        <div class="modal-nav" id="modalDots"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-credit" id="modalCredit"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(function(){
+var W={"01":{title:"キャノピーbyヒルトン<br>沖縄宮古島リゾート",meta:"Hotel · 2026 · Miyakojima",desc:"光は、揺れることで場所になる。<br><br>和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。<br><br>アジア太平洋初のリゾートブランドとして2026年4月開業。内装デザインはHBAが手がけた。",credit:"Interior Design: HBA (Hirsch Bedner Associates)<br>Lighting Installation: atelier TECNO FORM",slides:["images/hilton-okinawa-01.jpg","images/hilton-okinawa-02.jpg","images/hilton-okinawa-03.jpg","images/hilton-okinawa-04.jpg","images/hilton-okinawa-05.jpg","images/hilton-okinawa-07.jpg","images/hilton-okinawa-08.jpg"]},"09":{title:"シスメックス株式会社<br>本社",meta:"Corporate · 2005 · Kobe",desc:"ガラスに封じ込めた、細胞の記憶。<br><br>血球計数装置の世界的メーカーであるシスメックス。その本社エントランスに、細胞・水・生命のゆらぎをモチーフとしたパラメトリックガラスオブジェクトを制作。Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現しました。",credit:"Glass Object Design &amp; Production: atelier TECNO FORM",slides:["images/sysmex.jpg"]},"17":{title:"大丸神戸店<br>クラフトガラス壁面アート",meta:"Retail · 2024 · Sannomiya, Kobe",desc:"山の中に、景色がある。<br><br>六甲山系・丹生山系——今も昔も変わらず神戸三宮を見守る山々。その稜線をパラメトリック設計でトレースし、データとして壁面に刻む。<br><br>山の中に宿る風、雨、氷、樹木、川、霧。そうした自然の素材風景をひとつひとつのガラスに封じ込めた。複数種のクラフトガラスが重なり、光の角度によって表情を変えながら、大丸神戸店のエントランスに六甲の記憶を静かに映し続ける。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/daimaru-kobe-01.jpg","images/daimaru-kobe-02.jpg","images/daimaru-kobe-03.jpg","images/daimaru-kobe-04.jpg","images/daimaru-kobe-05.jpg","images/daimaru-kobe-06.jpg","images/daimaru-kobe-07.jpg"]},"18":{title:"多可町生涯学習<br>まちづくりプラザ Asmile",meta:"Public · 2024 · Taka-cho, Hyogo",desc:"意匠主題：あふれだす<br><br>「生涯学び続けられる生きがいあふれるまちづくり」——多可町のこの目標から意匠テーマを「あふれだす」と定めました。<br><br>学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。地域の宝・杉原紙を用いた5つのガラスアートで空間全体に織り込んでいます。",credit:"Architecture: 内藤建築事務所<br>Glass Art: atelier TECNO FORM",slides:["images/taka-town-01.jpg","images/taka-town-02.jpg","images/taka-town-03.jpg","images/taka-town-04.jpg","images/taka-town-05.jpg","images/taka-town-06.jpg"]},"12":{title:"パークタワー晴海<br>マンションギャラリー エントランス",meta:"Residential · 2017 · Harumi, Tokyo",desc:"風と光の輝きを、ブロンズミラーに封じ込める。<br><br>「風」をテーマに、ブロンズミラー表面へサンドブラスト加工を施したエントランス壁面ガラスアート。線が織りなす隙間や重なりが自然の情景を生み出し、多数のクリスタルが光と風の輝きを空間に宿す。<br><br>三井不動産レジデンシャルによるパークタワー晴海の最上階プレミアム住戸マンションギャラリー。東京湾を望む眺望と呼応するように、壁面に宇宙的なスケールの風景が広がります。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/park-tower-harumi-01.jpg","images/park-tower-harumi-02.jpg","images/park-tower-harumi-03.jpg","images/park-tower-harumi-04.jpg","images/park-tower-harumi-05.jpg"]},"21":{title:"ホテル京阪<br>天満橋駅前",meta:"Hotel · 2025 · Osaka",desc:"光は、素材を通じてはじめて「存在」する。<br><br>杉原紙は楮の繊維を水と植物性の粘液で漉き、紐で模様を描く——鎌倉時代から続く手仕事の産物。天井パネル、螺旋フロアランプ、壁面アートピースのいずれも杉原紙を立体成形し、川面に揺れる光の粒のような陰影を生み出しています。",credit:"Interior Design: ZYCC Corporation<br>Art Production: atelier TECNO FORM",slots:["images/hotel-keihan-tenmabashi-01.jpg","images/hotel-keihan-tenmabashi-02.jpg","images/hotel-keihan-tenmabashi-03.jpg","images/hotel-keihan-tenmabashi-04.jpg","images/hotel-keihan-tenmabashi-05.jpg","images/hotel-keihan-tenmabashi-06.jpg"]}};
+W["21"].slides=W["21"].slots;
+var ov,mi,md,cur=0,sl=[];
+function init(){
+  ov=document.getElementById("workModal");
+  mi=document.getElementById("modalImg");
+  md=document.getElementById("modalDots");
+  document.getElementById("modalClose").onclick=close;
+  document.getElementById("modalPrev").onclick=function(e){e.stopPropagation();stopAuto();go(cur-1);startAuto();};
+  document.getElementById("modalNext").onclick=function(e){e.stopPropagation();stopAuto();go(cur+1);startAuto();};
+  ov.onclick=function(e){if(e.target===ov)close();};
+  document.addEventListener("keydown",function(e){
+    if(!ov.classList.contains("open"))return;
+    if(e.key==="Escape")close();
+    if(e.key==="ArrowLeft")go(cur-1);
+    if(e.key==="ArrowRight")go(cur+1);
+  });
+  document.querySelectorAll(".work-card").forEach(function(c){
+    var n=c.querySelector(".work-num");
+    if(!n)return;
+    var k=n.textContent.trim();
+    if(!W[k])return;
+    c.style.cursor="pointer";
+    c.onclick=function(){openW(k);};
+  });
+}
+var timer=null;function startAuto(){stopAuto();if(sl.length>1)timer=setInterval(function(){go(cur+1);},2500);}function stopAuto(){if(timer){clearInterval(timer);timer=null;}}function openW(k){
+  var w=W[k];
+  sl=w.slides; cur=0;
+  document.getElementById("modalNum").textContent=k;
+  document.getElementById("modalTitle").innerHTML=w.title;
+  document.getElementById("modalMeta").textContent=w.meta;
+  document.getElementById("modalDesc").innerHTML=w.desc;
+  document.getElementById("modalCredit").innerHTML=w.credit;
+  render();
+  ov.classList.add("open");
+  document.body.style.overflow="hidden";
+  startAuto();
+}
+function close(){stopAuto();ov.classList.remove("open");document.body.style.overflow="";}
+function go(i){cur=(i+sl.length)%sl.length;render();}
+function render(){
+  mi.src=sl[cur];
+  md.innerHTML="";
+  sl.forEach(function(_,i){
+    var d=document.createElement("button");
+    d.className="modal-dot"+(i===cur?" active":"");
+    d.onclick=function(e){e.stopPropagation();go(i);};
+    md.appendChild(d);
+  });
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);
+else init();
 })();
 </script>
 
