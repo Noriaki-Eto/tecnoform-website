@@ -293,8 +293,8 @@
     }
     .nav-logo {
       font-family: var(--font-display);
-      font-size: 1.05rem; font-weight: 600; letter-spacing: 0.32em;
-      color: var(--accent); text-transform: uppercase; text-decoration: none;
+      font-size: 1rem; font-weight: 500; letter-spacing: 0.22em;
+      color: var(--accent); text-decoration: none;
       text-shadow: 0 0 40px rgba(197,165,90,0.35), 0 1px 0 rgba(197,165,90,0.2);
     }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -316,6 +316,32 @@
       position: absolute; inset: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 0;
     }
+    /* ■■ HERO BACKGROUND SLIDES ■■ */
+    .hero-bg-slides {
+      position: absolute; inset: 0; z-index: 0;
+      overflow: hidden;
+    }
+    .hero-bg-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      transform: scale(1.05);
+      animation: heroKenBurns 24s infinite ease-in-out;
+    }
+    .hero-bg-slide.active { opacity: 0.32; }
+    .hero-bg-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: radial-gradient(ellipse at center, rgba(8,8,6,0.55) 0%, rgba(8,8,6,0.85) 70%, rgba(8,8,6,0.95) 100%);
+      pointer-events: none;
+    }
+    @keyframes heroKenBurns {
+      0%, 100% { transform: scale(1.05); }
+      50% { transform: scale(1.15); }
+    }
+    #hero .hero-canvas, #hero .hero-bg-glow, #hero .hero-svg,
+    #hero .hero-content, #hero .hero-scroll { position: relative; z-index: 2; }
+
     .hero-bg-glow {
       position: absolute; inset: 0; pointer-events: none; z-index: 0;
       background:
@@ -335,7 +361,7 @@
     /* eyebrow */
     .hero-eyebrow {
       font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.34em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 2.4rem;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
       opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
     }
 
@@ -571,17 +597,35 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .clients-row {
-      display: flex; flex-wrap: wrap; gap: 0;
-      border-top: 1px solid var(--border); margin-top: 3rem;
+    .clients-intro {
+      font-family: var(--font-jp); font-size: 0.78rem;
+      line-height: 2; color: var(--text-dim);
+      text-align: center; margin: 0 auto 4rem;
+      max-width: 640px;
     }
-    .client-item {
-      flex: 1 1 20%; padding: 1.8rem 2rem;
-      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      font-family: var(--font-jp); font-size: 0.82rem; color: var(--text-dim);
-      letter-spacing: 0.05em; line-height: 1.5;
-      transition: color 0.3s, background 0.3s;
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem 2.5rem;
+      max-width: 1100px; margin: 0 auto;
     }
+    .client-group-label {
+      font-family: var(--font-ui); font-size: 0.6rem;
+      letter-spacing: 0.34em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.2rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(197,165,90,0.18);
+    }
+    .client-list { display: flex; flex-direction: column; gap: 0.55rem; }
+    .client-list span {
+      font-family: var(--font-jp); font-size: 0.82rem;
+      color: var(--text); letter-spacing: 0.04em; line-height: 1.6;
+    }
+    @media (max-width: 640px) {
+      .clients-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+      .clients-intro { font-size: 0.72rem; margin-bottom: 3rem; }
+    }
+
     .client-item:hover { color: var(--text); background: rgba(197,165,90,0.02); }
 
     /* ■■ CONTACT ■■ */
@@ -673,6 +717,13 @@
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-bg-slides">
+    <div class="hero-bg-slide active" style="background-image:url(images/park-tower-harumi-04.jpg)"></div>
+    <div class="hero-bg-slide" style="background-image:url(images/daimaru-kobe-04.jpg)"></div>
+    <div class="hero-bg-slide" style="background-image:url(images/hilton-okinawa-08.jpg)"></div>
+    <div class="hero-bg-slide" style="background-image:url(images/park-tower-harumi-01.jpg)"></div>
+  </div>
+  <div class="hero-bg-overlay"></div>
   <canvas class="hero-canvas" id="heroCanvas"></canvas>
   <div class="hero-bg-glow"></div>
   <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -686,7 +737,8 @@
   </svg>
 
   <div class="hero-inner" id="heroInner">
-    <p class="hero-eyebrow">Glass &middot; Washi &middot; Parametric Design &middot; atelier TECNO FORM</p>
+    <p class="hero-eyebrow">Glass &middot; Washi &middot; Parametric Design</p>
+    <p class="hero-brand">atelier TECNO FORM</p>
     <h1 class="hero-title">
       <span class="line"><span class="line-inner">光が宿り、</span></span>
       <span class="line"><span class="line-inner"><span class="accent">素材が語りだす。</span></span></span>
@@ -964,19 +1016,42 @@
 
 <!-- CLIENTS -->
 <section id="clients">
-  <div class="section-label">Clients</div>
+  <div class="section-label">Trusted by</div>
   <h2 class="section-title">主要納入先</h2>
-  <div class="clients-row">
-    <div class="client-item">ヒルトン沖縄宮古島</div>
-    <div class="client-item">ザ・リッツカールトン東京</div>
-    <div class="client-item">ルネッサンス台北士林</div>
-    <div class="client-item">リーガロイヤルリタート沖縄</div>
-    <div class="client-item">パナスニック日比谷</div>
-    <div class="client-item">三井不動産</div>
-    <div class="client-item">大丸神戸店</div>
-    <div class="client-item">シスメックス株式会社</div>
-    <div class="client-item">パークタワー晴海</div>
-    <div class="client-item">多可町生涯学習施設</div>
+  <p class="clients-intro">高級ホテル・大手不動産・グローバル企業本社・公共施設まで——<br>世界水準を求める空間に選ばれてきました。</p>
+  <div class="clients-grid">
+    <div class="client-group">
+      <div class="client-group-label">Hospitality</div>
+      <div class="client-list">
+        <span>キャノピー by ヒルトン 沖縄宮古島</span>
+        <span>ザ・リッツカールトン東京</span>
+        <span>ルネッサンス台北士林</span>
+        <span>リーガロイヤルリゾート沖縄</span>
+        <span>ホテル京阪 天満橋駅前</span>
+      </div>
+    </div>
+    <div class="client-group">
+      <div class="client-group-label">Corporate</div>
+      <div class="client-list">
+        <span>シスメックス株式会社</span>
+        <span>パナソニック 日比谷</span>
+      </div>
+    </div>
+    <div class="client-group">
+      <div class="client-group-label">Residential</div>
+      <div class="client-list">
+        <span>三井不動産レジデンシャル パークタワー晴海</span>
+        <span>三井不動産 横浜北仲</span>
+        <span>三井不動産 パークコート</span>
+      </div>
+    </div>
+    <div class="client-group">
+      <div class="client-group-label">Retail &amp; Public</div>
+      <div class="client-list">
+        <span>大丸神戸店</span>
+        <span>多可町生涯学習まちづくりプラザ Asmile</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -986,8 +1061,8 @@
     <div class="section-label">Enquiry</div>
     <p class="contact-quote">設計に、<br>最高水準の光を。</p>
     <p class="contact-sub">
-      高級ホテルから企業エントランスまで、空間の求める素質をヒイリングし、<br>
-      素材を問いて、揺らぎを纏ぇ唯一の表現をご提案します。
+      高級ホテルから企業エントランスまで、空間の求める素質をヒアリングし、<br>
+      素材を解いて、揺らぎを纏う唯一の表現をご提案します。
     </p>
     <a href="mailto:info@tecnoform.jp" class="btn">Contact Us</a>
   </div>
@@ -999,6 +1074,19 @@
   <div class="footer-copy">&copy; 2026 atelier TECNO FORM. All rights reserved.</div>
 </footer>
 
+<script>
+/* HERO BG SLIDESHOW */
+(function(){
+  var slides = document.querySelectorAll('.hero-bg-slide');
+  if (slides.length < 2) return;
+  var cur = 0;
+  setInterval(function(){
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 5000);
+})();
+</script>
 <script>
 /* ■■ CANVAS: Fire + Water Particles ■■ */
 (function() {
