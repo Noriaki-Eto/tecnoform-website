@@ -885,7 +885,7 @@ reveals.forEach(el => io.observe(el));
   <script>
   // Slideshow for work cards
   document.querySelectorAll('.work-slideshow').forEach(card => {
-    const slides = JSON.parse(card.dataset.slides);
+    const slides = card.dataset.slides.split(',').map(s => s.trim()).filter(Boolean);
     if (slides.length <= 1) return;
     const img = card.querySelector('img');
     const dotsEl = card.querySelector('.slide-dots');
