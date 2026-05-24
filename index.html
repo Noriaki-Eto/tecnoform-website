@@ -33,23 +33,7 @@
     }
 
 
-    /* ■■ SLIDESHOW ■■ */
-    .slide-dots {
-      position: absolute; bottom: 0.7rem; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 5px; z-index: 10;
-    }
-    .slide-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: rgba(240,235,224,0.35); cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .slide-dot.active {
-      background: var(--accent); transform: scale(1.3);
-    }
-    .work-slideshow img {
-      transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s;
-    }
-    .work-slideshow img.fade-out { opacity: 0; }
+    
 
 
     /* ■■ MODAL ■■ */
@@ -623,7 +607,6 @@
         <div class="work-name">キャノピーbyヒルトン<br>沖縄宮古島リゾート</div>
         <div class="work-type">Hotel · Washi Shade · Miyakojima</div>
       </div>
-      <div class="slide-dots"></div>
     </div>
 
     <!-- 02 - Coming Soon -->
@@ -776,7 +759,6 @@
         <div class="work-name">多可町生涯学習<br>まちづくりプラザ Asmile</div>
         <div class="work-type">Public · Washi Glass · Hyogo</div>
       </div>
-      <div class="slide-dots"></div>
     </div>
 
     <!-- 19 - Coming Soon -->
@@ -803,7 +785,6 @@
         <div class="work-name">ホテル京阪<br>天満橋駅前</div>
         <div class="work-type">Hotel · Washi Room · Osaka</div>
       </div>
-      <div class="slide-dots"></div>
     </div>
 
   </div>
@@ -988,43 +969,7 @@ const io = new IntersectionObserver((entries) => {
 reveals.forEach(el => io.observe(el));
 </script>
 
-  <script>
-  // Slideshow for work cards
-  document.querySelectorAll('.work-slideshow').forEach(card => {
-    const slides = card.dataset.slides.split(',').map(s => s.trim()).filter(Boolean);
-    if (slides.length <= 1) return;
-    const img = card.querySelector('img');
-    const dotsEl = card.querySelector('.slide-dots');
-    let current = 0;
-
-    // ドット生成
-    slides.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
-      dotsEl.appendChild(dot);
-    });
-
-    function goTo(idx) {
-      current = idx;
-      img.classList.add('fade-out');
-      setTimeout(() => {
-        img.src = slides[current];
-        img.classList.remove('fade-out');
-      }, 300);
-      dotsEl.querySelectorAll('.slide-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === current);
-      });
-    }
-
-    // ホバー中は自動送り
-    let timer;
-    card.addEventListener('mouseenter', () => {
-      timer = setInterval(() => goTo((current + 1) % slides.length), 1800);
-    });
-    card.addEventListener('mouseleave', () => clearInterval(timer));
-  });
-  </script>
+  
 
   <!-- MODAL -->
   <div class="modal-overlay" id="workModal" role="dialog" aria-modal="true">
@@ -1049,139 +994,124 @@ reveals.forEach(el => io.observe(el));
   </div>
 
   <script>
-  // ■ 物件データ
-  const WORKS = {
-    '01': {
-      title: 'キャノピーbyヒルトン\n沖縄宮古島リゾート',
-      meta: 'Hotel · 2026 · Miyakojima, Okinawa',
-      desc: `光は、揺れることで場所になる。
+(function() {
+  var WORKS = {
+    "01": {
+      title: "キャノピーbyヒルトン<br>沖縄宮古島リゾート",
+      meta: "Hotel · 2026 · Miyakojima, Okinawa",
+      desc: "光は、揺れることで場所になる。
 
 和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。
 
-アジア太平洋初のリゾートブランドとして2026年4月に開業したキャノピーbyヒルトン沖縄宮古島リゾート。内装デザインはHBA（Hirsch Bedner Associates）が手がけ、ロビーラウンジの中心に、atelier TECNO FORMの照明インスタレーションが配置された。`,
-      credit: 'Interior Design: HBA (Hirsch Bedner Associates)
-Lighting Installation: atelier TECNO FORM',
-      slides: ['images/hilton-okinawa-01.jpg','images/hilton-okinawa-02.jpg','images/hilton-okinawa-03.jpg','images/hilton-okinawa-04.jpg','images/hilton-okinawa-05.jpg','images/hilton-okinawa-07.jpg','images/hilton-okinawa-08.jpg']
+アジア太平洋初のリゾートブランドとして2026年4月に開業。内装デザインはHBA（Hirsch Bedner Associates）が手がけた。",
+      credit: "Interior Design: HBA (Hirsch Bedner Associates)<br>Lighting Installation: atelier TECNO FORM",
+      slides: ["images/hilton-okinawa-01.jpg","images/hilton-okinawa-02.jpg","images/hilton-okinawa-03.jpg","images/hilton-okinawa-04.jpg","images/hilton-okinawa-05.jpg","images/hilton-okinawa-07.jpg","images/hilton-okinawa-08.jpg"]
     },
-    '09': {
-      title: 'シスメックス株式会社\n本社',
-      meta: 'Corporate · 2005 · Kobe',
-      desc: `ガラスに封じ込めた、細胞の記憶。
+    "09": {
+      title: "シスメックス株式会社<br>本社",
+      meta: "Corporate · 2005 · Kobe",
+      desc: "ガラスに封じ込めた、細胞の記憶。
 
 血球計数装置の世界的メーカーであるシスメックス。その本社エントランスに、細胞・水・生命のゆらぎをモチーフとしたパラメトリックガラスオブジェクトを制作しました。
 
-Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現。企業の核心である「生命科学」を、建築空間のなかで静かに語りかけます。`,
-      credit: 'Glass Object Design & Production: atelier TECNO FORM',
-      slides: ['images/sysmex.jpg']
+Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現。企業の核心である「生命科学」を、建築空間のなかで静かに語りかけます。",
+      credit: "Glass Object Design & Production: atelier TECNO FORM",
+      slides: ["images/sysmex.jpg"]
     },
-    '18': {
-      title: '多可町生涯学習\nまちづくりプラザ Asmile',
-      meta: 'Public Facility · 2024 · Taka-cho, Hyogo',
-      desc: `意匠主題：あふれだす
+    "18": {
+      title: "多可町生涯学習<br>まちづくりプラザ Asmile",
+      meta: "Public Facility · 2024 · Taka-cho, Hyogo",
+      desc: "意匠主題：あふれだす
 
 「生涯学び続けられる生きがいあふれるまちづくり」——多可町が掲げるこの目標から、意匠のテーマを「あふれだす」と定めました。
 
-学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。その流れを、地域の宝である杉原紙を用いた5つのガラスアートで空間全体に織り込みました。
-
-風除室には流れと泡を重ねた杉原紙合わせ強化ガラス、図書館エントランスには大小の円が浮かぶはさみガラス、児童書架前には緑・黄緑の糸を漉き込んだ「絵本の森」——場所ごとに異なる文様が、学・交・表という3つのゾーンの役割を静かに語ります。`,
-      credit: 'Architecture: 内藤建築事務所
-Glass Art Design & Production: atelier TECNO FORM',
-      slides: ['images/taka-town-01.jpg','images/taka-town-02.jpg','images/taka-town-03.jpg','images/taka-town-04.jpg','images/taka-town-05.jpg','images/taka-town-06.jpg']
+学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。その流れを、地域の宝である杉原紙を用いた5つのガラスアートで空間全体に織り込みました。",
+      credit: "Architecture: 内藤建築事務所<br>Glass Art Design & Production: atelier TECNO FORM",
+      slides: ["images/taka-town-01.jpg","images/taka-town-02.jpg","images/taka-town-03.jpg","images/taka-town-04.jpg","images/taka-town-05.jpg","images/taka-town-06.jpg"]
     },
-    '21': {
-      title: 'ホテル京阪\n天満橋駅前',
-      meta: 'Hotel · 2025 · Osaka',
-      desc: `光は、素材を通じてはじめて「存在」する。
+    "21": {
+      title: "ホテル京阪<br>天満橋駅前",
+      meta: "Hotel · 2025 · Osaka",
+      desc: "光は、素材を通じてはじめて「存在」する。
 
-杉原紙は、楮の繊維を水と植物性の粘液で漉き、紐で模様を描く——鎌倉時代から続く手仕事の産物です。1983年に兵庫県重要無形文化財に指定されたこの和紙に宿る、不均一な繊維の走りと微細な透光性が、照明と出会うことで空間の表情へと変わります。
-
-天井を覆う曲面パネル、螺旋状に立ち上がるフロアランプ、壁に佇む縦長のアートピース。いずれも杉原紙を立体的に成形し、内側から光を纏わせることで、川面に揺れる光の粒のような陰影を生み出しています。`,
-      credit: 'Interior Design & Construction: ZYCC Corporation
-Lighting & Art Production: atelier TECNO FORM',
-      slides: ['images/hotel-keihan-tenmabashi-01.jpg','images/hotel-keihan-tenmabashi-02.jpg','images/hotel-keihan-tenmabashi-03.jpg','images/hotel-keihan-tenmabashi-04.jpg','images/hotel-keihan-tenmabashi-05.jpg','images/hotel-keihan-tenmabashi-06.jpg']
+杉原紙は、楮の繊維を水と植物性の粘液で漉き、紐で模様を描く——鎌倉時代から続く手仕事の産物です。天井を覆う曲面パネル、螺旋状に立ち上がるフロアランプ、壁に佇む縦長のアートピース。いずれも杉原紙を立体的に成形し、内側から光を纏わせることで、川面に揺れる光の粒のような陰影を生み出しています。",
+      credit: "Interior Design & Construction: ZYCC Corporation<br>Lighting & Art Production: atelier TECNO FORM",
+      slides: ["images/hotel-keihan-tenmabashi-01.jpg","images/hotel-keihan-tenmabashi-02.jpg","images/hotel-keihan-tenmabashi-03.jpg","images/hotel-keihan-tenmabashi-04.jpg","images/hotel-keihan-tenmabashi-05.jpg","images/hotel-keihan-tenmabashi-06.jpg"]
     }
   };
 
-  // ■ モーダル制御
-  const overlay = document.getElementById('workModal');
-  const modalImg = document.getElementById('modalImg');
-  const modalDots = document.getElementById('modalDots');
-  const modalNum = document.getElementById('modalNum');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalMeta = document.getElementById('modalMeta');
-  const modalDesc = document.getElementById('modalDesc');
-  const modalCredit = document.getElementById('modalCredit');
+  var overlay, img, dotsEl, cur = 0, slides = [];
 
-  let currentSlides = [], currentIdx = 0;
+  function init() {
+    overlay = document.getElementById("workModal");
+    img     = document.getElementById("modalImg");
+    dotsEl  = document.getElementById("modalDots");
 
-  function openModal(num) {
-    const w = WORKS[num];
-    if (!w) return;
-    currentSlides = w.slides;
-    currentIdx = 0;
+    document.getElementById("modalClose").onclick = close;
+    document.getElementById("modalPrev").onclick  = function(e){ e.stopPropagation(); go(cur - 1); };
+    document.getElementById("modalNext").onclick  = function(e){ e.stopPropagation(); go(cur + 1); };
+    overlay.onclick = function(e){ if(e.target === overlay) close(); };
 
-    modalNum.textContent = num;
-    modalTitle.innerHTML = w.title.replace('\n', '<br>');
-    modalMeta.textContent = w.meta;
-    modalDesc.textContent = w.desc;
-    modalCredit.innerHTML = w.credit.replace(/\n/g, '<br>');
+    document.addEventListener("keydown", function(e){
+      if (!overlay.classList.contains("open")) return;
+      if (e.key === "Escape")     close();
+      if (e.key === "ArrowLeft")  go(cur - 1);
+      if (e.key === "ArrowRight") go(cur + 1);
+    });
 
-    renderSlide();
-    renderDots();
-
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function renderSlide() {
-    modalImg.src = currentSlides[currentIdx];
-  }
-
-  function renderDots() {
-    modalDots.innerHTML = '';
-    currentSlides.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'modal-dot' + (i === currentIdx ? ' active' : '');
-      d.addEventListener('click', () => { currentIdx = i; renderSlide(); renderDots(); });
-      modalDots.appendChild(d);
+    document.querySelectorAll(".work-card").forEach(function(card){
+      var numEl = card.querySelector(".work-num");
+      if (!numEl) return;
+      var n = numEl.textContent.trim();
+      if (!WORKS[n]) return;
+      card.style.cursor = "pointer";
+      card.onclick = function(){ open(n); };
     });
   }
 
-  function prevSlide() {
-    currentIdx = (currentIdx - 1 + currentSlides.length) % currentSlides.length;
-    renderSlide(); renderDots();
-  }
-  function nextSlide() {
-    currentIdx = (currentIdx + 1) % currentSlides.length;
-    renderSlide(); renderDots();
+  function open(n) {
+    var w = WORKS[n];
+    slides = w.slides;
+    cur = 0;
+    document.getElementById("modalNum").textContent   = n;
+    document.getElementById("modalTitle").innerHTML   = w.title;
+    document.getElementById("modalMeta").textContent  = w.meta;
+    document.getElementById("modalDesc").innerHTML    = w.desc.replace(/
+/g,"<br>");
+    document.getElementById("modalCredit").innerHTML  = w.credit;
+    render();
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
   }
 
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalPrev').addEventListener('click', prevSlide);
-  document.getElementById('modalNext').addEventListener('click', nextSlide);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', e => {
-    if (!overlay.classList.contains('open')) return;
-    if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowLeft') prevSlide();
-    if (e.key === 'ArrowRight') nextSlide();
-  });
+  function close() {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
 
-  // ■ work-cardにクリックイベント
-  document.querySelectorAll('.work-card').forEach(card => {
-    const num = card.querySelector('.work-num');
-    if (!num) return;
-    const n = num.textContent.trim();
-    if (!WORKS[n]) return;
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', () => openModal(n));
-  });
-  </script>
+  function go(idx) {
+    cur = (idx + slides.length) % slides.length;
+    render();
+  }
+
+  function render() {
+    img.src = slides[cur];
+    dotsEl.innerHTML = "";
+    slides.forEach(function(_, i){
+      var d = document.createElement("button");
+      d.className = "modal-dot" + (i === cur ? " active" : "");
+      d.onclick = function(e){ e.stopPropagation(); go(i); };
+      dotsEl.appendChild(d);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>
