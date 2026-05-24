@@ -32,6 +32,25 @@
       -webkit-font-smoothing: antialiased;
     }
 
+
+    /* ■■ SLIDESHOW ■■ */
+    .slide-dots {
+      position: absolute; bottom: 0.7rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 5px; z-index: 10;
+    }
+    .slide-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(240,235,224,0.35); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .slide-dot.active {
+      background: var(--accent); transform: scale(1.3);
+    }
+    .work-slideshow img {
+      transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s;
+    }
+    .work-slideshow img.fade-out { opacity: 0; }
+
     /* ■■ NAV ■■ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -491,13 +510,14 @@
   <div class="works-grid">
 
     <!-- 01 - Available -->
-    <div class="work-card">
-      <img src="images/hilton-okinawa-01.jpg" alt="キャノピーbyヒルトン沖縄宮古島リゾート" loading="lazy" onerror="this.style.display='none'">
+    <div class="work-card work-slideshow" data-slides='["images/hilton-okinawa-01.jpg","images/hilton-okinawa-02.jpg","images/hilton-okinawa-03.jpg","images/hilton-okinawa-04.jpg","images/hilton-okinawa-05.jpg","images/hilton-okinawa-07.jpg","images/hilton-okinawa-08.jpg"]'>
+      <img src="images/hilton-okinawa-01.jpg" alt="キャノピーbyヒルトン沖縄宮古島リゾート" loading="lazy">
       <div class="work-overlay">
         <div class="work-num">01</div>
         <div class="work-name">キャノピーbyヒルトン<br>沖縄宮古島リゾート</div>
         <div class="work-type">Hotel · Washi Shade · Miyakojima</div>
       </div>
+      <div class="slide-dots"></div>
     </div>
 
     <!-- 02 - Coming Soon -->
@@ -643,13 +663,14 @@
     </div>
 
     <!-- 18 - Available -->
-    <div class="work-card">
-      <img src="images/taka-town-01.jpg" alt="多可町生涯学習まちづくりプラザ Asmile" loading="lazy" onerror="this.style.display='none'">
+    <div class="work-card work-slideshow" data-slides='["images/taka-town-01.jpg","images/taka-town-02.jpg","images/taka-town-03.jpg","images/taka-town-04.jpg","images/taka-town-05.jpg","images/taka-town-06.jpg"]'>
+      <img src="images/taka-town-01.jpg" alt="多可町生涯学習まちづくりプラザ Asmile" loading="lazy">
       <div class="work-overlay">
         <div class="work-num">18</div>
         <div class="work-name">多可町生涯学習<br>まちづくりプラザ Asmile</div>
         <div class="work-type">Public · Washi Glass · Hyogo</div>
       </div>
+      <div class="slide-dots"></div>
     </div>
 
     <!-- 19 - Coming Soon -->
@@ -669,13 +690,14 @@
     </div>
 
     <!-- 21 - Available -->
-    <div class="work-card">
-      <img src="images/hotel-keihan-tenmabashi-03.jpg" alt="ホテル京阪 天満橋駅前" loading="lazy" onerror="this.style.display='none'">
+    <div class="work-card work-slideshow" data-slides='["images/hotel-keihan-tenmabashi-01.jpg","images/hotel-keihan-tenmabashi-02.jpg","images/hotel-keihan-tenmabashi-03.jpg","images/hotel-keihan-tenmabashi-04.jpg","images/hotel-keihan-tenmabashi-05.jpg","images/hotel-keihan-tenmabashi-06.jpg"]'>
+      <img src="images/hotel-keihan-tenmabashi-03.jpg" alt="ホテル京阪 天満橋駅前" loading="lazy">
       <div class="work-overlay">
         <div class="work-num">21</div>
         <div class="work-name">ホテル京阪<br>天満橋駅前</div>
         <div class="work-type">Hotel · Washi Room · Osaka</div>
       </div>
+      <div class="slide-dots"></div>
     </div>
 
   </div>
@@ -859,5 +881,43 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 reveals.forEach(el => io.observe(el));
 </script>
+
+  <script>
+  // Slideshow for work cards
+  document.querySelectorAll('.work-slideshow').forEach(card => {
+    const slides = JSON.parse(card.dataset.slides);
+    if (slides.length <= 1) return;
+    const img = card.querySelector('img');
+    const dotsEl = card.querySelector('.slide-dots');
+    let current = 0;
+
+    // ドット生成
+    slides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
+      dotsEl.appendChild(dot);
+    });
+
+    function goTo(idx) {
+      current = idx;
+      img.classList.add('fade-out');
+      setTimeout(() => {
+        img.src = slides[current];
+        img.classList.remove('fade-out');
+      }, 300);
+      dotsEl.querySelectorAll('.slide-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    // ホバー中は自動送り
+    let timer;
+    card.addEventListener('mouseenter', () => {
+      timer = setInterval(() => goTo((current + 1) % slides.length), 1800);
+    });
+    card.addEventListener('mouseleave', () => clearInterval(timer));
+  });
+  </script>
 </body>
 </html>
