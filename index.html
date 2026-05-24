@@ -30,6 +30,8 @@
       font-weight: 300;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+    
+      letter-spacing: 0.015em;
     }
 
 
@@ -474,16 +476,33 @@
     }
 
     /* ■■ SECTIONS ■■ */
-    section { padding: 8rem 3rem; }
+    section { padding: 11rem 3rem; }
     .section-label {
-      font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.32em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+      font-family: var(--font-ui);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.2rem;
+      position: relative;
+      padding-left: 2.2rem;
+    }
+    .section-label::before {
+      content: ""; position: absolute; left: 0; top: 50%;
+      width: 1.6rem; height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
     }
     .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      font-weight: 300; font-style: italic; line-height: 1.2;
-      color: var(--text); margin-bottom: 3rem;
+      font-family: var(--font-jp);
+      font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+      font-weight: 200;
+      font-style: normal;
+      letter-spacing: 0.14em;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 4.5rem;
     }
 
     /* ■■ ABOUT ■■ */
@@ -497,11 +516,19 @@
       max-width: 1100px;
     }
     .about-text p {
-      font-size: 0.93rem; color: var(--text-dim); line-height: 2.1; margin-bottom: 1.6rem;
+      font-family: var(--font-jp);
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 2.2;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.6rem;
     }
     .about-values { display: flex; flex-direction: column; gap: 2.2rem; padding-top: 0.4rem; }
     .value-item {
-      border-left: 1px solid var(--accent-dim); padding-left: 1.6rem;
+      padding: 0.4rem 0 1.8rem 2.4rem;
+      border-left: 1px solid rgba(197,165,90,0.18);
+      position: relative;
     }
     .value-title {
       font-family: var(--font-display); font-size: 1.05rem; font-style: italic;
@@ -593,24 +620,43 @@
       border-top: 1px solid var(--border);
     }
     .tech-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 4rem 3.5rem;
+      max-width: 1080px;
+      margin: 0 auto;
     }
     .tech-item {
-      padding: 2.2rem 2rem; border: 1px solid var(--border);
-      transition: border-color 0.4s, background 0.4s;
+      padding: 0.4rem 0 0.4rem 2rem;
+      border-left: 1px solid rgba(197,165,90,0.18);
     }
     .tech-item:hover { border-color: var(--accent-dim); background: rgba(197,165,90,0.03); }
     .tech-glyph {
-      font-family: var(--font-display); font-size: 2.2rem; font-style: italic;
-      color: var(--accent); margin-bottom: 1.2rem; opacity: 0.7;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0.55;
+      letter-spacing: 0.1em;
     }
     .tech-name {
-      font-family: var(--font-display); font-size: 1.05rem; font-style: italic;
-      color: var(--text); margin-bottom: 0.6rem; letter-spacing: 0.02em;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.04em;
     }
     .tech-desc {
-      font-family: var(--font-ui); font-size: 0.74rem; letter-spacing: 0.04em;
-      color: var(--text-dim); line-height: 2;
+      font-family: var(--font-jp);
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 2.1;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
     }
 
     /* ■■ CLIENTS ■■ */
@@ -658,22 +704,46 @@
     }
     .contact-inner { max-width: 640px; margin: 0 auto; }
     .contact-quote {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 3rem); font-style: italic; font-weight: 300;
-      color: var(--text); line-height: 1.45; margin-bottom: 2rem;
+      font-family: var(--font-jp);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 200;
+      line-height: 1.85;
+      letter-spacing: 0.14em;
+      color: var(--text);
+      margin: 1rem 0 3rem;
     }
     .contact-sub {
-      font-family: var(--font-ui); font-size: 0.82rem;
-      color: var(--text-dim); line-height: 2.1; margin-bottom: 3rem;
+      font-family: var(--font-jp);
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 2.2;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      margin-bottom: 3.5rem;
     }
     .btn {
-      display: inline-block; padding: 1rem 3.2rem;
-      border: 1px solid var(--accent); color: var(--accent);
-      font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.22em;
-      text-transform: uppercase; text-decoration: none;
-      transition: background 0.4s, color 0.4s;
+      display: inline-block; padding: 1.3rem 3.6rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      font-family: var(--font-ui); font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
     }
-    .btn:hover { background: var(--accent); color: var(--bg); }
+    .btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: var(--accent);
+      transform: translateY(101%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -1;
+    }
+    .btn:hover { color: var(--bg); }
+    .btn:hover::before { transform: translateY(0); }
 
     /* ■■ FOOTER ■■ */
     footer {
@@ -693,8 +763,10 @@
 
     /* ■■ REVEAL ■■ */
     .reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -731,6 +803,37 @@
       .hero-origin { font-size: 1rem !important; margin: 0.4rem 0 !important; }
       .hero-catchphrase { font-size: 0.78rem !important; letter-spacing: 0.28em !important; margin-top: 1.4rem !important; }
       .hero-bg-slide.active { opacity: 0.7; }
+    }
+  
+    .value-num {
+      font-family: var(--font-display); font-size: 0.95rem;
+      font-style: italic; font-weight: 300;
+      color: var(--accent); opacity: 0.55;
+      margin-bottom: 0.9rem; letter-spacing: 0.08em;
+    }
+    .value-title {
+      font-family: var(--font-display); font-size: 1.15rem;
+      font-style: italic; font-weight: 400;
+      color: var(--text); margin-bottom: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+    .value-jp {
+      font-family: var(--font-jp); font-size: 0.78rem;
+      font-weight: 300; color: var(--accent);
+      letter-spacing: 0.18em; margin-bottom: 1.1rem;
+    }
+    .value-desc {
+      font-family: var(--font-jp); font-size: 0.74rem;
+      font-weight: 300; line-height: 2.1;
+      color: var(--text-dim); letter-spacing: 0.02em;
+    }
+  
+    .contact-mail {
+      margin-top: 2rem;
+      font-family: var(--font-display);
+      font-size: 0.82rem; font-style: italic;
+      letter-spacing: 0.1em;
+      color: rgba(197,165,90,0.55);
     }
   </style>
 </head>
@@ -795,21 +898,27 @@
     <div class="about-text reveal">
       <div class="section-label">Philosophy</div>
       <h2 class="section-title">技術と素材から<br>生まれるものを、<br>問い直す。</h2>
-      <p>atelier TECNO FORMは、ガラスと和紙、3Dプリント技術を組み合わせたパラメトリック設計で制作するアートワークを、最高水準の空間創造で実現します。</p>
-      <p>Grasshopperによるアルゴリズム設計、アクアフォトミクスの水の科学、そして職人の技が生まれる複雑さが、常識を超えた空間体験をつくり出します。</p>
+      <p>ガラスと和紙、麻繊維、3Dプリント。パラメトリック設計と伝統技法を交差させ、最高水準の空間に唯一無二のアートワークを立ち上げる工房。</p>
+      <p>アルゴリズムが生む複雑さ、水の科学が描く可視化、そして職人の手が残す微細な揺らぎ。三つが重なる場所に、ありふれない空間体験が立ち上がります。</p>
     </div>
     <div class="about-values reveal">
       <div class="value-item">
+        <div class="value-num">i</div>
         <div class="value-title">Luxury Refined</div>
-        <div class="value-desc">高級ホテルや施設のエントランスに求められる気品と存在感を、素材と技術の融合から生み出します。</div>
+        <div class="value-jp">気品と、存在感。</div>
+        <div class="value-desc">高級ホテルや企業エントランスに求められる凛とした品格を、素材と技術の融合から生み出します。</div>
       </div>
       <div class="value-item">
+        <div class="value-num">ii</div>
         <div class="value-title">Organic Complexity</div>
-        <div class="value-desc">自然のゆらぎをアルゴリズムで表現し、機械的でありながら生命的な揺らぎを持つ造形を生み出します。</div>
+        <div class="value-jp">機械の中に、生命を。</div>
+        <div class="value-desc">自然のゆらぎをアルゴリズムで表現し、機械的でありながら呼吸する造形を生み出します。</div>
       </div>
       <div class="value-item">
+        <div class="value-num">iii</div>
         <div class="value-title">Wellness × Art × Craft</div>
-        <div class="value-desc">ウェルネスへのアートと伝統工芸の融合で、心に深く刻まれる体験空間をつくり出します。</div>
+        <div class="value-jp">心に、深く刻む。</div>
+        <div class="value-desc">アートと伝統工芸を融合させ、訪れた人の記憶に残る体験空間を立ち上げます。</div>
       </div>
     </div>
   </div>
@@ -1025,22 +1134,22 @@
   <h2 class="section-title">技術と素材</h2>
   <div class="tech-grid">
     <div class="tech-item reveal">
-      <div class="tech-glyph">Gg</div>
+      <div class="tech-glyph">Ⅰ</div>
       <div class="tech-name">Parametric Design</div>
       <div class="tech-desc">Grasshopperによるアルゴリズムデザインで複雑なデータを自動的に生成。繰り返しのない有機的なフォルムを、効率的な制作フローで実現します。</div>
     </div>
     <div class="tech-item reveal">
-      <div class="tech-glyph">Gl</div>
+      <div class="tech-glyph">Ⅱ</div>
       <div class="tech-name">Craft Glass</div>
       <div class="tech-desc">パラメトリックに設計された精密なデザインを、フューズド成形・サンドブラストなど特殊なガラス工芸で立体化。光と空間に、唯一の表情を与えます。</div>
     </div>
     <div class="tech-item reveal">
-      <div class="tech-glyph">和</div>
+      <div class="tech-glyph">Ⅲ</div>
       <div class="tech-name">Washi Art</div>
       <div class="tech-desc">伝統的な和紙漉きの技法を、現代の意匠と融合。和紙アートワークを空間デザインへ溶け込ませ、唯一無二のオブジェを生み出します。</div>
     </div>
     <div class="tech-item reveal">
-      <div class="tech-glyph">Aq</div>
+      <div class="tech-glyph">Ⅳ</div>
       <div class="tech-name">Aquaphotonics</div>
       <div class="tech-desc">水の光吸収スペクトルを可視化するアクアフォトニクスの知見を空間デザインに応用し、癒しと健康をテーマとした体験空間を生み出します。</div>
     </div>
@@ -1094,10 +1203,11 @@
     <div class="section-label">Enquiry</div>
     <p class="contact-quote">設計に、<br>最高水準の光を。</p>
     <p class="contact-sub">
-      高級ホテルから企業エントランスまで、空間の求める特性をヒアリングし、<br>
-      素材を解いて、揺らぎを纏う唯一の表現をご提案します。
+      空間の求める特性に静かに耳を澄まし、<br>
+      素材を解いて、揺らぎを纏う一つの表現を提案します。
     </p>
-    <a href="mailto:info@tecnoform.jp" class="btn">Contact Us</a>
+    <a href="mailto:info@tecnoform.jp" class="btn">Contact</a>
+    <p class="contact-mail">info@tecnoform.jp</p>
   </div>
 </section>
 
