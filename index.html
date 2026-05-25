@@ -387,8 +387,7 @@
     /* ■■ HERO BACKGROUND SLIDES ■■ */
     .hero-bg-slides {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 58vh;
+      inset: 0;
       z-index: 0;
       overflow: hidden;
     }
@@ -540,7 +539,7 @@
     }
 
     /* ■■ SECTIONS ■■ */
-    section { padding: 11rem 3rem; }
+    section { padding: 5rem 3rem; }
     .section-label {
       font-family: var(--font-ui);
       font-size: 0.58rem;
@@ -940,7 +939,7 @@
   
     @media (max-width: 640px) {
       #hero { min-height: 100vh; padding-top: 0 !important; padding-bottom: 4vh; }
-      .hero-bg-slides, .hero-bg-overlay, .hero-canvas { height: 50vh !important; }
+      .hero-bg-slides, .hero-bg-overlay, .hero-canvas { height: 100% !important; }
       .hero-inner { padding-top: 52vh !important; }
       .hero-title { font-size: clamp(1.9rem, 9vw, 3rem) !important; line-height: 1.65 !important; margin: 1.2rem 0 1.6rem !important; letter-spacing: 0.08em !important; }
       .hero-origin { font-size: 1rem !important; margin: 0.4rem 0 !important; }
