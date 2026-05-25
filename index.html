@@ -1,1034 +1,528 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>atelier TECNO FORM｜光が宿り、素材が語りだす</title>
-  <meta name="description" content="ガラス・和紙・麻繊維を用いたパラメトリック設計のアートワーク。高級ホテル・大手不動産・グローバル企業本社まで、最高水準の空間に唯一無二の表現を提案する工房。">
-  <meta name="keywords" content="atelier TECNO FORM,アトリエ テクノフォーム,パラメトリックデザイン,ガラスアート,和紙アート,空間デザイン,江藤徳晃,光のインスタレーション,Grasshopper,Glass Art,Washi Art">
-  <meta name="author" content="atelier TECNO FORM">
-  <link rel="canonical" href="https://tecnoform.jp/">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="alternate icon" href="favicon.svg">
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="ja_JP">
-  <meta property="og:url" content="https://tecnoform.jp/">
-  <meta property="og:site_name" content="atelier TECNO FORM">
-  <meta property="og:title" content="atelier TECNO FORM｜光が宿り、素材が語りだす">
-  <meta property="og:description" content="ガラス・和紙・麻繊維を用いたパラメトリック設計のアートワーク。最高水準の空間に唯一無二の表現を提案する工房。">
-  <meta property="og:image" content="https://noriaki-eto.github.io/tecnoform-website/images/ogp.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="atelier TECNO FORM - 光と素材のアートワーク">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="atelier TECNO FORM｜光が宿り、素材が語りだす">
-  <meta name="twitter:description" content="ガラス・和紙・麻繊維を用いたパラメトリック設計のアートワーク。">
-  <meta name="twitter:image" content="https://noriaki-eto.github.io/tecnoform-website/images/ogp.jpg">
-  
-  <!-- 構造化データ (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "atelier TECNO FORM",
-    "alternateName": "アトリエ・テクノフォーム",
-    "url": "https://tecnoform.jp/",
-    "logo": "https://noriaki-eto.github.io/tecnoform-website/favicon.svg",
-    "image": "https://noriaki-eto.github.io/tecnoform-website/images/ogp.jpg",
-    "description": "ガラス・和紙・麻繊維を用いたパラメトリック設計のアートワーク制作工房",
-    "email": "info@tecnoform.jp",
-    "founder": {
-      "@type": "Person",
-      "name": "江藤徳晃"
-    },
-    "areaServed": "JP",
-    "knowsAbout": ["Parametric Design", "Glass Art", "Washi Art", "Aquaphotonics", "Grasshopper", "空間デザイン"]
-  }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;1,300;1,400&family=Shippori+Mincho:wght@200;400;500&family=Zen+Kaku+Gothic+Antique:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0e0e0b;
-      --bg-2: #141410;
-      --text: #f0ebe0;
-      --text-dim: #9a9180;
-      --accent: #c5a55a;
-      --accent-dim: #7d6835;
-      --border: rgba(240,235,224,0.07);
-      --font-display: 'Cormorant Infant', 'Cormorant Garamond', serif;
-      --font-jp: 'Shippori Mincho', 'Noto Serif JP', serif;
-      --font-ui: 'Zen Kaku Gothic Antique', 'Noto Sans JP', sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-jp);
-      font-weight: 300;
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-    
-      letter-spacing: 0.015em;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>atelier TECNO FORM | 枠を解いて、揺らぎを纏う。</title>
+<meta name="description" content="ガラス・和紙・麻繊維によるパラメトリック光のインスタレーション。アトリエ・テクノフォルム。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0b0a09;
+  --ink-soft: #14110e;
+  --paper: #ece5d5;
+  --paper-soft: #b8a78a;
+  --paper-mute: #6a6258;
+  --line: rgba(184, 167, 138, 0.18);
+  --accent: #c9a875;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Inter', 'Noto Serif JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
 
+/* ===== NAVIGATION ===== */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.6rem 3rem;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(11,10,9,0.92), rgba(11,10,9,0));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: padding 0.4s ease, background 0.4s ease;
+}
+.site-nav.scrolled {
+  padding: 1rem 3rem;
+  background: rgba(11,10,9,0.94);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--paper);
+}
+.nav-links {
+  list-style: none; display: flex; gap: 2.4rem;
+}
+.nav-links a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.92rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-soft);
+  transition: color 0.3s ease;
+}
+.nav-links a:hover { color: var(--paper); }
+.nav-toggle { display: none; background: none; border: none; color: var(--paper); cursor: pointer; }
 
-    
+@media (max-width: 768px) {
+  .site-nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0; padding: 1rem 1.5rem 2rem;
+    background: rgba(11,10,9,0.98); backdrop-filter: blur(8px); }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-bottom: 1px solid var(--line); padding: 1.1rem 0; }
+  .nav-toggle { display: block; font-size: 1.4rem; letter-spacing: 0.18em; }
+}
 
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 3rem; overflow: hidden;
+}
+.hero-bg-slides {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  background: var(--ink);
+}
+.hero-bg-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  transition: opacity 2.4s ease-in-out;
+}
+.hero-bg-slide.active {
+  opacity: 0.42;
+  animation: kenBurns 12s ease-out forwards;
+}
+@keyframes kenBurns {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.10); }
+}
+.hero-bg-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background: 
+    radial-gradient(ellipse at 30% 50%, transparent 0%, rgba(11,10,9,0.55) 70%),
+    linear-gradient(to bottom, rgba(11,10,9,0.32) 0%, rgba(11,10,9,0.18) 40%, rgba(11,10,9,0.85) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+.hero-mark {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--paper-soft);
+  letter-spacing: 0.32em; text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: heroFadeUp 1.4s ease 0.3s forwards;
+}
+.hero-mark::before {
+  content: ""; display: inline-block;
+  width: 38px; height: 1px; background: var(--paper-soft);
+  vertical-align: middle; margin-right: 1.1rem;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  line-height: 1.28; letter-spacing: 0.04em;
+  color: var(--paper);
+  margin-bottom: 2.4rem;
+  opacity: 0; animation: heroFadeUp 1.6s ease 0.7s forwards;
+}
+.hero-title em {
+  font-style: normal; color: var(--accent);
+  font-weight: 400;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.15rem;
+  color: var(--paper-soft);
+  letter-spacing: 0.12em; max-width: 580px;
+  line-height: 1.8;
+  opacity: 0; animation: heroFadeUp 1.6s ease 1.1s forwards;
+}
+.hero-scroll {
+  position: absolute; bottom: 3rem; left: 50%;
+  transform: translateX(-50%); z-index: 2;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; letter-spacing: 0.4em;
+  color: var(--paper-soft); text-transform: uppercase;
+  opacity: 0; animation: heroFadeUp 1.6s ease 1.5s forwards;
+}
+.hero-scroll::after {
+  content: ""; display: block;
+  width: 1px; height: 48px; background: var(--paper-soft);
+  margin: 1rem auto 0;
+  animation: scrollLine 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(0.3); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+@media (max-width: 768px) {
+  #hero { padding: 0 1.5rem; }
+  .hero-mark { font-size: 0.78rem; margin-bottom: 1.8rem; }
+  .hero-mark::before { width: 22px; margin-right: 0.8rem; }
+  .hero-scroll { font-size: 0.7rem; bottom: 2rem; }
+  .hero-scroll::after { height: 32px; }
+}
 
-    /* ■■ MODAL ■■ */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(8,8,6,0.92);
-      backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 2rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .modal-overlay.open {
-      opacity: 1; pointer-events: all;
-    }
-    .modal-inner {
-      position: relative;
-      max-width: 760px; width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      background: var(--bg-2);
-      border: 1px solid rgba(197,165,90,0.15);
-      display: flex;
-      flex-direction: column;
-      transform: translateY(24px);
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .modal-overlay.open .modal-inner {
-      transform: translateY(0);
-    }
-    .modal-header {
-      position: relative;
-      padding: 2rem 2rem 1.2rem;
-      border-bottom: 1px solid rgba(197,165,90,0.08);
-      flex-shrink: 0;
-    }
-    .modal-gallery {
-      position: relative;
-      height: 420px;
-      overflow: hidden; background: #0a0a07;
-      flex-shrink: 0;
-    }
-    .modal-gallery img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: contain;
-      transition: opacity 0.5s ease;
-    }
-    .modal-gallery img.hidden { opacity: 0; }
-    .modal-nav {
-      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 6px;
-    }
-    .modal-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(240,235,224,0.3); cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      border: none;
-    }
-    .modal-dot.active { background: var(--accent); transform: scale(1.4); }
-    .modal-prev, .modal-next {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(14,14,11,0.6); border: 1px solid rgba(197,165,90,0.2);
-      color: var(--accent); font-size: 1.1rem;
-      width: 36px; height: 36px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
-    }
-    .modal-prev:hover, .modal-next:hover { background: rgba(197,165,90,0.15); }
-    .modal-prev { left: 0.7rem; }
-    .modal-next { right: 0.7rem; }
-    .modal-body {
-      padding: 1.8rem 2rem 2rem;
-      display: flex; flex-direction: column; gap: 1.2rem;
-    }
-    .modal-num {
-      font-family: var(--font-display); font-size: 3.5rem; font-weight: 300;
-      font-style: italic; color: rgba(197,165,90,0.18); line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .modal-title {
-      font-family: var(--font-jp); font-size: 1.05rem; font-weight: 400;
-      letter-spacing: 0.06em; color: var(--text); margin-bottom: 0.3rem;
-      line-height: 1.6;
-    }
-    .modal-meta {
-      font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 1.6rem;
-    }
-    .modal-desc {
-      font-family: var(--font-jp); font-size: 0.78rem; line-height: 2.1;
-      color: var(--text-dim); flex: 1;
-      white-space: pre-line;
-    }
-    .modal-credit {
-      margin-top: 1.4rem; padding-top: 1rem;
-      border-top: 1px solid rgba(197,165,90,0.1);
-      font-family: var(--font-ui); font-size: 0.62rem;
-      letter-spacing: 0.1em; color: rgba(197,165,90,0.5);
-      line-height: 1.8;
-    }
-    .modal-close {
-      position: absolute; top: 1rem; right: 1rem;
-      background: none; border: 1px solid rgba(197,165,90,0.2);
-      color: var(--text-dim); font-size: 1.1rem;
-      width: 34px; height: 34px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; z-index: 10;
-    }
-    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
-    .modal-num { margin-bottom: 0.2rem; }
-    @media (max-width: 640px) {
-      .modal-overlay { padding: 0; align-items: flex-end; }
-      .modal-inner {
-        max-height: 94vh;
-        border-radius: 16px 16px 0 0;
-        overflow-y: auto;
-      }
-      .modal-header { padding: 1.2rem 1.2rem 0.8rem; }
-      .modal-gallery { height: 240px; }
-      .modal-body { padding: 1.2rem 1.2rem 2rem; }
-      .modal-num { font-size: 2rem; }
-      .modal-title { font-size: 0.95rem; }
-      .modal-close { top: 0.7rem; right: 0.7rem; }
-    }
+/* ===== SECTION COMMON ===== */
+section {
+  padding: 9rem 3rem;
+  position: relative;
+}
+@media (max-width: 768px) {
+  section { padding: 5rem 1.5rem; }
+}
+.section-head {
+  max-width: 1280px; margin: 0 auto 5rem;
+  display: flex; align-items: baseline; gap: 2rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.6rem;
+}
+.section-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.9rem; letter-spacing: 0.24em;
+  color: var(--paper-soft); text-transform: uppercase;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  letter-spacing: 0.04em; color: var(--paper);
+}
+@media (max-width: 768px) {
+  .section-head { margin-bottom: 3rem; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+}
 
+/* ===== WORKS ===== */
+#works { padding-top: 7rem; }
+.works-lead {
+  max-width: 1280px; margin: 0 auto 4.5rem;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.18rem; line-height: 2;
+  color: var(--paper-soft);
+  letter-spacing: 0.04em;
+  max-width: 720px;
+}
+.works-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 4rem 3rem;
+}
+@media (max-width: 768px) {
+  .works-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .works-lead { font-size: 1.02rem; line-height: 1.85; margin-bottom: 3rem; }
+}
+.work-card {
+  cursor: pointer; position: relative;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.work-card.is-coming { cursor: default; opacity: 0.4; }
+.work-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: var(--ink-soft);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: border-color 0.6s ease;
+}
+.work-frame img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  background: var(--ink);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+  filter: brightness(0.96);
+}
+.work-card:hover .work-frame { border-color: var(--accent); }
+.work-card:hover .work-frame img { transform: scale(1.025); filter: brightness(1.0); }
+.work-coming-mark {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; letter-spacing: 0.32em;
+  color: var(--paper-mute); text-transform: uppercase;
+}
+.work-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-top: 1.4rem; gap: 1.5rem;
+  padding-bottom: 0.4rem;
+}
+.work-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--accent);
+  letter-spacing: 0.2em; flex-shrink: 0;
+}
+.work-info { flex: 1; }
+.work-name {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: 1.05rem; line-height: 1.55;
+  color: var(--paper); letter-spacing: 0.02em;
+}
+.work-type {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; color: var(--paper-soft);
+  letter-spacing: 0.14em; margin-top: 0.4rem;
+}
+.work-imgcount {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.78rem; color: var(--paper-mute);
+  letter-spacing: 0.2em; flex-shrink: 0; align-self: flex-start;
+  padding-top: 0.3rem;
+}
 
-    /* ■■ MODAL ■■ */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(8,8,6,0.92);
-      backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 2rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-inner {
-      position: relative;
-      max-width: 680px; width: 100%;
-      max-height: 88vh;
-      overflow-y: auto;
-      background: var(--bg-2);
-      border: 1px solid rgba(197,165,90,0.15);
-      display: flex;
-      flex-direction: column;
-      transform: translateY(20px);
-      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    }
-    .modal-overlay.open .modal-inner { transform: translateY(0); }
+/* ===== ABOUT / PHILOSOPHY ===== */
+#about { background: var(--ink-soft); }
+.about-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 5rem; align-items: start;
+}
+.about-pull {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  line-height: 1.85; color: var(--paper);
+  letter-spacing: 0.04em;
+  border-left: 1px solid var(--accent);
+  padding-left: 2rem;
+}
+.about-body {
+  font-size: 0.98rem; line-height: 2.0;
+  color: var(--paper-soft);
+}
+.about-body p + p { margin-top: 1.5rem; }
+.about-body em {
+  font-style: italic; color: var(--paper);
+  font-family: 'Cormorant Garamond', serif;
+}
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-pull { padding-left: 1.2rem; font-size: 1.15rem; }
+}
 
-    /* 1: タイトルヘッダー */
-    .modal-header {
-      order: 1;
-      padding: 1.6rem 1.8rem 1.2rem;
-      border-bottom: 1px solid rgba(197,165,90,0.08);
-      flex-shrink: 0;
-      position: relative;
-    }
-    .modal-num {
-      font-family: var(--font-display); font-size: 2.8rem; font-weight: 300;
-      font-style: italic; color: rgba(197,165,90,0.2); line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-    .modal-title {
-      font-family: var(--font-jp); font-size: 1.05rem; font-weight: 400;
-      letter-spacing: 0.06em; color: var(--text); line-height: 1.6;
-      margin-bottom: 0.4rem;
-    }
-    .modal-meta {
-      font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--accent);
-    }
-    .modal-close {
-      position: absolute; top: 1rem; right: 1rem;
-      background: none; border: 1px solid rgba(197,165,90,0.2);
-      color: var(--text-dim); font-size: 1rem;
-      width: 32px; height: 32px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+/* ===== TECHNOLOGY ===== */
+.tech-list {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.tech-item {
+  padding: 2rem 2rem 2rem 0;
+  border-right: 1px solid var(--line);
+}
+.tech-item:nth-child(3n) { border-right: none; padding-right: 0; }
+.tech-item:nth-child(n+4) { padding-top: 3rem; border-top: 1px solid var(--line); margin-top: 0; }
+.tech-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; color: var(--accent);
+  letter-spacing: 0.24em; margin-bottom: 0.8rem;
+}
+.tech-title {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: 1.1rem; color: var(--paper);
+  margin-bottom: 0.8rem; line-height: 1.5;
+}
+.tech-desc {
+  font-size: 0.88rem; line-height: 1.85;
+  color: var(--paper-soft);
+}
+@media (max-width: 768px) {
+  .tech-list { grid-template-columns: 1fr; }
+  .tech-item { border-right: none; border-bottom: 1px solid var(--line); padding: 1.6rem 0; }
+  .tech-item:nth-child(n+4) { padding-top: 1.6rem; border-top: none; }
+  .tech-item:last-child { border-bottom: none; }
+}
 
-    /* 2: 写真ギャラリー */
-    .modal-gallery {
-      order: 2;
-      position: relative;
-      height: 460px;
-      overflow: hidden; background: #0a0a07;
-      flex-shrink: 0;
-    }
-    .modal-gallery img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: contain;
-      background: #050503;
-    }
-    .modal-prev, .modal-next {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(14,14,11,0.65); border: 1px solid rgba(197,165,90,0.25);
-      color: var(--accent); font-size: 1.3rem;
-      width: 40px; height: 40px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s; z-index: 2;
-    }
-    .modal-prev { left: 0.8rem; }
-    .modal-next { right: 0.8rem; }
-    .modal-prev:hover, .modal-next:hover { background: rgba(197,165,90,0.2); }
-    .modal-nav {
-      position: absolute; bottom: 0.8rem; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 6px; z-index: 2;
-    }
-    .modal-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(240,235,224,0.3); border: none; cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .modal-dot.active { background: var(--accent); transform: scale(1.4); }
+/* ===== CLIENTS ===== */
+#clients { background: var(--ink-soft); }
+.clients-grid {
+  max-width: 1100px; margin: 0 auto;
+  columns: 3; column-gap: 4rem;
+  font-size: 0.92rem;
+  color: var(--paper-soft);
+  line-height: 2.1;
+}
+.clients-grid li {
+  list-style: none;
+  break-inside: avoid;
+  padding: 0.15rem 0;
+}
+@media (max-width: 768px) {
+  .clients-grid { columns: 1; }
+}
 
-    /* 3: 説明テキスト */
-    .modal-body {
-      order: 3;
-      padding: 1.6rem 1.8rem 2rem;
-      display: flex; flex-direction: column; gap: 1.2rem;
-    }
-    .modal-desc {
-      font-family: var(--font-jp); font-size: 0.78rem; line-height: 2.1;
-      color: var(--text-dim);
-    }
-    .modal-credit {
-      padding-top: 1rem;
-      border-top: 1px solid rgba(197,165,90,0.1);
-      font-family: var(--font-ui); font-size: 0.62rem;
-      letter-spacing: 0.1em; color: rgba(197,165,90,0.5); line-height: 1.9;
-    }
+/* ===== CONTACT ===== */
+#contact { text-align: center; padding: 8rem 3rem; }
+.contact-tagline {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--paper-soft);
+  margin-bottom: 2.4rem; letter-spacing: 0.06em;
+  line-height: 1.6;
+}
+.contact-mail {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.4rem;
+  display: inline-block;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+.contact-mail:hover { color: var(--paper); border-color: var(--paper); }
+.contact-info {
+  margin-top: 3rem;
+  font-size: 0.92rem; color: var(--paper-mute);
+  letter-spacing: 0.08em;
+  line-height: 2;
+}
+footer {
+  border-top: 1px solid var(--line);
+  padding: 2rem 3rem;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.78rem; letter-spacing: 0.2em;
+  color: var(--paper-mute);
+}
 
-    /* モバイル */
-    @media (max-width: 640px) {
-      .modal-overlay { padding: 0; align-items: flex-end; }
-      .modal-inner {
-        max-height: 93vh; max-width: 100%;
-        border-radius: 16px 16px 0 0;
-      }
-      .modal-header { padding: 1.2rem 1.2rem 0.9rem; }
-      .modal-gallery { height: 280px; }
-      .modal-body { padding: 1.2rem 1.2rem 2.4rem; }
-      .modal-num { font-size: 2rem; }
-      .modal-title { font-size: 0.92rem; }
-    }
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(8, 7, 6, 0.96);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  display: none; flex-direction: column;
+  opacity: 0; transition: opacity 0.45s ease;
+}
+.lightbox.is-open { display: flex; opacity: 1; }
+.lb-header {
+  padding: 1.2rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--line);
+}
+.lb-counter {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; letter-spacing: 0.22em;
+  color: var(--paper-soft);
+}
+.lb-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--paper); font-size: 1.6rem;
+  font-family: 'Cormorant Garamond', serif;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.lb-close:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ■■ NAV ■■ */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 3rem;
-      background: linear-gradient(to bottom, rgba(14,14,11,0.97) 60%, transparent);
-      backdrop-filter: blur(10px);
-    }
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 0.95rem; font-weight: 400;
-      letter-spacing: 0.32em;
-      color: var(--accent); text-decoration: none;
-      position: relative;
-      text-shadow: 0 0 30px rgba(197,165,90,0.25);
-    }
-    .nav-links { display: flex; gap: 3.2rem; list-style: none; align-items: center; }
-    .nav-links a {
-      font-family: var(--font-ui);
-      font-size: 0.6rem;
-      font-weight: 400;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.5s ease;
-      position: relative;
-      padding-bottom: 4px;
-    }
-    .nav-links a::after {
-      content: ""; position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a:hover { color: var(--accent); }
+.lb-stage {
+  flex: 1; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem; min-height: 0;
+}
+.lb-img-wrap {
+  position: relative;
+  max-width: 100%; max-height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-img {
+  max-width: 100%; max-height: 78vh;
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: opacity 0.4s ease;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.lb-img.loading { opacity: 0; }
 
-    /* ■■ HERO ■■ */
-    #hero {
-      min-height: 72vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 0 3rem;
-      position: relative; overflow: hidden;
-    }
-    .hero-canvas {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 58vh;
-      pointer-events: none; z-index: 2;
-    }
-    /* ■■ HERO BACKGROUND SLIDES ■■ */
-    .hero-bg-slides {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .hero-bg-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center 45%;
-      opacity: 0;
-      transition: opacity 3.5s ease-in-out;
-      transform: scale(1.05);
-      animation: heroKenBurns 28s infinite ease-in-out;
-    }
-    .hero-bg-slide.active { 
-      opacity: 0.78;
-      animation: kenBurns 9s ease-out forwards;
-    }
-    @keyframes kenBurns {
-      0%   { transform: scale(1.0) translateY(0); }
-      100% { transform: scale(1.08) translateY(-1.5%); }
-    }
-    .hero-bg-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 58vh;
-      z-index: 1;
-      background:
-        linear-gradient(180deg, rgba(8,8,6,0.35) 0%, rgba(8,8,6,0.15) 30%, rgba(8,8,6,0.6) 80%, rgba(8,8,6,1) 100%),
-        linear-gradient(90deg, rgba(8,8,6,0.45) 0%, rgba(8,8,6,0.05) 40%, rgba(8,8,6,0.05) 60%, rgba(8,8,6,0.45) 100%);
-      pointer-events: none;
-    }
-    @keyframes heroKenBurns {
-      0%, 100% { transform: scale(1.05) translate(0, 0); }
-      50% { transform: scale(1.12) translate(-2%, 1%); }
-    }
-      50% { transform: scale(1.15); }
-    }
-    #hero .hero-canvas, #hero .hero-bg-glow, #hero .hero-svg,
-    #hero .hero-content, #hero .hero-scroll { position: relative; z-index: 2; }
+.lb-nav {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(11,10,9,0.7); border: 1px solid var(--line);
+  color: var(--paper); cursor: pointer;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  z-index: 2;
+}
+.lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(11,10,9,0.9); }
+.lb-prev { left: 1.5rem; }
+.lb-next { right: 1.5rem; }
+.lb-nav.is-hidden { display: none; }
 
-    .hero-bg-glow {
-      position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(ellipse 70% 55% at 65% 38%, rgba(197,165,90,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 35% at 18% 75%, rgba(120,160,200,0.04) 0%, transparent 65%),
-        var(--bg);
-    }
-    .hero-svg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 1;
-    }
-    .hero-inner {
-      position: relative; z-index: 2; max-width: 920px;
-      will-change: transform;
-    
-      padding-top: 62vh;
-    }
+.lb-footer {
+  padding: 2rem 3rem 2.4rem;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+.lb-title {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--paper); letter-spacing: 0.04em; line-height: 1.55;
+  margin-bottom: 0.6rem;
+}
+.lb-meta {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.9rem; letter-spacing: 0.18em;
+  color: var(--paper-soft);
+  margin-bottom: 1rem;
+}
+.lb-desc {
+  font-size: 0.92rem; line-height: 1.95;
+  color: var(--paper-soft);
+  max-width: 700px; margin: 0 auto 1rem;
+}
+.lb-desc:empty { display: none; }
+.lb-credit {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.82rem; line-height: 1.85;
+  color: var(--paper-mute);
+  letter-spacing: 0.04em;
+}
+.lb-credit:empty { display: none; }
 
-    /* eyebrow */
-    .hero-eyebrow {
-      font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.34em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
-      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
-    }
+@media (max-width: 768px) {
+  .lb-header { padding: 0.8rem 1rem; }
+  .lb-close { width: 38px; height: 38px; font-size: 1.4rem; }
+  .lb-stage { padding: 1rem; }
+  .lb-img { max-height: 60vh; }
+  .lb-nav { width: 40px; height: 40px; font-size: 1.3rem; }
+  .lb-prev { left: 0.4rem; }
+  .lb-next { right: 0.4rem; }
+  .lb-footer { padding: 1.4rem 1.2rem 1.8rem; }
+}
 
-    /* main title → JP */
-    .hero-title {
-      font-family: var(--font-jp);
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      font-weight: 200;
-      letter-spacing: 0.12em;
-      line-height: 1.85;
-      color: var(--text);
-      margin: 3.5rem 0 2.8rem;
-      opacity: 0;
-      animation: fadeUp 1.6s ease 0.5s forwards;
-    }
-    .hero-title .line { display: block; overflow: hidden; }
-    .hero-title .line-inner {
-      display: block;
-      opacity: 0; transform: translateY(100%);
-      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .hero-title .line:nth-child(1) .line-inner { animation-delay: 0.55s; }
-    .hero-title .line:nth-child(2) .line-inner { animation-delay: 0.78s; }
-    .hero-title .accent { color: var(--accent); }
-
-    /* born from fire and water */
-    .hero-origin {
-      font-family: var(--font-display);
-      font-size: clamp(1.1rem, 2vw, 1.6rem);
-      font-weight: 300; font-style: italic;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      margin-bottom: 0;
-      opacity: 0;
-      animation: fadeUp 1.6s ease 1.1s forwards;
-    }
-    .hero-origin .fire { color: #e85d3c; font-weight: 500; font-style: italic; text-shadow: 0 0 12px rgba(232,93,60,0.3); }
-    .hero-origin .water { color: #5fa8d3; font-weight: 500; font-style: italic; text-shadow: 0 0 12px rgba(95,168,211,0.3); }
-
-    /* catchcopy */
-    .hero-catch {
-      font-family: var(--font-jp); font-size: 0.82rem; letter-spacing: 0.12em;
-      color: var(--text-dim); margin-bottom: 2.6rem; font-weight: 300;
-      opacity: 0; animation: fadeUp 1s ease 1.35s forwards;
-    }
-
-    /* desc */
-    .hero-desc {
-      font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.04em;
-      color: var(--text-dim); line-height: 2.2; max-width: 420px;
-      opacity: 0; animation: fadeUp 1s ease 1.55s forwards;
-    }
-
-    /* scroll indicator */
-    .hero-scroll {
-      position: absolute; bottom: 2.8rem; left: 3rem;
-      display: flex; align-items: center; gap: 1rem;
-      font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--text-dim);
-      opacity: 0; animation: fadeIn 1s ease 2s forwards;
-    }
-    .hero-scroll-line {
-      width: 36px; height: 1px; background: var(--accent);
-      display: inline-block;
-      animation: lineGrow 2s ease 2.2s infinite;
-    }
-
-    /* element pills — fire & water */
-    .hero-elements {
-      position: absolute; right: 3rem; bottom: 2.8rem; z-index: 2;
-      display: flex; gap: 1.4rem; align-items: center;
-      opacity: 0; animation: fadeIn 1.2s ease 2.2s forwards;
-    }
-    .el-pill {
-      font-family: var(--font-display); font-size: 0.68rem; font-style: italic;
-      letter-spacing: 0.16em; padding: 0.35rem 1rem;
-      border: 1px solid rgba(197,165,90,0.2);
-    }
-    .el-pill.fire { color: #d4824a; border-color: rgba(212,130,74,0.25); }
-    .el-pill.water { color: #8ab8cc; border-color: rgba(138,184,204,0.25); }
-
-    /* keyframes */
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(100%); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes lineGrow {
-      0%   { width: 36px; opacity: 1; }
-      50%  { width: 58px; opacity: 0.4; }
-      100% { width: 36px; opacity: 1; }
-    }
-
-    /* ■■ SECTIONS ■■ */
-    section { padding: 5rem 3rem; }
-    .section-label {
-      font-family: var(--font-ui);
-      font-size: 0.58rem;
-      font-weight: 400;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 2.2rem;
-      position: relative;
-      padding-left: 2.2rem;
-    }
-    .section-label::before {
-      content: ""; position: absolute; left: 0; top: 50%;
-      width: 1.6rem; height: 1px;
-      background: var(--accent);
-      opacity: 0.5;
-    }
-    .section-title {
-      font-family: var(--font-jp);
-      font-size: clamp(1.7rem, 3.2vw, 2.8rem);
-      font-weight: 200;
-      font-style: normal;
-      letter-spacing: 0.14em;
-      line-height: 1.85;
-      color: var(--text);
-      margin-bottom: 4.5rem;
-    }
-
-    /* ■■ ABOUT ■■ */
-    #about {
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .about-grid {
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 6rem;
-      max-width: 1100px;
-    }
-    .about-text p {
-      font-family: var(--font-jp);
-      font-size: 0.82rem;
-      font-weight: 300;
-      line-height: 2.2;
-      color: var(--text-dim);
-      letter-spacing: 0.04em;
-      margin-bottom: 1.6rem;
-    }
-    .about-values { display: flex; flex-direction: column; gap: 2.2rem; padding-top: 0.4rem; }
-    .value-item {
-      padding: 0.4rem 0 1.8rem 2.4rem;
-      border-left: 1px solid rgba(197,165,90,0.18);
-      position: relative;
-    }
-    .value-title {
-      font-family: var(--font-display); font-size: 1.05rem; font-style: italic;
-      color: var(--accent); margin-bottom: 0.4rem; letter-spacing: 0.04em;
-    }
-    .value-desc {
-      font-family: var(--font-ui); font-size: 0.76rem; letter-spacing: 0.04em;
-      color: var(--text-dim); line-height: 1.9;
-    }
-
-    /* ■■ WORKS ■■ */
-    #works { background: var(--bg); }
-    .works-header {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 4rem; border-bottom: 1px solid var(--border);
-      padding-bottom: 2rem;
-    }
-    .works-count {
-      font-family: var(--font-display); font-size: 5rem; font-weight: 300;
-      color: var(--accent); line-height: 1; opacity: 0.5;
-    }
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(197,165,90,0.05);
-    }
-    @media (max-width: 900px) {
-      .works-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 480px) {
-      .works-grid { grid-template-columns: 1fr; }
-    }
-    .work-card {
-      position: relative; overflow: hidden; aspect-ratio: 4/3;
-      background: #0a0a0a; cursor: pointer;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .work-card img {
-      width: 100%; height: 100%; object-fit: contain;
-      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.8s ease;
-      filter: brightness(0.78) saturate(0.92);
-    }
-    .work-card:hover img {
-      transform: scale(1.06);
-      filter: brightness(1) saturate(1);
-    }
-    .work-card:nth-child(1) { grid-column: span 2; aspect-ratio: 16/9; }
-    .work-card:nth-child(6) { aspect-ratio: 3/4; }
-    
-    /* Coming Soon Placeholder */
-    .work-placeholder {
-      position: absolute; inset: 0;
-      background: var(--bg-2);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 1.2rem;
-      transition: background 0.6s ease;
-    }
-    .work-placeholder::before {
-      content: ""; position: absolute;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 60%; height: 1px;
-      background: rgba(197,165,90,0.12);
-    }
-    .work-placeholder-num {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(197,165,90,0.4);
-      letter-spacing: 0.1em;
-      position: relative;
-      z-index: 1;
-      padding: 0 1.2rem;
-      background: var(--bg-2);
-    }
-    .work-placeholder-text {
-      font-family: var(--font-ui);
-      font-size: 0.55rem;
-      font-weight: 400;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: rgba(240,235,224,0.25);
-      position: relative;
-      z-index: 1;
-      padding: 0 1.2rem;
-      background: var(--bg-2);
-    }
-    .work-coming-soon {
-      background: linear-gradient(135deg, #2a2a1e 0%, #1a1a14 100%);
-      border: 1px solid rgba(197,165,90,0.08);
-    }
-    .work-coming-soon .work-placeholder-text {
-      color: var(--accent-dim);
-    }
-    
-    .work-card img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: contain; display: block;
-      transition: transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s;
-      filter: brightness(0.65) saturate(0.75);
-    }
-    .work-card:hover img {
-      transform: scale(1.07); filter: brightness(0.8) saturate(0.9);
-    }
-    .work-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,8,6,0.92) 0%, rgba(8,8,6,0.35) 50%, rgba(8,8,6,0) 100%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 2.2rem 2.2rem;
-      transition: background 0.6s ease;
-    }
-    .work-card:hover .work-overlay {
-      background: linear-gradient(to top, rgba(8,8,6,0.96) 0%, rgba(8,8,6,0.55) 50%, rgba(8,8,6,0.1) 100%);
-    }
-    .work-overlay::after {
-      content: ""; position: absolute;
-      left: 2.2rem; bottom: 2.2rem;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .work-card:hover .work-overlay::after { width: 2rem; }
-    .work-num {
-      font-family: var(--font-display);
-      font-size: 0.62rem;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--accent);
-      letter-spacing: 0.34em;
-      margin-bottom: 0.9rem;
-      opacity: 0.7;
-    }
-    .work-name {
-      font-family: var(--font-jp);
-      font-size: 0.88rem;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.7;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.5rem;
-    }
-    .work-type {
-      font-family: var(--font-ui);
-      font-size: 0.58rem;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(197,165,90,0.55);
-    }
-    .work-card:hover .work-type { opacity: 1; transform: translateY(0); }
-
-    /* ■■ TECHNOLOGY ■■ */
-    #technology {
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-    }
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 4rem 3.5rem;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-    .tech-item {
-      padding: 0.4rem 0 0.4rem 2rem;
-      border-left: 1px solid rgba(197,165,90,0.18);
-    }
-    .tech-item:hover { border-color: var(--accent-dim); background: rgba(197,165,90,0.03); }
-    .tech-glyph {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-style: italic;
-      font-weight: 300;
-      color: var(--accent);
-      margin-bottom: 2rem;
-      opacity: 0.55;
-      letter-spacing: 0.1em;
-    }
-    .tech-name {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 1.4rem;
-      letter-spacing: 0.04em;
-    }
-    .tech-desc {
-      font-family: var(--font-jp);
-      font-size: 0.78rem;
-      font-weight: 300;
-      line-height: 2.1;
-      color: var(--text-dim);
-      letter-spacing: 0.02em;
-    }
-
-    /* ■■ CLIENTS ■■ */
-    #clients {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .clients-intro {
-      font-family: var(--font-jp); font-size: 0.78rem;
-      line-height: 2; color: var(--text-dim);
-      text-align: center; margin: 0 auto 4rem;
-      max-width: 640px;
-    }
-    .clients-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 3rem 2.5rem;
-      max-width: 1100px; margin: 0 auto;
-    }
-    .client-group-label {
-      font-family: var(--font-ui); font-size: 0.6rem;
-      letter-spacing: 0.34em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.2rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 1px solid rgba(197,165,90,0.18);
-    }
-    .client-list { display: flex; flex-direction: column; gap: 0.55rem; }
-    .client-list span {
-      font-family: var(--font-jp); font-size: 0.82rem;
-      color: var(--text); letter-spacing: 0.04em; line-height: 1.6;
-    }
-    @media (max-width: 640px) {
-      .clients-grid { grid-template-columns: 1fr; gap: 2.2rem; }
-      .clients-intro { font-size: 0.72rem; margin-bottom: 3rem; }
-    }
-
-    .client-item:hover { color: var(--text); background: rgba(197,165,90,0.02); }
-
-    /* ■■ CONTACT ■■ */
-    #contact {
-      text-align: center;
-      background: var(--bg-2);
-      border-top: 1px solid var(--border);
-    }
-    .contact-inner { max-width: 640px; margin: 0 auto; }
-    .contact-quote {
-      font-family: var(--font-jp);
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 200;
-      line-height: 1.85;
-      letter-spacing: 0.14em;
-      color: var(--text);
-      margin: 1rem 0 3rem;
-    }
-    .contact-sub {
-      font-family: var(--font-jp);
-      font-size: 0.8rem;
-      font-weight: 300;
-      line-height: 2.2;
-      letter-spacing: 0.05em;
-      color: var(--text-dim);
-      margin-bottom: 3.5rem;
-    }
-    .btn {
-      display: inline-block; padding: 1.3rem 3.6rem;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-      font-family: var(--font-ui); font-size: 0.65rem;
-      font-weight: 400;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    .btn::before {
-      content: ""; position: absolute; inset: 0;
-      background: var(--accent);
-      transform: translateY(101%);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: -1;
-    }
-    .btn:hover { color: var(--bg); }
-    .btn:hover::before { transform: translateY(0); }
-
-    /* ■■ FOOTER ■■ */
-    footer {
-      padding: 5rem 3rem 3.5rem;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: flex-end; justify-content: space-between;
-      background: var(--bg);
-      gap: 3rem;
-    }
-    @media (max-width: 640px) {
-      footer { flex-direction: column; align-items: flex-start; padding: 4rem 2rem 3rem; gap: 2.5rem; }
-    }
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 1rem; font-weight: 400;
-      letter-spacing: 0.3em;
-      color: var(--accent);
-      margin-bottom: 0.9rem;
-    }
-    .footer-copy {
-      font-family: var(--font-ui);
-      font-size: 0.55rem;
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      color: rgba(240,235,224,0.3);
-      margin-top: 0.8rem;
-    }
-
-    /* ■■ REVEAL ■■ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ■■ RESPONSIVE ■■ */
-    @media (max-width: 1024px) {
-      .tech-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 860px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      section { padding: 5rem 1.5rem; }
-      #hero { padding: 0 1.5rem; }
-      .hero-elements { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .works-grid { grid-template-columns: repeat(2, 1fr); }
-      .work-card:nth-child(1) { grid-column: span 2; }
-      .work-card:nth-child(6) { aspect-ratio: 4/3; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
-      .client-item { flex: 1 1 33%; }
-    }
-    @media (max-width: 560px) {
-      .works-grid { grid-template-columns: 1fr; }
-      .work-card:nth-child(1) { grid-column: span 1; aspect-ratio: 4/3; }
-      .tech-grid { grid-template-columns: 1fr; }
-      .hero-scroll { display: none; }
-      .client-item { flex: 1 1 50%; }
-    }
-  
-    @media (max-width: 640px) {
-      #hero { min-height: 70vh; padding-top: 0 !important; padding-bottom: 3vh; }
-      .hero-bg-slides, .hero-bg-overlay, .hero-canvas { height: 100% !important; }
-      .hero-inner { padding-top: 52vh !important; }
-      .hero-title { font-size: clamp(1.9rem, 9vw, 3rem) !important; line-height: 1.65 !important; margin: 1.2rem 0 1.6rem !important; letter-spacing: 0.08em !important; }
-      .hero-origin { font-size: 1rem !important; margin: 0.4rem 0 !important; }
-      .hero-catchphrase { font-size: 0.78rem !important; letter-spacing: 0.28em !important; margin-top: 1.4rem !important; }
-      .hero-bg-slide.active { opacity: 0.7; }
-    }
-  
-    .value-num {
-      font-family: var(--font-display); font-size: 0.95rem;
-      font-style: italic; font-weight: 300;
-      color: var(--accent); opacity: 0.55;
-      margin-bottom: 0.9rem; letter-spacing: 0.08em;
-    }
-    .value-title {
-      font-family: var(--font-display); font-size: 1.15rem;
-      font-style: italic; font-weight: 400;
-      color: var(--text); margin-bottom: 0.4rem;
-      letter-spacing: 0.04em;
-    }
-    .value-jp {
-      font-family: var(--font-jp); font-size: 0.78rem;
-      font-weight: 300; color: var(--accent);
-      letter-spacing: 0.18em; margin-bottom: 1.1rem;
-    }
-    .value-desc {
-      font-family: var(--font-jp); font-size: 0.74rem;
-      font-weight: 300; line-height: 2.1;
-      color: var(--text-dim); letter-spacing: 0.02em;
-    }
-  
-    .contact-mail {
-      margin-top: 2rem;
-      font-family: var(--font-display);
-      font-size: 0.82rem; font-style: italic;
-      letter-spacing: 0.1em;
-      color: rgba(197,165,90,0.55);
-    }
-  
-    .footer-tagline {
-      font-family: var(--font-jp); font-size: 0.7rem;
-      font-weight: 300; letter-spacing: 0.32em;
-      color: var(--text-dim);
-    }
-    .footer-meta {
-      display: flex; flex-direction: column; align-items: flex-end;
-      gap: 0.4rem;
-    }
-    @media (max-width: 640px) {
-      .footer-meta { align-items: flex-start; }
-    }
-    .footer-mail {
-      font-family: var(--font-display);
-      font-size: 0.85rem; font-style: italic;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      text-decoration: none;
-      transition: opacity 0.3s;
-    }
-    .footer-mail:hover { opacity: 0.7; }
-  
-    .works-lead-copy {
-      font-family: 'Cormorant Garamond', 'Yu Mincho', serif;
-      font-size: 1.15rem; font-style: italic;
-      color: #b8a78a; line-height: 1.9;
-      text-align: center; margin: 1.2rem auto 4rem;
-      max-width: 640px; letter-spacing: 0.06em;
-      opacity: 0.85;
-    }
-    @media (max-width: 768px){
-      .works-lead-copy { font-size: 1rem; margin: 1rem 1.5rem 3rem; }
-    }
-  </style>
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<nav class="site-nav">
   <a href="#hero" class="nav-logo">atelier TECNO FORM</a>
+  <button class="nav-toggle" aria-label="menu">MENU</button>
   <ul class="nav-links">
-    <li><a href="#about">Philosophy</a></li>
     <li><a href="#works">Works</a></li>
+    <li><a href="#about">Philosophy</a></li>
     <li><a href="#technology">Technology</a></li>
+    <li><a href="#clients">Clients</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -1036,598 +530,306 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg-slides">
-    <div class="hero-bg-slide active" style="background-image:url(images/hilton-okinawa-05.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/hide-entrance.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/ritz-entrance-01.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/hilton-okinawa-08.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/hotel-keihan-tenmabashi-02.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/hide-interior.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/ritz-entrance-03.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/hilton-okinawa-01.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/hotel-keihan-tenmabashi-04.jpg)"></div>
-    <div class="hero-bg-slide" style="background-image:url(images/daimaru-kobe-03.jpg)"></div>
+    <div class="hero-bg-slide active" style="background-image: url('images/hilton-okinawa-01.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/ritz-bar-lounge-02.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/taka-town-03.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/hide-entrance.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/hotel-keihan-tenmabashi-04.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/sysmex_main.jpg');"></div>
   </div>
-  <div class="hero-bg-overlay"></div>
-  <canvas class="hero-canvas" id="heroCanvas"></canvas>
-  <div class="hero-bg-glow"></div>
-  <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <line x1="0" y1="450" x2="580" y2="450" stroke="rgba(197,165,90,0.05)" stroke-width="1"/>
-    <line x1="860" y1="0" x2="860" y2="900" stroke="rgba(197,165,90,0.04)" stroke-width="1"/>
-    <circle cx="860" cy="450" r="220" stroke="rgba(197,165,90,0.04)" fill="none" stroke-width="1"/>
-    <circle cx="860" cy="450" r="380" stroke="rgba(197,165,90,0.025)" fill="none" stroke-width="1"/>
-    <circle cx="860" cy="450" r="540" stroke="rgba(197,165,90,0.015)" fill="none" stroke-width="1"/>
-    <line x1="580" y1="230" x2="860" y2="450" stroke="rgba(197,165,90,0.04)" stroke-width="1"/>
-    <line x1="860" y1="450" x2="1140" y2="230" stroke="rgba(197,165,90,0.03)" stroke-width="1"/>
-  </svg>
-
-  <div class="hero-inner" id="heroInner">
-    
-    <h1 class="hero-title">
-      <span class="line"><span class="line-inner">光が宿り、</span></span>
-      <span class="line"><span class="line-inner"><span class="accent">素材が語りだす。</span></span></span>
-    </h1>
-    <p class="hero-origin">born from <span class="fire">fire</span> and <span class="water">water</span></p>
-    <p class="hero-catch">枠を解いて、揺らぎを纏う。</p>
-    <p class="hero-desc">ガラスと和紙、3Dプリントを用いてパラメトリック設計で制作するアートワークで、<br>最高水準の空間創造を実現します。</p>
+  <div class="hero-bg-veil"></div>
+  <div class="hero-content">
+    <p class="hero-mark">atelier TECNO FORM &nbsp; / &nbsp; est. 1983</p>
+    <h1 class="hero-title">枠を解いて、<br><em>揺らぎを纏う。</em></h1>
+    <p class="hero-sub">Glass · Washi · Hemp Fiber<br>Parametric Light Installation since 1983</p>
   </div>
-
-  <div class="hero-scroll"><span class="hero-scroll-line"></span>Scroll</div>
-
-  <div class="hero-elements">
-    <div class="el-pill fire">Fire · Glass</div>
-    <div class="el-pill water">Water · Washi</div>
-  </div>
+  <div class="hero-scroll">Scroll</div>
 </section>
 
 <!-- WORKS -->
 <section id="works">
-  <div class="works-header">
-    <div>
-      <div class="section-label">Selected Works</div>
-      <h2 class="section-title">Works</h2>
-    </div>
-    <p class="works-lead-copy">光が素材と出会い、空間に揺らぎが宿る。<br>
-  2003年から現在まで、私たちが紡いだ24の物語。</p>
+  <div class="section-head">
+    <span class="section-label">Selected Works</span>
+    <h2 class="section-title">Works</h2>
   </div>
-  <div class="works-grid">
-
-    <!-- 01 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/hilton-okinawa-01.jpg,images/hilton-okinawa-02.jpg,images/hilton-okinawa-03.jpg,images/hilton-okinawa-04.jpg,images/hilton-okinawa-05.jpg,images/hilton-okinawa-07.jpg,images/hilton-okinawa-08.jpg">
-      <img src="images/hilton-okinawa-01.jpg" alt="キャノピーbyヒルトン沖縄宮古島リゾート" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">01</div>
-        <div class="work-name">キャノピーbyヒルトン<br>沖縄宮古島リゾート</div>
-        <div class="work-type">Hotel · Washi Shade · Miyakojima</div>
-      </div>
-    </div>
-
-    <!-- 02 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/ritz-entrance-01.jpg,images/ritz-entrance-02.jpg,images/ritz-entrance-03.jpg">
-      <img src="images/ritz-entrance-01.jpg" alt="リッツカールトン東京 クラブレベル エントランス" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">02</div>
-        <div class="work-name">ザ・リッツカールトン東京<br>クラブレベル エントランス</div>
-        <div class="work-type">Hotel · Lighting Object · Tokyo</div>
-      </div>
-    </div>
-
-    <!-- 03 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/ritz-bar-counter-01.jpg,images/ritz-bar-counter-02.jpg">
-      <img src="images/ritz-bar-counter-01.jpg" alt="リッツカールトン東京 バーカウンター" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">03</div>
-        <div class="work-name">ザ・リッツカールトン東京<br>バーカウンター ガラスオブジェ</div>
-        <div class="work-type">Hotel · Glass Object · Tokyo</div>
-      </div>
-    </div>
-
-    <!-- 04 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/ritz-suite-hemp-01.jpg,images/ritz-suite-hemp-02.jpg,images/ritz-suite-hemp-03.jpg">
-      <img src="images/ritz-suite-hemp-01.jpg" alt="リッツカールトン東京 トップスイート 麻の葉" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">04</div>
-        <div class="work-name">ザ・リッツカールトン東京<br>トップスイート 硝子象嵌和紙アートパネル</div>
-        <div class="work-type">Hotel · Washi Art · Tokyo</div>
-      </div>
-    </div>
-
-    <!-- 05 - Available (NEW) -->
-    <div class="work-card work-slideshow" data-slides="images/renaissance-taipei.jpg,images/renaissance-taipei-detail.jpg">
-      <img src="images/renaissance-taipei.jpg" alt="ルネッサンス台北士林ホテル 中華レストラン Butterfly Wall Art" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">05</div>
-        <div class="work-name">ルネッサンス台北士林ホテル<br>中華レストラン Butterfly Wall Art</div>
-        <div class="work-type">Hotel · Washi Sculpture · Taipei</div>
-      </div>
-    </div>
-
-    <!-- 06 - Available (NEW) -->
-    <div class="work-card">
-      <img src="images/hide-entrance.jpg" alt="秀 京町堀 阿吽の宇宙 エントランス 光オブジェ" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">06</div>
-        <div class="work-name">秀 〜京町堀〜 阿吽の宇宙<br>エントランス 光オブジェ</div>
-        <div class="work-type">Restaurant · Washi Light Object · Osaka</div>
-      </div>
-    </div>
-
-    <!-- 07 - Available (NEW) -->
-    <div class="work-card">
-      <img src="images/hide-interior.jpg" alt="秀 京町堀 阿吽の宇宙 店内 和紙アートパネル・光オブジェ" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">07</div>
-        <div class="work-name">秀 〜京町堀〜 阿吽の宇宙<br>店内 和紙アートパネル・光オブジェ</div>
-        <div class="work-type">Restaurant · Washi Art Panel · Osaka</div>
-      </div>
-    </div>
-
-    <!-- 08 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/sysmex_main.jpg,images/sysmex.jpg,images/sysmex_glass.jpg">
-      <img src="images/sysmex_main.jpg" alt="シスメックス株式会社 本社" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">08</div>
-        <div class="work-name">シスメックス株式会社<br>本社</div>
-        <div class="work-type">Corporate · Glass Object · Kobe</div>
-      </div>
-    </div>
-
-    <!-- 09 - Available -->
-    <div class="work-card">
-      <img src="images/triaxis.jpg" alt="フィットネス トライアクシス OSAKA-BAY 強化複層アートガラス" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">09</div>
-        <div class="work-name">フィットネス トライアクシス<br>OSAKA-BAY</div>
-        <div class="work-type">Fitness · Ripple Art Glass · Osaka</div>
-      </div>
-    </div>
-
-    <!-- 10 - Available (NEW) -->
-    <div class="work-card">
-      <img src="images/yunosato.jpg" alt="ゆの里 お水の宿 このの レストラン壁面 アクアフォトミクスガラスアート" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">10</div>
-        <div class="work-name">ゆの里 お水の宿 このの<br>アクアフォトミクス ガラスアート</div>
-        <div class="work-type">Resort · Glass Art · Wakayama</div>
-      </div>
-    </div>
-
-    <!-- 11 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/park-tower-harumi-01.jpg,images/park-tower-harumi-02.jpg,images/park-tower-harumi-03.jpg,images/park-tower-harumi-04.jpg,images/park-tower-harumi-05.jpg">
-      <img src="images/park-tower-harumi-01.jpg" alt="パークタワー晴海 マンションギャラリー エントランス" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">11</div>
-        <div class="work-name">パークタワー晴海<br>マンションギャラリー エントランス</div>
-        <div class="work-type">Residential · Bronze Mirror Glass · Tokyo</div>
-      </div>
-    </div>
-
-    <!-- 12 - Available (FIXED) -->
-    <div class="work-card work-slideshow" data-slides="images/mitsui-yokohama-01.jpg,images/mitsui-yokohama-02.jpg,images/mitsui-yokohama-03.jpg,images/mitsui-yokohama-04.jpg">
-      <img src="images/mitsui-yokohama-01.jpg" alt="三井不動産 横浜北仲 エントランス ガラスオブジェ" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">12</div>
-        <div class="work-name">三井不動産 横浜北仲<br>エントランス ガラスオブジェ</div>
-        <div class="work-type">Residential · Glass Object · Yokohama</div>
-      </div>
-    </div>
-
-    <!-- 13 - Available (FIXED) -->
-    <div class="work-card">
-      <img src="images/mitsui-parkcoat.jpg" alt="三井不動産レジデンシャル パークコート JR芦屋駅前 エントランスロビー" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">13</div>
-        <div class="work-name">三井不動産レジデンシャル<br>パークコート JR芦屋駅前</div>
-        <div class="work-type">Residential · Wall Art Glass · Ashiya</div>
-      </div>
-    </div>
-
-    <!-- 14 - Coming Soon (キンダーキッズ画像未着) -->
-    <div class="work-card">
-      <div class="work-placeholder work-coming-soon">
-        <span class="work-placeholder-num">14</span>
-        <span class="work-placeholder-text">Coming Soon</span>
-      </div>
-    </div>
-
-    <!-- 15 - Available (FIXED) -->
-    <div class="work-card">
-      <img src="images/shinai-obstetrics.jpg" alt="親愛産婦人科 廊下壁面 Life on the planet earth" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">15</div>
-        <div class="work-name">親愛産婦人科<br>Life on the planet earth</div>
-        <div class="work-type">Medical · Glass Art Wall · Himeji</div>
-      </div>
-    </div>
-
-    <!-- 16 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/daimaru-kobe-01.jpg,images/daimaru-kobe-02.jpg,images/daimaru-kobe-03.jpg,images/daimaru-kobe-04.jpg,images/daimaru-kobe-05.jpg,images/daimaru-kobe-06.jpg,images/daimaru-kobe-07.jpg">
-      <img src="images/daimaru-kobe-03.jpg" alt="大丸神戸店 クラフトガラス壁面アート" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">16</div>
-        <div class="work-name">大丸神戸店<br>クラフトガラス壁面アート</div>
-        <div class="work-type">Retail · Craft Glass · Kobe</div>
-      </div>
-    </div>
-
-    <!-- 17 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/taka-town-01.jpg,images/taka-town-02.jpg,images/taka-town-03.jpg,images/taka-town-04.jpg,images/taka-town-05.jpg,images/taka-town-06.jpg">
-      <img src="images/taka-town-01.jpg" alt="多可町生涯学習まちづくりプラザ Asmile" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">17</div>
-        <div class="work-name">多可町生涯学習<br>まちづくりプラザ Asmile</div>
-        <div class="work-type">Public · Washi Glass · Hyogo</div>
-      </div>
-    </div>
-
-    <!-- 18 - Coming Soon (リーガロイヤル北谷 雲灯) -->
-    <div class="work-card">
-      <div class="work-placeholder work-coming-soon">
-        <span class="work-placeholder-num">18</span>
-        <span class="work-placeholder-text">Coming Soon</span>
-      </div>
-    </div>
-
-    <!-- 19 - Coming Soon (パナソニック日比谷 立礼茶室) -->
-    <div class="work-card">
-      <div class="work-placeholder work-coming-soon">
-        <span class="work-placeholder-num">19</span>
-        <span class="work-placeholder-text">Coming Soon</span>
-      </div>
-    </div>
-
-    <!-- 20 - Available -->
-    <div class="work-card work-slideshow" data-slides="images/hotel-keihan-tenmabashi-01.jpg,images/hotel-keihan-tenmabashi-02.jpg,images/hotel-keihan-tenmabashi-03.jpg,images/hotel-keihan-tenmabashi-04.jpg,images/hotel-keihan-tenmabashi-05.jpg,images/hotel-keihan-tenmabashi-06.jpg">
-      <img src="images/hotel-keihan-tenmabashi-03.jpg" alt="ホテル京阪 天満橋駅前" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">20</div>
-        <div class="work-name">ホテル京阪<br>天満橋駅前</div>
-        <div class="work-type">Hotel · Washi Room · Osaka</div>
-      </div>
-    </div>
-
-    <!-- 21 - Available (NEW) -->
-    <div class="work-card">
-      <img src="images/branz-nishinomiya-kitaguchi.jpg" alt="東急不動産 ブランズ西宮北口 エントランスロビー壁面アートガラス" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">21</div>
-        <div class="work-name">東急不動産 ブランズ西宮北口<br>エントランスロビー壁面アートガラス</div>
-        <div class="work-type">Residential · Art Glass · Nishinomiya</div>
-      </div>
-    </div>
-
-    <!-- 22 - Available (NEW) -->
-    <div class="work-card work-slideshow" data-slides="images/presance-legend-biwako-entrance.jpg,images/presance-legend-biwako-modelroom.jpg">
-      <img src="images/presance-legend-biwako-entrance.jpg" alt="プレサンス レジェンド 琵琶湖 エントランスロビー アートガラス" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">22</div>
-        <div class="work-name">プレサンス レジェンド 琵琶湖<br>エントランス & モデルルーム</div>
-        <div class="work-type">Residential · Mirror Base Glass · Otsu</div>
-      </div>
-    </div>
-
-    <!-- 23 - Available (NEW) -->
-    <div class="work-card">
-      <img src="images/plenus-corporate-symbol.jpg" alt="株式会社プレナス 企業シンボル ガラスオブジェ 東京日本橋茅場町" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">23</div>
-        <div class="work-name">株式会社プレナス<br>企業シンボル ガラスオブジェ</div>
-        <div class="work-type">Corporate · Glass Tower Object · Tokyo</div>
-      </div>
-    </div>
-
-    <!-- 24 - Available (NEW) -->
-    <div class="work-card">
-      <img src="images/mansion-yamazaki-entrance.jpg" alt="マンション山崎 エントランス 強化ガラスサイン" loading="lazy">
-      <div class="work-overlay">
-        <div class="work-num">24</div>
-        <div class="work-name">マンション山崎<br>エントランス 強化ガラスサイン</div>
-        <div class="work-type">Residential · Glass Sign · Japan</div>
-      </div>
-    </div>
-
+  <p class="works-lead reveal">光が素材と出会い、空間に揺らぎが宿る。<br>2003年から現在まで、私たちが紡いだ作品群。</p>
+  <div class="works-grid" id="worksGrid">
+    <!-- JSで動的生成 -->
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
+  <div class="section-head">
+    <span class="section-label">Philosophy</span>
+    <h2 class="section-title">About</h2>
+  </div>
   <div class="about-grid">
-    <div class="about-text reveal">
-      <div class="section-label">Philosophy</div>
-      <h2 class="section-title">技術と素材から<br>生まれるものを、<br>問い直す。</h2>
-      <p>ガラスと和紙、麻繊維、3Dプリント。パラメトリック設計と伝統技法を交差させ、最高水準の空間に唯一無二のアートワークを立ち上げる工房。</p>
-      <p>アルゴリズムが生む複雑さ、水の科学が描く可視化、そして職人の手が残す微細な揺らぎ。三つが重なる場所に、ありふれない空間体験が立ち上がります。</p>
-    </div>
-    <div class="about-values reveal">
-      <div class="value-item">
-        <div class="value-num">i</div>
-        <div class="value-title">Luxury Refined</div>
-        <div class="value-jp">気品と、存在感。</div>
-        <div class="value-desc">高級ホテルや企業エントランスに求められる凛とした品格を、素材と技術の融合から生み出します。</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">ii</div>
-        <div class="value-title">Organic Complexity</div>
-        <div class="value-jp">機械の中に、生命を。</div>
-        <div class="value-desc">自然のゆらぎをアルゴリズムで表現し、機械的でありながら呼吸する造形を生み出します。</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">iii</div>
-        <div class="value-title">Wellness × Art × Craft</div>
-        <div class="value-jp">心に、深く刻む。</div>
-        <div class="value-desc">アートと伝統工芸を融合させ、訪れた人の記憶に残る体験空間を立ち上げます。</div>
-      </div>
+    <p class="about-pull reveal">
+      光は、揺れることで場所になる。<br>
+      素材は、解かれることで物語を語る。
+    </p>
+    <div class="about-body reveal">
+      <p>atelier TECNO FORM は、<em>ガラス</em>・<em>和紙</em>・<em>麻繊維</em>を軸に、空間に光のインスタレーションを生み出す制作スタジオです。1983年の創設以来、ホテル・企業本社・高級住宅・文化施設を舞台に、素材と光の対話を空間言語として翻訳してきました。</p>
+      <p>パラメトリック設計と手仕事を行き来しながら、<em>三次元の和紙造形</em>、<em>クラフトガラス</em>、<em>麻繊維シェード</em>といった独自の素材語彙を開発。図面に収まらない有機的な形が、計算と直感の境界で生まれます。</p>
+      <p>私たちのアートは、絵画のように鑑賞される対象ではなく、日々の生活に潤いと変化を与える<em>花のような存在</em>を目指しています。</p>
     </div>
   </div>
 </section>
 
 <!-- TECHNOLOGY -->
 <section id="technology">
-  <div class="section-label">Methodology</div>
-  <h2 class="section-title">技術と素材</h2>
-  <div class="tech-grid">
+  <div class="section-head">
+    <span class="section-label">Materials &amp; Technique</span>
+    <h2 class="section-title">Technology</h2>
+  </div>
+  <div class="tech-list">
     <div class="tech-item reveal">
-      <div class="tech-glyph">Ⅰ</div>
-      <div class="tech-name">Parametric Design</div>
-      <div class="tech-desc">Grasshopperによるアルゴリズムデザインで複雑なデータを自動的に生成。繰り返しのない有機的なフォルムを、効率的な制作フローで実現します。</div>
+      <div class="tech-num">/ 01</div>
+      <h3 class="tech-title">立体手漉き和紙</h3>
+      <p class="tech-desc">3D構造体に手漉きで紙を漉き重ねる独自技法。光を通すと内部の繊維が浮かび上がり、紙そのものが発光しているように見える。</p>
     </div>
     <div class="tech-item reveal">
-      <div class="tech-glyph">Ⅱ</div>
-      <div class="tech-name">Craft Glass</div>
-      <div class="tech-desc">パラメトリックに設計された精密なデザインを、フューズド成形・サンドブラストなど特殊なガラス工芸で立体化。光と空間に、唯一の表情を与えます。</div>
+      <div class="tech-num">/ 02</div>
+      <h3 class="tech-title">クラフトアートガラス</h3>
+      <p class="tech-desc">ミラーベースの色彩流し、テクスチャーガラス、クラック加工。複層構成によって水面・氷・光のシャワーを表現する。</p>
     </div>
     <div class="tech-item reveal">
-      <div class="tech-glyph">Ⅲ</div>
-      <div class="tech-name">Washi Art</div>
-      <div class="tech-desc">伝統的な和紙漉きの技法を、現代の意匠と融合。和紙アートワークを空間デザインへ溶け込ませ、唯一無二のオブジェを生み出します。</div>
+      <div class="tech-num">/ 03</div>
+      <h3 class="tech-title">麻繊維シェード</h3>
+      <p class="tech-desc">麻の繊維を立体造形に重ね、光を内側から纏わせる。和紙よりも素朴で重厚な質感が、空間に静かな存在感を与える。</p>
     </div>
     <div class="tech-item reveal">
-      <div class="tech-glyph">Ⅳ</div>
-      <div class="tech-name">Aquaphotonics</div>
-      <div class="tech-desc">水の光吸収スペクトルを可視化するアクアフォトニクスの知見を空間デザインに応用し、癒しと健康をテーマとした体験空間を生み出します。</div>
+      <div class="tech-num">/ 04</div>
+      <h3 class="tech-title">パラメトリック設計</h3>
+      <p class="tech-desc">Grasshopperによるアルゴリズミック設計と、3Dプリント生分解性プラスチック骨組みの組合せで、一品ごとに異なる有機形状を生成。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 05</div>
+      <h3 class="tech-title">硝子象嵌</h3>
+      <p class="tech-desc">和紙にミラー・色ガラスを象嵌する独自技法。麻の葉文様などの伝統意匠を、光と影で再構成する。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 06</div>
+      <h3 class="tech-title">光のチューニング</h3>
+      <p class="tech-desc">色温度4500K〜6500K、点光源 vs 多灯のドラマ性、熱抜きの設計。素材と灯具を共設計することで、長寿命と表現を両立する。</p>
     </div>
   </div>
 </section>
 
 <!-- CLIENTS -->
 <section id="clients">
-  <div class="section-label">Trusted by</div>
-  <h2 class="section-title">主要納入先</h2>
-  <p class="clients-intro">高級ホテル・大手不動産・グローバル企業本社・公共施設まで——<br>世界水準を求める空間に選ばれてきました。</p>
-  <div class="clients-grid">
-    <div class="client-group">
-      <div class="client-group-label">Hospitality</div>
-      <div class="client-list">
-        <span>キャノピー by ヒルトン 沖縄宮古島</span>
-        <span>ザ・リッツカールトン東京</span>
-        <span>ルネッサンス台北士林</span>
-        <span>リーガロイヤルリゾート沖縄</span>
-        <span>ホテル京阪 天満橋駅前</span>
-      </div>
-    </div>
-    <div class="client-group">
-      <div class="client-group-label">Corporate</div>
-      <div class="client-list">
-        <span>シスメックス株式会社</span>
-        <span>パナソニック 日比谷</span>
-      </div>
-    </div>
-    <div class="client-group">
-      <div class="client-group-label">Residential</div>
-      <div class="client-list">
-        <span>三井不動産レジデンシャル パークタワー晴海</span>
-        <span>三井不動産 横浜北仲</span>
-        <span>三井不動産 パークコート</span>
-      </div>
-    </div>
-    <div class="client-group">
-      <div class="client-group-label">Retail &amp; Public</div>
-      <div class="client-list">
-        <span>大丸神戸店</span>
-        <span>多可町生涯学習まちづくりプラザ Asmile</span>
-      </div>
-    </div>
+  <div class="section-head">
+    <span class="section-label">Selected Clients</span>
+    <h2 class="section-title">Clients</h2>
   </div>
+  <ul class="clients-grid reveal">
+    <li>Canopy by Hilton 沖縄宮古島</li>
+    <li>ザ・リッツカールトン東京</li>
+    <li>ルネッサンス台北士林</li>
+    <li>ホテル京阪</li>
+    <li>リーガロイヤルリゾート</li>
+    <li>三井不動産レジデンシャル</li>
+    <li>東急不動産</li>
+    <li>プレサンス コーポレーション</li>
+    <li>シスメックス株式会社</li>
+    <li>パナソニック</li>
+    <li>株式会社プレナス</li>
+    <li>大丸神戸店</li>
+    <li>HBA (Hirsch Bedner Associates)</li>
+    <li>ILYA Corporation</li>
+    <li>DAIKO</li>
+    <li>乃村工藝社</li>
+    <li>裏千家</li>
+    <li>多可町</li>
+    <li>親愛産婦人科</li>
+    <li>キンダーキッズ</li>
+    <li>ゆの里 お水の宿</li>
+    <li>涼樹園</li>
+    <li>HIDE 京町堀</li>
+    <li>フィットネス トライアクシス</li>
+  </ul>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-inner reveal">
-    <div class="section-label">Enquiry</div>
-    <p class="contact-quote">設計に、<br>最高水準の光を。</p>
-    <p class="contact-sub">
-      空間の求める特性に静かに耳を澄まし、<br>
-      素材を解いて、揺らぎを纏う一つの表現を提案します。
-    </p>
-    <a href="mailto:info@tecnoform.jp" class="btn">Contact</a>
-    <p class="contact-mail">info@tecnoform.jp</p>
+  <p class="contact-tagline reveal">空間に揺らぎを纏わせたい方へ。</p>
+  <a href="mailto:info@tecnoform.jp" class="contact-mail">info@tecnoform.jp</a>
+  <div class="contact-info reveal">
+    atelier TECNO FORM &nbsp;/&nbsp; 江藤徳晃<br>
+    tecnoform.jp
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-mark">
-    <div class="footer-logo">atelier TECNO FORM</div>
-    <div class="footer-tagline">枠を解いて、揺らぎを纏う。</div>
-  </div>
-  <div class="footer-meta">
-    <a href="mailto:info@tecnoform.jp" class="footer-mail">info@tecnoform.jp</a>
-    <div class="footer-copy">&copy; 2026 atelier TECNO FORM. All rights reserved.</div>
-  </div>
+  © 1983 — 2026 &nbsp; atelier TECNO FORM &nbsp; / &nbsp; All works copyright atelier TECNO FORM
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lb-header">
+    <span class="lb-counter" id="lbCounter">— / —</span>
+    <button class="lb-close" id="lbClose" aria-label="close">×</button>
+  </div>
+  <div class="lb-stage">
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="prev">‹</button>
+    <div class="lb-img-wrap"><img class="lb-img" id="lbImg" alt=""></div>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="next">›</button>
+  </div>
+  <div class="lb-footer">
+    <div class="lb-title" id="lbTitle"></div>
+    <div class="lb-meta" id="lbMeta"></div>
+    <p class="lb-desc" id="lbDesc"></p>
+    <p class="lb-credit" id="lbCredit"></p>
+  </div>
+</div>
+
 <script>
-/* HERO BG SLIDESHOW */
+/* ============ PROJECTS DATA ============ */
+var PROJECTS = [{"num": "01", "title": "キャノピーbyヒルトン<br>沖縄宮古島リゾート", "meta": "Hotel · 2026 · Miyakojima", "desc": "光は、揺れることで場所になる。<br><br>和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。<br><br>アジア太平洋初のリゾートブランドとして2026年4月開業。内装デザインはHBAが手がけた。", "credit": "Interior Design: HBA (Hirsch Bedner Associates)<br>Lighting Installation: atelier TECNO FORM", "slides": ["images/hilton-okinawa-01.jpg", "images/hilton-okinawa-02.jpg", "images/hilton-okinawa-03.jpg", "images/hilton-okinawa-04.jpg", "images/hilton-okinawa-05.jpg", "images/hilton-okinawa-07.jpg", "images/hilton-okinawa-08.jpg"]}, {"num": "02", "title": "リッツカールトン東京 クラブレベル エントランス", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/ritz-entrance-01.jpg", "images/ritz-entrance-02.jpg", "images/ritz-entrance-03.jpg"]}, {"num": "03", "title": "リッツカールトン東京 バーカウンター", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/ritz-bar-counter-01.jpg", "images/ritz-bar-counter-02.jpg"]}, {"num": "04", "title": "リッツカールトン東京 トップスイート 麻の葉", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/ritz-suite-hemp-01.jpg", "images/ritz-suite-hemp-02.jpg", "images/ritz-suite-hemp-03.jpg"]}, {"num": "05", "title": "ルネッサンス台北士林ホテル 中華レストラン Butterfly Wall Art", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/renaissance-taipei.jpg", "images/renaissance-taipei-detail.jpg"]}, {"num": "06", "title": "秀 京町堀 阿吽の宇宙 エントランス 光オブジェ", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/hide-entrance.jpg"]}, {"num": "07", "title": "秀 京町堀 阿吽の宇宙 店内 和紙アートパネル・光オブジェ", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/hide-interior.jpg"]}, {"num": "08", "title": "シスメックス株式会社<br>本社", "meta": "Corporate · 2005 · Kobe", "desc": "ガラスに封じ込めた、細胞の記憶。<br><br>血球計数装置の世界的メーカーであるシスメックス。その本社エントランスに、細胞・水・生命のゆらぎをモチーフとしたパラメトリックガラスオブジェクトを制作。Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現しました。", "credit": "Glass Object Design &amp; Production: atelier TECNO FORM", "slides": ["images/sysmex.jpg"]}, {"num": "09", "title": "フィットネス トライアクシス OSAKA-BAY 強化複層アートガラス", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/triaxis.jpg"]}, {"num": "10", "title": "ゆの里 お水の宿 このの レストラン壁面 アクアフォトミクスガラスアート", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/yunosato.jpg"]}, {"num": "11", "title": "パークタワー晴海<br>マンションギャラリー エントランス", "meta": "Residential · 2017 · Harumi, Tokyo", "desc": "風と光の輝きを、ブロンズミラーに封じ込める。<br><br>「風」をテーマに、ブロンズミラー表面へサンドブラスト加工を施したエントランス壁面ガラスアート。線が織りなす隙間や重なりが自然の情景を生み出し、多数のクリスタルが光と風の輝きを空間に宿す。<br><br>三井不動産レジデンシャルによるパークタワー晴海の最上階プレミアム住戸マンションギャラリー。東京湾を望む眺望と呼応するように、壁面に宇宙的なスケールの風景が広がります。", "credit": "Glass Art Design &amp; Production: atelier TECNO FORM", "slides": ["images/park-tower-harumi-01.jpg", "images/park-tower-harumi-02.jpg", "images/park-tower-harumi-03.jpg", "images/park-tower-harumi-04.jpg", "images/park-tower-harumi-05.jpg"]}, {"num": "12", "title": "三井不動産 横浜北仲 エントランス ガラスオブジェ", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/mitsui-yokohama-01.jpg", "images/mitsui-yokohama-02.jpg", "images/mitsui-yokohama-03.jpg", "images/mitsui-yokohama-04.jpg"]}, {"num": "13", "title": "三井不動産レジデンシャル パークコート JR芦屋駅前 エントランスロビー", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/mitsui-parkcoat.jpg"]}, {"num": "14", "title": "キンダーキッズ インターナショナルスクール 大阪ベイ", "meta": "Educational · 大阪", "desc": "", "credit": "", "slides": [], "coming": true}, {"num": "15", "title": "親愛産婦人科 廊下壁面 Life on the planet earth", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/shinai-obstetrics.jpg"]}, {"num": "16", "title": "大丸神戸店<br>クラフトガラス壁面アート", "meta": "Retail · 2024 · Sannomiya, Kobe", "desc": "山の中に、景色がある。<br><br>六甲山系・丹生山系——今も昔も変わらず神戸三宮を見守る山々。その稜線をパラメトリック設計でトレースし、データとして壁面に刻む。<br><br>山の中に宿る風、雨、氷、樹木、川、霧。そうした自然の素材風景をひとつひとつのガラスに封じ込めた。複数種のクラフトガラスが重なり、光の角度によって表情を変えながら、大丸神戸店のエントランスに六甲の記憶を静かに映し続ける。", "credit": "Glass Art Design &amp; Production: atelier TECNO FORM", "slides": ["images/daimaru-kobe-01.jpg", "images/daimaru-kobe-02.jpg", "images/daimaru-kobe-03.jpg", "images/daimaru-kobe-04.jpg", "images/daimaru-kobe-05.jpg", "images/daimaru-kobe-06.jpg", "images/daimaru-kobe-07.jpg"]}, {"num": "17", "title": "多可町生涯学習<br>まちづくりプラザ Asmile", "meta": "Public · 2024 · Taka-cho, Hyogo", "desc": "意匠主題：あふれだす<br><br>「生涯学び続けられる生きがいあふれるまちづくり」——多可町のこの目標から意匠テーマを「あふれだす」と定めました。<br><br>学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。地域の宝・杉原紙を用いた5つのガラスアートで空間全体に織り込んでいます。", "credit": "Architecture: 内藤建築事務所<br>Glass Art: atelier TECNO FORM", "slides": ["images/taka-town-01.jpg", "images/taka-town-02.jpg", "images/taka-town-03.jpg", "images/taka-town-04.jpg", "images/taka-town-05.jpg", "images/taka-town-06.jpg"]}, {"num": "18", "title": "リーガロイヤルリゾート沖縄（北谷） 雲灯", "meta": "Hotel · 沖縄北谷", "desc": "", "credit": "", "slides": [], "coming": true}, {"num": "19", "title": "パナソニック日比谷 立礼茶室「得心軒」", "meta": "Cultural · 東京日比谷", "desc": "", "credit": "", "slides": [], "coming": true}, {"num": "20", "title": "ホテル京阪 天満橋駅前", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/hotel-keihan-tenmabashi-01.jpg", "images/hotel-keihan-tenmabashi-02.jpg", "images/hotel-keihan-tenmabashi-03.jpg", "images/hotel-keihan-tenmabashi-04.jpg", "images/hotel-keihan-tenmabashi-05.jpg", "images/hotel-keihan-tenmabashi-06.jpg"]}, {"num": "21", "title": "東急不動産 ブランズ西宮北口<br>エントランスロビー壁面アートガラス", "meta": "Residential · Nishinomiya", "desc": "四季の光を映し込む、変化あるミラーベース素材で制作。絵画の様に作者の表現を鑑賞する物ではなく、日々の生活に潤いと変化を与える花の様な存在を目指しました。", "credit": "Glass Art Design &amp; Production: atelier TECNO FORM", "slides": ["images/branz-nishinomiya-kitaguchi.jpg"]}, {"num": "22", "title": "プレサンス レジェンド 琵琶湖 エントランスロビー アートガラス", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/presance-legend-biwako-entrance.jpg", "images/presance-legend-biwako-modelroom.jpg"]}, {"num": "23", "title": "株式会社プレナス 企業シンボル ガラスオブジェ 東京日本橋茅場町", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/plenus-corporate-symbol.jpg"]}, {"num": "24", "title": "マンション山崎 エントランス 強化ガラスサイン", "meta": "", "desc": "", "credit": "Design &amp; Production: atelier TECNO FORM", "slides": ["images/mansion-yamazaki-entrance.jpg"]}]
+;
+/* ============ WORKS GRID 動的生成 ============ */
+(function(){
+  var grid = document.getElementById('worksGrid');
+  PROJECTS.forEach(function(p){
+    var card = document.createElement('div');
+    card.className = 'work-card reveal' + (p.coming ? ' is-coming' : '');
+    card.setAttribute('data-num', p.num);
+    
+    var inner;
+    if(p.coming){
+      inner = '<div class="work-frame"><div class="work-coming-mark">Coming Soon</div></div>'
+        + '<div class="work-meta">'
+        + '<span class="work-num">/ ' + p.num + '</span>'
+        + '<div class="work-info">'
+        + '<div class="work-name">' + p.title + '</div>'
+        + (p.meta ? '<div class="work-type">' + p.meta + '</div>' : '')
+        + '</div></div>';
+    } else {
+      inner = '<div class="work-frame"><img src="' + p.slides[0] + '" alt="' + p.title.replace(/<br>/g,' ') + '" loading="lazy"></div>'
+        + '<div class="work-meta">'
+        + '<span class="work-num">/ ' + p.num + '</span>'
+        + '<div class="work-info">'
+        + '<div class="work-name">' + p.title + '</div>'
+        + (p.meta ? '<div class="work-type">' + p.meta + '</div>' : '')
+        + '</div>'
+        + (p.slides.length > 1 ? '<span class="work-imgcount">+' + (p.slides.length - 1) + '</span>' : '')
+        + '</div>';
+    }
+    card.innerHTML = inner;
+    if(!p.coming){
+      card.addEventListener('click', function(){ openLightbox(p); });
+    }
+    grid.appendChild(card);
+  });
+})();
+
+/* ============ LIGHTBOX ============ */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lbImg');
+var lbTitle = document.getElementById('lbTitle');
+var lbMeta = document.getElementById('lbMeta');
+var lbDesc = document.getElementById('lbDesc');
+var lbCredit = document.getElementById('lbCredit');
+var lbCounter = document.getElementById('lbCounter');
+var lbPrev = document.getElementById('lbPrev');
+var lbNext = document.getElementById('lbNext');
+var lbClose = document.getElementById('lbClose');
+
+var currentProject = null, currentIdx = 0;
+
+function openLightbox(project){
+  currentProject = project;
+  currentIdx = 0;
+  lbTitle.innerHTML = project.title;
+  lbMeta.textContent = project.meta || '';
+  lbDesc.innerHTML = project.desc || '';
+  lbCredit.innerHTML = project.credit || '';
+  showImage(0);
+  lb.classList.add('is-open');
+  lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lb.classList.remove('is-open');
+  lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  currentProject = null;
+}
+function showImage(idx){
+  if(!currentProject) return;
+  var total = currentProject.slides.length;
+  currentIdx = (idx + total) % total;
+  lbImg.classList.add('loading');
+  var img = new Image();
+  img.onload = function(){
+    lbImg.src = currentProject.slides[currentIdx];
+    setTimeout(function(){ lbImg.classList.remove('loading'); }, 30);
+  };
+  img.src = currentProject.slides[currentIdx];
+  lbCounter.textContent = (currentIdx + 1) + ' / ' + total;
+  lbPrev.classList.toggle('is-hidden', total < 2);
+  lbNext.classList.toggle('is-hidden', total < 2);
+}
+lbPrev.addEventListener('click', function(){ showImage(currentIdx - 1); });
+lbNext.addEventListener('click', function(){ showImage(currentIdx + 1); });
+lbClose.addEventListener('click', closeLightbox);
+lb.addEventListener('click', function(e){ if(e.target === lb || e.target.classList.contains('lb-stage')) closeLightbox(); });
+document.addEventListener('keydown', function(e){
+  if(!lb.classList.contains('is-open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') showImage(currentIdx - 1);
+  if(e.key === 'ArrowRight') showImage(currentIdx + 1);
+});
+
+// スワイプ対応（モバイル）
+var touchStartX = 0;
+lb.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, {passive: true});
+lb.addEventListener('touchend', function(e){
+  var dx = e.changedTouches[0].clientX - touchStartX;
+  if(Math.abs(dx) > 60){ showImage(currentIdx + (dx < 0 ? 1 : -1)); }
+}, {passive: true});
+
+/* ============ HERO BG SLIDES ============ */
 (function(){
   var slides = document.querySelectorAll('.hero-bg-slide');
-  if (slides.length < 2) return;
+  if(slides.length < 2) return;
   var cur = 0;
   setInterval(function(){
     slides[cur].classList.remove('active');
     cur = (cur + 1) % slides.length;
     slides[cur].classList.add('active');
-  }, 4000);
+  }, 5500);
 })();
-</script>
-<script>
-/* ■■ CANVAS: Flowing Streams (Yuragi/Fluctuation) ■■ */
-(function() {
-  const canvas = document.getElementById('heroCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, streams = [], t = 0;
 
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', () => { resize(); initStreams(); });
-
-  function rand(a, b) { return a + Math.random() * (b - a); }
-
-  class Stream {
-    constructor(i, total) {
-      this.id = i;
-      this.type = i % 2 === 0 ? 'fire' : 'water';
-      this.baseY = H * (0.15 + (i / total) * 0.7);
-      this.amplitude = rand(40, 120);
-      this.wavelength = rand(0.003, 0.007);
-      this.phase = rand(0, Math.PI * 2);
-      this.speed = rand(0.00012, 0.0004);
-      this.opacity = rand(0.08, 0.22);
-      this.thickness = rand(0.5, 1.4);
-      this.driftY = rand(-30, 30);
-      this.driftSpeed = rand(0.00006, 0.00018);
-      this.driftPhase = rand(0, Math.PI * 2);
-      this.color = this.type === 'fire' ? '197, 165, 90' : '120, 175, 200';
-    }
-    draw(time) {
-      const drift = Math.sin(time * this.driftSpeed + this.driftPhase) * this.driftY;
-      const y0 = this.baseY + drift;
-      ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
-      ctx.beginPath();
-      for (let x = -20; x <= W + 20; x += 5) {
-        const y = y0
-          + Math.sin(x * this.wavelength + time * this.speed * 60 + this.phase) * this.amplitude
-          + Math.sin(x * this.wavelength * 2.7 + time * this.speed * 30) * (this.amplitude * 0.3);
-        if (x === -20) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      const grad = ctx.createLinearGradient(0, 0, W, 0);
-      grad.addColorStop(0, `rgba(${this.color}, 0)`);
-      grad.addColorStop(0.5, `rgba(${this.color}, ${this.opacity})`);
-      grad.addColorStop(1, `rgba(${this.color}, 0)`);
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = this.thickness;
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  function initStreams() {
-    streams = [];
-    const count = W < 640 ? 6 : 10;
-    for (let i = 0; i < count; i++) streams.push(new Stream(i, count));
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, W, H);
-    t++;
-    streams.forEach(s => s.draw(t));
-    requestAnimationFrame(animate);
-  }
-
-  initStreams();
-  animate();
-})();
-</script>
-
-
-
-
-  
-
-  <!-- MODAL -->
-  <div class="modal-overlay" id="workModal" role="dialog" aria-modal="true">
-    <div class="modal-inner">
-      <div class="modal-header">
-        <button class="modal-close" id="modalClose">&#x2715;</button>
-        <div class="modal-num" id="modalNum"></div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-meta" id="modalMeta"></div>
-      </div>
-      <div class="modal-gallery">
-        <img id="modalImg" src="" alt="">
-        <button class="modal-prev" id="modalPrev">&#8249;</button>
-        <button class="modal-next" id="modalNext">&#8250;</button>
-        <div class="modal-nav" id="modalDots"></div>
-      </div>
-      <div class="modal-body">
-        <div class="modal-desc" id="modalDesc"></div>
-        <div class="modal-credit" id="modalCredit"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
+/* ============ NAV ============ */
 (function(){
-var W={"01":{title:"キャノピーbyヒルトン<br>沖縄宮古島リゾート",meta:"Hotel · 2026 · Miyakojima",desc:"光は、揺れることで場所になる。<br><br>和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。<br><br>アジア太平洋初のリゾートブランドとして2026年4月開業。内装デザインはHBAが手がけた。",credit:"Interior Design: HBA (Hirsch Bedner Associates)<br>Lighting Installation: atelier TECNO FORM",slides:["images/hilton-okinawa-01.jpg","images/hilton-okinawa-02.jpg","images/hilton-okinawa-03.jpg","images/hilton-okinawa-04.jpg","images/hilton-okinawa-05.jpg","images/hilton-okinawa-07.jpg","images/hilton-okinawa-08.jpg"]},"02":{title:"リッツカールトン東京 クラブレベル エントランス",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/ritz-entrance-01.jpg","images/ritz-entrance-02.jpg","images/ritz-entrance-03.jpg"]},"03":{title:"リッツカールトン東京 バーカウンター",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/ritz-bar-counter-01.jpg","images/ritz-bar-counter-02.jpg"]},"04":{title:"リッツカールトン東京 トップスイート 麻の葉",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/ritz-suite-hemp-01.jpg","images/ritz-suite-hemp-02.jpg","images/ritz-suite-hemp-03.jpg"]},"05":{title:"ルネッサンス台北士林ホテル 中華レストラン Butterfly Wall Art",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/renaissance-taipei.jpg","images/renaissance-taipei-detail.jpg"]},"06":{title:"秀 京町堀 阿吽の宇宙 エントランス 光オブジェ",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/hide-entrance.jpg"]},"07":{title:"秀 京町堀 阿吽の宇宙 店内 和紙アートパネル・光オブジェ",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/hide-interior.jpg"]},"08":{title:"シスメックス株式会社<br>本社",meta:"Corporate · 2005 · Kobe",desc:"ガラスに封じ込めた、細胞の記憶。<br><br>血球計数装置の世界的メーカーであるシスメックス。その本社エントランスに、細胞・水・生命のゆらぎをモチーフとしたパラメトリックガラスオブジェクトを制作。Grasshopperによるアルゴリズム設計で生成した有機的なフォルムを、キャストガラスで実現しました。",credit:"Glass Object Design &amp; Production: atelier TECNO FORM",slides:["images/sysmex.jpg"]},"09":{title:"フィットネス トライアクシス OSAKA-BAY 強化複層アートガラス",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/triaxis.jpg"]},"10":{title:"ゆの里 お水の宿 このの レストラン壁面 アクアフォトミクスガラスアート",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/yunosato.jpg"]},"11":{title:"パークタワー晴海<br>マンションギャラリー エントランス",meta:"Residential · 2017 · Harumi, Tokyo",desc:"風と光の輝きを、ブロンズミラーに封じ込める。<br><br>「風」をテーマに、ブロンズミラー表面へサンドブラスト加工を施したエントランス壁面ガラスアート。線が織りなす隙間や重なりが自然の情景を生み出し、多数のクリスタルが光と風の輝きを空間に宿す。<br><br>三井不動産レジデンシャルによるパークタワー晴海の最上階プレミアム住戸マンションギャラリー。東京湾を望む眺望と呼応するように、壁面に宇宙的なスケールの風景が広がります。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/park-tower-harumi-01.jpg","images/park-tower-harumi-02.jpg","images/park-tower-harumi-03.jpg","images/park-tower-harumi-04.jpg","images/park-tower-harumi-05.jpg"]},"12":{title:"三井不動産 横浜北仲 エントランス ガラスオブジェ",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/mitsui-yokohama-01.jpg","images/mitsui-yokohama-02.jpg","images/mitsui-yokohama-03.jpg","images/mitsui-yokohama-04.jpg"]},"13":{title:"三井不動産レジデンシャル パークコート JR芦屋駅前 エントランスロビー",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/mitsui-parkcoat.jpg"]},"15":{title:"親愛産婦人科 廊下壁面 Life on the planet earth",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/shinai-obstetrics.jpg"]},"16":{title:"大丸神戸店<br>クラフトガラス壁面アート",meta:"Retail · 2024 · Sannomiya, Kobe",desc:"山の中に、景色がある。<br><br>六甲山系・丹生山系——今も昔も変わらず神戸三宮を見守る山々。その稜線をパラメトリック設計でトレースし、データとして壁面に刻む。<br><br>山の中に宿る風、雨、氷、樹木、川、霧。そうした自然の素材風景をひとつひとつのガラスに封じ込めた。複数種のクラフトガラスが重なり、光の角度によって表情を変えながら、大丸神戸店のエントランスに六甲の記憶を静かに映し続ける。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/daimaru-kobe-01.jpg","images/daimaru-kobe-02.jpg","images/daimaru-kobe-03.jpg","images/daimaru-kobe-04.jpg","images/daimaru-kobe-05.jpg","images/daimaru-kobe-06.jpg","images/daimaru-kobe-07.jpg"]},"17":{title:"多可町生涯学習<br>まちづくりプラザ Asmile",meta:"Public · 2024 · Taka-cho, Hyogo",desc:"意匠主題：あふれだす<br><br>「生涯学び続けられる生きがいあふれるまちづくり」——多可町のこの目標から意匠テーマを「あふれだす」と定めました。<br><br>学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。地域の宝・杉原紙を用いた5つのガラスアートで空間全体に織り込んでいます。",credit:"Architecture: 内藤建築事務所<br>Glass Art: atelier TECNO FORM",slides:["images/taka-town-01.jpg","images/taka-town-02.jpg","images/taka-town-03.jpg","images/taka-town-04.jpg","images/taka-town-05.jpg","images/taka-town-06.jpg"]},"20":{title:"ホテル京阪 天満橋駅前",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/hotel-keihan-tenmabashi-01.jpg","images/hotel-keihan-tenmabashi-02.jpg","images/hotel-keihan-tenmabashi-03.jpg","images/hotel-keihan-tenmabashi-04.jpg","images/hotel-keihan-tenmabashi-05.jpg","images/hotel-keihan-tenmabashi-06.jpg"]},"21":{title:"東急不動産 ブランズ西宮北口<br>エントランスロビー壁面アートガラス",meta:"Residential · Nishinomiya",desc:"四季の光を映し込む、変化あるミラーベース素材で制作。絵画の様に作者の表現を鑑賞する物ではなく、日々の生活に潤いと変化を与える花の様な存在を目指しました。",credit:"Glass Art Design &amp; Production: atelier TECNO FORM",slides:["images/branz-nishinomiya-kitaguchi.jpg"]},"22":{title:"プレサンス レジェンド 琵琶湖 エントランスロビー アートガラス",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/presance-legend-biwako-entrance.jpg","images/presance-legend-biwako-modelroom.jpg"]},"23":{title:"株式会社プレナス 企業シンボル ガラスオブジェ 東京日本橋茅場町",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/plenus-corporate-symbol.jpg"]},"24":{title:"マンション山崎 エントランス 強化ガラスサイン",meta:"",desc:"",credit:"Design &amp; Production: atelier TECNO FORM",slides:["images/mansion-yamazaki-entrance.jpg"]}};
+  var nav = document.querySelector('.site-nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.querySelector('.nav-links');
+  if(toggle){
+    toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+    links.addEventListener('click', function(e){
+      if(e.target.tagName === 'A') links.classList.remove('open');
+    });
+  }
+})();
 
-var ov,mi,md,cur=0,sl=[];
-function init(){
-  ov=document.getElementById("workModal");
-  mi=document.getElementById("modalImg");
-  md=document.getElementById("modalDots");
-  document.getElementById("modalClose").onclick=close;
-  document.getElementById("modalPrev").onclick=function(e){e.stopPropagation();stopAuto();go(cur-1);startAuto();};
-  document.getElementById("modalNext").onclick=function(e){e.stopPropagation();stopAuto();go(cur+1);startAuto();};
-  ov.onclick=function(e){if(e.target===ov)close();};
-  document.addEventListener("keydown",function(e){
-    if(!ov.classList.contains("open"))return;
-    if(e.key==="Escape")close();
-    if(e.key==="ArrowLeft")go(cur-1);
-    if(e.key==="ArrowRight")go(cur+1);
-  });
-  document.querySelectorAll(".work-card").forEach(function(c){
-    var n=c.querySelector(".work-num");
-    if(!n)return;
-    var k=n.textContent.trim();
-    if(!W[k])return;
-    c.style.cursor="pointer";
-    c.onclick=function(){openW(k);};
-  });
-}
-var timer=null;function startAuto(){stopAuto();if(sl.length>1)timer=setInterval(function(){go(cur+1);},2500);}function stopAuto(){if(timer){clearInterval(timer);timer=null;}}function openW(k){
-  var w=W[k];
-  sl=w.slides; cur=0;
-  document.getElementById("modalNum").textContent=k;
-  document.getElementById("modalTitle").innerHTML=w.title;
-  document.getElementById("modalMeta").textContent=w.meta;
-  document.getElementById("modalDesc").innerHTML=w.desc;
-  document.getElementById("modalCredit").innerHTML=w.credit;
-  render();
-  ov.classList.add("open");
-  document.body.style.overflow="hidden";
-  startAuto();
-}
-function close(){stopAuto();ov.classList.remove("open");document.body.style.overflow="";}
-function go(i){cur=(i+sl.length)%sl.length;render();}
-function render(){
-  mi.src=sl[cur];
-  md.innerHTML="";
-  sl.forEach(function(_,i){
-    var d=document.createElement("button");
-    d.className="modal-dot"+(i===cur?" active":"");
-    d.onclick=function(e){e.stopPropagation();go(i);};
-    md.appendChild(d);
-  });
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);
-else init();
+/* ============ SCROLL REVEAL ============ */
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.12});
+  // works-grid のカードは動的生成後にobserve
+  setTimeout(function(){
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  }, 100);
 })();
 </script>
-
-
 </body>
 </html>
