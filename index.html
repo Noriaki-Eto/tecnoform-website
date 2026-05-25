@@ -1086,8 +1086,7 @@
       <div class="section-label">Selected Works</div>
       <h2 class="section-title">Works</h2>
     </div>
-    <div class="works-count">24</div>
-  <p class="works-lead-copy">光が素材と出会い、空間に揺らぎが宿る。<br>
+    <p class="works-lead-copy">光が素材と出会い、空間に揺らぎが宿る。<br>
   2003年から現在まで、私たちが紡いだ24の物語。</p>
   </div>
   <div class="works-grid">
@@ -1585,8 +1584,11 @@
       cur = nextIdx;
     }
     
-    // 常時自動ループ（4秒間隔）
-    setInterval(tick, 4000);
+    // 常時自動ループ（4秒間隔・カードごとに開始タイミングをランダム分散して同期明滅を防ぐ）
+    setTimeout(function(){
+      tick();
+      setInterval(tick, 4000);
+    }, Math.random() * 4000);
   });
 })();
 </script>
