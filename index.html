@@ -418,6 +418,7 @@ footer {
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   display: none; flex-direction: column;
   opacity: 0; transition: opacity 0.45s ease;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
 .lightbox.is-open { display: flex; opacity: 1; }
 .lb-header {
@@ -425,6 +426,9 @@ footer {
   display: flex; justify-content: space-between; align-items: center;
   flex-shrink: 0;
   border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(8, 7, 6, 0.94);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .lb-counter {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
@@ -512,6 +516,37 @@ footer {
   letter-spacing: 0.04em;
 }
 .lb-credit:empty { display: none; }
+.lb-back {
+  margin-top: 2rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  padding: 0.9rem 1.8rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+.lb-back:hover, .lb-back:active { border-color: var(--accent); color: var(--accent); background: rgba(201, 168, 117, 0.08); }
+
+/* ===== SCROLL TOP BUTTON ===== */
+.scroll-top {
+  position: fixed; right: 1.2rem; bottom: 1.2rem;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(11, 10, 9, 0.78);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-size: 1.25rem; line-height: 1;
+  cursor: pointer; z-index: 150;
+  opacity: 0; pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.3s ease, color 0.3s ease;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.scroll-top:hover, .scroll-top:active { border-color: var(--accent); color: var(--accent); }
 
 @media (max-width: 768px) {
   .lb-header { padding: 0.8rem 1rem; }
@@ -522,6 +557,8 @@ footer {
   .lb-prev { left: 0.4rem; }
   .lb-next { right: 0.4rem; }
   .lb-footer { padding: 1.4rem 1.2rem 1.8rem; }
+  .lb-back { font-size: 0.88rem; padding: 0.8rem 1.4rem; }
+  .scroll-top { right: 0.9rem; bottom: 0.9rem; width: 42px; height: 42px; font-size: 1.15rem; }
 }
 
 /* ===== SCROLL REVEAL ===== */
@@ -697,8 +734,12 @@ footer {
     <div class="lb-meta" id="lbMeta"></div>
     <p class="lb-desc" id="lbDesc"></p>
     <p class="lb-credit" id="lbCredit"></p>
+    <button class="lb-back" id="lbBack" type="button">✕ &nbsp;Works 一覧へ戻る</button>
   </div>
 </div>
+
+<!-- スクロールトップボタン -->
+<button class="scroll-top" id="scrollTop" aria-label="ページトップへ戻る" type="button">↑</button>
 
 <script>
 /* ============ PROJECTS DATA ============ */
@@ -766,12 +807,14 @@ function openLightbox(project){
   showImage(0);
   lb.classList.add('is-open');
   lb.setAttribute('aria-hidden','false');
+  lb.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 }
 function closeLightbox(){
   lb.classList.remove('is-open');
   lb.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  lb.scrollTop = 0;
   currentProject = null;
 }
 function showImage(idx){
@@ -792,6 +835,8 @@ function showImage(idx){
 lbPrev.addEventListener('click', function(){ showImage(currentIdx - 1); });
 lbNext.addEventListener('click', function(){ showImage(currentIdx + 1); });
 lbClose.addEventListener('click', closeLightbox);
+var lbBack = document.getElementById('lbBack');
+if(lbBack) lbBack.addEventListener('click', closeLightbox);
 lb.addEventListener('click', function(e){ if(e.target === lb || e.target.classList.contains('lb-stage')) closeLightbox(); });
 document.addEventListener('keydown', function(e){
   if(!lb.classList.contains('is-open')) return;
@@ -823,9 +868,17 @@ lb.addEventListener('touchend', function(e){
 /* ============ NAV ============ */
 (function(){
   var nav = document.querySelector('.site-nav');
+  var scrollTopBtn = document.getElementById('scrollTop');
   window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 50);
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 50);
+    if(scrollTopBtn) scrollTopBtn.classList.toggle('is-visible', y > 600);
   });
+  if(scrollTopBtn){
+    scrollTopBtn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
   if(toggle){
