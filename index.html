@@ -1452,7 +1452,7 @@
     slides[cur].classList.remove('active');
     cur = (cur + 1) % slides.length;
     slides[cur].classList.add('active');
-  }, 12000);
+  }, 4000);
 })();
 </script>
 <script>
@@ -1529,6 +1529,38 @@
   animate();
 })();
 </script>
+
+<script>
+/* ■■ WORK-CARD SLIDESHOW (data-slides自動ループ) ■■ */
+(function(){
+  document.querySelectorAll('.work-card.work-slideshow').forEach(function(card){
+    var raw = card.getAttribute('data-slides');
+    if(!raw) return;
+    var imgs = raw.split(',').map(function(s){return s.trim();}).filter(Boolean);
+    if(imgs.length < 2) return;
+    var img = card.querySelector('img');
+    if(!img) return;
+    var cur = 0;
+    var timer = null;
+    function next(){
+      cur = (cur + 1) % imgs.length;
+      img.style.opacity = '0';
+      setTimeout(function(){
+        img.src = imgs[cur];
+        img.style.opacity = '1';
+      }, 300);
+    }
+    function start(){ timer = setInterval(next, 2800); }
+    function stop(){ clearInterval(timer); timer = null; }
+    img.style.transition = 'opacity 0.3s ease';
+    // 常時自動ループ（ホバーで一時停止）
+    start();
+    card.addEventListener('mouseenter', stop);
+    card.addEventListener('mouseleave', start);
+  });
+})();
+</script>
+
 
   
 
