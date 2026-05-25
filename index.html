@@ -1543,55 +1543,7 @@
 })();
 </script>
 
-<script>
-/* ■■ WORK-CARD CROSS-FADE SLIDESHOW (2枚レイヤー方式) ■■ */
-(function(){
-  document.querySelectorAll('.work-card.work-slideshow').forEach(function(card){
-    var raw = card.getAttribute('data-slides');
-    if(!raw) return;
-    var imgs = raw.split(',').map(function(s){return s.trim();}).filter(Boolean);
-    if(imgs.length < 2) return;
-    var imgA = card.querySelector('img');
-    if(!imgA) return;
-    
-    // 既存imgを絶対配置に変更
-    imgA.style.cssText += 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity 1.5s ease-in-out;opacity:1;z-index:1;';
-    
-    // 2枚目（クロスフェード用）を作成
-    var imgB = document.createElement('img');
-    imgB.alt = '';
-    imgB.loading = 'lazy';
-    imgB.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity 1.5s ease-in-out;opacity:0;z-index:2;';
-    imgB.src = imgs[1];
-    imgA.parentNode.insertBefore(imgB, imgA.nextSibling);
-    
-    // カードに relative + overflow:hidden 保証
-    card.style.position = 'relative';
-    card.style.overflow = 'hidden';
-    
-    var cur = 0;
-    var showingA = true;
-    
-    function tick(){
-      var nextIdx = (cur + 1) % imgs.length;
-      var nextImg = showingA ? imgB : imgA;
-      var prevImg = showingA ? imgA : imgB;
-      nextImg.src = imgs[nextIdx];
-      void nextImg.offsetWidth;
-      nextImg.style.opacity = '1';
-      prevImg.style.opacity = '0';
-      showingA = !showingA;
-      cur = nextIdx;
-    }
-    
-    // 常時自動ループ（4秒間隔・カードごとに開始タイミングをランダム分散して同期明滅を防ぐ）
-    setTimeout(function(){
-      tick();
-      setInterval(tick, 4000);
-    }, Math.random() * 4000);
-  });
-})();
-</script>
+
 
 
   
