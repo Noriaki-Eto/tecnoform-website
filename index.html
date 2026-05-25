@@ -373,7 +373,7 @@
 
     /* ■■ HERO ■■ */
     #hero {
-      min-height: 100vh;
+      min-height: 72vh;
       display: flex; flex-direction: column; justify-content: center;
       padding: 0 3rem;
       position: relative; overflow: hidden;
@@ -945,7 +945,7 @@
     }
   
     @media (max-width: 640px) {
-      #hero { min-height: 100vh; padding-top: 0 !important; padding-bottom: 4vh; }
+      #hero { min-height: 70vh; padding-top: 0 !important; padding-bottom: 3vh; }
       .hero-bg-slides, .hero-bg-overlay, .hero-canvas { height: 100% !important; }
       .hero-inner { padding-top: 52vh !important; }
       .hero-title { font-size: clamp(1.9rem, 9vw, 3rem) !important; line-height: 1.65 !important; margin: 1.2rem 0 1.6rem !important; letter-spacing: 0.08em !important; }
@@ -1571,16 +1571,14 @@
     card.style.overflow = 'hidden';
     
     var cur = 0;
-    var showingA = true;  // 現在表示中はimgA
-    var paused = false;
+    var showingA = true;
+    var timer = null;
     
     function tick(){
-      if(paused) return;
       var nextIdx = (cur + 1) % imgs.length;
       var nextImg = showingA ? imgB : imgA;
       var prevImg = showingA ? imgA : imgB;
       nextImg.src = imgs[nextIdx];
-      // 強制リフロー後にクロスフェード
       void nextImg.offsetWidth;
       nextImg.style.opacity = '1';
       prevImg.style.opacity = '0';
@@ -1588,9 +1586,34 @@
       cur = nextIdx;
     }
     
-    var timer = setInterval(tick, 4200);  // 4.2秒ごと（1.8秒フェード + 2.4秒静止）
-    card.addEventListener('mouseenter', function(){ paused = true; });
-    card.addEventListener('mouseleave', function(){ paused = false; });
+    function reset(){
+      // 1枚目に戻す（静止状態）
+      if(!showingA){
+        imgA.src = imgs[0];
+        void imgA.offsetWidth;
+        imgA.style.opacity = '1';
+        imgB.style.opacity = '0';
+        showingA = true;
+      } else {
+        imgA.style.opacity = '1';
+        imgB.style.opacity = '0';
+      }
+      cur = 0;
+    }
+    
+    // PC: ホバー中のみ自動スライド
+    card.addEventListener('mouseenter', function(){
+      if(timer) return;
+      tick();
+      timer = setInterval(tick, 2200);  // ホバー中は短く2.2秒
+    });
+    card.addEventListener('mouseleave', function(){
+      clearInterval(timer); timer = null;
+      reset();
+    });
+    
+    // モバイル: タップで次の画像へ進める（カードクリック処理と競合しないよう、画像領域タップは伝播停止せず通常クリックとして扱う）
+    // → モバイルではタップでモーダルが開くので、スライドショーは表示のみ静止でOK
   });
 })();
 </script>
