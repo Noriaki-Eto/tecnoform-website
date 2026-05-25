@@ -399,7 +399,14 @@
       transform: scale(1.05);
       animation: heroKenBurns 28s infinite ease-in-out;
     }
-    .hero-bg-slide.active { opacity: 0.78; }
+    .hero-bg-slide.active { 
+      opacity: 0.78;
+      animation: kenBurns 9s ease-out forwards;
+    }
+    @keyframes kenBurns {
+      0%   { transform: scale(1.0) translateY(0); }
+      100% { transform: scale(1.08) translateY(-1.5%); }
+    }
     .hero-bg-overlay {
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -999,6 +1006,18 @@
       transition: opacity 0.3s;
     }
     .footer-mail:hover { opacity: 0.7; }
+  
+    .works-lead-copy {
+      font-family: 'Cormorant Garamond', 'Yu Mincho', serif;
+      font-size: 1.15rem; font-style: italic;
+      color: #b8a78a; line-height: 1.9;
+      text-align: center; margin: 1.2rem auto 4rem;
+      max-width: 640px; letter-spacing: 0.06em;
+      opacity: 0.85;
+    }
+    @media (max-width: 768px){
+      .works-lead-copy { font-size: 1rem; margin: 1rem 1.5rem 3rem; }
+    }
   </style>
 </head>
 <body>
@@ -1060,38 +1079,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <div class="section-label">Philosophy</div>
-      <h2 class="section-title">技術と素材から<br>生まれるものを、<br>問い直す。</h2>
-      <p>ガラスと和紙、麻繊維、3Dプリント。パラメトリック設計と伝統技法を交差させ、最高水準の空間に唯一無二のアートワークを立ち上げる工房。</p>
-      <p>アルゴリズムが生む複雑さ、水の科学が描く可視化、そして職人の手が残す微細な揺らぎ。三つが重なる場所に、ありふれない空間体験が立ち上がります。</p>
-    </div>
-    <div class="about-values reveal">
-      <div class="value-item">
-        <div class="value-num">i</div>
-        <div class="value-title">Luxury Refined</div>
-        <div class="value-jp">気品と、存在感。</div>
-        <div class="value-desc">高級ホテルや企業エントランスに求められる凛とした品格を、素材と技術の融合から生み出します。</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">ii</div>
-        <div class="value-title">Organic Complexity</div>
-        <div class="value-jp">機械の中に、生命を。</div>
-        <div class="value-desc">自然のゆらぎをアルゴリズムで表現し、機械的でありながら呼吸する造形を生み出します。</div>
-      </div>
-      <div class="value-item">
-        <div class="value-num">iii</div>
-        <div class="value-title">Wellness × Art × Craft</div>
-        <div class="value-jp">心に、深く刻む。</div>
-        <div class="value-desc">アートと伝統工芸を融合させ、訪れた人の記憶に残る体験空間を立ち上げます。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- WORKS -->
 <section id="works">
   <div class="works-header">
@@ -1100,6 +1087,8 @@
       <h2 class="section-title">実績</h2>
     </div>
     <div class="works-count">24</div>
+  <p class="works-lead-copy">光が素材と出会い、空間に揺らぎが宿る。<br>
+  2003年から現在まで、私たちが紡いだ24の物語。</p>
   </div>
   <div class="works-grid">
 
@@ -1340,6 +1329,38 @@
   </div>
 </section>
 
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">Philosophy</div>
+      <h2 class="section-title">技術と素材から<br>生まれるものを、<br>問い直す。</h2>
+      <p>ガラスと和紙、麻繊維、3Dプリント。パラメトリック設計と伝統技法を交差させ、最高水準の空間に唯一無二のアートワークを立ち上げる工房。</p>
+      <p>アルゴリズムが生む複雑さ、水の科学が描く可視化、そして職人の手が残す微細な揺らぎ。三つが重なる場所に、ありふれない空間体験が立ち上がります。</p>
+    </div>
+    <div class="about-values reveal">
+      <div class="value-item">
+        <div class="value-num">i</div>
+        <div class="value-title">Luxury Refined</div>
+        <div class="value-jp">気品と、存在感。</div>
+        <div class="value-desc">高級ホテルや企業エントランスに求められる凛とした品格を、素材と技術の融合から生み出します。</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">ii</div>
+        <div class="value-title">Organic Complexity</div>
+        <div class="value-jp">機械の中に、生命を。</div>
+        <div class="value-desc">自然のゆらぎをアルゴリズムで表現し、機械的でありながら呼吸する造形を生み出します。</div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">iii</div>
+        <div class="value-title">Wellness × Art × Craft</div>
+        <div class="value-jp">心に、深く刻む。</div>
+        <div class="value-desc">アートと伝統工芸を融合させ、訪れた人の記憶に残る体験空間を立ち上げます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TECHNOLOGY -->
 <section id="technology">
   <div class="section-label">Methodology</div>
@@ -1524,32 +1545,52 @@
 </script>
 
 <script>
-/* ■■ WORK-CARD SLIDESHOW (data-slides自動ループ) ■■ */
+/* ■■ WORK-CARD CROSS-FADE SLIDESHOW (2枚レイヤー方式) ■■ */
 (function(){
   document.querySelectorAll('.work-card.work-slideshow').forEach(function(card){
     var raw = card.getAttribute('data-slides');
     if(!raw) return;
     var imgs = raw.split(',').map(function(s){return s.trim();}).filter(Boolean);
     if(imgs.length < 2) return;
-    var img = card.querySelector('img');
-    if(!img) return;
+    var imgA = card.querySelector('img');
+    if(!imgA) return;
+    
+    // 既存imgを絶対配置に変更
+    imgA.style.cssText += 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.8s ease-in-out;opacity:1;z-index:1;';
+    
+    // 2枚目（クロスフェード用）を作成
+    var imgB = document.createElement('img');
+    imgB.alt = '';
+    imgB.loading = 'lazy';
+    imgB.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.8s ease-in-out;opacity:0;z-index:2;';
+    imgB.src = imgs[1];
+    imgA.parentNode.insertBefore(imgB, imgA.nextSibling);
+    
+    // カードに relative + overflow:hidden 保証
+    card.style.position = 'relative';
+    card.style.overflow = 'hidden';
+    
     var cur = 0;
-    var timer = null;
-    function next(){
-      cur = (cur + 1) % imgs.length;
-      img.style.opacity = '0';
-      setTimeout(function(){
-        img.src = imgs[cur];
-        img.style.opacity = '1';
-      }, 300);
+    var showingA = true;  // 現在表示中はimgA
+    var paused = false;
+    
+    function tick(){
+      if(paused) return;
+      var nextIdx = (cur + 1) % imgs.length;
+      var nextImg = showingA ? imgB : imgA;
+      var prevImg = showingA ? imgA : imgB;
+      nextImg.src = imgs[nextIdx];
+      // 強制リフロー後にクロスフェード
+      void nextImg.offsetWidth;
+      nextImg.style.opacity = '1';
+      prevImg.style.opacity = '0';
+      showingA = !showingA;
+      cur = nextIdx;
     }
-    function start(){ timer = setInterval(next, 2800); }
-    function stop(){ clearInterval(timer); timer = null; }
-    img.style.transition = 'opacity 0.3s ease';
-    // 常時自動ループ（ホバーで一時停止）
-    start();
-    card.addEventListener('mouseenter', stop);
-    card.addEventListener('mouseleave', start);
+    
+    var timer = setInterval(tick, 4200);  // 4.2秒ごと（1.8秒フェード + 2.4秒静止）
+    card.addEventListener('mouseenter', function(){ paused = true; });
+    card.addEventListener('mouseleave', function(){ paused = false; });
   });
 })();
 </script>
