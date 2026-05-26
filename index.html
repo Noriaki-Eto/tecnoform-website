@@ -253,6 +253,7 @@ section {
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .work-card.is-coming { cursor: default; opacity: 0.4; }
+.work-card.is-coming .work-frame { min-height: 220px; }
 .work-frame {
   position: relative;
   width: 100%;
@@ -260,7 +261,6 @@ section {
   overflow: hidden;
   border: 1px solid var(--line);
   transition: border-color 0.6s ease;
-  min-height: 220px;
 }
 .work-frame img {
   display: block;
@@ -461,7 +461,7 @@ footer {
 }
 .lb-img-wrap {
   position: relative;
-  max-width: 100%; max-height: 100%;
+  width: 100%;
   display: flex; align-items: center; justify-content: center;
 }
 .lb-img {
