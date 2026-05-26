@@ -67,6 +67,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.1rem; font-weight: 400;
   letter-spacing: 0.28em;
   color: var(--paper);
+  white-space: nowrap;
 }
 .nav-links {
   list-style: none; display: flex; gap: 2.4rem;
@@ -82,7 +83,8 @@ a { color: inherit; text-decoration: none; }
 .nav-toggle { display: none; background: none; border: none; color: var(--paper); cursor: pointer; }
 
 @media (max-width: 768px) {
-  .site-nav { padding: 1rem 1.5rem; }
+  .site-nav { padding: 1rem 1.2rem; }
+  .nav-logo { font-size: 0.95rem; letter-spacing: 0.16em; }
   .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; gap: 0; padding: 1rem 1.5rem 2rem;
     background: rgba(11,10,9,0.98); backdrop-filter: blur(8px); }
@@ -254,16 +256,15 @@ section {
 .work-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 11;
   background: var(--ink-soft);
   overflow: hidden;
   border: 1px solid var(--line);
   transition: border-color 0.6s ease;
+  min-height: 220px;
 }
 .work-frame img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: contain;
+  display: block;
+  width: 100%; height: auto;
   background: var(--ink);
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
   filter: brightness(0.96);
