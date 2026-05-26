@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>atelier TECNOFORM | 枠を解いて、揺らぎを纏う。</title>
+<title>atelier TECNOFORM | 枠を解いて、揺らぎをまとう</title>
 <meta name="description" content="ガラス・和紙・麻繊維のパラメトリック光インスタレーション。高級ホテル、企業本社、邸宅エントランスを彩る照明アート・壁面アートをワンオフで制作。リッツカールトン東京、キャノピーbyヒルトン、三井不動産、大丸神戸ほか。">
 <meta name="keywords" content="ガラスアート,和紙照明,パラメトリックデザイン,照明オブジェ,エントランスアート,高級ホテル内装,企業エントランス,邸宅アート,壁面アート,アトリエ,テクノフォルム">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <!-- Open Graph -->
-<meta property="og:title" content="atelier TECNOFORM | 枠を解いて、揺らぎを纏う。">
+<meta property="og:title" content="atelier TECNOFORM | 枠を解いて、揺らぎをまとう">
 <meta property="og:description" content="ガラス・和紙・麻繊維のパラメトリック光インスタレーション。高級ホテル、企業本社、邸宅を彩るアートスタジオ。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tecnoform.jp/">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="atelier TECNOFORM">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="atelier TECNOFORM | 枠を解いて、揺らぎを纏う。">
+<meta name="twitter:title" content="atelier TECNOFORM | 枠を解いて、揺らぎをまとう">
 <meta name="twitter:description" content="ガラス・和紙・麻繊維のパラメトリック光インスタレーション。">
 <meta name="twitter:image" content="https://tecnoform.jp/images/ogp.jpg">
 <link rel="canonical" href="https://tecnoform.jp/">
@@ -478,16 +478,16 @@ footer {
 .lb-nav {
   position: absolute; top: 50%;
   transform: translateY(-50%);
-  background: rgba(11,10,9,0.7); border: 1px solid var(--line);
-  color: var(--paper); cursor: pointer;
+  background: rgba(11,10,9,0.85); border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff; cursor: pointer;
   width: 52px; height: 52px;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
   z-index: 2;
 }
-.lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(11,10,9,0.9); }
+.lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(11,10,9,0.95); }
 .lb-prev { left: 1.5rem; }
 .lb-next { right: 1.5rem; }
 .lb-nav.is-hidden { display: none; }
@@ -541,7 +541,7 @@ footer {
 /* タイトル+メタを画像の上に配置 */
 .lb-caption {
   padding: 1.8rem 2rem 1.2rem;
-  text-align: center;
+  text-align: left;
   flex-shrink: 0;
   max-width: 1100px;
   margin: 0 auto;
@@ -594,13 +594,15 @@ footer {
 @media (max-width: 768px) {
   .lb-header { padding: 0.8rem 1rem; }
   .lb-close { width: 38px; height: 38px; font-size: 1.4rem; }
-  .lb-caption { padding: 1.2rem 1.2rem 0.8rem; }
-  .lb-stage { padding: 1rem; }
-  .lb-img { max-height: 60vh; }
-  .lb-nav { width: 40px; height: 40px; font-size: 1.3rem; }
-  .lb-prev { left: 0.4rem; }
-  .lb-next { right: 0.4rem; }
-  .lb-footer { padding: 1.4rem 1.2rem 1.8rem; }
+  .lb-caption { padding: 1rem 1rem 0.6rem; }
+  .lb-caption .lb-title { font-size: 1.05rem; line-height: 1.5; }
+  .lb-stage { padding: 0.5rem 0; }
+  .lb-img { max-height: 55vh; }
+  .lb-nav { width: 44px; height: 44px; font-size: 1.6rem; background: rgba(0,0,0,0.75); border-color: rgba(255,255,255,0.4); }
+  .lb-prev { left: 0.5rem; }
+  .lb-next { right: 0.5rem; }
+  .lb-footer { padding: 1.2rem 1rem 1.6rem; }
+  .lb-desc { font-size: 1rem; }
   .lb-back { font-size: 0.88rem; padding: 0.8rem 1.4rem; }
   .scroll-top { right: 0.9rem; bottom: 0.9rem; width: 42px; height: 42px; font-size: 1.15rem; }
 }
@@ -637,7 +639,7 @@ footer {
   <div class="hero-bg-veil"></div>
   <div class="hero-content">
     <p class="hero-mark">atelier TECNOFORM &nbsp; / &nbsp; est. 1983</p>
-    <h1 class="hero-title">枠を解いて、<br><em>揺らぎを纏う。</em></h1>
+    <h1 class="hero-title">枠を解いて、<br><em>揺らぎをまとう</em></h1>
     <p class="hero-sub"><em class="hero-sub-poem">Born from fire and water</em><br>Glass &nbsp;·&nbsp; Washi &nbsp;·&nbsp; Hemp Fiber</p>
   </div>
   <div class="hero-scroll">Scroll</div>
