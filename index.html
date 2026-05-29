@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>atelier TECNOFORM | 枠を解いて、揺らぎをまとう</title>
-<meta name="description" content="ガラス・和紙・麻繊維のパラメトリック光インスタレーション。高級ホテル、企業本社、邸宅エントランスを彩る照明アート・壁面アートをワンオフで制作。リッツカールトン東京、キャノピーbyヒルトン、三井不動産、大丸神戸ほか。">
-<meta name="keywords" content="ガラスアート,和紙照明,パラメトリックデザイン,照明オブジェ,エントランスアート,高級ホテル内装,企業エントランス,邸宅アート,壁面アート,アトリエ,テクノフォルム">
+<title>江藤徳晃 | 光と水の作家 | アトリエ・テクノフォルム</title>
+<meta name="description" content="光と水の作家。ガラス・和紙・3D造形で、ホテル・商業・住空間のアートと照明をつくる。受け入れ、流し、委ねる——強要しない、やわらかな光の環境を。リッツ・カールトン東京ほか実績多数。">
+<meta name="keywords" content="光と水の作家,江藤徳晃,ガラスアート,和紙照明,パラメトリックデザイン,照明オブジェ,エントランスアート,高級ホテル内装,企業エントランス,邸宅アート,壁面アート,アトリエ,テクノフォルム,Mebius">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <!-- Open Graph -->
-<meta property="og:title" content="atelier TECNOFORM | 枠を解いて、揺らぎをまとう">
-<meta property="og:description" content="ガラス・和紙・麻繊維のパラメトリック光インスタレーション。高級ホテル、企業本社、邸宅を彩るアートスタジオ。">
+<meta property="og:title" content="江藤徳晃 | 光と水の作家 | アトリエ・テクノフォルム">
+<meta property="og:description" content="光と水の作家。ガラス・和紙・3D造形で、ホテル・商業・住空間に、やわらかな光の環境をつくる。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tecnoform.jp/">
 <meta property="og:image" content="https://tecnoform.jp/images/ogp.jpg">
@@ -17,8 +17,8 @@
 <meta property="og:site_name" content="atelier TECNOFORM">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="atelier TECNOFORM | 枠を解いて、揺らぎをまとう">
-<meta name="twitter:description" content="ガラス・和紙・麻繊維のパラメトリック光インスタレーション。">
+<meta name="twitter:title" content="江藤徳晃 | 光と水の作家">
+<meta name="twitter:description" content="光と水の作家。ガラス・和紙・3D造形で、空間にやわらかな光の環境をつくる。">
 <meta name="twitter:image" content="https://tecnoform.jp/images/ogp.jpg">
 <link rel="canonical" href="https://tecnoform.jp/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -611,6 +611,166 @@ footer {
 /* ===== SCROLL REVEAL ===== */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
 .reveal.in { opacity: 1; transform: translateY(0); }
+/* ===== CONCEPT ===== */
+#concept {
+  background: var(--ink-soft);
+  text-align: center;
+  padding: 11rem 3rem;
+}
+.concept-inner { max-width: 760px; margin: 0 auto; }
+#concept .section-label { display: block; margin-bottom: 2.4rem; }
+.concept-head {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  letter-spacing: 0.08em; color: var(--paper);
+  margin-bottom: 2.8rem; line-height: 1.5;
+}
+.concept-body {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  line-height: 2.4; letter-spacing: 0.06em;
+  color: var(--paper-soft);
+}
+@media (max-width: 768px) {
+  #concept { padding: 6rem 1.6rem; }
+  .concept-body { line-height: 2.2; text-align: left; }
+}
+
+/* ===== STORY ===== */
+#story {
+  position: relative; overflow: hidden;
+  padding: 12rem 3rem;
+}
+.story-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: saturate(0.7) brightness(0.5);
+  transform: scale(1.05);
+  z-index: 0;
+}
+.story-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(11,10,9,0.86), rgba(11,10,9,0.78), rgba(11,10,9,0.92));
+}
+.story-inner {
+  position: relative; z-index: 2;
+  max-width: 760px; margin: 0 auto; text-align: center;
+}
+#story .section-label { display: block; margin-bottom: 2rem; }
+.story-head {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.8rem, 4.4vw, 3rem);
+  letter-spacing: 0.08em; color: var(--paper);
+  margin-bottom: 2.6rem; line-height: 1.5;
+}
+.story-body {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
+  line-height: 2.4; letter-spacing: 0.06em;
+  color: var(--paper-soft);
+}
+.story-divider {
+  width: 1px; height: 64px; margin: 4rem auto;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+}
+.story-subhead {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-weight: 400; font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  letter-spacing: 0.06em; color: var(--paper);
+  margin-bottom: 1.8rem;
+}
+.story-body-sm { font-size: clamp(0.95rem, 1.4vw, 1.05rem); line-height: 2.2; }
+.story-body em, .mebius-body em { font-style: normal; color: var(--accent); }
+@media (max-width: 768px) {
+  #story { padding: 6.5rem 1.6rem; }
+  .story-body { text-align: left; line-height: 2.15; }
+  .story-divider { margin: 3rem auto; }
+}
+
+/* ===== MATERIALS ===== */
+.materials-grid {
+  max-width: 1280px; margin: 0 auto 3.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;
+}
+.material-item { padding-top: 1.6rem; border-top: 1px solid var(--line); }
+.material-name {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: 1.25rem; letter-spacing: 0.1em; color: var(--paper);
+  margin-bottom: 1rem;
+}
+.material-desc {
+  font-size: 0.92rem; line-height: 1.9; color: var(--paper-mute);
+  letter-spacing: 0.03em;
+}
+.materials-trust {
+  max-width: 1280px; margin: 0 auto 5rem;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.1rem; color: var(--paper-soft); letter-spacing: 0.04em;
+  padding-top: 2rem; border-top: 1px solid var(--line);
+}
+@media (max-width: 768px) {
+  .materials-grid { grid-template-columns: repeat(2, 1fr); gap: 1.8rem 1.4rem; margin-bottom: 2.5rem; }
+  .materials-trust { margin-bottom: 3rem; font-size: 1rem; }
+}
+
+/* ===== MEBIUS ===== */
+#mebius {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
+  max-width: 1280px; margin: 0 auto; padding: 9rem 3rem;
+}
+.mebius-media { overflow: hidden; }
+.mebius-media img {
+  width: 100%; height: 100%; max-height: 560px; object-fit: cover;
+  filter: saturate(0.85);
+}
+.mebius-text { padding: 1rem 0; }
+#mebius .section-label { display: block; margin-bottom: 1.6rem; }
+.mebius-head {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: 0.05em;
+  color: var(--accent); line-height: 1.1; margin-bottom: 1.8rem;
+}
+.mebius-head-sub {
+  display: block; margin-top: 0.8rem;
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.05rem, 2vw, 1.4rem); letter-spacing: 0.08em;
+  color: var(--paper);
+}
+.mebius-body {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: 1.05rem; line-height: 2.2; letter-spacing: 0.05em;
+  color: var(--paper-soft); margin-bottom: 1.6rem;
+}
+.mebius-note { font-size: 0.82rem; color: var(--paper-mute); letter-spacing: 0.04em; }
+@media (max-width: 900px) {
+  #mebius { grid-template-columns: 1fr; gap: 2.2rem; padding: 6rem 1.6rem; }
+  .mebius-media img { max-height: 380px; }
+}
+
+/* ===== CONTACT additions ===== */
+#contact { text-align: center; }
+#contact .section-label { display: block; margin-bottom: 2rem; }
+.contact-lead {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: 1.02rem; line-height: 2; color: var(--paper-soft);
+  letter-spacing: 0.05em; margin: 0 auto 3rem; max-width: 560px;
+}
+.contact-cta {
+  display: inline-block; margin-bottom: 3.5rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink);
+  background: var(--accent); padding: 1.1rem 3.2rem;
+  border: 1px solid var(--accent); border-radius: 1px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.contact-cta:hover { background: transparent; color: var(--accent); }
+.contact-info a { border-bottom: 1px solid var(--line); transition: border-color 0.3s ease; }
+.contact-info a:hover { border-color: var(--accent); }
+.contact-info-sub { margin-top: 2.4rem; font-size: 0.82rem; color: var(--paper-mute); }
+@media (max-width: 768px) {
+  .contact-cta { padding: 1rem 2.6rem; font-size: 1.05rem; }
+}
+
 </style>
 </head>
 <body>
@@ -619,10 +779,11 @@ footer {
   <a href="#hero" class="nav-logo">atelier TECNOFORM</a>
   <button class="nav-toggle" aria-label="menu">MENU</button>
   <ul class="nav-links">
+    <li><a href="#concept">Philosophy</a></li>
+    <li><a href="#story">Story</a></li>
     <li><a href="#works">Works</a></li>
-    <li><a href="#about">Philosophy</a></li>
-    <li><a href="#technology">Technology</a></li>
-    <li><a href="#clients">Clients</a></li>
+    <li><a href="#mebius">Mebius</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -639,11 +800,50 @@ footer {
   </div>
   <div class="hero-bg-veil"></div>
   <div class="hero-content">
-    <p class="hero-mark">atelier TECNOFORM &nbsp; / &nbsp; est. 1983</p>
-    <h1 class="hero-title">枠を解いて、<br><em>揺らぎをまとう</em></h1>
-    <p class="hero-sub"><em class="hero-sub-poem">Born from fire and water</em><br>Glass &nbsp;·&nbsp; Washi &nbsp;·&nbsp; Hemp Fiber</p>
+    <p class="hero-mark">江藤 徳晃 &nbsp; / &nbsp; est. 1983</p>
+    <h1 class="hero-title">光と水の、<br><em>作家</em></h1>
+    <p class="hero-sub"><em class="hero-sub-poem">Artist of Light and Water</em><br>受け入れ、流し、委ねる。</p>
   </div>
   <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="concept-inner reveal">
+    <span class="section-label">Philosophy</span>
+    <h2 class="concept-head">受け入れ、流し、委ねる。</h2>
+    <p class="concept-body">
+      水は、人を受け入れる。気持ちも、物も、流してくれる。<br>
+      私はその深淵に惹かれ、ガラスという固まった水を扱ってきた。<br><br>
+      和紙の光は和らぎ、炎は揺らぎ、金属は支える。<br>
+      どの素材も、何かを強要しない。ただ、そっと在る。<br><br>
+      見る人が、それぞれに感じればいい。<br>
+      私がつくるのは、押し付けない、やわらかな光の環境です。
+    </p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-bg" style="background-image: url('images/triaxis-05.jpg');"></div>
+  <div class="story-veil"></div>
+  <div class="story-inner">
+    <span class="section-label reveal">Story</span>
+    <h2 class="story-head reveal">海が、受け入れてくれた。</h2>
+    <p class="story-body reveal">
+      父は建築家だった。家にはあまりいなかった。<br>
+      人とうまく交われない子どもだった私を、母が海に連れて行った。<br>
+      水泳から、ダイビングへ。やがて潜水士になった。<br><br>
+      海は、どんな私も受け入れてくれた。<br>
+      いま私が空間でしているのは、あのとき海がしてくれたこと。<br>
+      受け入れ、流し、委ねること。それだけです。
+    </p>
+    <div class="story-divider reveal"></div>
+    <h3 class="story-subhead reveal">二つの家族をつなぐ、建築と水。</h3>
+    <p class="story-body story-body-sm reveal">
+      父が手がけた空間で育ったのが、いま世界的に活動する建築家・<em>曽野正之</em>。彼の父は、水ガラスを知り尽くした硝子技術者だった。建築と、水と、ガラス。二世代を超えた縁が、共同作品『<em>Mebius</em>』へと結ばれていく。
+    </p>
+  </div>
 </section>
 
 <!-- WORKS -->
@@ -652,37 +852,37 @@ footer {
     <span class="section-label">Selected Works</span>
     <h2 class="section-title">Works</h2>
   </div>
-  <p class="works-lead reveal">光が素材と出会い、空間に揺らぎが宿る。<br>2003年から現在まで、私たちが紡いだ作品群。</p>
+  <p class="works-lead reveal">光が素材と出会い、空間に水のゆらぎが宿る。<br>ホテル・商業・住空間・文化施設に、私が紡いできた作品群。</p>
   <div class="works-grid" id="worksGrid">
     <!-- JSで動的生成 -->
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-head">
-    <span class="section-label">Philosophy</span>
-    <h2 class="section-title">About</h2>
-  </div>
-  <div class="about-grid">
-    <p class="about-pull reveal">
-      光が宿り、<br>
-      素材が語りだす。
-    </p>
-    <div class="about-body reveal">
-      <p>atelier TECNOFORM は、<em>ガラス</em>・<em>和紙</em>・<em>麻繊維</em>を軸に、空間に光のインスタレーションを生み出す制作スタジオです。1983年に活動を開始し、ホテル・企業本社・高級住宅・文化施設を舞台に、素材と光の対話を空間言語として翻訳してきました。</p>
-      <p>2001年以降は<em>パラメトリック設計</em>と手仕事を行き来しながら、<em>三次元の和紙造形</em>、<em>クラフトガラス</em>、<em>麻繊維シェード</em>といった独自の素材語彙を開発。図面に収まらない有機的な形が、計算と直感の境界で生まれます。</p>
-      <p>私たちのアートは、絵画のように鑑賞される対象ではなく、日々の生活に潤いと変化を与える<em>花のような存在</em>を目指しています。</p>
-    </div>
-  </div>
-</section>
-
-<!-- TECHNOLOGY -->
+<!-- MATERIALS & TECHNOLOGY -->
 <section id="technology">
   <div class="section-head">
     <span class="section-label">Materials &amp; Technique</span>
-    <h2 class="section-title">Technology</h2>
+    <h2 class="section-title">四つの素材、<br>一つの思想。</h2>
   </div>
+  <div class="materials-grid">
+    <div class="material-item reveal">
+      <h3 class="material-name">ガラス</h3>
+      <p class="material-desc">固まった水。深く、透き通り、人を映す。</p>
+    </div>
+    <div class="material-item reveal">
+      <h3 class="material-name">和紙</h3>
+      <p class="material-desc">和らぐ光。透かし、包み、温める。</p>
+    </div>
+    <div class="material-item reveal">
+      <h3 class="material-name">3D造形</h3>
+      <p class="material-desc">ガラスにできない形を、光を通す素材で。Rhino / Grasshopper によるパラメトリック設計。</p>
+    </div>
+    <div class="material-item reveal">
+      <h3 class="material-name">金属</h3>
+      <p class="material-desc">支え、吊り、構造を担う。安全を構造で守る。</p>
+    </div>
+  </div>
+  <p class="materials-trust reveal">美しさだけでなく、落下や経年に責任を持てる構造で設計します。</p>
   <div class="tech-list">
     <div class="tech-item reveal">
       <div class="tech-num">/ 01</div>
@@ -713,6 +913,40 @@ footer {
       <div class="tech-num">/ 06</div>
       <h3 class="tech-title">光のチューニング</h3>
       <p class="tech-desc">色温度4500K〜6500K、点光源 vs 多灯のドラマ性、熱抜きの設計。素材と灯具を共設計することで、長寿命と表現を両立する。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEBIUS -->
+<section id="mebius">
+  <div class="mebius-media reveal">
+    <img src="images/minowashi-fantasia-01.jpg" alt="Mebius — 立体手漉き和紙による光のオブジェ" loading="lazy">
+  </div>
+  <div class="mebius-text">
+    <span class="section-label reveal">Collaboration</span>
+    <h2 class="mebius-head reveal">Mebius<br><span class="mebius-head-sub">二世代の縁が生む、光のオブジェ。</span></h2>
+    <p class="mebius-body reveal">
+      世界的建築家・<em>曽野正之</em>（CLOUDS Architecture Office, New York）との共同創作。和紙・光・パラメトリック造形による、唯一無二の照明オブジェ。建築と水の二世代の物語が、一つの光に結ばれる。
+    </p>
+    <p class="mebius-note reveal">※ Mebius は曽野正之との共同創作です。</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-head">
+    <span class="section-label">About</span>
+    <h2 class="section-title">About</h2>
+  </div>
+  <div class="about-grid">
+    <p class="about-pull reveal">
+      光が宿り、<br>
+      素材が語りだす。
+    </p>
+    <div class="about-body reveal">
+      <p>atelier TECNOFORM は、<em>ガラス</em>・<em>和紙</em>・<em>麻繊維</em>を軸に、空間に光のインスタレーションを生み出す制作スタジオです。1983年に活動を開始し、ホテル・企業本社・高級住宅・文化施設を舞台に、素材と光の対話を空間言語として翻訳してきました。</p>
+      <p>2001年以降は<em>パラメトリック設計</em>と手仕事を行き来しながら、<em>三次元の和紙造形</em>、<em>クラフトガラス</em>、<em>麻繊維シェード</em>といった独自の素材語彙を開発。図面に収まらない有機的な形が、計算と直感の境界で生まれます。</p>
+      <p>私たちのアートは、絵画のように鑑賞される対象ではなく、日々の生活に潤いと変化を与える<em>花のような存在</em>を目指しています。</p>
     </div>
   </div>
 </section>
@@ -753,9 +987,15 @@ footer {
 
 <!-- CONTACT -->
 <section id="contact">
-  <p class="contact-tagline reveal">空間に、揺らぎをまとわせたい方へ</p>
-  <a href="mailto:info@tecnoform.jp" class="contact-mail">info@tecnoform.jp</a>
+  <span class="section-label reveal">Contact</span>
+  <p class="contact-tagline reveal">空間の相談を承ります。</p>
+  <p class="contact-lead reveal">ホテル・商業空間・住空間のアート計画、<br>照明オブジェのご相談をお受けしています。</p>
+  <a href="mailto:info@tecnoform.jp" class="contact-cta reveal">お問い合わせ</a>
   <div class="contact-info reveal">
+    <a href="mailto:info@tecnoform.jp">info@tecnoform.jp</a> &nbsp;/&nbsp; Tel 078-821-7551<br>
+    <a href="https://www.instagram.com/noriaki_etoh/?hl=ja" target="_blank" rel="noopener">Instagram @noriaki_etoh</a>
+  </div>
+  <div class="contact-info contact-info-sub reveal">
     atelier TECNOFORM Inc; &nbsp;/&nbsp; 江藤徳晃<br>
     tecnoform.jp
   </div>
