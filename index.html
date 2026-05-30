@@ -1113,7 +1113,9 @@ var lbPrev = document.getElementById('lbPrev');
 var lbNext = document.getElementById('lbNext');
 var lbClose = document.getElementById('lbClose');
 
-var currentProject = null, currentIdx = 0;
+var currentProject = null, currentIdx = 0, lbTimer = null;
+function startAuto(){ stopAuto(); if(currentProject && currentProject.slides.length > 1){ lbTimer = setInterval(function(){ showImage(currentIdx + 1); }, 4000); } }
+function stopAuto(){ if(lbTimer){ clearInterval(lbTimer); lbTimer = null; } }
 
 function openLightbox(project){
   currentProject = project;
@@ -1123,12 +1125,14 @@ function openLightbox(project){
   lbDesc.innerHTML = project.desc || '';
   lbCredit.innerHTML = project.credit || '';
   showImage(0);
+  startAuto();
   lb.classList.add('is-open');
   lb.setAttribute('aria-hidden','false');
   lb.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 }
 function closeLightbox(){
+  stopAuto();
   lb.classList.remove('is-open');
   lb.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
@@ -1150,8 +1154,8 @@ function showImage(idx){
   lbPrev.classList.toggle('is-hidden', total < 2);
   lbNext.classList.toggle('is-hidden', total < 2);
 }
-lbPrev.addEventListener('click', function(){ showImage(currentIdx - 1); });
-lbNext.addEventListener('click', function(){ showImage(currentIdx + 1); });
+lbPrev.addEventListener('click', function(){ showImage(currentIdx - 1); startAuto(); });
+lbNext.addEventListener('click', function(){ showImage(currentIdx + 1); startAuto(); });
 lbClose.addEventListener('click', closeLightbox);
 var lbBack = document.getElementById('lbBack');
 if(lbBack) lbBack.addEventListener('click', closeLightbox);
