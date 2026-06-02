@@ -788,6 +788,19 @@ footer {
 .tech-process-grid figcaption { margin-top: 0.85rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.82rem; color: var(--accent); letter-spacing: 0.12em; }
 .tech-process-cap { margin-top: 2.4rem; font-size: 0.76rem; line-height: 1.8; color: var(--paper-mute); letter-spacing: 0.03em; }
 @media (max-width: 768px) { .tech-process { margin-top: 3.5rem; } .tech-process-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+/* ===== 営業向け追加(positioning / trust / mid-cta) ===== */
+.hero-positioning{ font-size:.8rem; letter-spacing:.16em; line-height:1.9; color:var(--paper-soft); margin-top:1.9rem; max-width:30em; opacity:0; animation:heroFadeUp 1.4s ease .9s forwards; }
+#trust{ padding:4.6rem 1.5rem; border-bottom:1px solid var(--line); }
+.trust-bar{ max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:center; gap:2.4rem 4rem; text-align:center; }
+.trust-cell{ display:flex; flex-direction:column; gap:.55rem; min-width:11rem; }
+.trust-num{ font-size:1.35rem; letter-spacing:.06em; color:var(--accent); }
+.trust-label{ font-size:.76rem; letter-spacing:.12em; color:var(--paper-soft); line-height:1.7; }
+.mid-cta-band{ padding:5rem 1.5rem; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.mid-cta-text{ font-size:1.15rem; letter-spacing:.08em; color:var(--paper); margin-bottom:1.5rem; }
+.mid-cta-link{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; letter-spacing:.08em; color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:.3rem; transition:opacity .3s; }
+.mid-cta-link:hover{ opacity:.6; }
+@media(max-width:640px){ .trust-bar{ gap:2rem; } .trust-cell{ min-width:0; width:100%; } }
 </style>
 </head>
 <body>
@@ -819,8 +832,18 @@ footer {
     <p class="hero-mark">江藤 徳晃 &nbsp; / &nbsp; est. 1983</p>
     <h1 class="hero-title">光と水の、<br><em>作家</em></h1>
     <p class="hero-sub"><em class="hero-sub-poem">Artist of Light and Water</em><br>受け入れ、流し、委ねる。</p>
+    <p class="hero-positioning">ガラス・和紙・光のアート ｜ ホテル・商業・邸宅・文化施設の空間制作</p>
   </div>
   <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- TRUST BAR -->
+<section id="trust">
+  <div class="trust-bar reveal">
+    <div class="trust-cell"><span class="trust-num">1983</span><span class="trust-label">創業 — 40年超の実績</span></div>
+    <div class="trust-cell"><span class="trust-num">国内外</span><span class="trust-label">高級ホテル・商業・邸宅・文化施設</span></div>
+    <div class="trust-cell"><span class="trust-num">一貫制作</span><span class="trust-label">デザイン・造形・施工まで自社体制</span></div>
+  </div>
 </section>
 
 <!-- WORKS -->
@@ -833,6 +856,12 @@ footer {
   <div class="works-grid" id="worksGrid">
     <!-- JSで動的生成 -->
   </div>
+</section>
+
+<!-- MID CTA -->
+<section class="mid-cta-band reveal">
+  <p class="mid-cta-text">あなたのプロジェクトに、ひとつの光を。</p>
+  <a href="#contact" class="mid-cta-link">プロジェクトのご相談 →</a>
 </section>
 
 <!-- CONCEPT -->
