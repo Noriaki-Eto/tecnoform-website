@@ -801,6 +801,8 @@ footer {
 .mid-cta-link{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; letter-spacing:.08em; color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:.3rem; transition:opacity .3s; }
 .mid-cta-link:hover{ opacity:.6; }
 @media(max-width:640px){ .trust-bar{ gap:2rem; } .trust-cell{ min-width:0; width:100%; } }
+.lang-toggle{ background:none; border:1px solid var(--line); color:var(--paper-soft); font-family:'Cormorant Garamond',serif; font-size:.85rem; letter-spacing:.14em; padding:.1rem .65rem; cursor:pointer; transition:color .3s,border-color .3s; }
+.lang-toggle:hover{ color:var(--accent); border-color:var(--accent); }
 </style>
 </head>
 <body>
@@ -814,6 +816,7 @@ footer {
     <li><a href="#works">Works</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><button class="lang-toggle" id="langToggle" aria-label="language">EN</button></li>
   </ul>
 </nav>
 
@@ -1255,6 +1258,48 @@ lb.addEventListener('touchend', function(e){
   setTimeout(function(){
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
   }, 100);
+})();
+</script>
+<script>
+(function(){
+  var MAP = {
+    ".hero-mark":["Noriaki Eto &nbsp;/&nbsp; est. 1983"],
+    ".hero-title":["Artist of<br><em>Light &amp; Water</em>"],
+    ".hero-sub":['<em class="hero-sub-poem">Receive, let flow, surrender</em>'],
+    ".hero-positioning":["Glass, washi &amp; light \u2014 spatial art for hotels, retail, residences &amp; cultural spaces"],
+    ".trust-num":["Since 1983","Worldwide","End-to-end"],
+    ".trust-label":["Over 40 years of work","Luxury hotels \u00b7 retail \u00b7 residences \u00b7 cultural spaces","Design, making &amp; installation in-house"],
+    ".concept-body":["Glass is where water and light come to rest.<br>Washi wears the light,<br>flame sways,<br>metal holds the ground.","What I make is a gentle environment of light \u2014<br>dissolving the borders between materials,<br>imposing nothing."],
+    ".works-lead":["Where light meets material, the sway of water settles into a space.<br>Works woven for hotels, retail, residences and cultural spaces."],
+    ".story-body":["I grew up playing with water.<br>Later, as a diver, I gazed at the light falling through the sea.","Flowing, drifting, freezing, turning to mist, then filling again \u2014 water wears many faces.","Refusing nothing, holding nothing,<br>water accepted every version of me.","Glass is the shape that water briefly takes \u2014<br>a moment of memory made transparent.","To receive everything, to surrender to the current \u2014<br>I mirror in my materials the way of water I learned at sea,<br>and weave spaces of gentle light that impose nothing."],
+    ".mid-cta-text":["Bring a singular light to your project."],
+    ".mid-cta-link":["Discuss your project \u2192"],
+    ".contact-tagline":["Let us talk about your space."],
+    ".contact-lead":["Art programmes and lighting objects for hotels, retail and residential spaces \u2014 enquiries welcome."],
+    ".contact-cta":["Get in touch"],
+    ".contact-info-sub":["atelier TECNOFORM Inc; &nbsp;/&nbsp; Noriaki Eto<br>tecnoform.jp"]
+  };
+  var ja={}, ready=false;
+  function els(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function cache(){ for(var s in MAP){ ja[s]=els(s).map(function(e){return e.innerHTML;}); } ready=true; }
+  function apply(l){
+    if(!ready) cache();
+    for(var s in MAP){
+      var ns=els(s), arr=(l==="en")?MAP[s]:ja[s];
+      ns.forEach(function(e,i){ if(arr && arr[i]!=null) e.innerHTML=arr[i]; });
+    }
+    document.documentElement.lang=l;
+    var b=document.getElementById("langToggle"); if(b) b.textContent=(l==="en")?"\u65e5\u672c\u8a9e":"EN";
+    try{ localStorage.setItem("tf_lang", l); }catch(e){}
+  }
+  function init(){
+    cache();
+    var b=document.getElementById("langToggle");
+    if(b) b.addEventListener("click", function(){ apply(document.documentElement.lang==="en"?"ja":"en"); });
+    var cur="ja"; try{ cur=localStorage.getItem("tf_lang")||"ja"; }catch(e){}
+    if(cur==="en") apply("en");
+  }
+  if(document.readyState!=="loading") init(); else document.addEventListener("DOMContentLoaded", init);
 })();
 </script>
 </body>
