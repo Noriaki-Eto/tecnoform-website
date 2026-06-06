@@ -18,7 +18,7 @@
 
 - **本番URL（確定）**: https://atelier-tecnoform.com/ ／ 予備: https://noriaki-eto.github.io/tecnoform-website/
 - GitHub: Noriaki-Eto/tecnoform-website
-- トークン: ghp_****（Claudeのメモリ内に保存済み）
+- トークン: fine-grained PAT「github_pat_…」（このリポジトリ限定・Contents読み書き・期限付き）。実値はプロジェクト知識の `GITHUB_TOKEN:` 行のみに保存。Claudeは `github_pat_[A-Za-z0-9_]+` で抽出する。旧classic PAT（repoスコープ）は失効済みにすること。
 - GitHub連携済み・自動デプロイ済み
 - ※Netlify（stellular-clafoutis-e0a6ca.netlify.app）は帯域オーバーで停止。無視してOK
 - ※公開ドメインは atelier-tecnoform.com で確定（GitHub Pages・DNS稼働）。Zenlogic移行は不要
@@ -78,7 +78,7 @@
 import base64, json, urllib.request
 from PIL import Image, ImageOps
 
-TOKEN = "ghp_****（Claudeのメモリ内に保存済み）"
+TOKEN = "github_pat_****"  # 実値はプロジェクト知識の GITHUB_TOKEN: 行から取得。ドキュメント・コミットには絶対に書かない
 REPO = "Noriaki-Eto/tecnoform-website"
 
 def upload_image(local_path, filename):
