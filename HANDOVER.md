@@ -4,7 +4,7 @@
 ## 新チャット開始時
 1. リポジトリ: Noriaki-Eto/tecnoform-website
 2. **正となる指示書は `TECNOFORM_PROJECT.md`（同リポジトリ内）。まずそれを読む。**
-3. GitHubトークンは別途共有（リポジトリ・ドキュメントには絶対に載せない）。
+3. GitHubトークンはプロジェクト知識の `GITHUB_TOKEN:` 行のみに保存（fine-grained・`github_pat_` 始まり・このリポジトリ限定/Contents読み書き/期限付き）。Claudeは `github_pat_[A-Za-z0-9_]+` で抽出。リポジトリ・コミットには絶対に載せない。
 
 ## 公開中のHP
 - 本番URL（確定）: https://atelier-tecnoform.com/ （DNS稼働確認済み・GitHub Pages配信）
@@ -23,5 +23,5 @@
 - 詳細手順・コードは `TECNOFORM_PROJECT.md` を参照。
 
 ## 未処理（要のりあきさん判断）
-- GitHubトークンを期限付き・リポジトリ限定の fine-grained token に更新。
+- 旧classic PAT（repoスコープ＝全リポジトリ書込可）を失効し、fine-grained token（このリポジトリ限定・Contents読み書き・期限90日）へ移行。新トークンはプロジェクト知識の GITHUB_TOKEN 行に保存。
 - GitHub Pages の「Enforce HTTPS」を有効化（リポジトリ設定）。
