@@ -9,7 +9,7 @@
 ## 公開中のHP
 - 本番URL（確定）: https://atelier-tecnoform.com/ （DNS稼働確認済み・GitHub Pages配信）
 - 予備URL: https://noriaki-eto.github.io/tecnoform-website/
-- メールは別ドメイン: info@tecnoform.jp（サイトとは別。意図的な2ドメイン運用）
+- メール: info@atelier-tecnoform.com（サイトと同一ドメインに統一・Cloudflare Email Routingで無料転送）
 - GitHub Pages 自動デプロイ。
 - ※Netlify（旧 stellular-clafoutis-e0a6ca.netlify.app）は停止済み。無視してよい。
 
