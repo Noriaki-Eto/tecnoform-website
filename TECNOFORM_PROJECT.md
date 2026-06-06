@@ -76,13 +76,16 @@
 
 ```python
 import base64, json, urllib.request
-from PIL import Image
+from PIL import Image, ImageOps
 
 TOKEN = "ghp_****（Claudeのメモリ内に保存済み）"
 REPO = "Noriaki-Eto/tecnoform-website"
 
 def upload_image(local_path, filename):
     img = Image.open(local_path)
+    img = ImageOps.exif_transpose(img)   # iPhone縦写真の回転補正（必須・これが無いと横倒しになる）
+    if img.mode != "RGB":
+        img = img.convert("RGB")
     w, h = img.size
     if w > 1600:
         img = img.resize((1600, int(h * 1600 / w)), Image.LANCZOS)
