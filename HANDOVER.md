@@ -7,8 +7,9 @@
 3. GitHubトークンは別途共有（リポジトリ・ドキュメントには絶対に載せない）。
 
 ## 公開中のHP
-- 本番URL: https://noriaki-eto.github.io/tecnoform-website/
-- カスタムドメイン: CNAME = `atelier-tecnoform.com`（※`tecnoform.jp` への移行可否は未確定。要決定）
+- 本番URL（確定）: https://atelier-tecnoform.com/ （DNS稼働確認済み・GitHub Pages配信）
+- 予備URL: https://noriaki-eto.github.io/tecnoform-website/
+- メールは別ドメイン: info@tecnoform.jp（サイトとは別。意図的な2ドメイン運用）
 - GitHub Pages 自動デプロイ。
 - ※Netlify（旧 stellular-clafoutis-e0a6ca.netlify.app）は停止済み。無視してよい。
 
@@ -22,5 +23,5 @@
 - 詳細手順・コードは `TECNOFORM_PROJECT.md` を参照。
 
 ## 未処理（要のりあきさん判断）
-- ドメイン確定（atelier-tecnoform.com か tecnoform.jp か）。
 - GitHubトークンを期限付き・リポジトリ限定の fine-grained token に更新。
+- GitHub Pages の「Enforce HTTPS」を有効化（リポジトリ設定）。
