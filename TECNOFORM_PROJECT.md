@@ -7,7 +7,7 @@
 ## 基本情報
 
 - 代表：江藤徳晃（のりあきさん）
-- サイト：tecnoform.jp / info@tecnoform.jp
+- サイト（確定）：atelier-tecnoform.com（DNS稼働中・GitHub Pages配信） ／ メール：info@tecnoform.jp（別ドメイン運用）
 - キャッチコピー：「枠を解いて、揺らぎを纏う。」
 - 正式英文社名：atelier TECNOFORM Inc;（連結表記・セミコロン）
 - 通常表記：atelier TECNOFORM（atelierは小文字固定・CSSでuppercase変換しない）
@@ -16,12 +16,12 @@
 
 ## 公開中のHP
 
-- **本番URL**: https://noriaki-eto.github.io/tecnoform-website/
+- **本番URL（確定）**: https://atelier-tecnoform.com/ ／ 予備: https://noriaki-eto.github.io/tecnoform-website/
 - GitHub: Noriaki-Eto/tecnoform-website
 - トークン: ghp_****（Claudeのメモリ内に保存済み）
 - GitHub連携済み・自動デプロイ済み
 - ※Netlify（stellular-clafoutis-e0a6ca.netlify.app）は帯域オーバーで停止。無視してOK
-- ※本番ドメイン tecnoform.jp（Zenlogic/FileZilla）への移行は保留中
+- ※公開ドメインは atelier-tecnoform.com で確定（GitHub Pages・DNS稼働）。Zenlogic移行は不要
 
 ---
 
@@ -131,7 +131,7 @@ def upload_image(local_path, filename):
 - [ ] 残り16件の物件説明文生成
 - [ ] Instagram投稿カレンダー
 - [ ] 営業提案資料
-- [ ] tecnoform.jp 本番デプロイ（Zenlogic / FileZilla）
+- [x] 公開ドメイン確定：atelier-tecnoform.com（GitHub Pages・DNS稼働済み）
 
 ---
 
