@@ -7,7 +7,7 @@
 ## 基本情報
 
 - 代表：江藤徳晃（のりあきさん）
-- サイト（確定）：atelier-tecnoform.com（DNS稼働中・GitHub Pages配信） ／ メール：info@tecnoform.jp（別ドメイン運用）
+- サイト（確定）：atelier-tecnoform.com（DNS稼働中・GitHub Pages配信） ／ メール：info@atelier-tecnoform.com（サイトと同一ドメインに統一・旧info@tecnoformは移行期間中も受信可）
 - キャッチコピー：「枠を解いて、揺らぎを纏う。」
 - 正式英文社名：atelier TECNOFORM Inc;（連結表記・セミコロン）
 - 通常表記：atelier TECNOFORM（atelierは小文字固定・CSSでuppercase変換しない）
