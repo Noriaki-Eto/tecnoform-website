@@ -845,7 +845,7 @@ footer {
 <meta name="robots" content="noindex">
 <style>
 #hero-water{ position:absolute; inset:0; z-index:1; pointer-events:none;
-  mix-blend-mode:screen; opacity:0.5; filter:blur(1.6px); -webkit-filter:blur(1.6px); }
+  mix-blend-mode:screen; opacity:0.56; filter:blur(1.5px); -webkit-filter:blur(1.5px); }
 </style>
 </head>
 <body>
@@ -1380,7 +1380,7 @@ lb.addEventListener('touchend', function(e){
   var hero=document.getElementById('hero'), canvas=document.getElementById('hero-water');
   if(!hero||!canvas) return;
   var ctx=canvas.getContext('2d');
-  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.970, W=0,H=0;
+  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.973, W=0,H=0, t0=Date.now();
   function build(){
     var dpr=Math.min(window.devicePixelRatio||1,2);
     W=hero.clientWidth||window.innerWidth; H=hero.clientHeight||window.innerHeight;
@@ -1413,16 +1413,19 @@ lb.addEventListener('touchend', function(e){
     var t=cur;cur=prev;prev=t;
   }
   function render(){
-    var d=offData, N=cols*rows;
+    var d=offData, N=cols*rows, t=(Date.now()-t0)/1000;
     for(var i=0,p=0;i<N;i++,p+=4){
-      var x=i%cols;
+      var x=i%cols, y=(i/cols)|0, nx=x/cols, ny=y/rows;
       var sx=(x>0&&x<cols-1)?(cur[i-1]-cur[i+1]):0;
       var sy=(i>=cols&&i<N-cols)?(cur[i-cols]-cur[i+cols]):0;
       var spec=sx*0.7+sy*0.7;
-      var glint=spec>0?(spec/34):0; if(glint>1)glint=1;
-      var energy=Math.abs(cur[i])/70; if(energy>1)energy=1;
-      var a=glint*0.42+energy*0.12; if(a>0.42)a=0.42;
-      d[p]=238; d[p+1]=228; d[p+2]=204; d[p+3]=a*255;
+      var glint=spec>0?(spec/32):0; if(glint>1)glint=1;
+      var energy=Math.abs(cur[i])/65; if(energy>1)energy=1;
+      // 風：水面全体がゆっくり流れる光の帯
+      var w=Math.sin(nx*4.2 + t*0.55)*Math.sin(ny*3.0 - t*0.42);
+      var wind = w>0 ? Math.pow(w,1.6)*0.13 : 0;
+      var a=glint*0.5+energy*0.14+wind; if(a>0.5)a=0.5;
+      d[p]=240; d[p+1]=230; d[p+2]=206; d[p+3]=a*255;
     }
     offCtx.putImageData(offImg,0,0);
     ctx.clearRect(0,0,W,H);
@@ -1431,24 +1434,21 @@ lb.addEventListener('touchend', function(e){
   }
   function loop(){ if(hero.getBoundingClientRect().bottom>0){ step(); render(); } requestAnimationFrame(loop); }
   loop();
-  // 開幕：そっと一度だけ
-  setTimeout(function(){ drop(W*0.5,H*0.44,150); }, 500);
-  // 指でなぞる／マウスで動かすと波（スクロールは妨げない）
+  setTimeout(function(){ drop(W*0.5,H*0.44,200); }, 500);
   var lastMove=0;
   function pt(e){
     var t=e.touches?e.touches[0]:e, r=hero.getBoundingClientRect();
     var lx=t.clientX-r.left, ly=t.clientY-r.top;
     if(lx<0||ly<0||lx>W||ly>H)return;
-    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<60)return; lastMove=now; drop(lx,ly,22); }
-    else drop(lx,ly,95);
+    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<60)return; lastMove=now; drop(lx,ly,26); }
+    else drop(lx,ly,115);
   }
   addEventListener('mousemove',pt,{passive:true});
   addEventListener('touchstart',pt,{passive:true});
-  // 環境光：ごくたまに、静かに
   setInterval(function(){
     if(hero.getBoundingClientRect().bottom<=0)return;
-    drop(W*(0.15+Math.random()*0.7), H*(0.2+Math.random()*0.6), 38+Math.random()*26);
-  }, 6000);
+    drop(W*(0.15+Math.random()*0.7), H*(0.2+Math.random()*0.6), 45+Math.random()*30);
+  }, 5500);
 })();
 </script>
 </body>
