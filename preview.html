@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>江藤徳晃 | 光と水の作家 | アトリエ・テクノフォルム</title>
+<meta name="description" content="光と水の作家。ガラス・和紙・3D造形で、ホテル・商業・住空間のアートと照明をつくる。受け入れ、流し、委ねる——強要しない、やわらかな光の環境を。リッツ・カールトン東京ほか実績多数。">
+<meta name="keywords" content="光と水の作家,江藤徳晃,ガラスアート,和紙照明,パラメトリックデザイン,照明オブジェ,エントランスアート,高級ホテル内装,企業エントランス,邸宅アート,壁面アート,アトリエ,テクノフォルム">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- Open Graph -->
+<meta property="og:title" content="江藤徳晃 | 光と水の作家 | アトリエ・テクノフォルム">
+<meta property="og:description" content="光と水の作家。ガラス・和紙・3D造形で、ホテル・商業・住空間に、やわらかな光の環境をつくる。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://atelier-tecnoform.com/">
+<meta property="og:image" content="https://atelier-tecnoform.com/images/ogp.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="atelier TECNOFORM">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="江藤徳晃 | 光と水の作家">
+<meta name="twitter:description" content="光と水の作家。ガラス・和紙・3D造形で、空間にやわらかな光の環境をつくる。">
+<meta name="twitter:image" content="https://atelier-tecnoform.com/images/ogp.jpg">
+<link rel="canonical" href="https://atelier-tecnoform.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0b0a09;
+  --ink-soft: #14110e;
+  --paper: #ece5d5;
+  --paper-soft: #b8a78a;
+  --paper-mute: #6a6258;
+  --line: rgba(184, 167, 138, 0.18);
+  --accent: #c9a875;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Inter', 'Noto Serif JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ===== NAVIGATION ===== */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.6rem 3rem;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(11,10,9,0.92), rgba(11,10,9,0));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: padding 0.4s ease, background 0.4s ease;
+}
+.site-nav.scrolled {
+  padding: 1rem 3rem;
+  background: rgba(11,10,9,0.94);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 400;
+  letter-spacing: 0.28em;
+  color: var(--paper);
+  white-space: nowrap;
+}
+.nav-links {
+  list-style: none; display: flex; gap: 2.4rem;
+}
+.nav-links a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.92rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-soft);
+  transition: color 0.3s ease;
+}
+.nav-links a:hover { color: var(--paper); }
+.nav-toggle { display: none; background: none; border: none; color: var(--paper); cursor: pointer; }
+
+@media (max-width: 768px) {
+  .site-nav { padding: 1rem 1.2rem; }
+  .nav-logo { font-size: 0.95rem; letter-spacing: 0.16em; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 0; padding: 1rem 1.5rem 2rem;
+    background: rgba(11,10,9,0.98); backdrop-filter: blur(8px); }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-bottom: 1px solid var(--line); padding: 1.1rem 0; }
+  .nav-toggle { display: block; font-size: 1.4rem; letter-spacing: 0.18em; }
+}
+
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 3rem; overflow: hidden;
+}
+.hero-bg-slides {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  background: var(--ink);
+}
+.hero-bg-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  transition: opacity 2.4s ease-in-out;
+}
+.hero-bg-slide.active {
+  opacity: 0.42;
+  animation: kenBurns 12s ease-out forwards;
+}
+@keyframes kenBurns {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.10); }
+}
+.hero-bg-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background: 
+    radial-gradient(ellipse at 30% 50%, transparent 0%, rgba(11,10,9,0.55) 70%),
+    linear-gradient(to bottom, rgba(11,10,9,0.32) 0%, rgba(11,10,9,0.18) 40%, rgba(11,10,9,0.85) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+.hero-mark {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--paper-soft);
+  letter-spacing: 0.32em;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: heroFadeUp 1.4s ease 0.3s forwards;
+}
+.hero-mark::before {
+  content: ""; display: inline-block;
+  width: 38px; height: 1px; background: var(--paper-soft);
+  vertical-align: middle; margin-right: 1.1rem;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  line-height: 1.28; letter-spacing: 0.04em;
+  color: var(--paper);
+  margin-bottom: 2.4rem;
+  opacity: 0; animation: heroFadeUp 1.6s ease 0.7s forwards;
+}
+.hero-title em {
+  font-style: normal; color: var(--accent);
+  font-weight: 400;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.15rem;
+  color: var(--paper-soft);
+  letter-spacing: 0.12em; max-width: 580px;
+  line-height: 1.8;
+  opacity: 0; animation: heroFadeUp 1.6s ease 1.1s forwards;
+}
+.hero-sub-poem {
+  display: inline-block;
+  font-style: italic;
+  font-size: 1.45rem;
+  letter-spacing: 0.16em;
+  color: var(--paper);
+  margin-bottom: 0.4rem;
+}
+.hero-scroll {
+  position: absolute; bottom: 3rem; left: 50%;
+  transform: translateX(-50%); z-index: 2;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; letter-spacing: 0.4em;
+  color: var(--paper-soft); text-transform: uppercase;
+  opacity: 0; animation: heroFadeUp 1.6s ease 1.5s forwards;
+}
+.hero-scroll::after {
+  content: ""; display: block;
+  width: 1px; height: 48px; background: var(--paper-soft);
+  margin: 1rem auto 0;
+  animation: scrollLine 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(0.3); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+@media (max-width: 768px) {
+  #hero { padding: 0 1.5rem; }
+  .hero-mark { font-size: 0.78rem; margin-bottom: 1.8rem; }
+  .hero-mark::before { width: 22px; margin-right: 0.8rem; }
+  .hero-sub-poem { font-size: 1.18rem; letter-spacing: 0.12em; }
+  .hero-scroll { font-size: 0.7rem; bottom: 2rem; }
+  .hero-scroll::after { height: 32px; }
+}
+
+/* ===== SECTION COMMON ===== */
+section {
+  padding: 9rem 3rem;
+  position: relative;
+}
+@media (max-width: 768px) {
+  section { padding: 5rem 1.5rem; }
+}
+.section-head {
+  max-width: 1280px; margin: 0 auto 5rem;
+  display: flex; align-items: baseline; gap: 2rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.6rem;
+}
+.section-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.9rem; letter-spacing: 0.24em;
+  color: var(--paper-soft); text-transform: uppercase;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  letter-spacing: 0.04em; color: var(--paper);
+}
+@media (max-width: 768px) {
+  .section-head { margin-bottom: 3rem; flex-direction: column; gap: 0.4rem; align-items: flex-start; }
+}
+
+/* ===== WORKS ===== */
+#works { padding-top: 7rem; }
+.works-lead {
+  max-width: 1280px; margin: 0 auto 4.5rem;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.18rem; line-height: 2;
+  color: var(--paper-soft);
+  letter-spacing: 0.04em;
+  max-width: 720px;
+}
+.works-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 4rem 3rem;
+}
+@media (max-width: 768px) {
+  .works-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .works-lead { font-size: 1.02rem; line-height: 1.85; margin-bottom: 3rem; }
+}
+.work-card {
+  cursor: pointer; position: relative;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.work-card.is-coming { cursor: default; opacity: 0.4; }
+.work-card.is-coming .work-frame { min-height: 220px; }
+.work-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--ink-soft);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: border-color 0.6s ease;
+}
+.work-frame img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: var(--ink);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+  filter: brightness(0.96);
+}
+.work-card:hover .work-frame { border-color: var(--accent); }
+.work-card:hover .work-frame img { transform: scale(1.025); filter: brightness(1.0); }
+.work-coming-mark {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; letter-spacing: 0.32em;
+  color: var(--paper-mute); text-transform: uppercase;
+}
+.work-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-top: 1.4rem; gap: 1.5rem;
+  padding-bottom: 0.4rem;
+}
+.work-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--accent);
+  letter-spacing: 0.2em; flex-shrink: 0;
+}
+.work-info { flex: 1; }
+.work-name {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: 1.05rem; line-height: 1.55;
+  color: var(--paper); letter-spacing: 0.02em;
+}
+.work-type {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; color: var(--paper-soft);
+  letter-spacing: 0.14em; margin-top: 0.4rem;
+}
+.work-imgcount {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.78rem; color: var(--paper-mute);
+  letter-spacing: 0.2em; flex-shrink: 0; align-self: flex-start;
+  padding-top: 0.3rem;
+}
+
+/* ===== ABOUT / PHILOSOPHY ===== */
+#about { background: var(--ink-soft); }
+.about-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 5rem; align-items: start;
+}
+.about-pull {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  line-height: 1.85; color: var(--paper);
+  letter-spacing: 0.04em;
+  border-left: 1px solid var(--accent);
+  padding-left: 2rem;
+}
+.about-body {
+  font-size: 0.98rem; line-height: 2.0;
+  color: var(--paper-soft);
+}
+.about-body p + p { margin-top: 1.5rem; }
+.about-body em {
+  font-style: italic; color: var(--paper);
+  font-family: 'Cormorant Garamond', serif;
+}
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-pull { padding-left: 1.2rem; font-size: 1.15rem; }
+}
+
+/* ===== TECHNOLOGY ===== */
+.tech-list {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.tech-item {
+  padding: 2rem 2rem 2rem 0;
+  border-right: 1px solid var(--line);
+}
+.tech-item:nth-child(3n) { border-right: none; padding-right: 0; }
+.tech-item:nth-child(n+4) { padding-top: 3rem; border-top: 1px solid var(--line); margin-top: 0; }
+.tech-num {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.85rem; color: var(--accent);
+  letter-spacing: 0.24em; margin-bottom: 0.8rem;
+}
+.tech-title {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: 1.1rem; color: var(--paper);
+  margin-bottom: 0.8rem; line-height: 1.5;
+}
+.tech-desc {
+  font-size: 0.88rem; line-height: 1.85;
+  color: var(--paper-soft);
+}
+@media (max-width: 768px) {
+  .tech-list { grid-template-columns: 1fr; }
+  .tech-item { border-right: none; border-bottom: 1px solid var(--line); padding: 1.6rem 0; }
+  .tech-item:nth-child(n+4) { padding-top: 1.6rem; border-top: none; }
+  .tech-item:last-child { border-bottom: none; }
+}
+
+/* ===== CLIENTS ===== */
+#clients { background: var(--ink-soft); }
+.clients-grid {
+  max-width: 1100px; margin: 0 auto;
+  columns: 3; column-gap: 4rem;
+  font-size: 0.92rem;
+  color: var(--paper-soft);
+  line-height: 2.1;
+}
+.clients-grid li {
+  list-style: none;
+  break-inside: avoid;
+  padding: 0.15rem 0;
+}
+@media (max-width: 768px) {
+  .clients-grid { columns: 1; }
+}
+
+/* ===== CONTACT ===== */
+#contact { text-align: center; padding: 8rem 3rem; }
+.contact-tagline {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--paper-soft);
+  margin-bottom: 2.4rem; letter-spacing: 0.06em;
+  line-height: 1.6;
+}
+.contact-mail {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.4rem;
+  display: inline-block;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+.contact-mail:hover { color: var(--paper); border-color: var(--paper); }
+.contact-info {
+  margin-top: 3rem;
+  font-size: 0.92rem; color: var(--paper-mute);
+  letter-spacing: 0.08em;
+  line-height: 2;
+}
+footer {
+  border-top: 1px solid var(--line);
+  padding: 2rem 3rem;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.78rem; letter-spacing: 0.2em;
+  color: var(--paper-mute);
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: #0b0a09;
+  display: none;
+  opacity: 0; transition: opacity 0.45s ease;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+.lightbox.is-open { display: block; opacity: 1; }
+.lb-header {
+  padding: 1.2rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+  background: #0b0a09;
+}
+.lb-counter {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; letter-spacing: 0.22em;
+  color: var(--paper-soft);
+}
+.lb-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--paper); font-size: 1.6rem;
+  font-family: 'Cormorant Garamond', serif;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.lb-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.lb-stage {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  width: 100%; box-sizing: border-box;
+}
+.lb-img-wrap {
+  position: relative;
+  width: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-img {
+  max-width: 100%; max-height: 78vh;
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: opacity 0.4s ease;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.lb-img.loading { opacity: 0; }
+
+.lb-nav {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(11,10,9,0.85); border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff; cursor: pointer;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  z-index: 2;
+}
+.lb-nav:hover { border-color: var(--accent); color: var(--accent); background: rgba(11,10,9,0.95); }
+.lb-prev { left: 1.5rem; }
+.lb-next { right: 1.5rem; }
+.lb-nav.is-hidden { display: none; }
+
+.lb-footer {
+  display: block;
+  padding: 2rem 2rem 2.4rem;
+  border-top: 1px solid var(--line);
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background: transparent;
+}
+.lb-title {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--paper); letter-spacing: 0.04em; line-height: 1.55;
+  margin-bottom: 0.6rem;
+}
+.lb-meta {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.9rem; letter-spacing: 0.18em;
+  color: var(--paper-soft);
+  margin-bottom: 1rem;
+}
+.lb-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem; line-height: 2.1;
+  font-weight: 500;
+  color: #ffffff;
+  max-width: 640px; margin: 0 auto 1.4rem;
+  text-align: left;
+  letter-spacing: 0.03em;
+}
+.lb-desc em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.lb-desc:empty { display: none; }
+.lb-credit {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.82rem; line-height: 1.85;
+  color: var(--paper-mute);
+  letter-spacing: 0.04em;
+}
+.lb-credit:empty { display: none; }
+
+/* タイトル+メタを画像の上に配置 */
+.lb-caption {
+  display: block;
+  padding: 1.8rem 2rem 1.2rem;
+  text-align: left;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.lb-caption .lb-title {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+  color: var(--paper); letter-spacing: 0.04em; line-height: 1.55;
+  margin-bottom: 0.7rem;
+}
+.lb-caption .lb-meta {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.95rem; letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 0;
+}
+.lb-back {
+  margin-top: 2rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  padding: 0.9rem 1.8rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+.lb-back:hover, .lb-back:active { border-color: var(--accent); color: var(--accent); background: rgba(201, 168, 117, 0.08); }
+
+/* ===== SCROLL TOP BUTTON ===== */
+.scroll-top {
+  position: fixed; right: 1.2rem; bottom: 1.2rem;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(11, 10, 9, 0.78);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  font-size: 1.25rem; line-height: 1;
+  cursor: pointer; z-index: 150;
+  opacity: 0; pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.3s ease, color 0.3s ease;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.scroll-top:hover, .scroll-top:active { border-color: var(--accent); color: var(--accent); }
+
+@media (max-width: 768px) {
+  .lb-header { padding: 0.8rem 1rem; }
+  .lb-close { width: 38px; height: 38px; font-size: 1.4rem; }
+  .lb-caption { padding: 1.2rem 1.2rem 0.8rem; }
+  .lb-stage { padding: 1rem; }
+  .lb-img { max-height: 60vh; }
+  .lb-nav { width: 44px; height: 44px; font-size: 1.6rem; background: rgba(0,0,0,0.75); border-color: rgba(255,255,255,0.4); }
+  .lb-prev { left: 0.4rem; }
+  .lb-next { right: 0.4rem; }
+  .lb-footer { padding: 1.4rem 1.2rem 1.8rem; }
+  .lb-back { font-size: 0.88rem; padding: 0.8rem 1.4rem; }
+  .scroll-top { right: 0.9rem; bottom: 0.9rem; width: 42px; height: 42px; font-size: 1.15rem; }
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.about-corp { margin-top: 1.6rem; font-size: 0.85rem; color: var(--paper-mute); line-height: 1.9; letter-spacing: 0.03em; }
+.about-body em { font-style: normal; color: var(--paper); }
+
+/* ===== CONCEPT ===== */
+#concept {
+  background: var(--ink-soft);
+  text-align: center;
+  padding: 11rem 3rem;
+}
+.concept-inner { max-width: 760px; margin: 0 auto; }
+#concept .section-label { display: block; margin-bottom: 2.4rem; }
+.concept-head {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  letter-spacing: 0.08em; color: var(--paper);
+  margin-bottom: 2.8rem; line-height: 1.5;
+}
+.concept-body {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  line-height: 2.4; letter-spacing: 0.06em;
+  color: var(--paper-soft);
+}
+@media (max-width: 768px) {
+  #concept { padding: 6rem 1.6rem; }
+  .concept-body { line-height: 2.2; text-align: left; }
+}
+
+/* ===== STORY ===== */
+#story {
+  position: relative; overflow: hidden;
+  padding: 12rem 3rem;
+}
+.story-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: saturate(0.7) brightness(0.5);
+  transform: scale(1.05);
+  z-index: 0;
+}
+.story-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(11,10,9,0.86), rgba(11,10,9,0.78), rgba(11,10,9,0.92));
+}
+.story-inner {
+  position: relative; z-index: 2;
+  max-width: 760px; margin: 0 auto; text-align: center;
+}
+#story .section-label { display: block; margin-bottom: 2rem; }
+.story-head {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.8rem, 4.4vw, 3rem);
+  letter-spacing: 0.08em; color: var(--paper);
+  margin-bottom: 2.6rem; line-height: 1.5;
+}
+.story-body {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
+  line-height: 2.4; letter-spacing: 0.06em;
+  color: var(--paper-soft);
+}
+.story-body + .story-body { margin-top: 2.2rem; }
+.story-divider {
+  width: 1px; height: 64px; margin: 4rem auto;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+}
+.story-subhead {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-weight: 400; font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  letter-spacing: 0.06em; color: var(--paper);
+  margin-bottom: 1.8rem;
+}
+.story-body-sm { font-size: clamp(0.95rem, 1.4vw, 1.05rem); line-height: 2.2; }
+.story-body em, .mebius-body em { font-style: normal; color: var(--accent); }
+@media (max-width: 768px) {
+  #story { padding: 6.5rem 1.6rem; }
+  .story-body { text-align: left; line-height: 2.15; }
+  .story-divider { margin: 3rem auto; }
+}
+
+/* ===== MATERIALS ===== */
+.materials-grid {
+  max-width: 1280px; margin: 0 auto 3.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;
+}
+.material-item { padding-top: 1.6rem; border-top: 1px solid var(--line); }
+.material-name {
+  font-family: 'Noto Serif JP', serif; font-weight: 400;
+  font-size: 1.25rem; letter-spacing: 0.1em; color: var(--paper);
+  margin-bottom: 1rem;
+}
+.material-desc {
+  font-size: 0.92rem; line-height: 1.9; color: var(--paper-mute);
+  letter-spacing: 0.03em;
+}
+.materials-trust {
+  max-width: 1280px; margin: 0 auto 5rem;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.1rem; color: var(--paper-soft); letter-spacing: 0.04em;
+  padding-top: 2rem; border-top: 1px solid var(--line);
+}
+@media (max-width: 768px) {
+  .materials-grid { grid-template-columns: repeat(2, 1fr); gap: 1.8rem 1.4rem; margin-bottom: 2.5rem; }
+  .materials-trust { margin-bottom: 3rem; font-size: 1rem; }
+}
+
+/* ===== MEBIUS ===== */
+#mebius {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
+  max-width: 1280px; margin: 0 auto; padding: 9rem 3rem;
+}
+.mebius-media { overflow: hidden; }
+.mebius-media img {
+  width: 100%; height: 100%; max-height: 560px; object-fit: cover;
+  filter: saturate(0.85);
+}
+.mebius-text { padding: 1rem 0; }
+#mebius .section-label { display: block; margin-bottom: 1.6rem; }
+.mebius-head {
+  font-family: 'Cormorant Garamond', serif; font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: 0.05em;
+  color: var(--accent); line-height: 1.1; margin-bottom: 1.8rem;
+}
+.mebius-head-sub {
+  display: block; margin-top: 0.8rem;
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: clamp(1.05rem, 2vw, 1.4rem); letter-spacing: 0.08em;
+  color: var(--paper);
+}
+.mebius-body {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: 1.05rem; line-height: 2.2; letter-spacing: 0.05em;
+  color: var(--paper-soft); margin-bottom: 1.6rem;
+}
+.mebius-note { font-size: 0.82rem; color: var(--paper-mute); letter-spacing: 0.04em; }
+@media (max-width: 900px) {
+  #mebius { grid-template-columns: 1fr; gap: 2.2rem; padding: 6rem 1.6rem; }
+  .mebius-media img { max-height: 380px; }
+}
+
+/* ===== CONTACT additions ===== */
+#contact { text-align: center; }
+#contact .section-label { display: block; margin-bottom: 2rem; }
+.contact-lead {
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  font-size: 1.02rem; line-height: 2; color: var(--paper-soft);
+  letter-spacing: 0.05em; margin: 0 auto 3rem; max-width: 560px;
+}
+.contact-cta {
+  display: inline-block; margin-bottom: 3.5rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink);
+  background: var(--accent); padding: 1.1rem 3.2rem;
+  border: 1px solid var(--accent); border-radius: 1px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.contact-cta:hover { background: transparent; color: var(--accent); }
+.contact-info a { border-bottom: 1px solid var(--line); transition: border-color 0.3s ease; }
+.contact-info a:hover { border-color: var(--accent); }
+.contact-info-sub { margin-top: 2.4rem; font-size: 0.82rem; color: var(--paper-mute); }
+@media (max-width: 768px) {
+  .contact-cta { padding: 1rem 2.6rem; font-size: 1.05rem; }
+}
+
+
+/* ===== TECH DESIGN PROCESS ===== */
+.tech-process { max-width: 1100px; margin: 5rem auto 0; padding-top: 3rem; border-top: 1px solid var(--line); }
+.tech-process-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.24em; margin-bottom: 0.9rem; }
+.tech-process-title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: 0.04em; color: var(--paper); margin-bottom: 1.4rem; }
+.tech-process-lead { max-width: 760px; font-size: 0.95rem; line-height: 1.95; color: var(--paper-soft); margin-bottom: 3rem; }
+.tech-process-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+.tech-process-grid figure { margin: 0; }
+.tech-process-grid img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line); }
+.tech-process-grid img.is-screen { object-fit: contain; background: var(--ink); }
+.tech-process-grid figcaption { margin-top: 0.85rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.82rem; color: var(--accent); letter-spacing: 0.12em; }
+.tech-process-cap { margin-top: 2.4rem; font-size: 0.76rem; line-height: 1.8; color: var(--paper-mute); letter-spacing: 0.03em; }
+@media (max-width: 768px) { .tech-process { margin-top: 3.5rem; } .tech-process-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+/* ===== 営業向け追加(positioning / trust / mid-cta) ===== */
+.hero-positioning{ font-size:.8rem; letter-spacing:.16em; line-height:1.9; color:var(--paper-soft); margin-top:1.9rem; max-width:30em; opacity:0; animation:heroFadeUp 1.4s ease .9s forwards; }
+#trust{ padding:4.6rem 1.5rem; border-bottom:1px solid var(--line); }
+.trust-bar{ max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:center; gap:2.4rem 4rem; text-align:center; }
+.trust-cell{ display:flex; flex-direction:column; gap:.55rem; min-width:11rem; }
+.trust-num{ font-size:1.35rem; letter-spacing:.06em; color:var(--accent); }
+.trust-label{ font-size:.76rem; letter-spacing:.12em; color:var(--paper-soft); line-height:1.7; }
+.mid-cta-band{ padding:5rem 1.5rem; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.mid-cta-text{ font-size:1.15rem; letter-spacing:.08em; color:var(--paper); margin-bottom:1.5rem; }
+.mid-cta-link{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; letter-spacing:.08em; color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:.3rem; transition:opacity .3s; }
+.mid-cta-link:hover{ opacity:.6; }
+@media(max-width:640px){ .trust-bar{ gap:2rem; } .trust-cell{ min-width:0; width:100%; } }
+.lang-toggle{ background:none; border:1px solid var(--line); color:var(--paper-soft); font-family:'Cormorant Garamond',serif; font-size:.85rem; letter-spacing:.14em; padding:.1rem .65rem; cursor:pointer; transition:color .3s,border-color .3s; }
+.lang-toggle:hover{ color:var(--accent); border-color:var(--accent); }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://atelier-tecnoform.com/#org",
+      "name": "atelier TECNOFORM",
+      "legalName": "株式会社アトリエ・テクノフォルム",
+      "url": "https://atelier-tecnoform.com/",
+      "foundingDate": "1983",
+      "email": "info@atelier-tecnoform.com",
+      "telephone": "+81-78-821-7551",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "住吉山手3-3-18",
+        "addressLocality": "神戸市東灘区",
+        "addressRegion": "兵庫県",
+        "addressCountry": "JP"
+      },
+      "founder": { "@id": "https://atelier-tecnoform.com/#person" },
+      "sameAs": [
+        "https://www.instagram.com/noriaki_etoh/",
+        "https://www.facebook.com/atelier.tecno.form/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://atelier-tecnoform.com/#person",
+      "name": "江藤徳晃",
+      "alternateName": "Noriaki Eto",
+      "jobTitle": "光と水の作家",
+      "worksFor": { "@id": "https://atelier-tecnoform.com/#org" },
+      "url": "https://atelier-tecnoform.com/"
+    }
+  ]
+}
+</script>
+<meta name="robots" content="noindex">
+<style>
+#hero-water{ position:absolute; inset:0; z-index:1; pointer-events:none;
+  mix-blend-mode:screen; opacity:0.58; filter:blur(1.4px); -webkit-filter:blur(1.4px); }
+@media (prefers-reduced-motion: reduce){ #hero-water{ display:none; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="#hero" class="nav-logo">atelier TECNOFORM</a>
+  <button class="nav-toggle" aria-label="menu">MENU</button>
+  <ul class="nav-links">
+    <li><a href="#concept">Philosophy</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="lotus.html">Lotus</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button class="lang-toggle" id="langToggle" aria-label="language">EN</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-slides">
+    <div class="hero-bg-slide active" style="background-image: url('images/hilton-okinawa-01.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/ritz-bar-lounge-01.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/taka-town-03.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/daimaru-kobe-02.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/hotel-keihan-tenmabashi-04.jpg');"></div>
+    <div class="hero-bg-slide" style="background-image: url('images/sysmex_main-bb.jpg');"></div>
+  </div>
+  <div class="hero-bg-veil"></div>
+  <canvas id="hero-water" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <p class="hero-mark">江藤 徳晃 &nbsp; / &nbsp; est. 1983</p>
+    <h1 class="hero-title">光と水の、<br><em>作家</em></h1>
+    <p class="hero-sub"><em class="hero-sub-poem">Artist of Light and Water</em><br>受け入れ、流し、委ねる。</p>
+    <p class="hero-positioning">ガラス・和紙・光のアート ｜ ホテル・商業・邸宅・文化施設の空間制作</p>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- TRUST BAR -->
+<section id="trust">
+  <div class="trust-bar reveal">
+    <div class="trust-cell"><span class="trust-num">1983</span><span class="trust-label">創業 — 40年超の実績</span></div>
+    <div class="trust-cell"><span class="trust-num">国内外</span><span class="trust-label">高級ホテル・商業・邸宅・文化施設</span></div>
+    <div class="trust-cell"><span class="trust-num">一貫制作</span><span class="trust-label">デザイン・造形・施工まで自社体制</span></div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-head">
+    <span class="section-label">Selected Works</span>
+    <h2 class="section-title">Works</h2>
+  </div>
+  <p class="works-lead reveal">光が素材と出会い、空間に水のゆらぎが宿る。<br>ホテル・商業・住空間・文化施設に紡いできた、作品群。</p>
+  <div class="works-grid" id="worksGrid">
+    <!-- JSで動的生成 -->
+  </div>
+</section>
+
+<!-- MID CTA -->
+<section class="mid-cta-band reveal">
+  <p class="mid-cta-text">あなたのプロジェクトに、ひとつの光を。</p>
+  <a href="#contact" class="mid-cta-link">プロジェクトのご相談 →</a>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="concept-inner reveal">
+    <span class="section-label">Philosophy</span>
+    <p class="concept-body">
+      ガラスは、水と光の留まる姿<br>
+      和紙は光をまとい、<br>
+      炎は揺らぎ、<br>
+      金属は礎となる
+    </p>
+    <p class="concept-body">
+      私がつくるのは、異なる素材の枠を解き、<br>
+      何も強いることのない、<br>
+      やわらかな光の環境です。
+    </p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-bg" style="background-image: url('images/triaxis-05.jpg');"></div>
+  <div class="story-veil"></div>
+  <div class="story-inner">
+    <span class="section-label reveal">Story</span>
+    <p class="story-body reveal">
+      幼い頃から、水と戯れて育った。<br>
+      やがて潜水士として海に潜り、水底に射し込む光を見つめてきた。
+    </p>
+    <p class="story-body reveal">
+      流れ、たゆたい、凍り、霧になり、また満ちる——いくつもの顔を持つ水。
+    </p>
+    <p class="story-body reveal">
+      拒むことなく、留めることなく、<br>
+      水はどんな私も受け入れてくれた。
+    </p>
+    <p class="story-body reveal">
+      ガラスは、その水がふと結んだ姿。<br>
+      透き通る形となった一瞬の記憶。
+    </p>
+    <p class="story-body reveal">
+      全てを受け入れ、流れに身を委ねる——<br>
+      海で学んだ水のあり方を、素材に映す。<br>
+      何も強いることのない、心地よい光の空間を紡いでいきたい。
+    </p>
+  </div>
+</section>
+
+<!-- MATERIALS & TECHNOLOGY -->
+<section id="technology">
+  <div class="section-head">
+    <span class="section-label">Materials &amp; Technique</span>
+    <h2 class="section-title">四つの素材、<br>一つの思想。</h2>
+  </div>
+  <div class="materials-grid">
+    <div class="material-item reveal">
+      <h3 class="material-name">ガラス</h3>
+      <p class="material-desc">固まった水。深く、透き通り、人を映す。</p>
+    </div>
+    <div class="material-item reveal">
+      <h3 class="material-name">和紙</h3>
+      <p class="material-desc">和らぐ光。透かし、包み、温める。</p>
+    </div>
+    <div class="material-item reveal">
+      <h3 class="material-name">3D造形</h3>
+      <p class="material-desc">ガラスにできない形を、光を通す素材で。Rhino / Grasshopper によるパラメトリック設計。</p>
+    </div>
+    <div class="material-item reveal">
+      <h3 class="material-name">金属</h3>
+      <p class="material-desc">支え、吊り、構造を担う。安全を構造で守る。</p>
+    </div>
+  </div>
+  <p class="materials-trust reveal">美しさだけでなく、落下や経年に責任を持てる構造で設計します。</p>
+  <div class="tech-list">
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 01</div>
+      <h3 class="tech-title">立体手漉き和紙</h3>
+      <p class="tech-desc">3D構造体に手漉きで紙を漉き重ねる独自技法。光を通すと内部の繊維が浮かび上がり、紙そのものが発光しているように見える。和紙造形は、<em>江藤 惠美</em>（ヤドリギアート）を中心に手がける。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 02</div>
+      <h3 class="tech-title">クラフトアートガラス</h3>
+      <p class="tech-desc">ミラーベースの色彩流し、テクスチャーガラス、クラック加工。複層構成によって水面・氷・光のシャワーを表現する。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 03</div>
+      <h3 class="tech-title">麻繊維シェード</h3>
+      <p class="tech-desc">麻の繊維を立体造形に重ね、光を内側から纏わせる。和紙よりも素朴で重厚な質感が、空間に静かな存在感を与える。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 04</div>
+      <h3 class="tech-title">パラメトリック設計</h3>
+      <p class="tech-desc">Grasshopperによるアルゴリズミック設計と、3Dプリント生分解性プラスチック骨組みの組合せで、一品ごとに異なる有機形状を生成。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 05</div>
+      <h3 class="tech-title">硝子象嵌</h3>
+      <p class="tech-desc">和紙にミラー・色ガラスを象嵌する独自技法。麻の葉文様などの伝統意匠を、光と影で再構成する。</p>
+    </div>
+    <div class="tech-item reveal">
+      <div class="tech-num">/ 06</div>
+      <h3 class="tech-title">光のチューニング</h3>
+      <p class="tech-desc">色温度2500K〜6500K、点光源 vs 多灯のドラマ性、熱抜きの設計。素材と灯具を共設計することで、長寿命と表現を両立する。</p>
+    </div>
+  </div>
+
+  <div class="tech-process reveal">
+    <p class="tech-process-label">/ Design Process</p>
+    <h3 class="tech-process-title">設計から、手仕事まで。</h3>
+    <p class="tech-process-lead">ガラスは、空間と光の中でこそ生きる。だから、担当する空間を3D・VRで再現し、その中でガラスの見え方を確かめてから設計する。デジタルで検証し、手で仕上げる。</p>
+    <div class="tech-process-grid">
+      <figure>
+        <img class="is-screen" src="images/daimaru-kobe-process-rhino.jpg" alt="Rhino + V-Ray による設計画面">
+        <figcaption>01 — 設計データ｜Rhino + V-Ray</figcaption>
+      </figure>
+      <figure>
+        <img src="images/daimaru-kobe-process-vr.jpg" alt="VRによる空間シミュレーション（レンダリング）">
+        <figcaption>02 — VRシミュレーション｜光と正面の見え方</figcaption>
+      </figure>
+      <figure>
+        <img src="images/daimaru-kobe-process-vr2.jpg" alt="VRによる空間シミュレーション（反射・人の映り込み）">
+        <figcaption>03 — VRシミュレーション｜反射と人の映り込み</figcaption>
+      </figure>
+      <figure>
+        <img src="images/daimaru-kobe-03.jpg" alt="大丸神戸店 設置後の実物">
+        <figcaption>04 — 実装｜大丸神戸店</figcaption>
+      </figure>
+    </div>
+    <p class="tech-process-cap">大丸神戸店 エントランス ガラスアートウォール ／ 01・02 は江藤徳晃による設計データ・VRレンダリング、03 は設置後の実物写真です。<br>Space Design: 吉里謙一（cmyk）　Coordination: ubushina（立川裕大）</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-head">
+    <span class="section-label">Profile</span>
+    <h2 class="section-title">About</h2>
+  </div>
+  <div class="about-grid">
+    <p class="about-pull reveal">
+      光が宿り、<br>
+      素材が語りだす。
+    </p>
+    <div class="about-body reveal">
+      <p>ガラス造形・3Dプリント造形・手漉き和紙造形——複数の技法を統合し、建築空間全体のデザインを含めて制作・施工します。国内外のプロジェクトに対応。</p>
+      <p>アール・ヌーヴォーからジャポニズム、そして<em>イサム・ノグチ</em>の光の造形に学んだ造形思想を、ガラスと和紙の手仕事に重ねています。</p>
+      <p>ガラス造形：<em>江藤 徳晃</em>（Noriaki Eto）<br>和紙造形：<em>江藤 惠美</em>（Megumi Eto・一般社団法人ヤドリギアート）／<em>江藤 徳晃</em><br>Art Direction：<em>江藤 惠美</em></p>
+      <p>事業内容：建築工事の設計・施工・監理／インテリア及び商業空間デザインの企画・制作／附帯関連事業。</p>
+      <p>1983年の設立以来、作家・アートディレクター・制作協力による体制で、設計から制作・施工までを一貫して担い、構造と安全に責任を持ちます。</p>
+      <p class="about-corp">株式会社アトリエ・テクノフォルム<br>〒658-0063 兵庫県神戸市東灘区住吉山手3-3-18<br>設立 1983年11月 &nbsp;/&nbsp; 代表 江藤徳晃</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="section-head">
+    <span class="section-label">Selected Clients</span>
+    <h2 class="section-title">Clients</h2>
+  </div>
+  <ul class="clients-grid reveal">
+    <li>Canopy by Hilton 沖縄宮古島</li>
+    <li>ザ・リッツカールトン東京</li>
+    <li>ルネッサンス台北士林</li>
+    <li>ホテル京阪</li>
+    <li>リーガロイヤルリゾート</li>
+    <li>三井不動産レジデンシャル</li>
+    <li>東急不動産</li>
+    <li>プレサンス コーポレーション</li>
+    <li>シスメックス株式会社</li>
+    <li>パナソニック</li>
+    <li>株式会社プレナス</li>
+    <li>大丸神戸店</li>
+    <li>HBA (Hirsch Bedner Associates)</li>
+    <li>ILYA Corporation</li>
+    <li>DAIKO</li>
+    <li>乃村工藝社</li>
+    <li>裏千家</li>
+    <li>多可町</li>
+    <li>親愛産婦人科</li>
+    <li>キンダーキッズ</li>
+    <li>ゆの里 お水の宿</li>
+    <li>涼樹園</li>
+    <li>HIDE 京町堀</li>
+    <li>フィットネス トライアクシス</li>
+  </ul>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-label reveal">Contact</span>
+  <p class="contact-tagline reveal">空間の相談を承ります。</p>
+  <p class="contact-lead reveal">ホテル・商業空間・住空間のアート計画、<br>照明オブジェのご相談をお受けしています。</p>
+  <a href="mailto:info@atelier-tecnoform.com" class="contact-cta reveal">お問い合わせ</a>
+  <div class="contact-info reveal">
+    <a href="mailto:info@atelier-tecnoform.com">info@atelier-tecnoform.com</a> &nbsp;/&nbsp; Tel 078-821-7551<br>
+    <a href="https://www.instagram.com/noriaki_etoh/?hl=ja" target="_blank" rel="noopener">Instagram @noriaki_etoh</a>
+  </div>
+  <div class="contact-info contact-info-sub reveal">
+    atelier TECNOFORM Inc; &nbsp;/&nbsp; 江藤徳晃<br>
+    atelier-tecnoform.com
+  </div>
+</section>
+
+<footer>
+  © 1983 — 2026 &nbsp; atelier TECNOFORM Inc; &nbsp; / &nbsp; All works copyright atelier TECNOFORM Inc;<br>
+  <a href="tokushoho.html" style="color:var(--paper-soft);font-style:normal;letter-spacing:0.06em;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;">特定商取引法に基づく表記</a>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lb-header">
+    <span class="lb-counter" id="lbCounter">— / —</span>
+    <button class="lb-close" id="lbClose" aria-label="close">×</button>
+  </div>
+  <div class="lb-caption">
+    <div class="lb-title" id="lbTitle"></div>
+    <div class="lb-meta" id="lbMeta"></div>
+  </div>
+  <div class="lb-stage">
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="prev">‹</button>
+    <div class="lb-img-wrap"><img class="lb-img" id="lbImg" alt=""></div>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="next">›</button>
+  </div>
+  <div class="lb-footer">
+    <p class="lb-desc" id="lbDesc"></p>
+    <p class="lb-credit" id="lbCredit"></p>
+    <button class="lb-back" id="lbBack" type="button">✕ &nbsp;Works 一覧へ戻る</button>
+  </div>
+</div>
+
+<!-- スクロールトップボタン -->
+<button class="scroll-top" id="scrollTop" aria-label="ページトップへ戻る" type="button">↑</button>
+
+<script>
+/* ============ PROJECTS DATA ============ */
+var PROJECTS = [{"num": "01", "title": "キャノピーbyヒルトン<br>沖縄宮古島リゾート", "meta": "Hotel · 2026 · Okinawa Miyakojima", "desc": "宮古の風と水を、光に還す<br><br>和紙と麻繊維で成形した有機的なシェード群が、アーチ状のアームから自由に宙を泳ぐ。ひとつひとつ異なる形と傾きを持つシェードは、内側から光を纏い、互いに影を落とし合いながら、宮古島の風と水の記憶を空間に宿す。<br><br>アジア太平洋初のリゾートブランドとして2026年4月開業。内装デザインはHBAが手がけた。", "credit": "Interior Design: HBA (Hirsch Bedner Associates)<br>Lighting Installation: atelier TECNOFORM", "slides": ["images/hilton-okinawa-02.jpg", "images/hilton-okinawa-03.jpg", "images/hilton-okinawa-04.jpg", "images/hilton-okinawa-07.jpg", "images/hilton-okinawa-08.jpg", "images/hilton-okinawa-05.jpg", "images/hilton-okinawa-01.jpg"]}, {"num": "30", "title": "美濃和紙の里会館<br>「和紙のファンタジア」展", "meta": "Exhibition · 2024–2025 · Mino, Gifu", "desc": "美濃和紙の里会館の企画展<em>「和紙のファンタジア（Fantasia of Japanese Paper）」</em>（2024.12.19–2025.3.10）に出展。立体手漉き和紙による楕円オブジェ、<em>KUMO Lamp</em>（雲）、<em>蓮花型ペンダント</em> 群を atelier TECNOFORM が制作。回転体の捻れによる三次元的な幾何学オブジェと、米と蓮の花をテーマとしたランプ群を中心に、約20点の照明作品で空間全体を和紙の幻想で包んだ。<br><br>会場の<em>和紙ドレス群</em>は<em>ヤドリギアート（江藤惠美）</em>が制作。光と布、立体と平面が呼応する協奏空間を実現した。", "credit": "Overall Direction &amp; Lighting Installation: atelier TECNOFORM 江藤徳晃<br>Paper Dress Works: ヤドリギアート 江藤惠美", "slides": ["images/minowashi-fantasia-01.jpg", "images/minowashi-fantasia-05.jpg", "images/minowashi-fantasia-06.jpg", "images/minowashi-fantasia-04.jpg", "images/minowashi-fantasia-07.jpg", "images/minowashi-fantasia-03.jpg", "images/minowashi-fantasia-02.jpg"]}, {"num": "22", "title": "六甲山サイレンスリゾート<br>「和紙 伝統と未来」展", "meta": "Exhibition · 2021 · Rokko, Kobe", "desc": "六甲山サイレンスリゾート（神戸市灘区）で開催された展覧会<em>「和紙 伝統と未来」</em>（会期：2021年4月15日〜5月9日）。<em>異なる世代間の対話</em>を通じて和紙の世界を豊かにし、新たな表現を生み出すことをテーマに、神戸在住の江藤惠美・江藤徳晃が作品を発表。徳島の拝宮和紙職人<em>中村功</em>の作品も併せて展示された。<br><br>江戸期より記録が残り、六甲山で約130年ぶりに再発見された紫陽花<em>「七段花（シチダンカ）」</em>をベースモチーフに据え、花弁の構造をパラメトリックに設計。光造形（SLA／大豆油・アクリル樹脂）と熱溶解積層（FDM／生分解性プラスチック）の3Dプリントで骨格を造形し、そこへ手漉き和紙を漉き重ねた立体造形を展開した。<br><br>放散虫（ラジオラリア）に着想した<em>光オブジェ群</em>と、和紙のドレス・コサージュ・帽子による<em>装いの作品群</em>が呼応。環境にやさしく持続可能・リサイクル可能な素材を用い、伝統素材の和紙が現代の造形技術と光をまとって生まれ変わる——世代を超えた対話の場となった。<br><br>和紙の造形群は<em>ヤドリギアート（江藤惠美）</em>、光オブジェと全体構成は<em>atelier TECNOFORM（江藤徳晃）</em>が手がけた。", "credit": "Overall Direction &amp; Light Objects: atelier TECNOFORM 江藤徳晃<br>Washi Sculpture &amp; Dress Works: ヤドリギアート 江藤惠美<br>Guest Artist (Traditional Washi): 中村功（拝宮和紙・徳島）<br>Art Direction: 江藤惠美", "slides": ["images/rokko-washi-10.jpg", "images/rokko-washi-07.jpg", "images/rokko-washi-11.jpg", "images/rokko-washi-01.jpg", "images/rokko-washi-08.jpg", "images/rokko-washi-02.jpg", "images/rokko-washi-03.jpg", "images/rokko-washi-04.jpg", "images/rokko-washi-09.jpg"]}, {"num": "17", "title": "多可町生涯学習<br>まちづくりプラザ Asmile", "meta": "Public · 2024 · Hyogo Taka", "desc": "意匠主題：あふれだす<br><br>「生涯学び続けられる生きがいあふれるまちづくり」——多可町のこの目標から意匠テーマを「あふれだす」と定めました。<br><br>学びの意欲が粒となって広がり、人と人がつながり、やがて表現へと溢れ出す。地域の宝・杉原紙を用いた5つのガラスアートで空間全体に織り込んでいます。", "credit": "Architecture: 内藤建築事務所<br>Glass Art: atelier TECNOFORM", "slides": ["images/taka-town-04.jpg", "images/taka-town-05.jpg", "images/taka-town-03.jpg", "images/taka-town-07.jpg", "images/taka-town-06.jpg", "images/taka-town-08.jpg", "images/taka-town-09.jpg", "images/taka-town-01.jpg", "images/taka-town-02.jpg"]}, {"num": "05", "title": "ザ・リッツカールトン東京<br>クラブスイート 麻の葉文様 和紙アートパネル", "meta": "Hotel · 2015 · Tokyo · Club Suite", "desc": "日本の伝統文様<em>麻の葉</em>を、生成り和紙とミラーの硝子象嵌で再構成。星型に展開する六芒星パターンが、生成り和紙の柔らかなテクスチャの上で光を反射し、時間や視点によって表情を変える。クラブスイートの空間に、伝統文様の静謐な格と現代の光の遊びを共存させた。", "credit": "Washi Art Panel (Hemp Leaf Crest Inlay): atelier TECNOFORM", "slides": ["images/ritz-suite-hemp-01.jpg", "images/ritz-suite-hemp-02.jpg", "images/ritz-suite-hemp-04.jpg", "images/ritz-suite-hemp-05.jpg", "images/ritz-suite-hemp-03.jpg"]}, {"num": "08", "title": "秀（HIDE）京町堀<br>阿吽の宇宙 店内 和紙アートパネル・光オブジェ", "meta": "Restaurant · Osaka Kyomachibori", "desc": "対面する職人の心意気と食の活き。その緊張感・空気感を、手漉き和紙パネルに波紋ミラーの象眼加工で瑞々しく表現。入口の「あ」の照明オブジェに対して、店内奥の「<em>うん</em>」の光オブジェ。ミラー効果で幽玄な光景を創り出す。", "credit": "Washi Art Panel &amp; Light Object: atelier TECNOFORM", "slides": ["images/hide-interior.jpg", "images/hide-interior-02.jpg"]}, {"num": "18", "title": "ホテル京阪 天満橋駅前<br>客室和紙オブジェ・壁面パネル", "meta": "Hotel · Osaka Temmabashi", "desc": "客室を彩るシリーズ作品。兵庫県の伝統工芸『杉原紙』を用いた立体和紙の螺旋ねじれ型卓上ライトは、内部の3Dプリント骨組みが透けて柔らかな光を放つ。壁面パネルは細長い和紙基板に、麻糸の交差線とクリア・グレー・青・黒の多色ガラス石を象嵌。天井照明や襖の和紙加工も手がけ、客室全体に杉原紙の表情を通わせた。水の流れを思わせる有機的なフォルムが、出張・観光のひとときに静かな宿りを与える。", "credit": "Washi Objects, Wall Panels &amp; Surface Finishing: atelier TECNOFORM<br>Space Design: ZYCC（ジーク）<br>Lighting Fixture Production: DAIKO（大光電機）", "slides": ["images/hotel-keihan-tenmabashi-04.jpg", "images/hotel-keihan-tenmabashi-05.jpg", "images/hotel-keihan-tenmabashi-06.jpg", "images/hotel-keihan-tenmabashi-03.jpg", "images/hotel-keihan-tenmabashi-01.jpg", "images/hotel-keihan-tenmabashi-02.jpg"]}, {"num": "07", "title": "秀（HIDE）京町堀<br>阿吽の宇宙 エントランス 光オブジェ", "meta": "Restaurant · Osaka Kyomachibori", "desc": "「<em>阿</em>」という始まりの音から「<em>吽</em>」の終わりは、それぞれの宇宙の始まりと終わりを表す言葉。入口に「あ」、店内奥に「うん」の光オブジェを配置し、阿吽の宇宙の中にゲストが包まれ、特別な食と空間の広がりを創造。「米」をテーマとする店だが、米のシンプルな輪郭を主体に花や種子にも見えるようデザイン。立体手漉き和紙の表皮に、内部構造は3D造形の生分解性プラスチック骨組み。ハーフミラーによって光オブジェが無数に映り込むアイキャッチな象徴を創造。", "credit": "Washi Light Object Design &amp; Production: atelier TECNOFORM", "slides": ["images/hide-entrance-04.jpg", "images/hide-entrance.jpg", "images/hide-entrance-03.jpg", "images/hide-entrance-02.jpg"]}, {"num": "11", "title": "ゆの里 お水の宿 このの<br>レストラン壁面 アクアフォトミクスガラスアート", "meta": "Restaurant · Wakayama Hashimoto", "desc": "<em>アクアフォトミクス</em>は、ツェンコヴァ・ルミアナ教授によって提案された、生物と水のシステムのための包括的な情報として水のスペクトルパターンを研究する新しい科学分野。近赤外線分光測定方式によって、三種類の温泉水が湧き出る不思議な場所・和歌山県ゆの里の水の構造と機能が明らかになりつつある。その水がもたらす事象と機能をガラス素材で壁面に表現。Gold Water=浄化、Silver Water=解毒、Bronze Water=調和の三相を、十二のグラフィックパネルと中央の立体ガラスで構成。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM<br>Concept Research: Dr. R. Tsenkova &amp; S. Shigeoka", "slides": ["images/yunosato-main.jpg", "images/yunosato-02.jpg", "images/yunosato-04.jpg", "images/yunosato-03.jpg", "images/yunosato-05.jpg"]}, {"num": "06", "title": "ルネッサンス台北士林ホテル<br>中華レストラン Butterfly Wall Art", "meta": "Hotel · Taipei · Shilin", "desc": "ホテルの傍に蒋介石が愛した有名な庭園があり、<em>蝶</em>をコンセプトに立体造形を制作。<em>和紙の表皮</em>に<em>アルミパイプの骨格</em>、<em>3Dプリントジョイント</em>による接合構造で、軽量かつ大型のフォルムを実現。光の影を壁面に投げかけ、ドラマチックに空間を演出。gray／light beige／beige／pink／brown の5色のカラーバリエーションを群として配置し、回遊する蝶の群れが空間に揺らぎを生む。", "credit": "Washi × Aluminum × 3D-Print Joint Sculpture: atelier TECNOFORM", "slides": ["images/renaissance-taipei-room.jpg", "images/renaissance-taipei-wall-a.jpg", "images/renaissance-taipei-wall-b.jpg", "images/renaissance-taipei-single.jpg"]}, {"num": "29", "title": "iikids 大阪弁天町<br>エントランス シンボル ガラスアート", "meta": "Educational · Osaka Bentencho", "desc": "英語教育×学童保育の複合施設 <em>iikids</em>（アイアイキッズ）のシンボル ガラスアート。北欧神話の世界樹 <em>Yggdrasil</em> を中心モチーフに、色鮮やかなテクスチャーガラスとミラー積層、Swarovskiクリスタルで子供たちの個性と可能性を表現。<em>innovation</em>／<em>identity</em>／<em>imagination</em>／<em>integrity</em> 等のキーワードを世界樹の幹に込めた。", "credit": "Symbol Glass Art Design &amp; Production: atelier TECNOFORM 江藤徳晃", "slides": ["images/iikids-osaka-bentencho.jpg", "images/iikids-02.jpg", "images/iikids-03.jpg", "images/iikids-04.jpg", "images/iikids-05.jpg"]}, {"num": "10", "title": "フィットネス トライアクシス OSAKA-BAY<br>エントランス 強化複層アートガラス", "meta": "Fitness · Osaka Bay", "desc": "ミラーベースの複層ガラスと波紋ガラスの構成により、エントランスを瑞々しく浮遊感ある素材表現で演出。25mm角1.6tスチール四方枠ホワイトパール五分艶焼付け塗装仕上げ、各種アートガラス内部封入、Swarovski透明プリズム、表面8mm強化ガラス。下部よりライトアップ(昼白色)。サイズ 1323×1703mm／全体荷重 150kg。", "credit": "Glass &amp; Art Design: atelier TECNOFORM ／ Space Design: CURE:ATELIER DESIGN", "slides": ["images/triaxis-04.jpg", "images/triaxis-perspective.jpg", "images/triaxis-05.jpg", "images/triaxis-06.jpg"]}, {"num": "15", "title": "親愛産婦人科<br>廊下壁面 Life on the planet earth", "meta": "Medical · Hyogo Himeji", "desc": "「<em>地球の上の親子たち</em>」をテーマに、待合廊下壁面の光壁を制作。動物の親子たちのシルエットが、青から紫、赤、緑へとグラデーションで連なり、生命の連鎖と母子の絆を表現。診療を待つ時間が、地球の風景を見つめる時間に変わる。", "credit": "Glass Art Wall Design &amp; Production: atelier TECNOFORM", "slides": ["images/shinai-obstetrics.jpg"]}, {"num": "27", "title": "板倉レディースクリニック<br>別棟 吹抜け壁面 ガラスアート", "meta": "Medical · 2013 · Nagano", "desc": "命の海をテーマに、別棟吹抜け壁面に5連の強化複層アートガラスパネルを展開。マンタ・クジラ・サンゴ礁の生物群を色彩流しと象嵌で表現し、海洋生命のスペクトル — 緑から赤、青へと連なる流れを一画面に封じ込めた。診察を待つ時間が、生命の海を旅する時間へと変わる。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM", "slides": ["images/itakura-ladies-clinic.jpg"]}, {"num": "16", "title": "大丸神戸店<br>クラフトガラス壁面アート", "meta": "Retail · 2024 · Kobe Sannomiya", "desc": "神戸三宮を見守る、六甲山系・丹生山系。施設屋上から望むその稜線を「山側」としてエントランスに取り込む——この構想を描いたのは、空間デザイナー・吉里謙一（cmyk）。海側と山側、方位の記憶を空間に込める設計だった。<br><br>その稜線データを受け、atelier TECNOFORM が複数種のクラフトガラスへと翻訳した。山に宿る風、雨、氷、樹木、川、霧——自然の風景を一枚ごとに封じ込め、光の角度で表情を変える。<br><br>デザイナーと職人をつなぎ、空間にふさわしい工芸へと昇華させる——その工芸ディレクションを担ったのは、ubushina（立川裕大）。<br><br>コンセプトとガラスが呼応し、大丸神戸店のエントランスは、訪れる人を迎える六甲の風景になった。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM / Noriaki Eto<br>Space Design: 吉里謙一（cmyk）<br>Coordination: ubushina（立川裕大）", "slides": ["images/daimaru-kobe-01.jpg", "images/daimaru-kobe-03.jpg", "images/daimaru-kobe-04.jpg", "images/daimaru-kobe-07.jpg", "images/daimaru-kobe-06.jpg", "images/daimaru-kobe-05.jpg", "images/daimaru-kobe-02.jpg"]}, {"num": "13", "title": "三井不動産レジデンシャル 横浜北仲<br>エントランスロビー ガラスオブジェ", "meta": "Residential · 2020 · Yokohama", "desc": "歴史的建築が日常風景に溶け込む「山下・関内地区」と、ビジネス・商業機能が充実した「みなとみらい21地区」。それらをつなぐ新街区の中心に、横浜の風景を変貌させる大規模プロジェクト「ザ・タワー横浜北仲」が誕生。<em>地(ち)・水(すい)・火(か)・風(ふう)</em>の四大をコンセプトに、ガラス素材でロビー空間を彩る。ガラスの量感を保ちつつ、光と色の濃淡に変化を感ずる造形デザイン。本体部分 300Φ × H550mm。ガラスの積層表現がドラマチックに光と風景を変容させる。", "credit": "Glass Object Design &amp; Production: atelier TECNOFORM 江藤徳晃", "slides": ["images/mitsui-yokohama-lobby.jpg", "images/mitsui-yokohama-obj-a.jpg", "images/mitsui-yokohama-earth.jpg", "images/mitsui-yokohama-water.jpg", "images/mitsui-yokohama-fire.jpg", "images/mitsui-yokohama-wind.jpg"]}, {"num": "14", "title": "三井不動産レジデンシャル パークコート<br>JR芦屋駅前 エントランスロビー", "meta": "Residential · Hyogo Ashiya", "desc": "「<em>風や水面の揺らぎ</em>」をテーマに、流れと動きを感ずる複層アートガラスパネル。大理石風の白壁の柱とダークブロンズの帯の間に縦長のガラスパネルが連続し、ブロンズの曲線パターン・波紋ガラス・クラック加工を多層に重ねた表現で、エントランスロビーに静かな水面の気配を宿す。", "credit": "Art Glass Design &amp; Production: atelier TECNOFORM", "slides": ["images/mitsui-parkcoat-b.jpg", "images/mitsui-parkcoat.jpg", "images/mitsui-parkcoat-a.jpg", "images/mitsui-parkcoat-d.jpg"]}, {"num": "19", "title": "東急不動産 ブランズ西宮北口<br>エントランスロビー壁面アートガラス", "meta": "Residential · Hyogo Nishinomiya", "desc": "四季の光を映し込む、変化あるミラーベース素材で制作。絵画の様に作者の表現を鑑賞する物ではなく、日々の生活に潤いと変化を与える花の様な存在を目指しました。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM", "slides": ["images/branz-nishinomiya.jpg"]}, {"num": "02", "title": "ザ・リッツカールトン東京<br>53F クラブレベル「レジデンス」エントランス", "meta": "Hotel · 2015 · Tokyo · 53F", "desc": "「<em>西洋と東洋の融合</em>」をコンセプトに、3Dプリントベースの造形にガラスと和紙が絡み合って一体化したライティングオブジェを制作。<em>和紙は水より生まれ、ガラスは炎より生まれ出る</em>──その対極の存在が関わり合って一つの形となり、有機的で柔らかな光と影を創出する。クラブレベル「レジデンス」の異なる趣きを持つ4つのエリアごとに、異なる光の表情を配した。<br><br>本案件はクラブレベル「レジデンス」エントランスの<em>Entrance Art シリーズ</em>として、和紙×ガラス×3Dプリントの造形オブジェ群を展開。", "credit": "Glass &amp; Washi Light Object Design &amp; Production: atelier TECNOFORM<br>Renovation Project Director: Jacqueline Teissier Okuma", "slides": ["images/ritz-club-foyer.jpg", "images/ritz-club-residence-c.jpg", "images/ritz-club-residence-a.jpg", "images/ritz-club-actual-01.jpg", "images/ritz-club-residence-b.jpg", "images/ritz-club-actual-03.jpg"]}, {"num": "03", "title": "ザ・リッツカールトン東京<br>53F バーラウンジ 空間演出", "meta": "Hotel · 2015 · Tokyo · 53F", "desc": "都心の夜景を一望する53Fクラブラウンジに連続するバーラウンジ。深い闇に包まれた空間の中央に、エメラルドグリーンのクラフトガラスオブジェが静かに佇む。窓外に広がる東京の夜景と呼応しながら、ガラスの透明と乳白の二相が光を屈折させ、ナイトキャップの時間に静謐な存在感を添える。", "credit": "Art Installation Design &amp; Production: atelier TECNOFORM<br>Renovation Project Director: Jacqueline Teissier Okuma", "slides": ["images/ritz-bar-lounge-night2.jpg", "images/ritz-bar-lounge-night.jpg", "images/ritz-bar-lounge-01.jpg", "images/ritz-bar-glass-a.jpg", "images/ritz-bar-glass-b.jpg"]}, {"num": "04", "title": "ザ・リッツカールトン東京<br>53F クラブラウンジ ガラス×大理石 彫刻オブジェ シリーズ", "meta": "Hotel · 2015 · Tokyo · 53F", "desc": "東京の夜景を一望する53Fクラブラウンジの窓辺に、<em>エメラルドグリーンのクラフトガラス</em>と<em>カラーラ大理石</em>が一体となった彫刻オブジェ群を展開。<br><br>ガラスの流動的な曲面が大理石の鉱物的な静謐さを抱き込み、二つの対極的な素材が一つの形象に溶け合う。手吹きの透明・乳白の二相ガラスと、白い結晶構造を持つカラーラ大理石を組み合わせ、窓越しに揺れる都市の光と呼応するようデザイン。<br><br>各々が異なる造形を持つ複数の彫刻が、バーカウンター上・窓辺・スタンド上に配置され、ラウンジ全体に静謐なドラマを宿す。", "credit": "Sculpture Series Design &amp; Production: atelier TECNOFORM<br>Renovation Project Director: Jacqueline Teissier Okuma", "slides": ["images/ritz-bar-counter-01.jpg", "images/ritz-bar-counter-02.jpg", "images/ritz-bar-lounge-07.jpg", "images/ritz-bar-lounge-05.jpg", "images/ritz-bar-lounge-06.jpg", "images/ritz-bar-lounge-03.jpg", "images/ritz-bar-lounge-04.jpg"]}, {"num": "20", "title": "プレサンス レジェンド 琵琶湖<br>エントランス &amp; モデルルーム", "meta": "Residential · Shiga Otsu", "desc": "琵琶湖畔最大級プロジェクト。旅亭「紅葉」跡地に格別の総486邸が誕生。日本一の水景を全邸から一望する家。<br><br><em>エントランスロビー</em>はミラーベースの色彩流し技法とテクスチャーガラスとの積層表現で水面の光景を表現。<em>モデルルーム</em>では板ガラス側面をクラック加工し、板ガラスに接着して複層設置、水面のきらめきと光景を表現。", "credit": "Art Glass Design &amp; Production: atelier TECNOFORM", "slides": ["images/presance-biwako-entrance.jpg", "images/presance-biwako-modelroom.jpg"]}, {"num": "12", "title": "パークタワー晴海<br>マンションギャラリー エントランス", "meta": "Residential · 2017 · Tokyo Harumi", "desc": "風と光の輝きを、ブロンズミラーに封じ込める。<br><br>「風」をテーマに、ブロンズミラー表面へサンドブラスト加工を施したエントランス壁面ガラスアート。線が織りなす隙間や重なりが自然の情景を生み出し、多数のクリスタルが光と風の輝きを空間に宿す。<br><br>三井不動産レジデンシャルによるパークタワー晴海の最上階プレミアム住戸マンションギャラリー。東京湾を望む眺望と呼応するように、壁面に宇宙的なスケールの風景が広がります。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM", "slides": ["images/park-tower-harumi.jpg", "images/park-tower-harumi-03.jpg", "images/park-tower-harumi-02.jpg", "images/park-tower-harumi-04.jpg", "images/park-tower-harumi-05.jpg"]}, {"num": "21", "title": "株式会社プレナス<br>東京本社 ガラスアートコレクション", "meta": "Corporate · 2007–2020 · Tokyo Kayabacho", "desc": "ほっともっと・やよい軒を展開する株式会社プレナスの東京本社（日本橋茅場町）で、2007年から2020年にかけて展開した長期ガラスアートプロジェクト。<br><br>エントランスの<em>カラーキューブシリーズ</em>（2007〜）に始まり、7F の<em>命の泉「塩井」</em>（2014）、迎賓館アトリウムの<em>棚田の四季</em>（2020）、<em>茶室借景硝子</em>（2020）、<em>社長室 強化アートガラス</em>（2020）の5作品が体系をなす。<br><br>細川護熙氏の壁画「棚田の四季」とガラスアートが一体となったアトリウムは、和の食文化を国内外の訪問客に伝える舞台装置として機能する。2007年から続くプレナスとatelier TECNOFORMの長期パートナーシップが生んだ建物全体の芸術的統合。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM<br>Mural Painting「棚田の四季」: 細川護熙", "slides": ["images/plenus-corporate-symbol.jpg", "images/plenus-memorial-cube-bb.jpg", "images/plenus-8f-stained-glass.jpg", "images/plenus-7f-shioi-bb.jpg", "images/plenus-geihinkan-overview-bb.jpg", "images/plenus-geihinkan-tea-room-bb.jpg"]}, {"num": "28", "title": "DAIKIN鳥取 研修所<br>特別宿泊室 強化ペアガラスアート", "meta": "Corporate · 2014 · Tottori", "desc": "日本海を望む鳥取の研修所、その特別宿泊室に青色のガラスブロックを浮遊配置した強化ペアガラスアート。窓外の海と呼応するように、波のリズムを抽象的なパターンに翻訳。研修の合間のひとときに、海の記憶が静かに添う。", "credit": "Glass Art Design &amp; Production: atelier TECNOFORM", "slides": ["images/daikin-tottori.jpg"]}, {"num": "31", "title": "シスメックス株式会社 ソリューションセンター<br>迎賓室 アートガラスパネル", "meta": "Corporate · 2009 · Kobe Nishi-ku", "desc": "神戸西区のシスメックス ソリューションセンター迎賓室に、円形の硝子象嵌を施したアートガラスパネル群を展開。重なり合う花弁状の幾何学パターンが、訪問者の視線をやわらかく受け止め、企業の研究開発の哲学を空間言語に翻訳する。", "credit": "Glass Art Panel Design &amp; Production: atelier TECNOFORM", "slides": ["images/sysmex_main-bb.jpg", "images/sysmex.jpg", "images/sysmex-2.jpg", "images/sysmex_glass.jpg"]}, {"num": "X2", "title": "リーガロイヤルリゾート沖縄(北谷) 雲灯", "meta": "Hotel · Okinawa Chatan", "desc": "", "credit": "Light Object「雲灯」: atelier TECNOFORM<br>Architectural Design: AAR+（浅井謙建築研究所）<br>Lighting: DAIKO（大光電機）", "slides": [], "coming": true}, {"num": "X3", "title": "パナソニック日比谷 立礼茶室「得心軒」", "meta": "Cultural · Tokyo Hibiya", "desc": "パナソニック東京・日比谷の立礼茶室「得心軒」。既製のシーリングライトに手漉き和紙のシェードを被せ、光をやわらげて茶席に落とす。設えを大きく変えずに、和紙の陰影だけで一室を茶の湯の景色へと整える。", "credit": "Washi Light Shade: atelier TECNOFORM<br>Fixture Production &amp; Design Coordination: STAFF", "slides": [], "coming": true}]
+;
+/* ============ WORKS GRID 動的生成 ============ */
+(function(){
+  var SHOW_COMING = false; // 写真未配置物件を表示する場合は true に
+  var grid = document.getElementById('worksGrid');
+  PROJECTS.forEach(function(p){
+    if(p.coming && !SHOW_COMING) return; // データは保持、表示のみスキップ
+    var card = document.createElement('div');
+    card.className = 'work-card reveal' + (p.coming ? ' is-coming' : '');
+    card.setAttribute('data-num', p.num);
+    
+    var inner;
+    if(p.coming){
+      inner = '<div class="work-frame"><div class="work-coming-mark">Coming Soon</div></div>'
+        + '<div class="work-meta">'
+        + '<span class="work-num">/ ' + p.num + '</span>'
+        + '<div class="work-info">'
+        + '<div class="work-name">' + p.title + '</div>'
+        + (p.meta ? '<div class="work-type">' + p.meta + '</div>' : '')
+        + '</div></div>';
+    } else {
+      inner = '<div class="work-frame"><img src="' + p.slides[0] + '" alt="' + p.title.replace(/<br>/g,' ') + '" loading="lazy"></div>'
+        + '<div class="work-meta">'
+        + '<span class="work-num">/ ' + p.num + '</span>'
+        + '<div class="work-info">'
+        + '<div class="work-name">' + p.title + '</div>'
+        + (p.meta ? '<div class="work-type">' + p.meta + '</div>' : '')
+        + '</div>'
+        + (p.slides.length > 1 ? '<span class="work-imgcount">+' + (p.slides.length - 1) + '</span>' : '')
+        + '</div>';
+    }
+    card.innerHTML = inner;
+    if(!p.coming){
+      card.addEventListener('click', function(){ openLightbox(p); });
+    }
+    grid.appendChild(card);
+  });
+})();
+
+/* ============ LIGHTBOX ============ */
+var lb = document.getElementById('lightbox');
+var lbImg = document.getElementById('lbImg');
+var lbTitle = document.getElementById('lbTitle');
+var lbMeta = document.getElementById('lbMeta');
+var lbDesc = document.getElementById('lbDesc');
+var lbCredit = document.getElementById('lbCredit');
+var lbCounter = document.getElementById('lbCounter');
+var lbPrev = document.getElementById('lbPrev');
+var lbNext = document.getElementById('lbNext');
+var lbClose = document.getElementById('lbClose');
+
+var currentProject = null, currentIdx = 0;
+
+function tfLang(){ return (document.documentElement.lang==='en') ? 'en':'ja'; }
+function tfFields(p){
+  var en = (tfLang()==='en') && window.PROJECTS_EN && window.PROJECTS_EN[p.num];
+  if(!en) return {title:p.title, meta:p.meta, desc:p.desc, credit:p.credit};
+  return {title:(en.t||p.title), meta:(en.m||p.meta), desc:(en.d||p.desc), credit:(en.c||p.credit)};
+}
+function updateWorksLang(){
+  var cards = document.querySelectorAll('.work-card');
+  Array.prototype.forEach.call(cards, function(card){
+    var num = card.getAttribute('data-num'), p=null, i;
+    for(i=0;i<PROJECTS.length;i++){ if(PROJECTS[i].num===num){ p=PROJECTS[i]; break; } }
+    if(!p) return;
+    var f = tfFields(p);
+    var nm = card.querySelector('.work-name'); if(nm) nm.innerHTML = f.title;
+    var tp = card.querySelector('.work-type'); if(tp) tp.innerHTML = f.meta||'';
+  });
+  if(lb && lb.classList.contains('is-open') && currentProject){
+    var ff = tfFields(currentProject);
+    lbTitle.innerHTML=ff.title; lbMeta.textContent=ff.meta||''; lbDesc.innerHTML=ff.desc||''; lbCredit.innerHTML=ff.credit||'';
+  }
+}
+window.updateWorksLang = updateWorksLang;
+
+function openLightbox(project){
+  currentProject = project;
+  currentIdx = 0;
+  var f = tfFields(project);
+  lbTitle.innerHTML = f.title;
+  lbMeta.textContent = f.meta || '';
+  lbDesc.innerHTML = f.desc || '';
+  lbCredit.innerHTML = f.credit || '';
+  showImage(0);
+  lb.classList.add('is-open');
+  lb.setAttribute('aria-hidden','false');
+  lb.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  lb.classList.remove('is-open');
+  lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  lb.scrollTop = 0;
+  currentProject = null;
+}
+function showImage(idx){
+  if(!currentProject) return;
+  var total = currentProject.slides.length;
+  currentIdx = (idx + total) % total;
+  lbImg.classList.add('loading');
+  var img = new Image();
+  img.onload = function(){
+    lbImg.src = currentProject.slides[currentIdx];
+    setTimeout(function(){ lbImg.classList.remove('loading'); }, 30);
+  };
+  img.src = currentProject.slides[currentIdx];
+  lbCounter.textContent = (currentIdx + 1) + ' / ' + total;
+  lbPrev.classList.toggle('is-hidden', total < 2);
+  lbNext.classList.toggle('is-hidden', total < 2);
+}
+lbPrev.addEventListener('click', function(){ showImage(currentIdx - 1); });
+lbNext.addEventListener('click', function(){ showImage(currentIdx + 1); });
+lbClose.addEventListener('click', closeLightbox);
+var lbBack = document.getElementById('lbBack');
+if(lbBack) lbBack.addEventListener('click', closeLightbox);
+lb.addEventListener('click', function(e){ if(e.target === lb || e.target.classList.contains('lb-stage')) closeLightbox(); });
+document.addEventListener('keydown', function(e){
+  if(!lb.classList.contains('is-open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') showImage(currentIdx - 1);
+  if(e.key === 'ArrowRight') showImage(currentIdx + 1);
+});
+
+// スワイプ対応（モバイル）
+var touchStartX = 0;
+lb.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, {passive: true});
+lb.addEventListener('touchend', function(e){
+  var dx = e.changedTouches[0].clientX - touchStartX;
+  if(Math.abs(dx) > 60){ showImage(currentIdx + (dx < 0 ? 1 : -1)); }
+}, {passive: true});
+
+/* ============ HERO BG SLIDES ============ */
+(function(){
+  var slides = document.querySelectorAll('.hero-bg-slide');
+  if(slides.length < 2) return;
+  var cur = 0;
+  setInterval(function(){
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 5500);
+})();
+
+/* ============ NAV ============ */
+(function(){
+  var nav = document.querySelector('.site-nav');
+  var scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 50);
+    if(scrollTopBtn) scrollTopBtn.classList.toggle('is-visible', y > 600);
+  });
+  if(scrollTopBtn){
+    scrollTopBtn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.querySelector('.nav-links');
+  if(toggle){
+    toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+    links.addEventListener('click', function(e){
+      if(e.target.tagName === 'A') links.classList.remove('open');
+    });
+  }
+})();
+
+/* ============ SCROLL REVEAL ============ */
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.12});
+  // works-grid のカードは動的生成後にobserve
+  setTimeout(function(){
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  }, 100);
+})();
+</script>
+<script>
+(function(){
+  window.PROJECTS_EN = {"01": {"t": "Canopy by Hilton<br>Okinawa Miyakojima Resort", "d": "Returning Miyako's wind and water to light.<br><br>Organic shades formed from washi and hemp fiber swim freely from arched arms. Each shade — distinct in form and tilt — wears light from within and casts shadows upon the others, holding the memory of Miyako Island's wind and water in the space.<br><br>Opened April 2026 as the brand's first resort in the Asia-Pacific. Interior design by HBA."}, "16": {"t": "Daimaru Kobe<br>Craft Glass Wall Art", "d": "Overlooking Kobe Sannomiya stand the Rokko and Niu mountain ranges. To draw their ridgelines — seen from the building's rooftop — into the entrance as the 'mountain side': this concept was conceived by space designer Kenichi Yoshizato (cmyk), a design embedding the memory of orientation, sea and mountain, into the space.<br><br>Receiving that ridgeline data, atelier TECNOFORM translated it into several kinds of craft glass. Wind, rain, ice, trees, rivers and mist that dwell in the mountains — each pane seals a fragment of nature, shifting expression with the angle of light.<br><br>Connecting designer and artisan, elevating the work into craft worthy of the space — this craft direction was led by ubushina (Yudai Tachikawa).<br><br>Concept and glass in dialogue, the entrance of Daimaru Kobe became a Rokko landscape that welcomes all who arrive.", "c": "Glass Art Design &amp; Production: atelier TECNOFORM / Noriaki Eto<br>Space Design: Kenichi Yoshizato (cmyk)<br>Craft Direction: ubushina (Yudai Tachikawa)"}, "02": {"t": "The Ritz-Carlton Tokyo<br>53F Club Level 'Residence' Entrance", "d": "Conceived around the theme of <em>the meeting of East and West</em>, a lighting object in which glass and washi intertwine over a 3D-printed base. <em>Washi is born of water, glass of fire</em> — these opposite presences meet to become a single form, casting soft, organic light and shadow. Each of the four distinct areas of the Club Level 'Residence' received its own expression of light.<br><br>Part of the <em>Entrance Art series</em> for the Club Level 'Residence' entrance — a group of washi × glass × 3D-printed sculptural objects."}, "03": {"t": "The Ritz-Carlton Tokyo<br>53F Bar Lounge", "d": "A bar lounge flowing from the 53rd-floor club lounge with its panoramic view of the city at night. At the center of the deeply shadowed space, an emerald-green craft-glass object stands in quiet repose. Echoing the Tokyo night beyond the windows, the glass — transparent and opaline in two phases — refracts the light, lending a serene presence to the nightcap hour."}, "04": {"t": "The Ritz-Carlton Tokyo<br>53F Club Lounge — Glass × Marble Sculpture Series", "d": "At the windows of the 53rd-floor club lounge overlooking the Tokyo skyline, a series of sculptures unite <em>emerald-green craft glass</em> with <em>Carrara marble</em>.<br><br>The fluid curves of glass embrace the mineral stillness of marble; two opposite materials melt into a single form. Hand-blown two-phase glass, transparent and opaline, meets the white crystalline structure of Carrara marble, designed to echo the city lights trembling beyond the glass.<br><br>Each a distinct form, the sculptures rest on the bar counter, by the windows and on stands, lending a quiet drama to the whole lounge."}, "05": {"t": "The Ritz-Carlton Tokyo<br>Club Suite — Hemp-Leaf Crest Washi Art Panel", "d": "The traditional Japanese <em>hemp-leaf (asanoha)</em> motif, reconstructed through unbleached washi and mirror-glass inlay. A six-pointed star pattern unfolds, reflecting light across the soft texture of natural washi and shifting with the hour and the angle of view. Within the Club Suite, the quiet dignity of a traditional motif and the play of contemporary light coexist."}, "17": {"t": "Taka Town Lifelong Learning<br>Community Plaza 'Asmile'", "d": "Design theme: Overflowing<br><br>'Town-making full of lifelong learning and purpose' — from this goal of Taka Town, the design theme was set as <em>overflowing</em>.<br><br>The will to learn spreads as grains, people connect, and in time it overflows into expression. Five glass artworks made with the region's treasure — Sugihara washi — are woven throughout the space.", "c": "Architecture: Naito Architects &amp; Associates<br>Glass Art: atelier TECNOFORM"}, "06": {"t": "Renaissance Taipei Shilin Hotel<br>Chinese Restaurant — Butterfly Wall Art", "d": "Beside the hotel lies a famous garden once loved by Chiang Kai-shek; with the <em>butterfly</em> as concept, a series of three-dimensional forms was created. A <em>washi skin</em> over an <em>aluminum-pipe frame</em>, joined by <em>3D-printed connectors</em>, achieves a lightweight yet large form. Casting shadows across the wall, it animates the space with drama. Five color variations — gray, light beige, beige, pink and brown — are arranged as a flock, a migrating swarm of butterflies that sets the space aflutter."}, "07": {"t": "HIDE Kyomachibori<br>Cosmos of A-Un — Entrance Light Object", "d": "From <em>A</em>, the sound of beginning, to <em>Un</em>, the end — words that express the beginning and end of each universe. A light object of 'A' at the entrance and 'Un' deep within enfold the guest in the cosmos of A-Un, expanding a singular experience of food and space. Though the restaurant's theme is rice, the simple outline of a grain also suggests flowers and seeds. A skin of three-dimensional hand-poured washi over an interior frame of 3D-formed biodegradable plastic; a half-mirror multiplies the object into countless reflections — a striking, symbolic eye-catch."}, "08": {"t": "HIDE Kyomachibori<br>Cosmos of A-Un — Interior Washi Art Panel & Light Object", "d": "The spirit of the artisan facing the guest, and the life of the food. That tension and atmosphere is rendered, fresh and vivid, on hand-poured washi panels inlaid with rippling mirror. Answering the 'A' object at the entrance, the 'Un' light object deep within; the mirror effect conjures a scene of subtle, profound light."}, "10": {"t": "Fitness Triaxis Osaka-Bay<br>Entrance — Reinforced Laminated Art Glass", "d": "A composition of mirror-based laminated glass and ripple glass lends the entrance a fresh, weightless presence. A 25 mm square, 1.6t steel frame in white-pearl semi-matte baked finish; various art glasses sealed within; transparent Swarovski prisms; an 8 mm tempered-glass surface, lit from below in neutral white. 1323 × 1703 mm / total load 150 kg.", "c": "Glass &amp; Art Design: atelier TECNOFORM / Space Design: CURE:ATELIER DESIGN"}, "11": {"t": "Yunosato 'Konono'<br>Restaurant Wall — Aquaphotomics Glass Art", "d": "<em>Aquaphotomics</em> is a new scientific field proposed by Prof. Roumiana Tsenkova, studying the spectral patterns of water as holistic information for biological and aqueous systems. Through near-infrared spectroscopy, the structure and function of the water at Yunosato in Wakayama — a singular place where three kinds of hot-spring water spring forth — is being revealed. The phenomena of that water are expressed on the wall in glass: three phases — Gold Water (purification), Silver Water (detoxification), Bronze Water (harmony) — composed of twelve graphic panels and a central three-dimensional glass.", "c": "Glass Art Design &amp; Production: atelier TECNOFORM<br>Concept Research: Dr. R. Tsenkova &amp; S. Shigeoka"}, "12": {"t": "Park Tower Harumi<br>Residence Gallery Entrance", "d": "Sealing the shimmer of wind and light into bronze mirror.<br><br>An entrance-wall glass art on the theme of <em>wind</em>, sandblasted onto a bronze-mirror surface. Gaps and overlaps woven by line evoke scenes of nature, while countless crystals hold the shimmer of light and wind in the space.<br><br>The residence gallery for the top-floor premium units of Mitsui Fudosan Residential's Park Tower Harumi. Echoing the view over Tokyo Bay, a landscape of cosmic scale spreads across the wall."}, "13": {"t": "Mitsui Fudosan Residential Yokohama Kitanaka<br>Entrance Lobby Glass Objects", "d": "Where the Yamashita-Kannai district — historic architecture woven into daily life — meets the business and commercial Minatomirai 21 district, a large-scale project, 'The Tower Yokohama Kitanaka', transforms the Yokohama skyline. On the concept of the four elements — <em>earth, water, fire and wind</em> — glass adorns the lobby. Forms that hold the mass of glass while shifting in the gradation of light and color; the main body 300Φ × H550 mm. The layered glass dramatically transforms light and landscape.", "c": "Glass Object Design &amp; Production: atelier TECNOFORM / Noriaki Eto"}, "14": {"t": "Mitsui Fudosan Residential Park Court<br>JR Ashiya Station — Entrance Lobby", "d": "On the theme of <em>the sway of wind and the water's surface</em>, laminated art-glass panels that carry flow and movement. Between marble-like white columns and bands of dark bronze, tall glass panels run in sequence; layered bronze curve patterns, ripple glass and crack finishing summon the quiet presence of a water surface into the entrance lobby."}, "18": {"t": "Hotel Keihan Temmabashi<br>Guest-Room Washi Objects & Wall Panels", "d": "A series adorning the guest rooms. A spiral, twisting tabletop light of three-dimensional washi — made with Sugihara-gami, a traditional craft paper of Hyogo — lets its inner 3D-printed frame show through, casting soft light. The wall panels inlay crossing hemp threads and glass stones — clear, gray, blue and black — onto a slender washi base. The washi surfacing of the ceiling light and fusuma sliding doors was crafted in the same Sugihara-gami, carrying its texture through the whole room. Forms echoing flowing water offer a quiet lodging for a moment in a business or sightseeing stay."}, "20": {"t": "Presance Legend Biwako<br>Entrance & Model Room", "d": "One of the largest projects on the shore of Lake Biwa. On the site of the former inn 'Momiji', 486 exceptional residences are born — homes that command Japan's finest waterscape from every unit.<br><br>The <em>entrance lobby</em> renders the scene of a water surface through mirror-based color-flow technique layered with textured glass. In the <em>model room</em>, the edges of sheet glass are crack-finished and bonded in layers, expressing the glitter and scene of water."}, "21": {"t": "Plenus Co., Ltd.<br>Tokyo Headquarters — Glass Art Collection", "d": "A long-term glass-art project from 2007 to 2020 at the Tokyo headquarters (Nihonbashi Kayabacho) of Plenus, operator of Hotto Motto and Yayoiken.<br><br>Beginning with the entrance <em>Color Cube series</em> (2007–), a body of five works took shape: the spring of life 'Shioi' on 7F (2014), the <em>Four Seasons of the Terraced Rice Fields</em> in the guesthouse atrium (2020), the <em>tea-room borrowed-scenery glass</em> (2020) and the <em>president's-office reinforced art glass</em> (2020).<br><br>The atrium, where Morihiro Hosokawa's mural unites with the glass art, serves as a stage conveying Japan's food culture to visitors from home and abroad — an artistic integration of the whole building, born of the long partnership between Plenus and atelier TECNOFORM since 2007.", "c": "Glass Art Design &amp; Production: atelier TECNOFORM<br>Mural Painting 'Four Seasons of the Terraced Rice Fields': Morihiro Hosokawa"}, "29": {"t": "iikids Osaka Bentencho<br>Entrance Symbol Glass Art", "d": "The symbol glass art for <em>iikids</em>, a complex of English education and after-school care. With the Norse world-tree <em>Yggdrasil</em> as its central motif, vivid textured glass, mirror layering and Swarovski crystals express the individuality and possibility of children. Keywords such as <em>innovation, identity, imagination</em> and <em>integrity</em> are embedded in the trunk of the world tree.", "c": "Symbol Glass Art Design &amp; Production: atelier TECNOFORM / Noriaki Eto"}, "30": {"t": "Mino Washi Museum<br>'Fantasia of Japanese Paper' Exhibition", "d": "Exhibited at the Mino Washi Museum's special exhibition <em>Fantasia of Japanese Paper</em> (19 Dec 2024 – 10 Mar 2025). atelier TECNOFORM created elliptical objects of three-dimensional hand-poured washi, the <em>KUMO Lamp</em> (cloud) and a group of <em>lotus-form pendants</em>. Centered on geometric objects formed by the twist of solids of revolution, and lamps themed on rice and lotus flowers, some twenty lighting works enveloped the whole space in a washi fantasy.<br><br>The <em>washi dresses</em> in the venue were created by <em>Yadorigi Art (Megumi Eto)</em> — realizing a concertante space where light and cloth, solid and plane, echo one another.", "c": "Overall Direction &amp; Lighting Installation: atelier TECNOFORM / Noriaki Eto<br>Paper Dress Works: Yadorigi Art / Megumi Eto"}, "22": {"t": "Rokko Silence Resort<br>'Japanese Paper: Tradition and Future' Exhibition", "d": "The exhibition <em>Japanese Paper: Tradition and Future</em>, held at Rokko Silence Resort (Nada-ku, Kobe), 15 April – 9 May 2021. On the theme of enriching the world of washi through <em>dialogue across generations</em> and creating new expression, the Kobe-based artists Megumi Eto and Noriaki Eto presented their works, shown alongside pieces by <em>Isao Nakamura</em>, a Haigyū-washi craftsman from Tokushima.<br><br>The base motif was the <em>Shichidanka</em> — a hydrangea recorded since the Edo period and rediscovered on Mt. Rokko after roughly 130 years. Its petal structure was designed parametrically; the frames were 3D-printed by stereolithography (SLA / soybean oil and acrylic resin) and fused deposition modeling (FDM / biodegradable plastic), then layered with hand-poured washi into three-dimensional forms.<br><br>A group of <em>light objects</em> inspired by radiolaria converses with <em>wearable works</em> — washi dresses, corsages and hats. Using eco-friendly, sustainable and recyclable materials, washi — a traditional material — is reborn wearing contemporary form-making and light.<br><br>Washi sculptures by <em>Yadorigi Art (Megumi Eto)</em>; light objects and overall direction by <em>atelier TECNOFORM (Noriaki Eto)</em>.", "c": "Overall Direction &amp; Light Objects: atelier TECNOFORM / Noriaki Eto<br>Washi Sculpture &amp; Dress Works: Yadorigi Art / Megumi Eto<br>Guest Artist (Traditional Washi): Isao Nakamura (Haigyū Washi, Tokushima)<br>Art Direction: Megumi Eto"}, "15": {"t": "Shinai Obstetrics & Gynecology<br>Corridor Wall — Life on the Planet Earth", "d": "On the theme of <em>parents and children upon the earth</em>, a wall of light for the waiting corridor. Silhouettes of animal parents and their young run in gradation from blue to purple, red and green, expressing the chain of life and the bond of mother and child. The time spent waiting becomes time spent gazing at the landscape of the earth."}, "19": {"t": "Tokyu Land Branz Nishinomiya-Kitaguchi<br>Entrance Lobby Art Glass", "d": "Created in a changing, mirror-based material that reflects the light of the four seasons. Not a work to be appreciated for the artist's expression like a painting, but something meant to be like a flower — bringing moisture and change to daily life."}, "27": {"t": "Itakura Ladies Clinic<br>Annex Atrium Wall — Glass Art", "d": "On the theme of the sea of life, a five-part series of reinforced laminated art-glass panels unfolds across the annex's atrium wall. Manta rays, whales and coral-reef life are expressed through color-flow and inlay, sealing the spectrum of marine life — a flow from green to red and blue — into a single plane. The time spent waiting becomes a journey across the sea of life."}, "28": {"t": "Daikin Tottori Training Center<br>Special Guest Room — Reinforced Pair-Glass Art", "d": "In the special guest room of a training center in Tottori overlooking the Sea of Japan, a reinforced pair-glass art with blue glass blocks set adrift. Echoing the sea beyond the window, the rhythm of waves is translated into an abstract pattern. In a quiet interval between sessions, the memory of the sea gently keeps company."}, "31": {"t": "Sysmex Corporation Solution Center<br>Reception Room — Art Glass Panels", "d": "In the reception room of the Sysmex Solution Center in Kobe's Nishi-ku, a group of art-glass panels with circular glass inlay. Overlapping petal-like geometric patterns receive the visitor's gaze softly, translating the company's philosophy of research and development into the language of space."}, "X2": {"t": "RIHGA Royal Resort Okinawa (Chatan) — Kumo Lamp"}, "X3": {"t": "Panasonic Hibiya — Ritsurei Tea Room 'Tokushin-ken'", "d": "A ryurei (standing-style) tea room, 'Tokushin-ken', at Panasonic Tokyo Hibiya. A hand-poured washi shade is fitted over the existing ceiling light, softening its glow over the tea setting. Without altering the room, the washi shadows alone turn the space into a scene for tea."}};
+  var MAP = {
+    ".hero-mark":["Noriaki Eto &nbsp;/&nbsp; est. 1983"],
+    ".hero-title":["Artist of<br><em>Light &amp; Water</em>"],
+    ".hero-sub":['<em class="hero-sub-poem">Receive, let flow, surrender</em>'],
+    ".hero-positioning":["Glass, washi &amp; light \u2014 spatial art for hotels, retail, residences &amp; cultural spaces"],
+    ".trust-num":["Since 1983","Worldwide","End-to-end"],
+    ".trust-label":["Over 40 years of work","Luxury hotels \u00b7 retail \u00b7 residences \u00b7 cultural spaces","Design, making &amp; installation in-house"],
+    ".concept-body":["Glass is where water and light come to rest.<br>Washi wears the light,<br>flame sways,<br>metal holds the ground.","What I make is a gentle environment of light \u2014<br>dissolving the borders between materials,<br>imposing nothing."],
+    ".works-lead":["Where light meets material, the sway of water settles into a space.<br>Works woven for hotels, retail, residences and cultural spaces."],
+    ".story-body":["I grew up playing with water.<br>Later, as a diver, I gazed at the light falling through the sea.","Flowing, drifting, freezing, turning to mist, then filling again \u2014 water wears many faces.","Refusing nothing, holding nothing,<br>water accepted every version of me.","Glass is the shape that water briefly takes \u2014<br>a moment of memory made transparent.","To receive everything, to surrender to the current \u2014<br>I mirror in my materials the way of water I learned at sea,<br>and weave spaces of gentle light that impose nothing."],
+    ".mid-cta-text":["Bring a singular light to your project."],
+    ".mid-cta-link":["Discuss your project \u2192"],
+    ".contact-tagline":["Let us talk about your space."],
+    ".contact-lead":["Art programmes and lighting objects for hotels, retail and residential spaces \u2014 enquiries welcome."],
+    ".contact-cta":["Get in touch"],
+    ".contact-info-sub":["atelier TECNOFORM Inc; &nbsp;/&nbsp; Noriaki Eto<br>atelier-tecnoform.com"],
+  "#technology .section-title": ["Four Materials,<br>One Philosophy."], ".material-name": ["Glass", "Washi", "3D Form", "Metal"], ".material-desc": ["Frozen water. Deep, clear, mirroring those who pass.", "Softened light. It filters, wraps and warms.", "Forms glass cannot take, in materials that pass light. Parametric design with Rhino / Grasshopper.", "It supports, suspends and bears the structure — safety held within structure."], ".materials-trust": ["Designed not only for beauty, but in structures that take responsibility against falling and the passage of years."], ".tech-title": ["Three-Dimensional Hand-Poured Washi", "Craft Art Glass", "Hemp-Fiber Shade", "Parametric Design", "Glass Inlay (Zogan)", "Tuning the Light"], ".tech-desc": ["An original technique layering hand-poured paper over a 3D structure. Held to the light, the inner fibers surface and the paper itself seems to glow. Washi form-work is led by <em>Megumi Eto</em> (Yadorigi Art).", "Mirror-based color flow, textured glass and crack finishing. Layered composition expresses water surfaces, ice and showers of light.", "Hemp fibers layered onto three-dimensional form, made to wear light from within. A texture more rustic and substantial than washi lends a quiet presence to the space.", "Algorithmic design with Grasshopper combined with 3D-printed biodegradable-plastic frames generates a distinct organic form for each piece.", "An original technique inlaying mirror and colored glass into washi. Traditional motifs such as the hemp-leaf crest are reconstructed in light and shadow.", "Color temperature 2500K–6500K, the drama of a point source versus many lamps, and heat-venting design. By co-designing material and luminaire, longevity and expression are achieved together."], ".tech-process-title": ["From design to handwork."], ".tech-process-lead": ["Glass comes alive only within space and light. So I recreate each space in 3D and VR, confirm how the glass will appear within it, and only then design — verified in the digital, finished by hand."], ".tech-process-cap": ["Daimaru Kobe Entrance Glass Art Wall / 01 and 02 are design data and VR renderings by Noriaki Eto; 03 is a photograph after installation.<br>Space Design: Kenichi Yoshizato (cmyk)　Craft Direction: ubushina (Yudai Tachikawa)"], ".tech-process-grid figcaption": ["01 — Design data｜Rhino + V-Ray", "02 — VR simulation｜light & the frontal view", "03 — VR simulation｜reflections & figures", "04 — Installation｜Daimaru Kobe"], ".about-pull": ["Light takes up residence,<br>and the material begins to speak."], ".about-body p": ["Glass form-work, 3D-printed form-work, hand-poured washi form-work — integrating multiple techniques, we create and install, encompassing the design of the entire architectural space. Available for projects in Japan and abroad.", "A formal philosophy learned from Art Nouveau, Japonisme and the light sculptures of <em>Isamu Noguchi</em>, layered onto the handwork of glass and washi.", "Glass form-work: <em>Noriaki Eto</em><br>Washi form-work: <em>Megumi Eto</em> (Yadorigi Art) / <em>Noriaki Eto</em><br>Art Direction: <em>Megumi Eto</em>", "Scope of business: design, construction and supervision of architectural works / planning and production of interior and commercial-space design / related activities.", "Since its founding in 1983, with a team of artist, art director and production partners, we have handled everything from design to making and installation in-house, taking responsibility for structure and safety.", "atelier TECNOFORM Inc;<br>3-3-18 Sumiyoshi-Yamate, Higashinada-ku, Kobe, Hyogo 658-0063, Japan<br>Established November 1983 &nbsp;/&nbsp; Representative: Noriaki Eto"], "#clients .clients-grid li": ["Canopy by Hilton Okinawa Miyakojima", "The Ritz-Carlton Tokyo", "Renaissance Taipei Shilin", "Hotel Keihan", "RIHGA Royal Resort", "Mitsui Fudosan Residential", "Tokyu Land Corporation", "Presance Corporation", "Sysmex Corporation", "Panasonic", "Plenus Co., Ltd.", "Daimaru Kobe", "HBA (Hirsch Bedner Associates)", "ILYA Corporation", "DAIKO", "Nomura Co., Ltd.", "Urasenke", "Taka Town", "Shinai Obstetrics & Gynecology", "Kinderkids", "Yunosato", "Ryojuen", "HIDE Kyomachibori", "Fitness Triaxis"]
+  };
+  var ja={}, ready=false;
+  function els(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function cache(){ for(var s in MAP){ ja[s]=els(s).map(function(e){return e.innerHTML;}); } ready=true; }
+  function apply(l){
+    if(!ready) cache();
+    for(var s in MAP){
+      var ns=els(s), arr=(l==="en")?MAP[s]:ja[s];
+      ns.forEach(function(e,i){ if(arr && arr[i]!=null) e.innerHTML=arr[i]; });
+    }
+    document.documentElement.lang=l;
+    if(window.updateWorksLang) updateWorksLang();
+    var b=document.getElementById("langToggle"); if(b) b.textContent=(l==="en")?"\u65e5\u672c\u8a9e":"EN";
+    try{ localStorage.setItem("tf_lang", l); }catch(e){}
+  }
+  function init(){
+    cache();
+    var b=document.getElementById("langToggle");
+    if(b) b.addEventListener("click", function(){ apply(document.documentElement.lang==="en"?"ja":"en"); });
+    var cur="ja"; try{ cur=localStorage.getItem("tf_lang")||"ja"; }catch(e){}
+    if(cur==="en") apply("en");
+  }
+  if(document.readyState!=="loading") init(); else document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+<script>
+(function(){
+  var hero=document.getElementById('hero'), canvas=document.getElementById('hero-water');
+  if(!hero||!canvas) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=canvas.getContext('2d');
+  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.982, W=0,H=0;
+  function build(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    W=hero.clientWidth; H=hero.clientHeight;
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var target=150;
+    if(H>=W){rows=target;cols=Math.max(40,Math.round(target*(W/H)));}
+    else{cols=target;rows=Math.max(40,Math.round(target*(H/W)));}
+    cur=new Float32Array(cols*rows); prev=new Float32Array(cols*rows);
+    off=document.createElement('canvas'); off.width=cols; off.height=rows;
+    offCtx=off.getContext('2d'); offImg=offCtx.createImageData(cols,rows); offData=offImg.data;
+  }
+  build();
+  var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(build,200); });
+  function drop(lx,ly,s){
+    var gx=Math.floor(lx/W*cols), gy=Math.floor(ly/H*rows), R=3;
+    for(var y=-R;y<=R;y++)for(var x=-R;x<=R;x++){
+      var nx=gx+x,ny=gy+y;
+      if(nx<1||ny<1||nx>=cols-1||ny>=rows-1)continue;
+      var d2=x*x+y*y; if(d2>R*R)continue;
+      cur[nx+ny*cols]+=s*(1-Math.sqrt(d2)/R);
+    }
+  }
+  function step(){
+    for(var y=1;y<rows-1;y++){var r=y*cols;
+      for(var x=1;x<cols-1;x++){var i=r+x;
+        var n=(cur[i-1]+cur[i+1]+cur[i-cols]+cur[i+cols])*0.5-prev[i]; n*=damping; prev[i]=n;}}
+    var t=cur;cur=prev;prev=t;
+  }
+  function render(){
+    var d=offData, N=cols*rows;
+    for(var i=0,p=0;i<N;i++,p+=4){
+      var x=i%cols;
+      var sx=(x>0&&x<cols-1)?(cur[i-1]-cur[i+1]):0;
+      var sy=(i>=cols&&i<N-cols)?(cur[i-cols]-cur[i+cols]):0;
+      var spec=sx*0.7+sy*0.7;
+      var glint=spec>0?(spec/34):0; if(glint>1)glint=1;
+      var energy=Math.abs(cur[i])/70; if(energy>1)energy=1;
+      var a=glint*0.7+energy*0.18; if(a>0.62)a=0.62;
+      d[p]=240; d[p+1]=228; d[p+2]=198; d[p+3]=a*255;
+    }
+    offCtx.putImageData(offImg,0,0);
+    ctx.clearRect(0,0,W,H);
+    ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+    ctx.drawImage(off,0,0,W,H);
+  }
+  function loop(){ if(hero.getBoundingClientRect().bottom>0){ step(); render(); } requestAnimationFrame(loop); }
+  loop();
+  setTimeout(function(){ drop(W*0.5,H*0.42, reduce?120:230); }, 350);
+  var lastMove=0;
+  function pt(e){
+    var t=e.touches?e.touches[0]:e, r=hero.getBoundingClientRect();
+    var lx=t.clientX-r.left, ly=t.clientY-r.top;
+    if(lx<0||ly<0||lx>W||ly>H)return;
+    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<55)return; lastMove=now; drop(lx,ly,26); }
+    else drop(lx,ly,110);
+  }
+  addEventListener('mousemove',pt,{passive:true});
+  addEventListener('touchstart',pt,{passive:true});
+  if(!reduce){ setInterval(function(){
+    if(hero.getBoundingClientRect().bottom<=0)return;
+    drop(W*(0.15+Math.random()*0.7), H*(0.2+Math.random()*0.6), 60+Math.random()*55);
+  }, 2800); }
+})();
+</script>
+</body>
+</html>
