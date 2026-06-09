@@ -845,8 +845,7 @@ footer {
 <meta name="robots" content="noindex">
 <style>
 #hero-water{ position:absolute; inset:0; z-index:1; pointer-events:none;
-  mix-blend-mode:screen; opacity:0.58; filter:blur(1.4px); -webkit-filter:blur(1.4px); }
-@media (prefers-reduced-motion: reduce){ #hero-water{ display:none; } }
+  mix-blend-mode:screen; opacity:0.72; filter:blur(1.3px); -webkit-filter:blur(1.3px); }
 </style>
 </head>
 <body>
@@ -1380,12 +1379,11 @@ lb.addEventListener('touchend', function(e){
 (function(){
   var hero=document.getElementById('hero'), canvas=document.getElementById('hero-water');
   if(!hero||!canvas) return;
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ctx=canvas.getContext('2d');
-  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.982, W=0,H=0;
+  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.985, W=0,H=0;
   function build(){
     var dpr=Math.min(window.devicePixelRatio||1,2);
-    W=hero.clientWidth; H=hero.clientHeight;
+    W=hero.clientWidth||window.innerWidth; H=hero.clientHeight||window.innerHeight;
     canvas.width=W*dpr; canvas.height=H*dpr;
     canvas.style.width=W+'px'; canvas.style.height=H+'px';
     ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -1398,6 +1396,7 @@ lb.addEventListener('touchend', function(e){
   }
   build();
   var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(build,200); });
+  addEventListener('load', build);
   function drop(lx,ly,s){
     var gx=Math.floor(lx/W*cols), gy=Math.floor(ly/H*rows), R=3;
     for(var y=-R;y<=R;y++)for(var x=-R;x<=R;x++){
@@ -1420,10 +1419,10 @@ lb.addEventListener('touchend', function(e){
       var sx=(x>0&&x<cols-1)?(cur[i-1]-cur[i+1]):0;
       var sy=(i>=cols&&i<N-cols)?(cur[i-cols]-cur[i+cols]):0;
       var spec=sx*0.7+sy*0.7;
-      var glint=spec>0?(spec/34):0; if(glint>1)glint=1;
-      var energy=Math.abs(cur[i])/70; if(energy>1)energy=1;
-      var a=glint*0.7+energy*0.18; if(a>0.62)a=0.62;
-      d[p]=240; d[p+1]=228; d[p+2]=198; d[p+3]=a*255;
+      var glint=spec>0?(spec/22):0; if(glint>1)glint=1;
+      var energy=Math.abs(cur[i])/55; if(energy>1)energy=1;
+      var a=glint*0.85+energy*0.30; if(a>0.85)a=0.85;
+      d[p]=250; d[p+1]=238; d[p+2]=212; d[p+3]=a*255;
     }
     offCtx.putImageData(offImg,0,0);
     ctx.clearRect(0,0,W,H);
@@ -1432,21 +1431,26 @@ lb.addEventListener('touchend', function(e){
   }
   function loop(){ if(hero.getBoundingClientRect().bottom>0){ step(); render(); } requestAnimationFrame(loop); }
   loop();
-  setTimeout(function(){ drop(W*0.5,H*0.42, reduce?120:230); }, 350);
+  // 開幕：はっきり分かる動き（3連でひろがる）
+  setTimeout(function(){ drop(W*0.5,H*0.42,360); }, 300);
+  setTimeout(function(){ drop(W*0.30,H*0.58,240); }, 1100);
+  setTimeout(function(){ drop(W*0.72,H*0.36,240); }, 1900);
+  // ポインタでさざ波（スクロールは妨げない）
   var lastMove=0;
   function pt(e){
     var t=e.touches?e.touches[0]:e, r=hero.getBoundingClientRect();
     var lx=t.clientX-r.left, ly=t.clientY-r.top;
     if(lx<0||ly<0||lx>W||ly>H)return;
-    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<55)return; lastMove=now; drop(lx,ly,26); }
-    else drop(lx,ly,110);
+    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<50)return; lastMove=now; drop(lx,ly,34); }
+    else drop(lx,ly,150);
   }
   addEventListener('mousemove',pt,{passive:true});
   addEventListener('touchstart',pt,{passive:true});
-  if(!reduce){ setInterval(function(){
+  // 環境光：静かに揺れ続ける
+  setInterval(function(){
     if(hero.getBoundingClientRect().bottom<=0)return;
-    drop(W*(0.15+Math.random()*0.7), H*(0.2+Math.random()*0.6), 60+Math.random()*55);
-  }, 2800); }
+    drop(W*(0.12+Math.random()*0.76), H*(0.18+Math.random()*0.64), 90+Math.random()*70);
+  }, 2000);
 })();
 </script>
 </body>
