@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>atelier TECNOFORM</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://atelier-tecnoform.com/">
+<!-- 即時環境でJSが無効な場合のフォールバック転送（4秒） -->
+<noscript><meta http-equiv="refresh" content="4;url=https://atelier-tecnoform.com/"></noscript>
+
+<!-- Open Graph -->
+<meta property="og:title" content="atelier TECNOFORM">
+<meta property="og:description" content="光と水の、作家 — Artist of Light and Water">
+<meta property="og:url" content="https://atelier-tecnoform.com/">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0b0a09; --paper:#ece5d5; --paper-soft:#b8a78a;
+    --paper-mute:#6a6258; --accent:#c9a875;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    background:var(--ink); color:var(--paper);
+    font-family:'Noto Serif JP', serif; font-weight:300;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ヒーロー（本サイトと同じ #hero / #hero-water 構造で同一スクリプトを動かす） */
+  #hero{
+    position:fixed; inset:0; width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(120% 90% at 50% 38%, #14110e 0%, #0b0a09 62%, #060504 100%);
+  }
+  #hero-water{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    mix-blend-mode:screen; opacity:0.62;
+    filter:blur(1.4px); -webkit-filter:blur(1.4px);
+  }
+
+  .stage{
+    position:relative; z-index:2; text-align:center;
+    padding:0 1.5rem;
+    opacity:0; transform:translateY(10px);
+    animation:rise 1.8s cubic-bezier(.2,.7,.2,1) .25s forwards;
+  }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+
+  .mark{
+    font-family:'Cormorant Garamond', serif; font-weight:300;
+    font-size:0.82rem; letter-spacing:0.32em;
+    color:var(--paper-soft); text-transform:uppercase;
+    margin-bottom:1.6rem;
+  }
+  .wordmark{
+    font-family:'Cormorant Garamond', serif; font-weight:400;
+    font-size:clamp(1.7rem, 7vw, 2.9rem);
+    letter-spacing:0.16em; color:var(--paper);
+    line-height:1.2;
+  }
+  .wordmark .atelier{ font-weight:300; font-style:italic; }
+  .catch{
+    font-family:'Noto Serif JP', serif; font-weight:300;
+    font-size:clamp(0.82rem, 3.6vw, 1.02rem);
+    letter-spacing:0.18em; color:var(--paper-soft);
+    margin-top:1.7rem;
+  }
+  .en{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:300;
+    font-size:clamp(0.78rem, 3vw, 0.98rem);
+    letter-spacing:0.1em; color:var(--paper-mute);
+    margin-top:0.5rem;
+  }
+
+  /* 進行インジケータ（細い光の線がそっと満ちる＝余韻の可視化） */
+  .progress{
+    position:relative; width:90px; height:1px;
+    margin:2.6rem auto 0; background:rgba(184,167,138,0.16);
+    overflow:hidden;
+  }
+  .progress::after{
+    content:""; position:absolute; left:0; top:0; height:100%; width:0%;
+    background:var(--accent);
+    animation:fill 3.5s linear .2s forwards; opacity:0;
+  }
+  @keyframes fill{ to{ width:100%; } }
+
+  .enter{
+    display:inline-block; margin-top:1.9rem;
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:0.92rem; letter-spacing:0.16em;
+    color:var(--paper-mute); text-decoration:none;
+    border-bottom:1px solid rgba(184,167,138,0.25);
+    padding-bottom:2px; transition:color .4s, border-color .4s;
+  }
+  .enter:hover{ color:var(--paper); border-color:rgba(184,167,138,0.6); }
+
+  @media (prefers-reduced-motion: reduce){
+    .stage{ animation:none; opacity:1; transform:none; }
+    .progress::after{ animation-duration:.1s; }
+  }
+</style>
+</head>
+<body>
+
+<section id="hero">
+  <canvas id="hero-water" aria-hidden="true"></canvas>
+  <div class="stage">
+    <p class="mark">江藤 徳晃 &nbsp;/&nbsp; est. 1983</p>
+    <h1 class="wordmark"><span class="atelier">atelier</span> TECNOFORM</h1>
+    <p class="catch">枠を解いて、揺らぎをまとう</p>
+    <p class="en">Artist of Light and Water</p>
+    <div class="progress" aria-hidden="true"></div>
+    <a class="enter" href="https://atelier-tecnoform.com/">Enter</a>
+  </div>
+</section>
+
+<script>
+/* ===== 本サイト index.html と同一の水面シミュレーション（verbatim） ===== */
+(function(){
+  var hero=document.getElementById('hero'), canvas=document.getElementById('hero-water');
+  if(!hero||!canvas) return;
+  var ctx=canvas.getContext('2d');
+  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.973, W=0,H=0, t0=Date.now();
+  function build(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    W=hero.clientWidth||window.innerWidth; H=hero.clientHeight||window.innerHeight;
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var target=150;
+    if(H>=W){rows=target;cols=Math.max(40,Math.round(target*(W/H)));}
+    else{cols=target;rows=Math.max(40,Math.round(target*(H/W)));}
+    cur=new Float32Array(cols*rows); prev=new Float32Array(cols*rows);
+    off=document.createElement('canvas'); off.width=cols; off.height=rows;
+    offCtx=off.getContext('2d'); offImg=offCtx.createImageData(cols,rows); offData=offImg.data;
+  }
+  build();
+  var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(build,200); });
+  addEventListener('load', build);
+  function drop(lx,ly,s){
+    var gx=Math.floor(lx/W*cols), gy=Math.floor(ly/H*rows), R=3;
+    for(var y=-R;y<=R;y++)for(var x=-R;x<=R;x++){
+      var nx=gx+x,ny=gy+y;
+      if(nx<1||ny<1||nx>=cols-1||ny>=rows-1)continue;
+      var d2=x*x+y*y; if(d2>R*R)continue;
+      cur[nx+ny*cols]+=s*(1-Math.sqrt(d2)/R);
+    }
+  }
+  function step(){
+    for(var y=1;y<rows-1;y++){var r=y*cols;
+      for(var x=1;x<cols-1;x++){var i=r+x;
+        var n=(cur[i-1]+cur[i+1]+cur[i-cols]+cur[i+cols])*0.5-prev[i]; n*=damping; prev[i]=n;}}
+    var t=cur;cur=prev;prev=t;
+  }
+  function render(){
+    var d=offData, N=cols*rows, t=(Date.now()-t0)/1000;
+    for(var i=0,p=0;i<N;i++,p+=4){
+      var x=i%cols, y=(i/cols)|0, nx=x/cols, ny=y/rows;
+      var sx=(x>0&&x<cols-1)?(cur[i-1]-cur[i+1]):0;
+      var sy=(i>=cols&&i<N-cols)?(cur[i-cols]-cur[i+cols]):0;
+      var spec=sx*0.7+sy*0.7;
+      var glint=spec>0?(spec/32):0; if(glint>1)glint=1;
+      var energy=Math.abs(cur[i])/65; if(energy>1)energy=1;
+      // 風：水面全体がゆっくり流れる光の帯
+      var w=Math.sin(nx*4.2 + t*0.55)*Math.sin(ny*3.0 - t*0.42);
+      var wind = w>0 ? Math.pow(w,1.6)*0.13 : 0;
+      var a=glint*0.5+energy*0.14+wind; if(a>0.5)a=0.5;
+      d[p]=240; d[p+1]=230; d[p+2]=206; d[p+3]=a*255;
+    }
+    offCtx.putImageData(offImg,0,0);
+    ctx.clearRect(0,0,W,H);
+    ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+    ctx.drawImage(off,0,0,W,H);
+  }
+  function loop(){ if(hero.getBoundingClientRect().bottom>0){ step(); render(); } requestAnimationFrame(loop); }
+  loop();
+  /* 余韻の3.5秒で水面が生きて見えるよう、穏やかな種波を数回 */
+  setTimeout(function(){ drop(W*0.5,H*0.44,200); }, 400);
+  setTimeout(function(){ drop(W*0.32,H*0.55,90); }, 1500);
+  setTimeout(function(){ drop(W*0.68,H*0.40,90); }, 2600);
+  var lastMove=0;
+  function pt(e){
+    var t=e.touches?e.touches[0]:e, r=hero.getBoundingClientRect();
+    var lx=t.clientX-r.left, ly=t.clientY-r.top;
+    if(lx<0||ly<0||lx>W||ly>H)return;
+    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<60)return; lastMove=now; drop(lx,ly,26); }
+    else drop(lx,ly,115);
+  }
+  addEventListener('mousemove',pt,{passive:true});
+  addEventListener('touchstart',pt,{passive:true});
+})();
+
+/* ===== 余韻のあと本サイトへ。replace()で履歴に残さず「戻る」無限ループを防止 ===== */
+(function(){
+  var DEST='https://atelier-tecnoform.com/';
+  var go=function(){ location.replace(DEST); };
+  /* preview: 自動転送はオフ（本番index.htmlでは3.5秒で遷移します） */
+  // setTimeout(go, 3500);
+  // Enter を押したら即時遷移（こちらも履歴を汚さない）
+  var enter=document.querySelector('.enter');
+  if(enter){ enter.addEventListener('click', function(ev){ ev.preventDefault(); go(); }); }
+})();
+</script>
+</body>
+</html>
