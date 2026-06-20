@@ -1,0 +1,71 @@
+{
+  "_comment": "Hero slides rotation pool. Each slot rotates monthly within its own image list.",
+  "_epoch": "2026-01-01",
+  "_note_for_humans": "このファイルを編集すれば翌月以降のローテに反映されます。images/に存在するファイル名を指定してください。スロット順がそのままHero表示順になります。",
+  "slots": [
+    {
+      "name": "Hotel A",
+      "category": "hotel",
+      "images": [
+        "hilton-okinawa-01.jpg",
+        "ritz-club-foyer.jpg",
+        "ritz-club-residence-c.jpg",
+        "ritz-bar-lounge-night2.jpg"
+      ]
+    },
+    {
+      "name": "Hotel B",
+      "category": "hotel",
+      "images": [
+        "ritz-bar-lounge-01.jpg",
+        "ritz-bar-counter-01.jpg",
+        "ritz-suite-hemp-01.jpg",
+        "renaissance-taipei-room.jpg",
+        "hotel-keihan-tenmabashi-04.jpg"
+      ]
+    },
+    {
+      "name": "Residential",
+      "category": "residential",
+      "images": [
+        "park-tower-harumi.jpg",
+        "mitsui-yokohama-lobby.jpg",
+        "mitsui-parkcoat-b.jpg",
+        "branz-nishinomiya.jpg",
+        "presance-biwako-entrance.jpg"
+      ]
+    },
+    {
+      "name": "Commercial/Cultural",
+      "category": "commercial_cultural",
+      "images": [
+        "daimaru-kobe-02.jpg",
+        "hide-entrance-04.jpg",
+        "hide-interior.jpg",
+        "yunosato-main.jpg",
+        "taka-town-03.jpg",
+        "minowashi-fantasia-01.jpg",
+        "rokko-washi-10.jpg",
+        "triaxis-perspective.jpg"
+      ]
+    },
+    {
+      "name": "Medical/Educational",
+      "category": "medical_educational",
+      "images": [
+        "shinai-obstetrics.jpg",
+        "itakura-ladies-clinic.jpg",
+        "iikids-osaka-bentencho.jpg"
+      ]
+    },
+    {
+      "name": "Corporate",
+      "category": "corporate",
+      "images": [
+        "sysmex_main-bb.jpg",
+        "plenus-corporate-symbol.jpg",
+        "daikin-tottori.jpg"
+      ]
+    }
+  ]
+}
