@@ -1,0 +1,68 @@
+name: Hero Rotation
+
+# 毎月1日 09:00 JST (= 00:00 UTC) に発火
+# 手動実行も可能 (Actions タブの "Run workflow" ボタン)
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  rotate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run hero rotation
+        id: rotate
+        run: |
+          set -e
+          python scripts/rotate_hero.py | tee rotation.log
+          {
+            echo 'log<<ROTATION_LOG_EOF'
+            cat rotation.log
+            echo 'ROTATION_LOG_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Show diff
+        run: |
+          git diff --stat
+          git diff -- index.html | head -80 || true
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: hero-rotation/auto
+          delete-branch: true
+          commit-message: "chore(hero): monthly rotation"
+          title: "🌀 Hero Rotation"
+          body: |
+            自動生成: Hero スライド月次ローテーション
+
+            **ローテ結果:**
+            ```
+            ${{ steps.rotate.outputs.log }}
+            ```
+
+            **承認方法:**
+            - このPRをマージ → サイトに反映
+            - 「画像が気に入らない」「今月は変えない」→ このPRを Close するだけ
+            - 永続的に画像を変えたい → `data/hero-pool.json` を編集してからマージ
+
+            **失敗時の戻し方:**
+            マージ後に元に戻したい → このPRの "Revert" ボタンで1タップ復旧
+          labels: |
+            automation
+            hero-rotation
