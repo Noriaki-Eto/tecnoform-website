@@ -851,8 +851,8 @@ footer {
 
 <nav class="site-nav">
   <a href="#hero" class="nav-logo">atelier TECNOFORM</a>
-  <button class="nav-toggle" aria-label="menu">MENU</button>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="menu" aria-expanded="false" aria-controls="primary-navigation">MENU</button>
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="#concept">Philosophy</a></li>
     <li><a href="#story">Story</a></li>
     <li><a href="#works">Works</a></li>
@@ -1308,9 +1308,15 @@ lb.addEventListener('touchend', function(e){
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
   if(toggle){
-    toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+    toggle.addEventListener('click', function(){
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
     links.addEventListener('click', function(e){
-      if(e.target.tagName === 'A') links.classList.remove('open');
+      if(e.target.tagName === 'A'){
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 })();
