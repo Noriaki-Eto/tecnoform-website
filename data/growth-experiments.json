@@ -147,7 +147,17 @@
       "correction": "『tecnoform.jpは旧サイト』と確認。atelier-tecnoform.com（本リポジトリ）が現行の正式サイト。",
       "impact_on_plan": "GROWTH_OS.md・PROPOSAL-2026-08.mdの該当チェックリスト項目を解決済みとして更新。以後、観測・成長施策の対象は引き続きatelier-tecnoform.comに一本化。",
       "learning": "旧サイトが検索エンジンに残存し外部から参照可能な状態（gBizINFO等の企業情報サイトからもリンクされている）。実サイトを一本化しても、旧サイトが放置されると古い情報の露出・検索結果の分散というブランドリスクが残る可能性がある。",
-      "unresolved_followup": "tecnoform.jp（旧サイト）を閉鎖する／atelier-tecnoform.comへリダイレクトする／放置する、のいずれにするかは江藤さんの判断待ち（承認チェックリストに新規項目として追加済み、任意対応）。"
+      "unresolved_followup": "解決済み（2026-08-correction-03参照）"
+    },
+    {
+      "id": "2026-08-correction-03",
+      "date": "2026-08-04",
+      "type": "correction",
+      "source": "owner_feedback_direct",
+      "correction": "『（tecnoform.jpは）廃止予定』と確認。",
+      "impact_on_plan": "tecnoform.jpの扱いは『廃止予定』で確定。ただし本リポジトリは atelier-tecnoform.com のみを管理しており、tecnoform.jp自体のドメイン・ホスティング・DNSはこのリポジトリのスコープ外のため、本セッションから直接の廃止作業（リダイレクト設定・停止）はできない。",
+      "learning": "会社に複数ドメインが存在する場合、GROWTH_OSの観測範囲外の資産（別ドメイン・別ホスティング）については、決定事項を記録するに留め、実行は管理者側の作業として切り離す必要がある。",
+      "unresolved_followup": "廃止作業（ドメインの停止／リダイレクト設定）はtecnoform.jp側の管理者（レジストラ・旧ホスティング事業者）での作業が必要。実施時期・方法は江藤さんの手配次第。本リポジトリ側での追加対応は不要と判断し、このフォローアップはクローズする。"
     }
   ]
 }
