@@ -1,0 +1,132 @@
+{
+  "_comment": "自動化利益基盤の実験台帳。10ステップループの各サイクルを記録する。",
+  "cycles": [
+    {
+      "id": "2026-08-04-observation",
+      "date": "2026-08-04",
+      "type": "observation",
+      "generated_by": "scripts/observe_growth_signals.py",
+      "resolution_notes": "同一セッション内で機械的に安全な2件を即修正済み: (1) sitemap.xml のlastmodを実際の最終更新日に合わせて更新 (2) tokushoho.html にmeta descriptionを追加。次回観測でこの2件のflagは消える見込み。台帳未記入・関係先未記録は江藤さんの運用開始待ち（引き続きflagされる想定）。",
+      "signals": {
+        "inquiries": {
+          "present": true,
+          "columns": [
+            "date",
+            "channel",
+            "source_detail",
+            "inquiry_type",
+            "contact_name",
+            "organization",
+            "project_summary",
+            "status",
+            "outcome_value_jpy",
+            "notes"
+          ],
+          "real_entries": 0,
+          "example_row_still_present": true,
+          "last_entry_date": null,
+          "days_since_last_entry": null,
+          "flag_stale": true
+        },
+        "relationships": {
+          "present": true,
+          "total_relationships": 10,
+          "high_strength_count": 5,
+          "last_touchpoint_unrecorded": [
+            "ritz-carlton-tokyo",
+            "plenus",
+            "hide-kyomachibori",
+            "mitsui-fudosan-residential",
+            "daiko",
+            "hba",
+            "zycc",
+            "cmyk-ubushina",
+            "medical-clinics",
+            "aar-plus"
+          ],
+          "last_touchpoint_stale_180d": []
+        },
+        "works_capacity": {
+          "published_works": 26,
+          "coming_soon": 2,
+          "monthly_capacity_units": 20,
+          "note": "capacityはSuiren等の受注生産ラインの上限（LINEUP_PLAN.md）。B2B案件と共有のボトルネック。"
+        },
+        "content_freshness": {
+          "index.html": "2026-08-03",
+          "lotus.html": "2026-06-13",
+          "tokushoho.html": "2026-06-13"
+        },
+        "seo": {
+          "index.html": {
+            "title": "ガラスアート・和紙・光の空間制作 | atelier TECNOFORM（神戸・1983〜）",
+            "title_len": 46,
+            "description_present": true,
+            "description_len": 108,
+            "flag_missing_description": false
+          },
+          "lotus.html": {
+            "title": "睡蓮 Suiren｜光の花 受注｜atelier TECNOFORM",
+            "title_len": 34,
+            "description_present": true,
+            "description_len": 76,
+            "flag_missing_description": false
+          },
+          "tokushoho.html": {
+            "title": "特定商取引法に基づく表記 | atelier TECNOFORM",
+            "title_len": 32,
+            "description_present": false,
+            "description_len": 0,
+            "flag_missing_description": true
+          }
+        },
+        "broken_images": {
+          "broken_image_refs": {},
+          "flag": false
+        },
+        "sitemap": {
+          "present": true,
+          "entries": 3,
+          "stale_vs_actual_commits": [
+            {
+              "page": "index.html",
+              "sitemap_lastmod": "2026-06-22",
+              "actual_last_commit": "2026-08-03"
+            },
+            {
+              "page": "lotus.html",
+              "sitemap_lastmod": "2026-06-08",
+              "actual_last_commit": "2026-06-13"
+            },
+            {
+              "page": "tokushoho.html",
+              "sitemap_lastmod": "2026-06-08",
+              "actual_last_commit": "2026-06-13"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "2026-08-proposal-01",
+      "date": "2026-08-04",
+      "type": "proposal",
+      "observation_ref": "2026-08-04-observation",
+      "proposal_doc": "growth-system/PROPOSAL-2026-08.md",
+      "root_cause": "『露出不足』という既存の自己診断は、B2B側の実績データ（リッツ・カールトン東京4件、プレナス5件/13年、秀2件、三井不動産レジデンシャル3件）が示す紹介・リピート経路の存在と矛盾する。真の問題は観測の不在——何が効いているか記録されていなかったこと。",
+      "hypotheses_considered": [
+        {"id": "H1", "name": "引き合い・関係先の計測基盤", "decision": "shipped_this_session"},
+        {"id": "H2", "name": "既存B2B関係の再接点化", "decision": "template_prepared_pending_owner_action"},
+        {"id": "H3", "name": "B2B向け露出コンテンツエンジン（月次）", "decision": "scoped_down_pending_owner_decision_on_bandwidth"},
+        {"id": "H4", "name": "睡蓮レンタル事業化（新規事業）", "decision": "flagged_pending_owner_decision_insurance_and_pse_review_required"},
+        {"id": "H5", "name": "パラメトリック意匠デジタル化／ワークショップ（新規事業）", "decision": "parked_brand_dilution_risk_unverified_demand"},
+        {"id": "H6", "name": "睡蓮の値上げテスト", "decision": "pending_owner_decision_zero_cost"}
+      ],
+      "critique_summary": "独立AIエージェントによる批判: (1)露出診断は安易な結論の可能性、実績データと矛盾 (2)UTM-mailtoは転送・紹介経由の問い合わせを捕捉できずバイアスを生む→不採用 (3)2人体制でH3の月次継続は非現実的→条件付きに格下げ (4)H4は賠償責任・PSE・ブランド毀損リスクを過小評価 (5)H5はブランドの希少性を毀損しうる (6)最大の欠落：既に機能している紹介・リピート経路の再接点化が抜けていた→H2として追加。なお批判が『LINEUP_PLAN.mdがレンタル業態を明示的に禁止している』とした点は一次資料で確認したところ誤りで、実際は前向きに検討中の項目だった（本文で訂正済み）。",
+      "rule_check": "LINEUP_PLAN.mdのブランド規律・PSE前提、tokushoho.htmlの特商法表記と照合。H1・軽微SEO修正は抵触なし。H4は着手時にPSE適用の再確認と特商法表記の追加が前提条件。",
+      "status": "partially_shipped_rest_pending_human_approval",
+      "result": null,
+      "learning": null
+    }
+  ]
+}

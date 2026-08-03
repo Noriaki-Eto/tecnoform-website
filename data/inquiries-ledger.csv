@@ -1,0 +1,2 @@
+date,channel,source_detail,inquiry_type,contact_name,organization,project_summary,status,outcome_value_jpy,notes
+2026-01-15,EXAMPLE-DO-NOT-USE,この行は記入例です。実データを追加したら削除してください,b2b_commission,山田太郎,株式会社サンプル設計,ホテルロビー用ガラスアート の相談,won,850000,紹介元：DAIKO様

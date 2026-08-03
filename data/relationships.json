@@ -1,0 +1,121 @@
+{
+  "_comment": "B2B取引先・協業先の関係管理台帳。index.html の PROJECTS 配列（実績データ）から実在の協業歴を抽出して作成。既に成立している紹介・リピート経路を『再接点』させるための土台。新規開拓の前に、まずここを埋める。",
+  "_instructions_for_humans": [
+    "last_touchpoint（最終接点日）と contact に、実際の記録がある場合のみ日付・情報を記入してください。空欄（null）のままでOK＝『まだ記録していない』という正直な状態です。架空の日付は入れないでください。",
+    "新しい実績・協業が発生したら、この配列に1件追記してください（index.html の PROJECTS 配列に新規プロジェクトを追加するタイミングで一緒に、が忘れにくいです）。",
+    "growth-observe.yml（月次自動観測）が last_touchpoint の空白・古さを検知して月次レポートに出します。"
+  ],
+  "relationships": [
+    {
+      "id": "ritz-carlton-tokyo",
+      "name": "ザ・リッツカールトン東京",
+      "type": "client_hospitality",
+      "related_project_nums": ["02", "03", "04", "05"],
+      "years": "2015",
+      "relationship_note": "53Fクラブレベル改装で4案件を同時受注。共通クレジット：Renovation Project Director Jacqueline Teissier Okuma。単発ではなく同一プロジェクト経由の複数受注＝関係の強さの実例。",
+      "relationship_strength": "high",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "plenus",
+      "name": "株式会社プレナス（ほっともっと・やよい軒）",
+      "type": "client_corporate",
+      "related_project_nums": ["21"],
+      "years": "2007-2020",
+      "relationship_note": "東京本社で2007年から2020年まで13年間・5作品を継続受注。最長・最深の関係先。直近の接点が2020年で止まっている可能性が高く、再接点の優先度が最も高い候補。",
+      "relationship_strength": "high",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "hide-kyomachibori",
+      "name": "秀（HIDE）京町堀",
+      "type": "client_restaurant",
+      "related_project_nums": ["07", "08"],
+      "years": "unknown",
+      "relationship_note": "エントランスと店内、2回にわたり受注。飲食店オーナーの個人的な信頼から生まれたリピート発注の実例。",
+      "relationship_strength": "high",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "mitsui-fudosan-residential",
+      "name": "三井不動産レジデンシャル",
+      "type": "client_developer",
+      "related_project_nums": ["12", "13", "14"],
+      "years": "2017, 2020",
+      "relationship_note": "パークタワー晴海(2017)・横浜北仲(2020)・パークコートJR芦屋駅前、と異なる開発物件で複数回発注。デベロッパーとして継続的なパイプラインを持つ最重要候補。",
+      "relationship_strength": "high",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "daiko",
+      "name": "DAIKO（大光電機）",
+      "type": "fabrication_partner",
+      "related_project_nums": ["01", "18", "X2"],
+      "years": "ongoing",
+      "relationship_note": "顧客ではなく照明器具エンジニアリングの協業パートナー。ヒルトン沖縄宮古島(2026)・ホテル京阪天満橋・リーガロイヤル沖縄(予定)と複数のホテル案件で連携。ホテル案件の紹介元になり得る唯一無二のチャネル。",
+      "relationship_strength": "high",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "hba",
+      "name": "HBA（Hirsch Bedner Associates）",
+      "type": "design_firm_partner",
+      "related_project_nums": ["01"],
+      "years": "2026",
+      "relationship_note": "ヒルトン沖縄宮古島（2026年4月開業・最新案件）のインテリアデザイン担当。関係が最も新しく、直後のお礼・実績写真共有など再接点の反応が良い可能性が高い。",
+      "relationship_strength": "medium",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "zycc",
+      "name": "ZYCC（ジーク）",
+      "type": "design_firm_partner",
+      "related_project_nums": ["18"],
+      "years": "unknown",
+      "relationship_note": "ホテル京阪天満橋の空間デザイン担当。ホテル客室案件の設計会社ルート。",
+      "relationship_strength": "medium",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "cmyk-ubushina",
+      "name": "cmyk（吉里謙一）／ ubushina（立川裕大）",
+      "type": "design_firm_partner",
+      "related_project_nums": ["16"],
+      "years": "2024",
+      "relationship_note": "大丸神戸店（2024・最新の商業施設案件）の空間デザイン／工芸ディレクション。地元・神戸の商業施設案件の再現性を試すべき相手。",
+      "relationship_strength": "medium",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "medical-clinics",
+      "name": "医療施設クライアント（親愛産婦人科・板倉レディースクリニック）",
+      "type": "client_niche_vertical",
+      "related_project_nums": ["15", "27"],
+      "years": "2013, unknown",
+      "relationship_note": "産婦人科・レディースクリニックという同一ニッチ業態での受注が2件。院内デザイン会社経由の紹介パターンが機能している可能性があり、このニッチを狙った展開の仮説を裏付ける実データ。",
+      "relationship_strength": "medium",
+      "last_touchpoint": null,
+      "contact": null
+    },
+    {
+      "id": "aar-plus",
+      "name": "AAR+（浅井謙建築研究所）",
+      "type": "design_firm_partner",
+      "related_project_nums": ["X2"],
+      "years": "予定",
+      "relationship_note": "リーガロイヤルリゾート沖縄（北谷）雲灯、進行中案件の建築設計担当。",
+      "relationship_strength": "medium",
+      "last_touchpoint": null,
+      "contact": null
+    }
+  ],
+  "single_project_clients_note": "上記以外（シスメックス、DAIKIN鳥取、iikids、トライアクシス、ルネッサンス台北、プレサンス琵琶湖、東急不動産ブランズ西宮北口、パナソニック日比谷 等）は現時点で単発実績のみ確認。全実績の一次データは index.html の PROJECTS 配列を参照。"
+}
