@@ -127,6 +127,17 @@
       "status": "partially_shipped_rest_pending_human_approval",
       "result": null,
       "learning": null
+    },
+    {
+      "id": "2026-08-correction-01",
+      "date": "2026-08-04",
+      "type": "correction",
+      "source": "owner_feedback_direct",
+      "correction": "江藤さんより2点の訂正: (1)『和紙の照明販売（睡蓮/Suiren）を主力事業にするつもりはない』(2)会社の公式ホームページは tecnoform.jp（本セッション環境からはネットワークポリシーによりアクセス不可）。",
+      "verification": "法人番号照会（gBizINFO等、公開検索経由）で tecnoform.jp が同一法人（株式会社アトリエ・テクノフォルム、代表 江藤徳晃、神戸市東灘区住吉山手3-3-18）の運営であることを確認。公式事業内容：建築工事設計・監理、インテリアデザイン企画及びガラスアート製作、ガラス工事の建設業許可保有。資本金300万円、従業員3名、創業1983年11月1日。",
+      "impact_on_plan": "PROPOSAL-2026-08.md・GROWTH_OS.mdを修正: 主力事業をB2B建築設計監理・ガラス工事・インテリアデザインと明記し、H4/H5/H6（睡蓮関連）を『副次ライン限定』に格下げ。tecnoform.jpとatelier-tecnoform.com（本リポジトリ）の役割分担は未確認のため、承認チェックリストに追加し次サイクルで確認する。",
+      "learning": "実績データからの推論（B2B側の紹介・リピートが機能している）は事業説明として正しい方向だったが、『主力/副次』の明言は一次情報（事業主本人）でしか確定できない。次サイクル以降、事業の優先順位に関わる推論は必ず本人確認を挟むこと。",
+      "unresolved_followup": "tecnoform.jp の内容確認・atelier-tecnoform.comとの統合方針は、江藤さんの回答待ち。次にAIセッションが呼ばれたら、まずこの点を確認してから進めること。"
     }
   ]
 }
