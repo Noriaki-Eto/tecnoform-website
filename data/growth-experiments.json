@@ -158,6 +158,28 @@
       "impact_on_plan": "tecnoform.jpの扱いは『廃止予定』で確定。ただし本リポジトリは atelier-tecnoform.com のみを管理しており、tecnoform.jp自体のドメイン・ホスティング・DNSはこのリポジトリのスコープ外のため、本セッションから直接の廃止作業（リダイレクト設定・停止）はできない。",
       "learning": "会社に複数ドメインが存在する場合、GROWTH_OSの観測範囲外の資産（別ドメイン・別ホスティング）については、決定事項を記録するに留め、実行は管理者側の作業として切り離す必要がある。",
       "unresolved_followup": "廃止作業（ドメインの停止／リダイレクト設定）はtecnoform.jp側の管理者（レジストラ・旧ホスティング事業者）での作業が必要。実施時期・方法は江藤さんの手配次第。本リポジトリ側での追加対応は不要と判断し、このフォローアップはクローズする。"
+    },
+    {
+      "id": "2026-08-proposal-02",
+      "date": "2026-08-04",
+      "type": "proposal",
+      "proposal_doc": "growth-system/PROPOSAL-2026-08-B.md",
+      "request": "江藤さんより『独自メディア構築・アフィリエイト事業の収益化検討』『他の異なる新規自動化可能事業の検討』の指示。",
+      "conclusion": "独自メディア／アフィリエイト事業は非推奨。理由: (1)Googleの2026年3月コアアップデートがscaled content abuse（権威のない新規ドメインでのAI量産コンテンツ）を明示的に取り締まっており、AI生成コンテンツで50-80%減・一次体験のないアフィリエイトレビューで40-70%減の実例あり (2)自社の強み（B2B高単価受注の信頼性）とアフィリエイト併設は両立しない（ステマ表示義務が高額実績の隣に出る矛盾） (3)コンテンツ制作の帯域問題（サイクル1のH3で既に未解決）を解決しないまま新事業を積み増すことになる。",
+      "hypotheses_considered": [
+        {"id": "H-Media-A", "name": "汎用ジャンル アフィリエイトメディア", "decision": "not_recommended"},
+        {"id": "H-Media-B", "name": "隣接ジャンル オウンドメディア＋軽量アフィリエイト", "decision": "affiliate_layer_rejected_content_only_folded_into_cycle1_H3"},
+        {"id": "H-Media-C", "name": "専門特化ニッチアフィリエイト（PSE部材・3Dプリント資材等）", "decision": "parked_market_size_unverified"},
+        {"id": "H-New-1", "name": "紹介手数料型リード仲介", "decision": "conditional_small_test_pending_owner_approval_disclosure_and_partner_vetting_required"},
+        {"id": "H-New-2", "name": "パラメトリック意匠デジタル資産販売（別ブランド）", "decision": "parked_pending_legal_entity_separation_review"},
+        {"id": "H-New-3", "name": "法人向けアートワークショップ", "decision": "downgraded_from_recommended_to_single_test_email"},
+        {"id": "H-New-4", "name": "AI運用ツール群の外販（SaaS化）", "decision": "not_recommended_skillset_mismatch"}
+      ],
+      "critique_summary": "独立AIエージェントによる批判: (1)H-New-1は『ローリスク』ではない——仲介人の選任責任・依頼主への開示義務なしの手数料受領は利益相反になりうる→条件付き修正 (2)H-Media-Bのアフィリエイト併設はB2B信頼性を毀損するカテゴリーエラーで期待値マイナス→却下 (3)帯域問題（サイクル1で未解決）を回避せず新事業3つに積み増しているだけ (4)定款の事業目的との適合性が未確認、H-New-2の『別ブランド名』は法人格が同一のため責任分離にならない→専門家確認を前提条件に追加 (5)H-New-3は未検証の『推奨』だった→テストメール1通に格下げ (6)最大の欠落：サイクル1で承認待ちのまま実行記録のない低コスト施策（再接点メール・台帳運用・値上げテスト）の機会費用を問うべき。",
+      "rule_check": "定款の事業目的（建築設計監理・インテリアデザイン・ガラスアート製作＋附帯業務）とメディア運営・紹介仲介の適合性は未確認のため要専門家確認。景品表示法（ステマ規制）は非着手のため対応不要。LINEUP_PLAN.mdのブランド規律とH-Media-Bのアフィリエイト層は衝突すると判断し却下。",
+      "status": "no_new_business_started_pending_human_decision",
+      "result": null,
+      "learning": "『指示された手段（メディア構築）が本当にその目的（収益向上）に対して筋が良いか』を検証すること自体がStep 2-3の仕事。指示をそのまま実行せず、まず一次情報（2026年時点の検索エンジン方針・法規制）で裏を取ったことで、B2Bブランドを毀損しうる施策を未然に防いだ。"
     }
   ]
 }
