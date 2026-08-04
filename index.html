@@ -859,7 +859,7 @@ footer {
     <li><a href="lotus.html">Lotus</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><button class="lang-toggle" id="langToggle" aria-label="language">EN</button></li>
+    <li><button class="lang-toggle" id="langToggle" type="button" aria-label="英語に切り替える">EN</button></li>
   </ul>
 </nav>
 
@@ -1366,7 +1366,7 @@ lb.addEventListener('touchend', function(e){
     }
     document.documentElement.lang=l;
     if(window.updateWorksLang) updateWorksLang();
-    var b=document.getElementById("langToggle"); if(b) b.textContent=(l==="en")?"\u65e5\u672c\u8a9e":"EN";
+    var b=document.getElementById("langToggle"); if(b){ b.textContent=(l==="en")?"\u65e5\u672c\u8a9e":"EN"; b.setAttribute("aria-label",(l==="en")?"日本語に切り替える":"英語に切り替える"); }
     try{ localStorage.setItem("tf_lang", l); }catch(e){}
   }
   function init(){
