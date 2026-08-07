@@ -1,0 +1,204 @@
+{
+  "_comment": "自動化利益基盤の実験台帳。10ステップループの各サイクルを記録する。",
+  "cycles": [
+    {
+      "id": "2026-08-04-observation",
+      "date": "2026-08-04",
+      "type": "observation",
+      "generated_by": "scripts/observe_growth_signals.py",
+      "resolution_notes": "同一セッション内で機械的に安全な2件を即修正済み: (1) sitemap.xml のlastmodを実際の最終更新日に合わせて更新 (2) tokushoho.html にmeta descriptionを追加。次回観測でこの2件のflagは消える見込み。台帳未記入・関係先未記録は江藤さんの運用開始待ち（引き続きflagされる想定）。",
+      "signals": {
+        "inquiries": {
+          "present": true,
+          "columns": [
+            "date",
+            "channel",
+            "source_detail",
+            "inquiry_type",
+            "contact_name",
+            "organization",
+            "project_summary",
+            "status",
+            "outcome_value_jpy",
+            "notes"
+          ],
+          "real_entries": 0,
+          "example_row_still_present": true,
+          "last_entry_date": null,
+          "days_since_last_entry": null,
+          "flag_stale": true
+        },
+        "relationships": {
+          "present": true,
+          "total_relationships": 10,
+          "high_strength_count": 5,
+          "last_touchpoint_unrecorded": [
+            "ritz-carlton-tokyo",
+            "plenus",
+            "hide-kyomachibori",
+            "mitsui-fudosan-residential",
+            "daiko",
+            "hba",
+            "zycc",
+            "cmyk-ubushina",
+            "medical-clinics",
+            "aar-plus"
+          ],
+          "last_touchpoint_stale_180d": []
+        },
+        "works_capacity": {
+          "published_works": 26,
+          "coming_soon": 2,
+          "monthly_capacity_units": 20,
+          "note": "capacityはSuiren等の受注生産ラインの上限（LINEUP_PLAN.md）。B2B案件と共有のボトルネック。"
+        },
+        "content_freshness": {
+          "index.html": "2026-08-03",
+          "lotus.html": "2026-06-13",
+          "tokushoho.html": "2026-06-13"
+        },
+        "seo": {
+          "index.html": {
+            "title": "ガラスアート・和紙・光の空間制作 | atelier TECNOFORM（神戸・1983〜）",
+            "title_len": 46,
+            "description_present": true,
+            "description_len": 108,
+            "flag_missing_description": false
+          },
+          "lotus.html": {
+            "title": "睡蓮 Suiren｜光の花 受注｜atelier TECNOFORM",
+            "title_len": 34,
+            "description_present": true,
+            "description_len": 76,
+            "flag_missing_description": false
+          },
+          "tokushoho.html": {
+            "title": "特定商取引法に基づく表記 | atelier TECNOFORM",
+            "title_len": 32,
+            "description_present": false,
+            "description_len": 0,
+            "flag_missing_description": true
+          }
+        },
+        "broken_images": {
+          "broken_image_refs": {},
+          "flag": false
+        },
+        "sitemap": {
+          "present": true,
+          "entries": 3,
+          "stale_vs_actual_commits": [
+            {
+              "page": "index.html",
+              "sitemap_lastmod": "2026-06-22",
+              "actual_last_commit": "2026-08-03"
+            },
+            {
+              "page": "lotus.html",
+              "sitemap_lastmod": "2026-06-08",
+              "actual_last_commit": "2026-06-13"
+            },
+            {
+              "page": "tokushoho.html",
+              "sitemap_lastmod": "2026-06-08",
+              "actual_last_commit": "2026-06-13"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "2026-08-proposal-01",
+      "date": "2026-08-04",
+      "type": "proposal",
+      "observation_ref": "2026-08-04-observation",
+      "proposal_doc": "growth-system/PROPOSAL-2026-08.md",
+      "root_cause": "『露出不足』という既存の自己診断は、B2B側の実績データ（リッツ・カールトン東京4件、プレナス5件/13年、秀2件、三井不動産レジデンシャル3件）が示す紹介・リピート経路の存在と矛盾する。真の問題は観測の不在——何が効いているか記録されていなかったこと。",
+      "hypotheses_considered": [
+        {"id": "H1", "name": "引き合い・関係先の計測基盤", "decision": "shipped_this_session"},
+        {"id": "H2", "name": "既存B2B関係の再接点化", "decision": "template_prepared_pending_owner_action"},
+        {"id": "H3", "name": "B2B向け露出コンテンツエンジン（月次）", "decision": "scoped_down_pending_owner_decision_on_bandwidth"},
+        {"id": "H4", "name": "睡蓮レンタル事業化（新規事業）", "decision": "flagged_pending_owner_decision_insurance_and_pse_review_required"},
+        {"id": "H5", "name": "パラメトリック意匠デジタル化／ワークショップ（新規事業）", "decision": "parked_brand_dilution_risk_unverified_demand"},
+        {"id": "H6", "name": "睡蓮の値上げテスト", "decision": "pending_owner_decision_zero_cost"}
+      ],
+      "critique_summary": "独立AIエージェントによる批判: (1)露出診断は安易な結論の可能性、実績データと矛盾 (2)UTM-mailtoは転送・紹介経由の問い合わせを捕捉できずバイアスを生む→不採用 (3)2人体制でH3の月次継続は非現実的→条件付きに格下げ (4)H4は賠償責任・PSE・ブランド毀損リスクを過小評価 (5)H5はブランドの希少性を毀損しうる (6)最大の欠落：既に機能している紹介・リピート経路の再接点化が抜けていた→H2として追加。なお批判が『LINEUP_PLAN.mdがレンタル業態を明示的に禁止している』とした点は一次資料で確認したところ誤りで、実際は前向きに検討中の項目だった（本文で訂正済み）。",
+      "rule_check": "LINEUP_PLAN.mdのブランド規律・PSE前提、tokushoho.htmlの特商法表記と照合。H1・軽微SEO修正は抵触なし。H4は着手時にPSE適用の再確認と特商法表記の追加が前提条件。",
+      "status": "partially_shipped_rest_pending_human_approval",
+      "result": null,
+      "learning": null
+    },
+    {
+      "id": "2026-08-correction-01",
+      "date": "2026-08-04",
+      "type": "correction",
+      "source": "owner_feedback_direct",
+      "correction": "江藤さんより2点の訂正: (1)『和紙の照明販売（睡蓮/Suiren）を主力事業にするつもりはない』(2)会社の公式ホームページは tecnoform.jp（本セッション環境からはネットワークポリシーによりアクセス不可）。",
+      "verification": "法人番号照会（gBizINFO等、公開検索経由）で tecnoform.jp が同一法人（株式会社アトリエ・テクノフォルム、代表 江藤徳晃、神戸市東灘区住吉山手3-3-18）の運営であることを確認。公式事業内容：建築工事設計・監理、インテリアデザイン企画及びガラスアート製作、ガラス工事の建設業許可保有。資本金300万円、従業員3名、創業1983年11月1日。",
+      "impact_on_plan": "PROPOSAL-2026-08.md・GROWTH_OS.mdを修正: 主力事業をB2B建築設計監理・ガラス工事・インテリアデザインと明記し、H4/H5/H6（睡蓮関連）を『副次ライン限定』に格下げ。tecnoform.jpとatelier-tecnoform.com（本リポジトリ）の役割分担は未確認のため、承認チェックリストに追加し次サイクルで確認する。",
+      "learning": "実績データからの推論（B2B側の紹介・リピートが機能している）は事業説明として正しい方向だったが、『主力/副次』の明言は一次情報（事業主本人）でしか確定できない。次サイクル以降、事業の優先順位に関わる推論は必ず本人確認を挟むこと。",
+      "unresolved_followup": "解決済み（2026-08-correction-02参照）"
+    },
+    {
+      "id": "2026-08-correction-02",
+      "date": "2026-08-04",
+      "type": "correction",
+      "source": "owner_feedback_direct",
+      "correction": "『tecnoform.jpは旧サイト』と確認。atelier-tecnoform.com（本リポジトリ）が現行の正式サイト。",
+      "impact_on_plan": "GROWTH_OS.md・PROPOSAL-2026-08.mdの該当チェックリスト項目を解決済みとして更新。以後、観測・成長施策の対象は引き続きatelier-tecnoform.comに一本化。",
+      "learning": "旧サイトが検索エンジンに残存し外部から参照可能な状態（gBizINFO等の企業情報サイトからもリンクされている）。実サイトを一本化しても、旧サイトが放置されると古い情報の露出・検索結果の分散というブランドリスクが残る可能性がある。",
+      "unresolved_followup": "解決済み（2026-08-correction-03参照）"
+    },
+    {
+      "id": "2026-08-correction-03",
+      "date": "2026-08-04",
+      "type": "correction",
+      "source": "owner_feedback_direct",
+      "correction": "『（tecnoform.jpは）廃止予定』と確認。",
+      "impact_on_plan": "tecnoform.jpの扱いは『廃止予定』で確定。ただし本リポジトリは atelier-tecnoform.com のみを管理しており、tecnoform.jp自体のドメイン・ホスティング・DNSはこのリポジトリのスコープ外のため、本セッションから直接の廃止作業（リダイレクト設定・停止）はできない。",
+      "learning": "会社に複数ドメインが存在する場合、GROWTH_OSの観測範囲外の資産（別ドメイン・別ホスティング）については、決定事項を記録するに留め、実行は管理者側の作業として切り離す必要がある。",
+      "unresolved_followup": "廃止作業（ドメインの停止／リダイレクト設定）はtecnoform.jp側の管理者（レジストラ・旧ホスティング事業者）での作業が必要。実施時期・方法は江藤さんの手配次第。本リポジトリ側での追加対応は不要と判断し、このフォローアップはクローズする。"
+    },
+    {
+      "id": "2026-08-proposal-02",
+      "date": "2026-08-04",
+      "type": "proposal",
+      "proposal_doc": "growth-system/PROPOSAL-2026-08-B.md",
+      "request": "江藤さんより『独自メディア構築・アフィリエイト事業の収益化検討』『他の異なる新規自動化可能事業の検討』の指示。",
+      "conclusion": "独自メディア／アフィリエイト事業は非推奨。理由: (1)Googleの2026年3月コアアップデートがscaled content abuse（権威のない新規ドメインでのAI量産コンテンツ）を明示的に取り締まっており、AI生成コンテンツで50-80%減・一次体験のないアフィリエイトレビューで40-70%減の実例あり (2)自社の強み（B2B高単価受注の信頼性）とアフィリエイト併設は両立しない（ステマ表示義務が高額実績の隣に出る矛盾） (3)コンテンツ制作の帯域問題（サイクル1のH3で既に未解決）を解決しないまま新事業を積み増すことになる。",
+      "hypotheses_considered": [
+        {"id": "H-Media-A", "name": "汎用ジャンル アフィリエイトメディア", "decision": "not_recommended"},
+        {"id": "H-Media-B", "name": "隣接ジャンル オウンドメディア＋軽量アフィリエイト", "decision": "affiliate_layer_rejected_content_only_folded_into_cycle1_H3"},
+        {"id": "H-Media-C", "name": "専門特化ニッチアフィリエイト（PSE部材・3Dプリント資材等）", "decision": "parked_market_size_unverified"},
+        {"id": "H-New-1", "name": "紹介手数料型リード仲介", "decision": "conditional_small_test_pending_owner_approval_disclosure_and_partner_vetting_required"},
+        {"id": "H-New-2", "name": "パラメトリック意匠デジタル資産販売（別ブランド）", "decision": "parked_pending_legal_entity_separation_review"},
+        {"id": "H-New-3", "name": "法人向けアートワークショップ", "decision": "downgraded_from_recommended_to_single_test_email"},
+        {"id": "H-New-4", "name": "AI運用ツール群の外販（SaaS化）", "decision": "not_recommended_skillset_mismatch"}
+      ],
+      "critique_summary": "独立AIエージェントによる批判: (1)H-New-1は『ローリスク』ではない——仲介人の選任責任・依頼主への開示義務なしの手数料受領は利益相反になりうる→条件付き修正 (2)H-Media-Bのアフィリエイト併設はB2B信頼性を毀損するカテゴリーエラーで期待値マイナス→却下 (3)帯域問題（サイクル1で未解決）を回避せず新事業3つに積み増しているだけ (4)定款の事業目的との適合性が未確認、H-New-2の『別ブランド名』は法人格が同一のため責任分離にならない→専門家確認を前提条件に追加 (5)H-New-3は未検証の『推奨』だった→テストメール1通に格下げ (6)最大の欠落：サイクル1で承認待ちのまま実行記録のない低コスト施策（再接点メール・台帳運用・値上げテスト）の機会費用を問うべき。",
+      "rule_check": "定款の事業目的（建築設計監理・インテリアデザイン・ガラスアート製作＋附帯業務）とメディア運営・紹介仲介の適合性は未確認のため要専門家確認。景品表示法（ステマ規制）は非着手のため対応不要。LINEUP_PLAN.mdのブランド規律とH-Media-Bのアフィリエイト層は衝突すると判断し却下。",
+      "status": "no_new_business_started_pending_human_decision",
+      "result": null,
+      "learning": "『指示された手段（メディア構築）が本当にその目的（収益向上）に対して筋が良いか』を検証すること自体がStep 2-3の仕事。指示をそのまま実行せず、まず一次情報（2026年時点の検索エンジン方針・法規制）で裏を取ったことで、B2Bブランドを毀損しうる施策を未然に防いだ。"
+    },
+    {
+      "id": "2026-08-proposal-03",
+      "date": "2026-08-07",
+      "type": "proposal",
+      "proposal_doc": "growth-system/PROPOSAL-2026-08-C.md",
+      "request": "江藤さんより『担当者が変われば会社がなくなる。私を置いてものづくりができなくなる基盤を作れ。世の中の実需・流通・消費を確認した上でAIの独自性で自動化できる収益システムを作ってほしい』との指示。",
+      "context": "同日、Gmail実データ調査で以下を新たに確認：(1)2023年インターカルチャーアート(松枝様)からの大阪新設ホテル向け和紙作品110個の見積依頼が未返信のまま放置(下書き返信を作成済み) (2)Stripeアカウントが imfo@atelier-tecnoform.com (info@のタイポ)宛に既に存在 (3)ココナラ出品者アカウントが8/4登録のまま放置 (4)Payoneerを騙るフィッシングメール複数",
+      "hypotheses_considered": [
+        {"id": "H-C1", "name": "AI生成3Dコンセプトデザインをココナラ等で外販(新規収益源)", "decision": "rejected_after_adversarial_critique"},
+        {"id": "H-C2", "name": "技法・工程のナレッジベース化(脱属人化インフラ)", "decision": "shipped_this_session"},
+        {"id": "H-C3", "name": "AI生成3Dコンセプトを外販せず既存の紹介・引き合いフローの無償補助として使う", "decision": "pending_owner_decision"}
+      ],
+      "build_executed": "SketchUp MCPの実接続を確認し、2023年ICA案件の仕様(梅の花・φ240×H200~300mm相当・個体差のある110個)を参考に3種の異なるシルエットの和紙オブジェコンセプトを実際に構築、.skpとして保存。サムネイルをgrowth-system/assets/に保存。",
+      "critique_summary": "独立AIエージェントによる批判(H-C1に対して): (1)ココナラ3Dモデリング4,000件はコモディティCAD代行の需要でありホテル向け高単価アート意匠の需要とは買い手が別(高単価案件は実績データ上すべて紹介・リピート経由) (2)生成物はローポリ無テクスチャでフォトリアル期待層には安っぽく映りブランド毀損リスク (3)製作(ガラス/和紙の手仕事)は依然100%江藤さん依存で脱属人化になっていない、むしろAI出力のレビュー負荷という新しい依存を生む (4)SketchUp MCPは無料枠(saves_remaining 29/30)で商用成果物への無断使用は規約上の懸念、AI生成形状の著作権も未整理 (5)最大の指摘：この施策はサイクル1のH5・サイクル2のH-New-2(いずれもパラメトリック意匠のデジタル化/外販、需要未検証・法人格上の責任分離にならない、として保留)の焼き直しであり、過去の学びとの照合を怠っていた。",
+      "rule_check": "LINEUP_PLAN.mdのブランド規律(SKU・チャネル拡散抑制)とH-C1(マーケットプレイス外販)は抵触→不採用の追加根拠。H-C3(既存引き合いへの無償補助添付)は新チャネル・新商品を作らないため抵触なし。",
+      "status": "H-C1_rejected_H-C2_shipped_H-C3_pending_human_decision",
+      "result": null,
+      "learning": "H5/H-New-2という前例があったにも関わらず、『実際に動くツールがある』という事実に引っ張られて同じ弱点を持つ施策をほぼ再提案しかけた——過去サイクルの`hypotheses_considered`全件との照合を徹底していなかった。一方で『実際に手を動かして作り、独立AIに批判させてから提案する』プロセス自体は機能し、ダメな施策をStep 7(お金・ブランドを実際に使う段階)の前に止められた。属人性の本体は『意匠を考えること』ではなく『実際に手で作ること』にあり、AIが代替できるのは前者の一部のみ、という診断がこのサイクルの一番の成果。"
+    }
+  ]
+}

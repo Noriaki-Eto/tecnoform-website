@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /growth-system/
+Disallow: /data/
+Disallow: /scripts/
 
 Sitemap: https://atelier-tecnoform.com/sitemap.xml

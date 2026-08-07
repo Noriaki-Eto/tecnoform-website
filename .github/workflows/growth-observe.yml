@@ -1,0 +1,68 @@
+name: Growth Observe
+
+# 毎月1日 09:30 JST (= 00:30 UTC) に発火（hero-rotation の30分後）
+# 手動実行も可能 (Actions タブの "Run workflow" ボタン)
+on:
+  schedule:
+    - cron: '30 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # git log による正確な最終更新日取得に必要
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run growth observation
+        id: observe
+        run: |
+          set -e
+          python scripts/observe_growth_signals.py | tee observation-report.md
+          {
+            echo 'report<<OBSERVE_REPORT_EOF'
+            cat observation-report.md
+            echo 'OBSERVE_REPORT_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Show diff
+        run: git diff --stat
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: growth-observe/auto
+          delete-branch: true
+          commit-message: "chore(growth): monthly observation"
+          title: "📊 月次観測レポート（自動化利益基盤）"
+          body: |
+            自動生成: 現在地を観測する（10ステップループの Step 1）
+
+            ${{ steps.observe.outputs.report }}
+
+            **これは何をするPRか:**
+            - `data/growth-experiments.json` に今月の観測結果を1件追記するだけです。
+            - `index.html` など公開ページは一切変更しません。
+
+            **承認方法:**
+            - このPRをマージ → 台帳に記録として残る
+            - 見なくてよい → Close してもOK（次月また自動生成されます）
+
+            **次にすること（人間の仕事）:**
+            レポートの ⚠️ 項目を見て、対応するかどうかを判断してください。
+            仮説を立てる場合は `growth-system/GROWTH_OS.md` の手順を参照してください。
+          labels: |
+            automation
