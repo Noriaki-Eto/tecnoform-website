@@ -1,0 +1,19 @@
+{
+  "updated":"2026-09-03T16:41:00+09:00",
+  "site":"atelier-tecnoform",
+  "mode":"production",
+  "url":"https://atelier-tecnoform.com/",
+  "source":"Noriaki-Eto/tecnoform-website",
+  "design":"frozen",
+  "last_safe_action":"establish-verified-source-recovery-with-independent-copy",
+  "last_public_commit":"240b49bd0ff9859ab7a39a5242d68a670b6dc1f7",
+  "incident":"resolved",
+  "source_sync":"Local eeb8340 and fetched public 240b49b have the identical tree 36811a21eedc581cf7a032ef3d9ae3d7f0aa3462. Both histories preserved; no merge, reset or source edit performed.",
+  "source_recovery":"RECOVERED_APPROVAL_PENDING; GitHub main source plus two verified Drive parts reconstruct a 63,115,602-byte archive containing all 254 tracked files. No database or account/DNS configuration is included.",
+  "source_recovery_sha256":"1ef1192966733b96bfc0f9d3a30af09e3441fe6a89a4141faef0ca3813ee63fa",
+  "record_branch":"maintenance/2026-09-03-recovery",
+  "publication":"No deployment, no public main change, no new formal version promotion",
+  "trigger_utc":"2026-09-03T07:30:03.246Z",
+  "trigger_jst":"2026-09-03T16:30:03.246+09:00",
+  "schedule_note":"Nominal 07:30 slot observed at 16:30 JST; actual timestamps retained. Scheduler timezone not changed."
+}
