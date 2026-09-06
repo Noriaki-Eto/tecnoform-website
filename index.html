@@ -1122,16 +1122,16 @@ footer {
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" aria-hidden="true">
   <div class="lb-header">
     <span class="lb-counter" id="lbCounter">— / —</span>
-    <button class="lb-close" id="lbClose" aria-label="close">×</button>
+    <button class="lb-close" id="lbClose" aria-label="作品表示を閉じる">×</button>
   </div>
   <div class="lb-caption">
     <div class="lb-title" id="lbTitle"></div>
     <div class="lb-meta" id="lbMeta"></div>
   </div>
   <div class="lb-stage">
-    <button class="lb-nav lb-prev" id="lbPrev" aria-label="prev">‹</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="前の画像">‹</button>
     <div class="lb-img-wrap"><img class="lb-img" id="lbImg" alt=""></div>
-    <button class="lb-nav lb-next" id="lbNext" aria-label="next">›</button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="次の画像">›</button>
   </div>
   <div class="lb-footer">
     <p class="lb-desc" id="lbDesc"></p>
@@ -1367,6 +1367,10 @@ lb.addEventListener('touchend', function(e){
     document.documentElement.lang=l;
     if(window.updateWorksLang) updateWorksLang();
     var b=document.getElementById("langToggle"); if(b){ b.textContent=(l==="en")?"\u65e5\u672c\u8a9e":"EN"; b.setAttribute("aria-label",(l==="en")?"日本語に切り替える":"英語に切り替える"); }
+    var close=document.getElementById("lbClose"), prev=document.getElementById("lbPrev"), next=document.getElementById("lbNext");
+    if(close) close.setAttribute("aria-label", l==="en" ? "Close work viewer" : "作品表示を閉じる");
+    if(prev) prev.setAttribute("aria-label", l==="en" ? "Previous image" : "前の画像");
+    if(next) next.setAttribute("aria-label", l==="en" ? "Next image" : "次の画像");
     try{ localStorage.setItem("tf_lang", l); }catch(e){}
   }
   function init(){
@@ -1458,3 +1462,4 @@ lb.addEventListener('touchend', function(e){
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "544778460112444680d89fb7cb171e9f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
+
