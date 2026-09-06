@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "work_name": "DS SUPPORT JAPAN / atelier TECNOFORM maintenance",
+  "version": "2026-09-06.v1",
+  "approval_state": "APPROVAL_PENDING",
+  "created_at": "2026-09-06T16:44:00+09:00",
+  "storage_gate": "PASS",
+  "public_change": true,
+  "scope": "Source and maintenance recovery, not account secrets, DNS settings, mailboxes or a release approval.",
+  "closed_backlog_ids_on_gate_pass": [
+    "ATF-009"
+  ],
+  "artifacts": [
+    {
+      "name": "atelier-public-240b49b-source.tar.gz",
+      "version": "source-240b49b-2026-09-03",
+      "approval_state": "RECOVERED_APPROVAL_PENDING",
+      "format": "tar.gz reconstructed from 2 binary parts",
+      "dimensions": "not applicable",
+      "created_at": "2026-09-03T07:35:01.311Z",
+      "bytes": 63115602,
+      "sha256": "1ef1192966733b96bfc0f9d3a30af09e3441fe6a89a4141faef0ca3813ee63fa",
+      "first_store": {
+        "provider": "GitHub",
+        "repository": "Noriaki-Eto/tecnoform-website",
+        "file_id": "240b49bd0ff9859ab7a39a5242d68a670b6dc1f7",
+        "tree": "36811a21eedc581cf7a032ef3d9ae3d7f0aa3462",
+        "reproduce": "git archive --format=tar.gz of this exact fetched commit"
+      },
+      "second_store": {
+        "provider": "Google Drive",
+        "folder_id": "10fJ7ZRolJ1c8mhUj9SRJR9Pt7kerGJX_",
+        "parts": [
+          {
+            "name": "atelier-public-240b49b-source.tar.gz.part01",
+            "bytes": 33554432,
+            "sha256": "a591ac9735b61f6f2477a636722a10cd35c416cef3b545e547d0a2996d5470a9",
+            "drive_file_id": "13jKC0MdXz4E6B-Z0Iomdc7LvE7VnMpQK",
+            "modified_at": "2026-09-03T07:37:36.657Z"
+          },
+          {
+            "name": "atelier-public-240b49b-source.tar.gz.part02",
+            "bytes": 29561170,
+            "sha256": "cc857827494b681e0b744b2ad241308911042a3f3b1c47f52f25552e9dd591ec",
+            "drive_file_id": "10vXwvvcuAHndC1lbUrdQC07Ubz63FQhu",
+            "modified_at": "2026-09-03T07:37:45.704Z"
+          }
+        ]
+      },
+      "readback": "Fetched GitHub source; downloaded each Drive part; checked part SHA-256 and sizes; reassembled archive SHA-256 and size matched; extracted 254 files; sitemap parsed; all image references in main HTML files exist.",
+      "dependencies": "All 254 tracked source/assets/configuration files included. Operational restore helper is in the separate ops bundle.",
+      "next_step": "Restore only into an empty directory. Recovered copies require approval before becoming a formal release."
+    },
+    {
+      "name": "atelier-ops-20260903-v1.tar.gz",
+      "version": "2026-09-03.v1",
+      "approval_state": "APPROVAL_PENDING",
+      "format": "tar.gz",
+      "dimensions": "not applicable",
+      "created_at": "2026-09-03T07:43:15.763Z",
+      "bytes": 5779,
+      "sha256": "5a44877e01c5ecc026bdc0a9ec815bf71dae84abbedd9d1fb54b2effa0fae3e4",
+      "first_store": {
+        "provider": "GitHub",
+        "repository": "Noriaki-Eto/tecnoform-website",
+        "branch": "maintenance/2026-09-03-recovery",
+        "file_id": "2385dd88e865ccd7e1d78db6a733e5605993d762",
+        "member": ".maintenance/2026-09-03",
+        "reproduce": "git archive --format=tar.gz COMMIT .maintenance/2026-09-03"
+      },
+      "second_store": {
+        "provider": "Google Drive",
+        "file_id": "1O2SaqGrZOBUdR9mNsZhdUx2uvH_KHwWI",
+        "modified_at": "2026-09-03T07:43:15.763Z"
+      },
+      "readback": "Downloaded again, SHA-256 matched; all 8 extracted operational files match local originals byte-for-byte and JSON parses.",
+      "dependencies": [
+        "AUTONOMY_CHARTER.md",
+        "RUNBOOK.md",
+        "UPDATES.md",
+        "runtime/STATE.json",
+        "runtime/BACKLOG.json",
+        "runtime/LOCK.json",
+        "split-recovery.ps1",
+        "restore-recovery.ps1"
+      ],
+      "next_step": "Use ledger gate as final verification authority; do not merge maintenance branch into public main."
+    },
+    {
+      "name": "atelier-delta-20260906-v1.zip",
+      "version": "2026-09-06.v1",
+      "approval_state": "APPROVED_CURRENT",
+      "format": "zip containing two Git format-patches and operational verification records",
+      "dimensions": "not applicable",
+      "created_at": "2026-09-06T07:42:00Z",
+      "bytes": 147822,
+      "sha256": "86353bc43125104610c1645a55263dd80666c02399d2f5aabbcab51c63b0fc5a",
+      "first_store": {
+        "provider": "GitHub",
+        "repository": "Noriaki-Eto/tecnoform-website",
+        "file_id": "07e31b14470f288e8a98f13d2894f502935f0c92",
+        "base_file_id": "240b49bd0ff9859ab7a39a5242d68a670b6dc1f7",
+        "content_blob": "592ca0d5f66025032093d41b135319900c692391"
+      },
+      "second_store": {
+        "provider": "Google Drive",
+        "folder_id": "10fJ7ZRolJ1c8mhUj9SRJR9Pt7kerGJX_",
+        "file_id": "1l3vF4umi3gVAecy3k8j_4cH5D1PlPHjY",
+        "modified_at": "2026-09-06T07:43:02.557Z"
+      },
+      "readback": "Downloaded the Drive copy as raw bytes; size 147822 and SHA-256 matched the local archive. GitHub main was fetched again and contained both localized label sets. The public home returned the new labels after deployment.",
+      "dependencies": [
+        "atelier-public-240b49b-source.tar.gz verified base archive",
+        "0001-Localize-lightbox-control-labels.patch",
+        "0002-Normalize-accessible-label-update.patch",
+        "logs/2026-09-06-atelier-audit.md",
+        "runtime/STATE.json",
+        "runtime/BACKLOG.json",
+        "UPDATES.md"
+      ],
+      "next_step": "Apply the two patches in filename order to the verified 240b49b base only when reconstructing this release."
+    }
+  ],
+  "qc": {
+    "public_pages_http": 200,
+    "public_source_content_match": "All three main pages equal after CRLF/LF normalization; raw hashes differ for home and legal because of newline representation.",
+    "mobile": "390x844 emulator: no horizontal overflow on home/Lotus/legal; menu and JP/EN/JP switch verified.",
+    "visual_design": "Accessible names changed; visible design, copy, photography and work order retained.",
+    "history": "Both prior local and public histories preserved; public source commit is 07e31b1 and local integration commit is 62537e5."
+  },
+  "unverified_extra_copy": {
+    "drive_file_id": "15ptaTDDzeZdwFIyJczkLiu63OojUtVrM",
+    "note": "Original monolithic upload retained, but readback IPC size limit prevented its local materialization. Use the verified two-part restore route instead."
+  },
+  "record_files": {
+    "ledger": "ARTIFACT_LEDGER.json",
+    "checksums": "SHA256SUMS.txt",
+    "first_store_branch": "maintenance/2026-09-03-recovery",
+    "first_store_directory": ".maintenance/2026-09-03",
+    "second_store_folder_id": "10fJ7ZRolJ1c8mhUj9SRJR9Pt7kerGJX_",
+    "note": "SHA256SUMS contains the ledger hash; no self-referential checksum."
+  }
+}
+
