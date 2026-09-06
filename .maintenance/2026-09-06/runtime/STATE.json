@@ -1,0 +1,20 @@
+{
+  "updated":"2026-09-06T16:41:00+09:00",
+  "site":"atelier-tecnoform",
+  "mode":"production",
+  "url":"https://atelier-tecnoform.com/",
+  "source":"Noriaki-Eto/tecnoform-website",
+  "design":"frozen",
+  "last_safe_action":"localize-lightbox-control-labels",
+  "last_public_commit":"07e31b14470f288e8a98f13d2894f502935f0c92",
+  "incident":"resolved",
+  "source_sync":"Public main was updated through the GitHub contents API after command-line push credentials were unavailable. Local main then merged origin/main with renormalization; both histories are preserved and the working tree is clean.",
+  "source_recovery":"RECOVERED_APPROVAL_PENDING; GitHub main source plus two verified Drive parts reconstruct a 63,115,602-byte archive containing all 254 tracked files. No database or account/DNS configuration is included.",
+  "source_recovery_sha256":"1ef1192966733b96bfc0f9d3a30af09e3441fe6a89a4141faef0ca3813ee63fa",
+  "record_branch":"maintenance/2026-09-03-recovery",
+  "publication":"Published commit 07e31b14470f288e8a98f13d2894f502935f0c92; home, Lotus and legal pages returned HTTP 200, and the public home contains both Japanese and English lightbox labels.",
+  "trigger_utc":"2026-09-06T07:31:29.673Z",
+  "trigger_jst":"2026-09-06T16:31:29.673+09:00",
+  "schedule_note":"Nominal 07:30 slot observed at 16:31 JST; actual timestamps retained. Scheduler timezone not changed."
+}
+
