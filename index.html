@@ -776,6 +776,54 @@ footer {
 }
 
 
+
+/* ===== MIRAI CONCIERGE v1 ===== */
+.mirai-launcher{
+  position:fixed; right:1.25rem; bottom:1.25rem; z-index:180;
+  display:flex; align-items:center; gap:.7rem; padding:.8rem 1rem;
+  border:1px solid rgba(201,168,117,.55); background:rgba(11,10,9,.94);
+  color:var(--paper); cursor:pointer; box-shadow:0 12px 34px rgba(0,0,0,.34);
+  font:300 .82rem/1.3 'Noto Serif JP',serif; letter-spacing:.08em;
+}
+.mirai-launcher-mark{
+  width:2rem; height:2rem; border:1px solid var(--accent); border-radius:50%;
+  display:grid; place-items:center; color:var(--accent);
+  font:italic 1rem/1 'Cormorant Garamond',serif;
+}
+.mirai-panel{
+  position:fixed; right:1.25rem; bottom:5.8rem; z-index:181;
+  width:min(390px,calc(100vw - 2rem)); max-height:min(720px,calc(100svh - 7rem));
+  overflow:auto; display:none; text-align:left;
+  background:rgba(15,13,11,.985); border:1px solid rgba(201,168,117,.38);
+  box-shadow:0 22px 60px rgba(0,0,0,.5);
+}
+.mirai-panel.open{display:block;}
+.mirai-head{padding:1.25rem 1.3rem 1rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;}
+.mirai-kicker{font:italic .72rem/1.2 'Cormorant Garamond',serif;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;}
+.mirai-title{font:300 1.1rem/1.5 'Noto Serif JP',serif;color:var(--paper);margin-top:.35rem;}
+.mirai-close{border:0;background:none;color:var(--paper-soft);font-size:1.4rem;cursor:pointer;line-height:1;}
+.mirai-body{padding:1.25rem 1.3rem 1.4rem;}
+.mirai-message{font-size:.88rem;line-height:1.85;color:var(--paper-soft);margin-bottom:1rem;}
+.mirai-options{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:1rem;}
+.mirai-option{border:1px solid var(--line);background:transparent;color:var(--paper);padding:.75rem .7rem;cursor:pointer;font-size:.78rem;line-height:1.5;text-align:left;}
+.mirai-option:hover,.mirai-option.active{border-color:var(--accent);color:var(--accent);}
+.mirai-form{display:none;border-top:1px solid var(--line);padding-top:1rem;}
+.mirai-form.active{display:block;}
+.mirai-field{margin-bottom:.85rem;}
+.mirai-field label{display:block;font-size:.7rem;letter-spacing:.08em;color:var(--paper-soft);margin-bottom:.35rem;}
+.mirai-field input,.mirai-field textarea{
+  width:100%;border:1px solid var(--line);background:#0b0a09;color:var(--paper);
+  padding:.72rem .75rem;font:300 .82rem/1.6 'Inter','Noto Serif JP',sans-serif;border-radius:0;
+}
+.mirai-field textarea{min-height:88px;resize:vertical;}
+.mirai-send{width:100%;border:1px solid var(--accent);background:var(--accent);color:var(--ink);padding:.85rem 1rem;cursor:pointer;font-size:.82rem;letter-spacing:.08em;}
+.mirai-send:hover{background:transparent;color:var(--accent);}
+.mirai-note{font-size:.68rem;line-height:1.7;color:var(--paper-mute);margin-top:.8rem;}
+@media(max-width:640px){
+  .mirai-launcher{right:.75rem;bottom:.75rem;}
+  .mirai-panel{right:.75rem;bottom:5rem;width:calc(100vw - 1.5rem);max-height:calc(100svh - 6rem);}
+}
+
 /* ===== TECH DESIGN PROCESS ===== */
 .tech-process { max-width: 1100px; margin: 5rem auto 0; padding-top: 3rem; border-top: 1px solid var(--line); }
 .tech-process-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.24em; margin-bottom: 0.9rem; }
@@ -1118,6 +1166,42 @@ footer {
   <a href="tokushoho.html" style="color:var(--paper-soft);font-style:normal;letter-spacing:0.06em;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;">特定商取引法に基づく表記</a>
 </footer>
 
+
+<!-- MIRAI CONCIERGE v1: private lead intake UI; no autonomous quoting/contracting -->
+<button class="mirai-launcher" id="miraiLauncher" type="button" aria-controls="miraiPanel" aria-expanded="false">
+  <span class="mirai-launcher-mark">M</span>
+  <span>ミライに相談する</span>
+</button>
+<aside class="mirai-panel" id="miraiPanel" aria-hidden="true" aria-label="ミライ相談窓口">
+  <div class="mirai-head">
+    <div>
+      <div class="mirai-kicker">MIRAI / atelier TECNOFORM</div>
+      <div class="mirai-title">空間づくりの一次相談を承ります。</div>
+    </div>
+    <button class="mirai-close" id="miraiClose" type="button" aria-label="閉じる">×</button>
+  </div>
+  <div class="mirai-body">
+    <p class="mirai-message">こんにちは、ミライです。ご相談内容を整理して、atelier TECNOFORMへおつなぎします。まず近いものを選んでください。</p>
+    <div class="mirai-options" id="miraiOptions">
+      <button class="mirai-option" type="button" data-kind="建築・空間デザイン">建築・空間デザイン</button>
+      <button class="mirai-option" type="button" data-kind="ガラス・和紙・光の作品">ガラス・和紙・光の作品</button>
+      <button class="mirai-option" type="button" data-kind="商品・作品について">商品・作品について</button>
+      <button class="mirai-option" type="button" data-kind="その他のお問い合わせ">その他のお問い合わせ</button>
+    </div>
+    <form class="mirai-form" id="miraiForm">
+      <div class="mirai-field"><label for="miraiKind">ご相談の種類</label><input id="miraiKind" name="kind" readonly></div>
+      <div class="mirai-field"><label for="miraiDetail">どのようなご相談ですか？</label><textarea id="miraiDetail" name="detail" required placeholder="例：ホテルエントランスに、光と和紙を使った壁面作品を検討しています。"></textarea></div>
+      <div class="mirai-field"><label for="miraiPlace">場所・施設名（未定でも構いません）</label><input id="miraiPlace" name="place" placeholder="例：大阪市／ホテル／住宅"></div>
+      <div class="mirai-field"><label for="miraiTiming">ご希望時期</label><input id="miraiTiming" name="timing" placeholder="例：2027年春／未定"></div>
+      <div class="mirai-field"><label for="miraiBudget">ご予算感（任意）</label><input id="miraiBudget" name="budget" placeholder="例：100〜300万円／相談したい"></div>
+      <div class="mirai-field"><label for="miraiName">会社名・お名前</label><input id="miraiName" name="name" required></div>
+      <div class="mirai-field"><label for="miraiContact">返信先メールまたは電話番号</label><input id="miraiContact" name="contact" required></div>
+      <button class="mirai-send" type="submit">相談内容をメールで送る</button>
+      <p class="mirai-note">ミライは一次受付です。見積・契約・納期・仕様を自動確定しません。送信前に内容をご確認いただけます。</p>
+    </form>
+  </div>
+</aside>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" aria-hidden="true">
   <div class="lb-header">
@@ -1459,6 +1543,51 @@ lb.addEventListener('touchend', function(e){
   }, 5500);
 })();
 </script>
+<!-- MIRAI CONCIERGE JS -->
+
+<script>
+(function(){
+  var launcher=document.getElementById('miraiLauncher');
+  var panel=document.getElementById('miraiPanel');
+  var close=document.getElementById('miraiClose');
+  var form=document.getElementById('miraiForm');
+  var kind=document.getElementById('miraiKind');
+  if(!launcher||!panel||!form)return;
+  function setOpen(v){
+    panel.classList.toggle('open',v);
+    panel.setAttribute('aria-hidden',String(!v));
+    launcher.setAttribute('aria-expanded',String(v));
+  }
+  launcher.addEventListener('click',function(){setOpen(!panel.classList.contains('open'));});
+  close.addEventListener('click',function(){setOpen(false);});
+  document.querySelectorAll('.mirai-option').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.mirai-option').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active'); kind.value=btn.dataset.kind||'';
+      form.classList.add('active');
+      document.getElementById('miraiDetail').focus();
+    });
+  });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var val=function(id){return(document.getElementById(id).value||'').trim();};
+    var subject='【ミライ受付】'+val('miraiKind');
+    var body=[
+      'atelier TECNOFORM ご担当者様','',
+      'Webサイトのミライ相談窓口からの問い合わせです。','',
+      '【ご相談の種類】',val('miraiKind'),'',
+      '【ご相談内容】',val('miraiDetail'),'',
+      '【場所・施設名】',val('miraiPlace')||'未記入','',
+      '【ご希望時期】',val('miraiTiming')||'未記入','',
+      '【ご予算感】',val('miraiBudget')||'未記入','',
+      '【会社名・お名前】',val('miraiName'),'',
+      '【返信先】',val('miraiContact')
+    ].join('\n');
+    location.href='mailto:info@atelier-tecnoform.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  });
+})();
+</script>
+
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "544778460112444680d89fb7cb171e9f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
