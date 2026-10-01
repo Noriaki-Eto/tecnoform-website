@@ -7,6 +7,7 @@
 <meta name="description" content="ホテル・商業空間・邸宅・医療施設のガラスアート、和紙照明、光のインスタレーションを、構想から制作・設置まで一貫制作。ザ・リッツ・カールトン東京、三井不動産ほか実績多数。神戸の工房 atelier TECNOFORM。">
 <meta name="keywords" content="光と水の作家,江藤徳晃,ガラスアート,和紙照明,パラメトリックデザイン,照明オブジェ,エントランスアート,高級ホテル内装,企業エントランス,邸宅アート,壁面アート,アトリエ,テクノフォルム">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="mirai.css">
 <!-- Open Graph -->
 <meta property="og:title" content="ガラスアート・和紙・光の空間制作 | atelier TECNOFORM">
 <meta property="og:description" content="ホテル・商業・邸宅・医療施設のガラスアート、和紙照明、光のインスタレーション。構想から制作・設置まで一貫制作。神戸の工房 atelier TECNOFORM。">
@@ -1119,6 +1120,29 @@ footer {
   <a href="tokushoho.html" style="color:var(--paper-soft);font-style:normal;letter-spacing:0.06em;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;">特定商取引法に基づく表記</a>
 </footer>
 
+<!-- MIRAI CONCIERGE v2 -->
+<button class="mirai-launcher" id="miraiLauncher" type="button" aria-controls="miraiPanel" aria-expanded="false"><span class="mirai-launcher-mark">M</span><span>ミライに相談する</span></button>
+<aside class="mirai-panel" id="miraiPanel" aria-hidden="true" aria-label="ミライ AIコンシェルジュ">
+ <div class="mirai-head"><div><div class="mirai-kicker">MIRAI / atelier TECNOFORM</div><div class="mirai-title">作品案内・空間づくりの一次相談</div></div><button class="mirai-close" id="miraiClose" type="button" aria-label="閉じる">×</button></div>
+ <div class="mirai-stream" id="miraiStream">
+  <div class="mirai-msg bot">こんにちは、ミライです。atelier TECNOFORMのサイトに掲載された作品・素材・技術をご案内し、空間づくりのご相談を整理します。<br><br>「ホテルの事例」「和紙で何ができる？」「エントランスを相談したい」など、そのまま入力してください。</div>
+  <div class="mirai-quick"><button class="mirai-chip" type="button" data-q="ホテルの事例を見たい">ホテルの事例</button><button class="mirai-chip" type="button" data-q="和紙で何ができますか">和紙について</button><button class="mirai-chip" type="button" data-q="ガラスアートの事例">ガラスアート</button><button class="mirai-chip" type="button" data-q="空間デザインを相談したい">相談を始める</button></div>
+  <form class="mirai-lead" id="miraiLead">
+   <div class="mirai-lead-title">ご相談内容をまとめます。</div>
+   <div class="mirai-field"><label for="miraiKind">ご相談の種類</label><input id="miraiKind" value="建築・空間デザイン／作品制作"></div>
+   <div class="mirai-field"><label for="miraiDetail">ご相談内容</label><textarea id="miraiDetail" required placeholder="例：ホテルエントランスに、光と和紙を使った壁面作品を検討しています。"></textarea></div>
+   <div class="mirai-field"><label for="miraiPlace">場所・施設名</label><input id="miraiPlace" placeholder="例：大阪市／ホテル／住宅"></div>
+   <div class="mirai-field"><label for="miraiTiming">ご希望時期</label><input id="miraiTiming" placeholder="例：2027年春／未定"></div>
+   <div class="mirai-field"><label for="miraiBudget">ご予算感（任意）</label><input id="miraiBudget" placeholder="例：100〜300万円／相談したい"></div>
+   <div class="mirai-field"><label for="miraiName">会社名・お名前</label><input id="miraiName" required></div>
+   <div class="mirai-field"><label for="miraiContact">返信先メールまたは電話番号</label><input id="miraiContact" required></div>
+   <button class="mirai-send" type="submit">内容を確認してメールを作成</button>
+   <p class="mirai-note">入力内容はこの画面で整理し、送信時にメールアプリを開きます。ミライが見積・契約・納期・仕様を自動確定することはありません。</p>
+  </form>
+ </div>
+ <form class="mirai-compose" id="miraiCompose"><input class="mirai-input" id="miraiInput" autocomplete="off" placeholder="作品・素材・ご相談について質問"><button class="mirai-submit" type="submit">送信</button></form>
+</aside>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" aria-hidden="true">
   <div class="lb-header">
@@ -1460,6 +1484,7 @@ lb.addEventListener('touchend', function(e){
   }, 5500);
 })();
 </script>
+<script src="mirai.js"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "544778460112444680d89fb7cb171e9f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
