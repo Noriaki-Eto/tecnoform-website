@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECNOFORM JOURNAL | atelier TECNOFORM</title>
+<meta name="description" content="atelier TECNOFORMの実装ノート。AI、建築・空間デザイン、3D、デジタルファブリケーションを、実務でどう使うかという視点で記録します。">
+<link rel="canonical" href="https://atelier-tecnoform.com/journal.html">
+<meta property="og:title" content="TECNOFORM JOURNAL | atelier TECNOFORM">
+<meta property="og:description" content="新技術を増やすのではなく、実際の制作・設計・顧客対応につなぐための実装ノート。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://atelier-tecnoform.com/journal.html">
+<meta property="og:image" content="https://atelier-tecnoform.com/images/ogp.jpg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Serif+JP:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b0a09;--paper:#ece5d5;--soft:#b8a78a;--line:rgba(184,167,138,.20);--accent:#c9a875}
+*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--paper);font-family:Inter,'Noto Serif JP',sans-serif;font-weight:300;line-height:1.9}a{color:inherit}
+header{padding:1.3rem 3rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:rgba(11,10,9,.94);backdrop-filter:blur(8px);z-index:10}
+.logo{font-family:'Cormorant Garamond',serif;letter-spacing:.25em;text-decoration:none}.back{font-size:.82rem;color:var(--soft);text-decoration:none;letter-spacing:.12em}
+main{max-width:920px;margin:0 auto;padding:7rem 2rem 8rem}.eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--soft);letter-spacing:.2em}
+.title{font-family:'Noto Serif JP',serif;font-weight:300;font-size:clamp(2.2rem,6vw,4.4rem);line-height:1.35;margin:1rem 0 1.8rem}.lead{font-family:'Noto Serif JP',serif;color:var(--soft);font-size:1.08rem;max-width:760px}
+.meta{margin:2.5rem 0 5rem;color:var(--soft);font-size:.82rem;letter-spacing:.08em}.note{border-top:1px solid var(--line);padding:2.4rem 0}
+.num{font-family:'Cormorant Garamond',serif;color:var(--accent);font-size:1.2rem;letter-spacing:.12em}.note h2{font-family:'Noto Serif JP',serif;font-weight:400;font-size:1.45rem;margin:.4rem 0 1rem}
+.note p{margin:.7rem 0;color:#d9d0bf}.decision{margin-top:1.15rem;padding:1rem 1.2rem;border-left:1px solid var(--accent);background:rgba(201,168,117,.045);color:var(--paper)}
+.source{font-size:.82rem;color:var(--soft);margin-top:1rem}.source a{text-decoration:none;border-bottom:1px solid var(--line)}
+.rule{margin-top:4rem;border:1px solid var(--line);padding:1.6rem 1.8rem}.rule h2{font-family:'Noto Serif JP',serif;font-weight:400;font-size:1.2rem;margin:0 0 .7rem}.rule p{margin:.4rem 0;color:var(--soft)}
+footer{border-top:1px solid var(--line);padding:2.5rem 2rem;text-align:center;color:var(--soft);font-size:.78rem;letter-spacing:.08em}
+@media(max-width:700px){header{padding:1rem 1.2rem}.logo{font-size:.9rem;letter-spacing:.16em}main{padding:5rem 1.3rem 6rem}.lead{font-size:1rem}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="index.html">atelier TECNOFORM</a><a class="back" href="index.html">← WEBSITE</a></header>
+<main>
+<div class="eyebrow">TECNOFORM JOURNAL / IMPLEMENTATION NOTE 01</div>
+<h1 class="title">AIを増やさない。<br>仕事につなぐ。</h1>
+<p class="lead">毎日のAIニュースを追うだけでは、売上にも制作にもつながりません。atelier TECNOFORMでは、建築・空間デザイン、顧客対応、3D・デジタル制作に本当に使えるものだけを選び、既存の仕事へ組み込みます。</p>
+<div class="meta">2026.10.01 / atelier TECNOFORM</div>
+
+<section class="note">
+<div class="num">01 / ROUTING</div>
+<h2>問い合わせを、適切な次の仕事へ振り分ける</h2>
+<p>OpenAIは2026年9月29日のDevDayで、テキストや画像を有限の選択肢へ分類するDecisions APIと、ソフトウェア操作を含むAgents APIの拡張を発表しました。注目しているのは「何でもAIに任せる」ことではなく、問い合わせを建築・空間デザイン、商品案内、重要案件の人間対応へ正確に振り分ける部分です。</p>
+<div class="decision">採用方針：将来のAIコンシェルジュ「ミライ」の裏側で比較候補。提供条件・料金・実運用精度を確認してから実装します。</div>
+<div class="source">Primary source: <a href="https://openai.com/index/devday-2026-recap/" target="_blank" rel="noopener">OpenAI — DevDay 2026 Recap</a></div>
+</section>
+
+<section class="note">
+<div class="num">02 / VOICE</div>
+<h2>AIキャラクターは、自然に話せることを先に磨く</h2>
+<p>ElevenLabsは2026年9月28日にEleven v4と低遅延版v4 Turboを公開しました。90以上の言語に対応し、文脈・感情・話速を考慮した音声表現を強化しています。</p>
+<p>ミライでは、人物や映像を作り直すのではなく、採用済みの短い日本語セリフを同じ条件で比較し、「自然さ」「違和感の少なさ」「実費」で判断します。</p>
+<div class="decision">採用方針：比較候補。新しい契約を先に増やさず、既存音声との短文A/Bテストで優位が確認できた場合のみ採用します。</div>
+<div class="source">Primary source: <a href="https://elevenlabs.io/docs/changelog/2026/9/28" target="_blank" rel="noopener">ElevenLabs — Changelog, Sep 28 2026</a></div>
+</section>
+
+<section class="note">
+<div class="num">03 / AGENTS</div>
+<h2>画面を操作するAIは、承認の設計までが製品</h2>
+<p>Agents APIのcomputer useでは、AIがソフトウェア画面を操作できます。一方で、新しいWebサイトへのアクセスや、購入・破壊的変更などの重要操作では確認設計が必要です。</p>
+<p>atelier TECNOFORMでは、AIが勝手に契約、決済、公開を確定する構成にはしません。AIが整理・準備し、人間が重要判断だけを承認する形を基本にします。</p>
+<div class="decision">採用方針：業務自動化は進める。ただし重要操作だけ人間承認を残す。</div>
+<div class="source">Primary source: <a href="https://developers.openai.com/api/docs/guides/agents-api/tools/computer-use" target="_blank" rel="noopener">OpenAI Developers — Computer use</a></div>
+</section>
+
+<div class="rule">
+<h2>TECNOFORM JOURNALの掲載基準</h2>
+<p>・新しいだけのニュースは載せない。</p>
+<p>・atelier TECNOFORMの制作、設計、顧客対応、販売にどう効くかを書く。</p>
+<p>・未提供・未検証・未契約のものを「導入済み」と書かない。</p>
+<p>・採用／比較候補／保留を明記し、次の具体的作業へつなぐ。</p>
+</div>
+</main>
+<footer>© 1983 — 2026 atelier TECNOFORM Inc; / TECNOFORM JOURNAL</footer>
+</body>
+</html>
