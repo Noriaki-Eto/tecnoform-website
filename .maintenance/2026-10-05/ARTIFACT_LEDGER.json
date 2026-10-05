@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "work_name": "DS SUPPORT JAPAN / atelier TECNOFORM maintenance",
-  "version": "2026-10-05.v1",
+  "version": "2026-10-05.v2",
   "approval_state": "APPROVAL_PENDING",
   "created_at": "2026-10-05T19:57:52+09:00",
   "storage_gate": "PASS",
@@ -50,6 +50,31 @@
       "readback": "Fetched both Drive parts again; sizes and per-part SHA-256 matched; restored 63,146,770-byte zip SHA-256 matched; zip opened and contained 257 tracked entries including index.html, journal.html and sitemap.xml.",
       "dependencies": "The GitHub commit 7e9ffe757cfdfde9d3a3588da4092bac2f35bcd7 is the exact source base; operational recovery scripts and this ledger remain in the separate atelier-ops bundle.",
       "next_step": "Restore only into an empty directory. Keep RECOVERED_APPROVAL_PENDING until a release is explicitly approved."
+    },
+    {
+      "name": "atelier-ops-20261005-v1.zip",
+      "version": "ops-records-2026-10-05-v1",
+      "approval_state": "APPROVAL_PENDING",
+      "format": "zip bundle of the audit record, state, backlog, updates, ledger, checksums, charter, runbook and recovery helpers",
+      "dimensions": "not applicable",
+      "created_at": "2026-10-05T19:57:52+09:00",
+      "bytes": 14413,
+      "sha256": "370b119f8d7d150d77925554f6dbe79d23953adf06da806c9737e506f75f0677",
+      "first_store": {
+        "provider": "GitHub",
+        "repository": "Noriaki-Eto/tecnoform-website",
+        "branch": "maintenance/2026-09-03-recovery",
+        "commit_id": "0b3283b0b0706ad71bf3f74f286181bc1a0b6c2d",
+        "member_directory": ".maintenance/2026-10-05"
+      },
+      "second_store": {
+        "provider": "Google Drive",
+        "folder_id": "10fJ7ZRolJ1c8mhUj9SRJR9Pt7kerGJX_",
+        "file_id": "1YL_5XUFtEun2NNF_RCrULeYyLRZaM1ii"
+      },
+      "readback": "Re-fetched the raw Drive file (14,413 bytes); SHA-256 matched 370b119f8d7d150d77925554f6dbe79d23953adf06da806c9737e506f75f0677; ZIP opened and all 11 expected operational files were present.",
+      "dependencies": "The full source snapshot is separately stored as atelier-public-7e9ffe7-source.zip and split across its two verified Drive files.",
+      "next_step": "Retain this versioned bundle as the verified operational snapshot; use the v2 ledger and checksum list as the latest record set."
     },
     {
       "name": "atelier-public-240b49b-source.tar.gz",
@@ -186,11 +211,14 @@
     "note": "Original monolithic upload retained, but readback IPC size limit prevented its local materialization. Use the verified two-part restore route instead."
   },
   "record_files": {
-    "ledger": "ARTIFACT_LEDGER-2026-10-05-v1.json",
-    "checksums": "SHA256SUMS-2026-10-05-v1.txt",
+    "ledger": "ARTIFACT_LEDGER-2026-10-05-v2.json",
+    "checksums": "SHA256SUMS-2026-10-05-v2.txt",
     "first_store_branch": "maintenance/2026-09-03-recovery",
-    "first_store_directory": ".maintenance/2026-09-03",
+    "first_store_directory": ".maintenance/2026-10-05",
+    "drive_ledger_previous_version_id": "1SWXjZVZMkCdM8edKsSEPDm4AJ2V5KD4W",
+    "drive_checksums_previous_version_id": "13cshloHetGK48jl1qRLN-HVCqfk5rkju",
     "second_store_folder_id": "10fJ7ZRolJ1c8mhUj9SRJR9Pt7kerGJX_",
     "note": "SHA256SUMS contains the ledger hash; no self-referential checksum."
   }
 }
+
