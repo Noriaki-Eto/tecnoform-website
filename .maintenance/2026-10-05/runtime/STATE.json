@@ -1,0 +1,22 @@
+{
+  "latest_audit":{"date":"2026-10-05","record":"logs/2026-10-05-atelier-sitemap.md","status":"complete","http_pages_passed":4,"browser_checks":"390x844 menu open/close and JP-EN-JP verified; visual unchanged; viewport reset","source_changed":true,"changed_files":["sitemap.xml"],"published":true,"storage_gate":"PASS"},
+  "updated":"2026-10-05T19:57:52+09:00",
+  "site":"atelier-tecnoform",
+  "mode":"production",
+  "url":"https://atelier-tecnoform.com/",
+  "source":"Noriaki-Eto/tecnoform-website",
+  "design":"frozen",
+  "last_safe_action":"align-home-and-journal-sitemap-lastmod-with-2026-10-03-source-updates",
+  "last_public_commit":"7e9ffe757cfdfde9d3a3588da4092bac2f35bcd7",
+  "incident":"resolved",
+  "source_sync":"Preserved the prior divergent local main untouched; based the single-file sitemap update on current origin/main in a separate worktree and updated only sitemap.xml through GitHub contents API.",
+  "source_recovery":"RECOVERED_APPROVAL_PENDING; GitHub main source plus two verified Drive parts reconstruct a 63,115,602-byte archive containing all 254 tracked files. No database or account/DNS configuration is included.",
+  "source_recovery_sha256":"1ef1192966733b96bfc0f9d3a30af09e3441fe6a89a4141faef0ca3813ee63fa",
+  "record_branch":"maintenance/2026-09-03-recovery",
+  "publication":"GitHub Pages workflow succeeded for 7e9ffe757cfdfde9d3a3588da4092bac2f35bcd7; public sitemap returned 2026-10-03 for home and Journal; all four listed pages returned HTTP 200.",
+  "trigger_utc":"2026-10-05T07:56:00.891Z",
+  "trigger_jst":"2026-10-05T16:56:00.891+09:00",
+  "execution_utc":"2026-10-05T10:57:52Z",
+  "execution_jst":"2026-10-05T19:57:52+09:00",
+  "schedule_note":"Heartbeat trigger time and resumed execution time recorded separately; no scheduler timezone changed."
+}
