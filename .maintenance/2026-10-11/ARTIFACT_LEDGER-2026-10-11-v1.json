@@ -1,0 +1,78 @@
+{
+  "work": "atelier TECNOFORM operations",
+  "artifact": "Sitemap freshness correction and verification records",
+  "version": "2026-10-11.v1",
+  "approval_state": "APPROVED_CURRENT",
+  "created_at_utc": "2026-10-11T07:37:37Z",
+  "created_at_jst": "2026-10-11T16:37:37+09:00",
+  "format": "ZIP delta + JSON/Markdown operational records",
+  "dimensions": "not applicable",
+  "release": {
+    "repository": "Noriaki-Eto/tecnoform-website",
+    "branch": "main",
+    "commit": "557e2948858fb593e59379b5f1c42b4d461e4089",
+    "file_changed": "sitemap.xml",
+    "pages_workflow_run": "38121921607",
+    "pages_workflow_conclusion": "success",
+    "public_routes_http_200": [
+      "https://atelier-tecnoform.com/",
+      "https://atelier-tecnoform.com/journal.html",
+      "https://atelier-tecnoform.com/lotus.html",
+      "https://atelier-tecnoform.com/tokushoho.html"
+    ],
+    "visible_design_changed": false
+  },
+  "current_delta_archive": {
+    "name": "atelier-tecnoform-opsdelta-20261011-v2.zip",
+    "bytes": 7350,
+    "sha256": "756EA5C1138D15ACB4FA714DA67B177FDACCC85B260ED0962C8461161541BC28",
+    "first_store": {
+      "provider": "GitHub",
+      "repository": "Noriaki-Eto/tecnoform-website",
+      "branch": "main",
+      "commit": "557e2948858fb593e59379b5f1c42b4d461e4089",
+      "file": "sitemap.xml"
+    },
+    "second_store": {
+      "provider": "Google Drive",
+      "folder_id": "10fJ7ZRolJ1c8mhUj9SRJR9Pt7kerGJX_",
+      "file_id": "1TVZPIstZVDcn2rOyHVkfZ0tALVqCSXLc",
+      "file_url": "https://drive.google.com/file/d/1TVZPIstZVDcn2rOyHVkfZ0tALVqCSXLc/view?usp=drivesdk",
+      "modified_at": "2026-10-11T07:38:10.360Z"
+    },
+    "readback": "Drive file downloaded again; byte size 7350 and SHA-256 matched; ZIP opened with five entries."
+  },
+  "record_persistence": {
+    "ledger_google_drive_file_id": "113CARri0oA2HMPIiJIp6Ccwz6ThH5S8j",
+    "checksums_google_drive_file_id": "1DqZEwcAKw9mqR_zr7bT37blJisRXcOd-",
+    "ledger_github_path": ".maintenance/2026-10-11/ARTIFACT_LEDGER-2026-10-11-v1.json",
+    "checksums_github_path": ".maintenance/2026-10-11/SHA256SUMS-2026-10-11-v1.txt",
+    "github_branch": "maintenance/2026-09-03-recovery",
+    "readback_status": "pending"
+  },
+  "pre_edit_recovery": {
+    "name": "atelier-public-pre-20261011.zip",
+    "approval_state": "RECOVERED_APPROVAL_PENDING",
+    "bytes": 63147208,
+    "sha256": "21402a4ae54bd4fddb7ff073fb22582bfb03c9bf05df63ef7e15b68608c09203",
+    "drive_file_id": "1pMT0aphNNSIuoOCDYaBF4tQJU9SrLnrU",
+    "readback": "Previously verified download matched size and SHA-256; ZIP contained 265 entries."
+  },
+  "operational_file_hashes": {
+    "logs/2026-10-11-atelier-sitemap.md": "6EB30D05E868BBFF79DDE67019540241BCD5452AF08A52024BFE6535EE2E5E6B",
+    "runtime/STATE.json": "886EDD1A321B9AFCE1955EE1C1B38611B2FE815E3364FD506059C0ECA9B135A4",
+    "runtime/BACKLOG.json": "A33EA12C2D743F85CD84958F071A3BC8541CCBC8FC529E36DB389EB4B715D3A2",
+    "UPDATES.md": "8DB64E9CA958648BF54C8A087937FE7C91A0929F190AB64CD3A9F8C30BE2EDC2",
+    "sitemap.xml": "E8D96700109CE455BC9F58364D67AA845925D7ABBF0F9026BA5130708CF728FA"
+  },
+  "dependencies": [
+    "Current public GitHub main source at commit 557e2948858fb593e59379b5f1c42b4d461e4089",
+    "Pre-edit source archive atelier-public-pre-20261011.zip",
+    "logs/2026-10-11-atelier-sitemap.md",
+    "runtime/STATE.json",
+    "runtime/BACKLOG.json",
+    "UPDATES.md"
+  ],
+  "next_step": "Continue scheduled maintenance from current GitHub main. Treat recovered baseline archive as recovery-only; do not re-promote it."
+}
+
