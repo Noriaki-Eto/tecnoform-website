@@ -48,7 +48,7 @@
     "ledger_github_path": ".maintenance/2026-10-11/ARTIFACT_LEDGER-2026-10-11-v1.json",
     "checksums_github_path": ".maintenance/2026-10-11/SHA256SUMS-2026-10-11-v1.txt",
     "github_branch": "maintenance/2026-09-03-recovery",
-    "readback_status": "pending"
+    "readback_status": "PASS: GitHub raw ledger/checksum files fetched; Drive ledger and checksum files fetched again, and Drive delta ZIP re-downloaded with matching size and SHA-256."
   },
   "pre_edit_recovery": {
     "name": "atelier-public-pre-20261011.zip",
