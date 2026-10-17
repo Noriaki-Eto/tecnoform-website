@@ -4,16 +4,25 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 const root = path.join(__dirname, '..');
-function boot(copyFails=false) {
+function boot(copyFails=false, options={}) {
  const nodes=new Map();
  function el(id){if(!nodes.has(id))nodes.set(id,{value:'',hidden:true,textContent:'',classList:{toggle(){},contains(){return false},add(){}},setAttribute(){},focus(){this.focused=true},select(){this.selected=true},addEventListener(t,f){this[t]=f},insertBefore(){}});return nodes.get(id)}
  const location={href:''},copies=[];
- vm.runInNewContext(fs.readFileSync(path.join(root,'mirai.js'),'utf8'),{document:{getElementById:el,querySelectorAll(){return[]},createElement(){return{}}},location,navigator:{clipboard:{async writeText(t){if(copyFails)throw Error('denied');copies.push(t)}}},setTimeout(){}});
+ vm.runInNewContext(fs.readFileSync(path.join(root,'mirai.js'),'utf8'),{document:{getElementById(id){return options.missing===id?null:el(id)},querySelectorAll(){return[]},createElement(){return{}}},location,navigator:{clipboard:{async writeText(t){if(options.pending)await options.pending;if(copyFails)throw Error('denied');copies.push(t)}}},setTimeout(){}});
  for(const [k,v] of Object.entries({miraiKind:'空間制作',miraiDetail:'<script>危険</script> & 日本語\n二行目',miraiName:'検証用',miraiContact:'test@example.invalid'}))el(k).value=v;
  return {el,location,copies,submit(){el('miraiLead').submit({preventDefault(){}})}};
 }
 test('review has no navigation or external send; Japanese and HTML remain plain text',()=>{
  const b=boot();b.submit();assert.equal(b.location.href,'');assert.equal(b.el('miraiReview').hidden,false);assert.match(b.el('miraiPreview').value,/<script>危険<\/script> & 日本語/);assert.match(b.el('miraiMailStatus').textContent,/まだ送信されていません/);
+});
+test('long Japanese inquiries use copy without opening a truncated mail URL',async()=>{
+ const b=boot();b.el('miraiDetail').value='相談'.repeat(500);b.submit();b.el('miraiOpenMail').click();assert.equal(b.location.href,'');assert.match(b.el('miraiMailStatus').textContent,/本文が長いため/);await b.el('miraiCopyMail').click();assert.match(b.copies[0],/相談相談/);
+});
+test('a pending old copy cannot overwrite the edited draft status',async()=>{
+ let finish;const pending=new Promise(r=>finish=r);const b=boot(false,{pending});b.submit();const old=b.el('miraiCopyMail').click();b.el('miraiDetail').value='新しい相談';b.el('miraiLead').input();b.submit();const status=b.el('miraiMailStatus').textContent;finish();await old;assert.equal(b.el('miraiMailStatus').textContent,status);assert.match(b.el('miraiPreview').value,/新しい相談/);
+});
+test('stale HTML missing the new controls fails safely without navigation',()=>{
+ const b=boot(false,{missing:'miraiOpenMail'});b.submit();assert.equal(b.location.href,'');
 });
 test('mail handoff encodes the reviewed draft and never reports delivery',()=>{
  const b=boot();b.submit();b.el('miraiOpenMail').click();const u=new URL(b.location.href);assert.equal(u.pathname,'info@atelier-tecnoform.com');assert.match(u.searchParams.get('body'),/日本語\n二行目/);assert.match(b.el('miraiMailStatus').textContent,/送信・受信完了を確認できません/);

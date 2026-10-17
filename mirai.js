@@ -44,6 +44,11 @@ function ask(q){q=(q||'').trim();if(!q)return;msg(q,'user');var a=answer(q);msg(
 F.addEventListener('submit',function(e){e.preventDefault();ask(I.value);I.value=''});
 document.querySelectorAll('.mirai-chip').forEach(function(b){b.onclick=function(){ask(b.getAttribute('data-q'))}});
 var review=document.getElementById('miraiReview'),preview=document.getElementById('miraiPreview'),mailStatus=document.getElementById('miraiMailStatus'),draft=null;
+var openMail=document.getElementById('miraiOpenMail'),copyMail=document.getElementById('miraiCopyMail');
+if(!review||!preview||!mailStatus||!openMail||!copyMail){
+ Lead.addEventListener('submit',function(e){e.preventDefault();msg('ページを再読み込みするか、Contact欄のメールアドレスからご相談ください。まだ送信されていません。','bot')});
+ return;
+}
 Lead.addEventListener('input',function(){draft=null;review.hidden=true;preview.value='';mailStatus.textContent='内容が変わりました。もう一度確認してください。'});
 Lead.addEventListener('submit',function(e){
  e.preventDefault();function v(id){return(document.getElementById(id).value||'').trim()}
@@ -51,14 +56,18 @@ Lead.addEventListener('submit',function(e){
  var body=['atelier TECNOFORM ご担当者様','','Webサイトのミライ相談窓口からの問い合わせです。','','【ご相談の種類】',v('miraiKind'),'','【ご相談内容】',v('miraiDetail'),'','【場所・施設名】',v('miraiPlace')||'未記入','','【ご希望時期】',v('miraiTiming')||'未記入','','【ご予算感】',v('miraiBudget')||'未記入','','【会社名・お名前】',v('miraiName'),'','【返信先】',v('miraiContact')].join('\n');
  draft={subject:subject,body:body};preview.value='宛先：info@atelier-tecnoform.com\n件名：'+subject+'\n\n'+body;review.hidden=false;mailStatus.textContent='まだ送信されていません。内容をご確認ください。';preview.focus()
 });
-document.getElementById('miraiOpenMail').addEventListener('click',function(){
+openMail.addEventListener('click',function(){
  if(!draft)return;
- location.href='mailto:info@atelier-tecnoform.com?subject='+encodeURIComponent(draft.subject)+'&body='+encodeURIComponent(draft.body);
+ var url='mailto:info@atelier-tecnoform.com?subject='+encodeURIComponent(draft.subject)+'&body='+encodeURIComponent(draft.body);
+ // Conservative fallback: mail applications have different URL limits.
+ if(url.length>1800){mailStatus.textContent='本文が長いため、途中で切れないようコピーをご利用ください。宛先・件名・本文をメールに貼り付けて送信できます。まだ送信されていません。';return;}
+ location.href=url;
  mailStatus.textContent='メールアプリ側で内容を確認し、送信してください。この画面では送信・受信完了を確認できません。';
 });
-document.getElementById('miraiCopyMail').addEventListener('click',async function(){
+copyMail.addEventListener('click',async function(){
  if(!draft)return;
- try{await navigator.clipboard.writeText(preview.value);mailStatus.textContent='コピーしました。メールに貼り付けて送信してください。まだ送信されていません。'}
- catch(e){preview.focus();preview.select();mailStatus.textContent='自動コピーが使えません。選択された内容を手動でコピーしてください。まだ送信されていません。'}
+ var d=draft,text=preview.value;
+ try{await navigator.clipboard.writeText(text);if(draft!==d)return;mailStatus.textContent='コピーしました。メールに貼り付けて送信してください。まだ送信されていません。'}
+ catch(e){if(draft!==d)return;preview.focus();preview.select();mailStatus.textContent='自動コピーが使えません。選択された内容を手動でコピーしてください。まだ送信されていません。'}
 });
 })();
