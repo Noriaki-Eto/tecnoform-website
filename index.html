@@ -7,7 +7,7 @@
 <meta name="description" content="ホテル・商業空間・邸宅・医療施設のガラスアート、和紙照明、光のインスタレーションを、構想から制作・設置まで一貫制作。ザ・リッツ・カールトン東京、三井不動産ほか実績多数。神戸の工房 atelier TECNOFORM。">
 <meta name="keywords" content="光と水の作家,江藤徳晃,ガラスアート,和紙照明,パラメトリックデザイン,照明オブジェ,エントランスアート,高級ホテル内装,企業エントランス,邸宅アート,壁面アート,アトリエ,テクノフォルム">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="mirai.css">
+<link rel="stylesheet" href="mirai.css?v=20261017-review2">
 <!-- Open Graph -->
 <meta property="og:title" content="ガラスアート・和紙・光の空間制作 | atelier TECNOFORM">
 <meta property="og:description" content="ホテル・商業・邸宅・医療施設のガラスアート、和紙照明、光のインスタレーション。構想から制作・設置まで一貫制作。神戸の工房 atelier TECNOFORM。">
@@ -1153,8 +1153,15 @@ footer {
    <div class="mirai-field"><label for="miraiBudget">ご予算感（任意）</label><input id="miraiBudget" placeholder="例：100〜300万円／相談したい"></div>
    <div class="mirai-field"><label for="miraiName">会社名・お名前</label><input id="miraiName" required></div>
    <div class="mirai-field"><label for="miraiContact">返信先メールまたは電話番号</label><input id="miraiContact" required></div>
-   <button class="mirai-send" type="submit">内容を確認してメールを作成</button>
-   <p class="mirai-note">入力内容はこの画面で整理し、送信時にメールアプリを開きます。ミライが見積・契約・納期・仕様を自動確定することはありません。</p>
+   <button class="mirai-send" type="submit">相談内容を確認する</button>
+   <div id="miraiReview" hidden>
+    <label for="miraiPreview">メールの内容（確認用）</label>
+    <textarea id="miraiPreview" readonly rows="10"></textarea>
+    <button class="mirai-send" id="miraiOpenMail" type="button">確認した内容でメールアプリを開く</button>
+    <button class="mirai-chip" id="miraiCopyMail" type="button">宛先・件名・本文をコピー</button>
+   </div>
+   <p id="miraiMailStatus" class="mirai-note" role="status" aria-live="polite"></p>
+   <p class="mirai-note">内容確認後にメールアプリを開き、ご自身で送信してください。アプリが開かない場合は本文をコピーし、info@atelier-tecnoform.com 宛に送信できます。この画面では送信・受信完了を確認できません。ミライが見積・契約・納期・仕様を自動確定することはありません。</p>
   </form>
  </div>
  <form class="mirai-compose" id="miraiCompose"><input class="mirai-input" id="miraiInput" autocomplete="off" placeholder="作品・素材・ご相談について質問"><button class="mirai-submit" type="submit">送信</button></form>
@@ -1502,7 +1509,7 @@ lb.addEventListener('touchend', function(e){
   }, 5500);
 })();
 </script>
-<script src="mirai.js"></script>
+<script src="mirai.js?v=20261017-review2"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "544778460112444680d89fb7cb171e9f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
