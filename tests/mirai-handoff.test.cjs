@@ -15,6 +15,9 @@ function boot(copyFails=false, options={}) {
 test('review has no navigation or external send; Japanese and HTML remain plain text',()=>{
  const b=boot();b.submit();assert.equal(b.location.href,'');assert.equal(b.el('miraiReview').hidden,false);assert.match(b.el('miraiPreview').value,/<script>危険<\/script> & 日本語/);assert.match(b.el('miraiMailStatus').textContent,/まだ送信されていません/);
 });
+test('initial typing does not claim that a reviewed draft changed',()=>{
+ const b=boot();b.el('miraiLead').input();assert.equal(b.el('miraiMailStatus').textContent,'');assert.equal(b.location.href,'');
+});
 test('long Japanese inquiries use copy without opening a truncated mail URL',async()=>{
  const b=boot();b.el('miraiDetail').value='相談'.repeat(500);b.submit();b.el('miraiOpenMail').click();assert.equal(b.location.href,'');assert.match(b.el('miraiMailStatus').textContent,/本文が長いため/);await b.el('miraiCopyMail').click();assert.match(b.copies[0],/相談相談/);
 });

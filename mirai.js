@@ -49,7 +49,7 @@ if(!review||!preview||!mailStatus||!openMail||!copyMail){
  Lead.addEventListener('submit',function(e){e.preventDefault();msg('ページを再読み込みするか、Contact欄のメールアドレスからご相談ください。まだ送信されていません。','bot')});
  return;
 }
-Lead.addEventListener('input',function(){draft=null;review.hidden=true;preview.value='';mailStatus.textContent='内容が変わりました。もう一度確認してください。'});
+Lead.addEventListener('input',function(){var hadDraft=!!draft;draft=null;review.hidden=true;preview.value='';mailStatus.textContent=hadDraft?'内容が変わりました。もう一度確認してください。':'';});
 Lead.addEventListener('submit',function(e){
  e.preventDefault();function v(id){return(document.getElementById(id).value||'').trim()}
  var subject='【ミライ受付】'+v('miraiKind');
