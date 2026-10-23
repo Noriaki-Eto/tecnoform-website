@@ -1,0 +1,15 @@
+name: Static site security policy
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 scripts/security_policy.py --check
+      - run: python3 scripts/test_security_policy.py
+      - run: node --check mirai.js && node --check cinematic.js
