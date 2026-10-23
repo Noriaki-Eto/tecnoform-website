@@ -4,9 +4,9 @@ var L=document.getElementById('miraiLauncher'),P=document.getElementById('miraiP
 if(!L||!P||!S||!F||!I||!Lead)return;
 function open(v){P.classList.toggle('open',v);P.setAttribute('aria-hidden',String(!v));L.setAttribute('aria-expanded',String(v));if(v)setTimeout(function(){I.focus()},80)}
 L.onclick=function(){open(!P.classList.contains('open'))};C.onclick=function(){open(false)};
-function strip(s){var d=document.createElement('div');d.innerHTML=s||'';return(d.textContent||'').replace(/\s+/g,' ').trim()}
+function strip(s){var d=document.createElement('template');d.innerHTML=s||'';return(d.content.textContent||'').replace(/\s+/g,' ').trim()}
 function esc(s){return String(s||'').replace(/[&<>"']/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
-function msg(t,w,h){var d=document.createElement('div');d.className='mirai-msg '+w;h?d.innerHTML=t:d.textContent=t;S.insertBefore(d,Lead);S.scrollTop=S.scrollHeight}
+function msg(t,w,h){var d=document.createElement('div');d.className='mirai-msg '+w;h?d.innerHTML=t:d.textContent=t;S.insertBefore(d,Lead);while(S.querySelectorAll('.mirai-msg').length>60){S.querySelector('.mirai-msg').remove()}S.scrollTop=S.scrollHeight}
 function lead(seed){Lead.classList.add('active');var d=document.getElementById('miraiDetail');if(seed&&!d.value)d.value=seed;S.scrollTop=S.scrollHeight}
 function norm(s){return String(s||'').toLowerCase().replace(/　/g,' ').trim()}
 var syn={
@@ -40,7 +40,8 @@ function answer(q){
  ps=projects(q);if(ps.length)return list(ps);
  return'サイト掲載内容の範囲でご案内します。「ホテル」「エントランス」「和紙」「ガラス」「3D」「医療施設」など、用途や素材を一言入れていただくと近い実績を探せます。具体的な制作相談なら「相談したい」と入力してください。'
 }
-function ask(q){q=(q||'').trim();if(!q)return;msg(q,'user');var a=answer(q);msg(a,'bot',a.indexOf('<')>=0)}
+I.maxLength=1200;
+function ask(q){q=(q||'').trim();if(!q)return;if(q.length>1200){msg('1200文字以内に分けてご入力ください。','bot');return}msg(q,'user');var a=answer(q);msg(a,'bot',a.indexOf('<')>=0)}
 F.addEventListener('submit',function(e){e.preventDefault();ask(I.value);I.value=''});
 document.querySelectorAll('.mirai-chip').forEach(function(b){b.onclick=function(){ask(b.getAttribute('data-q'))}});
 Lead.addEventListener('submit',function(e){

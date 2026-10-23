@@ -91,3 +91,27 @@ html[data-motion="paused"] .work-frame { transform:none!important; }
  .hero-bg-veil {background:linear-gradient(180deg,rgba(8,10,9,.72),rgba(8,10,9,.42) 45%,transparent 60%,#0b0a09);}
  .scene-caption {left:7%;bottom:11%;}
 }
+
+/* Photo-first revision: restore the original immersive image scale. */
+#hero {min-height:max(780px,100svh);padding:130px 6.5vw 160px;background:var(--ink);}
+.hero-bg-slides {inset:0;z-index:0;overflow:hidden;transform:none!important;}
+.hero-bg-slide {background-size:cover;background-position:center;}
+.hero-bg-slide.active {opacity:1;}
+#light-field {z-index:1;opacity:.18;mask-image:linear-gradient(to top,#000,transparent 28%);-webkit-mask-image:linear-gradient(to top,#000,transparent 28%);}
+.hero-bg-veil {z-index:1;background:linear-gradient(90deg,rgba(8,10,9,.76),rgba(8,10,9,.36) 39%,rgba(8,10,9,.04) 70%),linear-gradient(0deg,rgba(8,10,9,.88),transparent 25%,transparent 85%,rgba(8,10,9,.4));}
+.hero-content {max-width:49%;}
+.scene-caption {left:auto;right:6.5vw;bottom:110px;max-width:40%;text-align:right;text-shadow:0 2px 8px #000;}
+.scene-kicker {justify-content:flex-end;}
+@media(max-width:768px){
+ #hero {min-height:max(820px,100svh);padding:120px 24px 180px;justify-content:center;}
+ .hero-content {max-width:100%;}
+ .hero-bg-slides {inset:0;}
+ .hero-bg-slide {background-size:cover;background-position:62% center;}
+ .hero-bg-veil {background:linear-gradient(90deg,rgba(8,10,9,.72),rgba(8,10,9,.2)),linear-gradient(0deg,rgba(8,10,9,.92),transparent 30%,transparent 80%,rgba(8,10,9,.4));}
+ .scene-caption {left:24px;right:24px;bottom:105px;max-width:none;text-align:left;}
+ .scene-kicker {justify-content:flex-start;}
+ .scene-controls {bottom:36px;}
+}
+
+/* Light atmosphere: no architecture overlay and no photograph movement. */
+#light-field {opacity:1;mask-image:none;-webkit-mask-image:none;mix-blend-mode:screen;}
