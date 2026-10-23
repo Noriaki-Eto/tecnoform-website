@@ -49,17 +49,7 @@
     card.addEventListener('keydown', event => {
       if (event.target === card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); card.click(); }
     });
-    const photo = card.querySelector('.work-frame');
-    card.addEventListener('pointermove', event => {
-      if (paused || !fine.matches) return;
-      const box = card.getBoundingClientRect();
-      const x = (event.clientX - box.left) / box.width - .5;
-      const y = (event.clientY - box.top) / box.height - .5;
-      photo.style.transform = `perspective(1200px) rotateX(${-y * 5}deg) rotateY(${x * 7}deg) translateZ(12px)`;
-      photo.style.setProperty('--shine-x', `${(x+.5)*100}%`);
-      photo.style.setProperty('--shine-y', `${(y+.5)*100}%`);
-    }, {passive:true});
-    card.addEventListener('pointerleave', () => { photo.style.transform = ''; });
+
   });
   hero.addEventListener('pointermove', event => {
     if (paused || !fine.matches) return;
@@ -69,44 +59,84 @@
   }, {passive:true});
   hero.addEventListener('pointerleave', () => { mx = my = 0; });
 
-  // A projected, lit three-dimensional wave mesh; no images are distorted.
+  // Ray-intersected gallery architecture. Photographs stay front-facing and untouched.
   const canvas = document.getElementById('light-field');
-  let gl = null, program = null, meshCount = 0, timeUniform, aspectUniform;
+  let gl = null, program = null, meshCount = 0, timeUniform, aspectUniform, viewUniform;
   function initGL() {
     try {
       gl = canvas.getContext('webgl', {alpha:true, premultipliedAlpha:false, antialias:false, powerPreference:'low-power'});
       if (!gl) { canvas.dataset.renderer='static'; return; }
       const vertex = `
-        precision mediump float;
-        attribute vec2 aPosition;
-        uniform float uTime; uniform float uAspect;
-        varying vec3 vNormal; varying vec2 vUv; varying float vDepth;
-        void main(){
-          float x=aPosition.x, z=aPosition.y;
-          float p=x*1.25+z*.7+uTime*.24;
-          float q=z*1.8-x*.45-uTime*.18;
-          float y=.22*sin(p)+.11*cos(q);
-          float dx=.275*cos(p)+.0495*sin(q);
-          float dz=.154*cos(p)-.198*sin(q);
-          vNormal=normalize(vec3(-dx,1.,-dz)); vUv=aPosition; vDepth=z;
-          float depth=z+5.8;
-          gl_Position=vec4((x+1.7)*1.8/uAspect,(y-1.75-z*.18)*1.8,0.,depth);
-        }`;
+        attribute vec2 aPosition; varying vec2 vUv;
+        void main(){vUv=aPosition;gl_Position=vec4(aPosition,0.,1.);}`;
       const fragment = `
-        precision mediump float;
-        varying vec3 vNormal; varying vec2 vUv; varying float vDepth;
-        uniform float uTime;
+        precision highp float;
+        varying vec2 vUv;
+        uniform float uTime; uniform float uAspect; uniform vec2 uView;
+        vec3 normal; float material;
+        float boxHit(vec3 ro,vec3 rd,vec3 center,vec3 size){
+          vec3 a=(center-size-ro)/rd,b=(center+size-ro)/rd;
+          vec3 lo=min(a,b),hi=max(a,b);
+          float near=max(max(lo.x,lo.y),lo.z),far=min(min(hi.x,hi.y),hi.z);
+          return far>max(near,0.)?near:1000.;
+        }
         void main(){
-          vec3 n=normalize(vNormal);
-          float spec=pow(max(dot(n,normalize(vec3(.1,.94,.24))),0.),45.);
-          float wave=sin(vUv.x*4.+sin(vUv.y*1.5+uTime*.22)*1.6);
-          float line=pow(abs(wave),22.);
-          float edge=smoothstep(0.,1.,(vUv.x+7.)/2.)*(1.-smoothstep(5.,7.,vUv.x));
-          float fade=smoothstep(-1.,.5,vDepth)*(1.-smoothstep(4.,11.,vDepth))*edge;
-          vec3 gold=vec3(.79,.65,.43), blue=vec3(.17,.38,.39);
-          vec3 color=mix(blue,gold,spec);
-          float alpha=fade*(.025+line*.17+spec*.2);
-          gl_FragColor=vec4(color,alpha);
+          vec3 ro=vec3(uView.x*.65+sin(uTime*.13)*.16, .8+uView.y*.25, 7.2);
+          vec3 forward=normalize(vec3(0.,.65,-7.)-ro);
+          vec3 right=normalize(cross(forward,vec3(0.,1.,0.)));
+          vec3 up=cross(right,forward);
+          vec3 rd=normalize(forward*1.6+right*vUv.x*uAspect+up*vUv.y);
+          float t=1000.; material=0.; normal=vec3(0.,0.,1.);
+          float q=(-2.-ro.y)/rd.y;
+          if(q>0.&&q<t){t=q;material=1.;normal=vec3(0.,1.,0.);}
+          q=(4.5-ro.y)/rd.y;
+          if(q>0.&&q<t){t=q;material=2.;normal=vec3(0.,-1.,0.);}
+          q=(-10.-ro.z)/rd.z;
+          if(q>0.&&q<t){t=q;material=3.;normal=vec3(0.,0.,1.);}
+          q=(sign(rd.x)*8.-ro.x)/rd.x;
+          if(q>0.&&q<t){t=q;material=3.;normal=vec3(-sign(rd.x),0.,0.);}
+          // Receding architectural portals are actual intersected volumes.
+          for(int i=0;i<5;i++){
+            float z=3.-float(i)*2.8;
+            for(int side=0;side<2;side++){
+              float x=side==0?-6.5:6.5;
+              vec3 c=vec3(x,1.2,z),h=vec3(.16,3.2,.18);
+              float d=boxHit(ro,rd,c,h);
+              if(d>0.&&d<t){t=d;material=4.;vec3 p=(ro+rd*t-c)/h;normal=abs(p.x)>abs(p.z)?vec3(sign(p.x),0.,0.):vec3(0.,0.,sign(p.z));}
+            }
+            float d=boxHit(ro,rd,vec3(0.,4.25,z),vec3(6.6,.13,.18));
+            if(d>0.&&d<t){t=d;material=4.;normal=vec3(0.,-1.,0.);}
+          }
+          vec3 p=ro+rd*t;
+          vec3 light=vec3(2.+sin(uTime*.16)*2.,3.5,-3.);
+          float diffuse=max(dot(normal,normalize(light-p)),0.);
+          vec3 base=vec3(.24,.21,.16);
+          if(material==1.)base=vec3(.17,.20,.19);
+          if(material==2.)base=vec3(.13,.14,.14);
+          if(material==4.)base=vec3(.32,.25,.16);
+          vec3 color=base*(.38+diffuse*.75);
+          if(material==1.){
+            vec2 tile=abs(fract((p.xz+vec2(0.,.5))/2.)-.5);
+            float grout=smoothstep(.48,.495,max(tile.x,tile.y));
+            color*=1.-grout*.35;
+            float pools=exp(-pow(p.x-3.4,2.)*.3)*(.5+.5*cos(p.z*1.5));
+            color+=vec3(.27,.19,.09)*pools*.65;
+            float flow=sin(p.x*2.+sin(p.z*1.4+uTime*.28)) + sin(p.z*2.2-uTime*.17);
+            color+=vec3(.09,.19,.18)*pow(max(flow*.5,0.),12.)*.45;
+          }
+          if(material==2.){
+            float strip=exp(-pow(abs(p.x)-3.8,2.)*85.);
+            color+=vec3(1.,.78,.44)*strip*.9;
+          }
+          if(material==3.){
+            float panel=exp(-pow(abs(p.x)-4.6,2.)*16.);
+            float wash=exp(-pow(p.y-1.4,2.)*.22);
+            color+=vec3(.32,.42,.38)*panel*wash;
+            color+=vec3(.32,.22,.11)*exp(-pow(p.y+1.7,2.)*70.);
+          }
+          color=mix(color,vec3(.055,.065,.063),1.-exp(-t*.027));
+          color*=1.-.24*length(vUv);
+          gl_FragColor=vec4(pow(max(color,vec3(0.)),vec3(.8)),1.);
         }`;
       function shader(type, code) {
         const s = gl.createShader(type); gl.shaderSource(s,code); gl.compileShader(s);
@@ -119,16 +149,13 @@
       gl.deleteShader(vs); gl.deleteShader(fs);
       if (!gl.getProgramParameter(program,gl.LINK_STATUS)) throw new Error('program');
       gl.useProgram(program);
-      const vertices = [], nx=80, nz=50;
-      for(let j=0;j<nz;j++) for(let i=0;i<nx;i++) {
-        const x=-7+i*14/nx, z=-1+j*12/nz, dx=14/nx, dz=12/nz;
-        vertices.push(x,z,x+dx,z,x,z+dz,x,z+dz,x+dx,z,x+dx,z+dz);
-      }
+      const vertices = [-1,-1,1,-1,-1,1,-1,1,1,-1,1,1];
       meshCount=vertices.length/2;
       const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);
       const position=gl.getAttribLocation(program,'aPosition');
       gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
+      viewUniform=gl.getUniformLocation(program,'uView');
       timeUniform=gl.getUniformLocation(program,'uTime'); aspectUniform=gl.getUniformLocation(program,'uAspect');
       gl.clearColor(0,0,0,0);
       canvas.dataset.renderer='webgl';
@@ -144,7 +171,7 @@
   }
   function draw() {
     if (!gl || gl.isContextLost()) return;
-    gl.clear(gl.COLOR_BUFFER_BIT); gl.uniform1f(timeUniform,elapsed); gl.drawArrays(gl.TRIANGLES,0,meshCount);
+    gl.clear(gl.COLOR_BUFFER_BIT); gl.uniform2f(viewUniform,px,py); gl.uniform1f(timeUniform,elapsed); gl.drawArrays(gl.TRIANGLES,0,meshCount);
   }
   function tick(now) {
     frame=0;
@@ -153,10 +180,7 @@
     if (!previous || now-previous>=32) {
       if(previous) elapsed+=Math.min((now-previous)/1000,.1);
       previous=now; px+=(mx-px)*.075; py+=(my-py)*.075;
-      if(fine.matches && innerWidth>768) {
-        const scroll=Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/hero.clientHeight));
-        stage.style.transform=`translate3d(${px*16}px,${py*10-scroll*32}px,0) rotateY(${-11+px*7+scroll*7}deg) rotateX(${3-py*5}deg) rotateZ(${-2+scroll}deg)`;
-      }
+
       draw();
     }
     frame=requestAnimationFrame(tick);

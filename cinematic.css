@@ -7,7 +7,7 @@
 .hero-sub { font-size:.92rem; line-height:2; }
 .hero-sub-poem { font-size:1.4rem; }
 .hero-positioning { max-width:24em; font-size:.72rem; line-height:2; }
-.hero-bg-slides { inset:16% 4% 20% 48%; z-index:1; overflow:visible; background:transparent; transform:rotateY(-11deg) rotateX(3deg) rotateZ(-2deg); transform-style:preserve-3d; box-shadow:35px 45px 70px #0008; will-change:transform; }
+.hero-bg-slides { inset:16% 4% 20% 48%; z-index:1; overflow:visible; background:transparent; transform:none; transform-style:preserve-3d; box-shadow:35px 45px 70px #0008; will-change:transform; }
 .hero-bg-slides::before,.hero-bg-slides::after { content:""; position:absolute; inset:-18px; border:1px solid #c9a87540; pointer-events:none; transform:translateZ(-35px); }
 .hero-bg-slides::after { inset:-38px; border-color:#c9a87518; transform:translateZ(-75px); }
 .hero-bg-slide { background-position:center; box-shadow:inset 0 0 0 1px #ffffff20; transition:opacity 1.8s ease; }
@@ -39,7 +39,7 @@ a:focus-visible,button:focus-visible,.work-card:focus-visible { outline:2px soli
 @media(min-width:901px){ .work-card:nth-child(even) { margin-top:100px; } .work-card:nth-child(5n+1) { grid-column:1/-1; width:85%; margin:0 auto; } .work-card:nth-child(5n+1) .work-frame { aspect-ratio:16/9; } }
 .reveal { transition-duration:1.15s; }
 html[data-motion="paused"] { scroll-behavior:auto; }
-html[data-motion="paused"] .hero-bg-slides { transform:rotateY(-11deg) rotateX(3deg) rotateZ(-2deg)!important; }
+html[data-motion="paused"] .hero-bg-slides { transform:none; }
 html[data-motion="paused"] .hero-bg-slide,html[data-motion="paused"] .reveal,html[data-motion="paused"] .work-frame { transition:none!important; }
 html[data-motion="paused"] .hero-scroll::after,html[data-motion="paused"] .hero-content p,html[data-motion="paused"] .hero-title { animation:none!important; opacity:1!important; }
 html[data-motion="paused"] .work-frame { transform:none!important; }
@@ -53,7 +53,7 @@ html[data-motion="paused"] .work-frame { transform:none!important; }
  .hero-sub { font-size:.8rem; }.hero-sub-poem {font-size:1.12rem;}
  .hero-positioning { font-size:.68rem; margin-top:14px; max-width:29em; }
  .hero-enter { font-size:.72rem; margin-top:9px; padding:8px 0; gap:38px; }
- .hero-bg-slides { inset:51% 8% 17% 9%; transform:rotateY(-7deg) rotateZ(-2deg); }
+ .hero-bg-slides { inset:51% 8% 17% 9%; transform:none; }
  .hero-bg-slides::before { inset:-10px; }.hero-bg-slides::after { inset:-21px; }
  .hero-orbit { top:45%; left:0; width:110vw; height:110vw; }
  .hero-orbit span { font-size:8px; }
@@ -64,9 +64,30 @@ html[data-motion="paused"] .work-frame { transform:none!important; }
  .hero-scroll { display:none; }
  .works-grid { gap:3.5rem; }
  #light-field { opacity:.5; }
- html[data-motion="paused"] .hero-bg-slides { transform:rotateY(-7deg) rotateZ(-2deg)!important; }
+ html[data-motion="paused"] .hero-bg-slides { transform:none; }
 }
 @media(prefers-reduced-motion:reduce) {
  html {scroll-behavior:auto!important;} *,*::before,*::after {animation:none!important;transition:none!important;}
  .reveal,.hero-content p,.hero-title {opacity:1!important;transform:none!important;}
+}
+
+/* Environment study v2: the architecture carries depth, never the photographs. */
+#hero {background:#181d1b;}
+#light-field {opacity:1;}
+.hero-orbit {display:none;}
+.hero-bg-slides {inset:24% 10% 27% 51%; transform:none!important; box-shadow:none; will-change:auto; background:transparent;}
+.hero-bg-slides::before,.hero-bg-slides::after {display:none;}
+.hero-bg-slide {background-size:contain;background-repeat:no-repeat;box-shadow:none;transform:none!important;}
+.hero-bg-veil {background:linear-gradient(90deg,rgba(8,10,9,.80),rgba(8,10,9,.48) 32%,transparent 58%),linear-gradient(0deg,#0b0a09,transparent 12%);}
+.hero-content {z-index:2;}
+.hero-title {text-shadow:0 3px 25px #0005;}
+.scene-caption {left:51%;bottom:18%;}
+.work-frame,.work-card:hover .work-frame {transform:none!important;}
+.work-frame::after {display:none;}
+.work-card:hover .work-frame img {transform:none;}
+@media(max-width:768px){
+ #light-field {opacity:1;}
+ .hero-bg-slides {inset:51% 7% 18% 7%;transform:none!important;}
+ .hero-bg-veil {background:linear-gradient(180deg,rgba(8,10,9,.72),rgba(8,10,9,.42) 45%,transparent 60%,#0b0a09);}
+ .scene-caption {left:7%;bottom:11%;}
 }
