@@ -857,6 +857,7 @@ footer {
 #hero-water{ position:absolute; inset:0; z-index:1; pointer-events:none;
   mix-blend-mode:screen; opacity:0.56; filter:blur(1.5px); -webkit-filter:blur(1.5px); }
 </style>
+<link rel="stylesheet" href="cinematic.css">
 </head>
 <body>
 
@@ -889,14 +890,22 @@ footer {
   <!-- HERO_ROTATION_END -->
 
   <div class="hero-bg-veil"></div>
-  <canvas id="hero-water" aria-hidden="true"></canvas>
+  <canvas id="light-field" aria-hidden="true"></canvas>
+  <div class="hero-orbit" aria-hidden="true"><span>LIGHT / MATERIAL / SPACE</span></div>
   <div class="hero-content">
     <p class="hero-mark">atelier TECNOFORM &nbsp; / &nbsp; est. 1983</p>
     <h1 class="hero-title">光と水を、<br><em>空間に。</em></h1>
     <p class="hero-sub"><em class="hero-sub-poem">Glass, Washi &amp; Light</em><br>神戸の工房から、国内外の空間へ。</p>
     <p class="hero-positioning">ガラス・和紙・光のアート ｜ 構想から制作・設置まで一貫制作</p>
+    <a class="hero-enter" href="#works"><span data-cinema-ja="光の作品をめぐる" data-cinema-en="Explore the works">光の作品をめぐる</span><span aria-hidden="true">↗</span></a>
   </div>
-  <div class="hero-scroll">Scroll</div>
+  <a class="hero-scroll" href="#works">Scroll to discover</a>
+  <div class="scene-caption"><span class="scene-kicker">SELECTED SCENE <span id="scene-number">01 / 06</span></span><p id="scene-title">ザ・リッツ・カールトン東京</p></div>
+  <div class="scene-controls" aria-label="作品写真と動きの操作">
+    <button type="button" id="scene-prev" aria-label="前の作品写真">←</button>
+    <button type="button" id="scene-next" aria-label="次の作品写真">→</button>
+    <button type="button" id="motion-toggle" aria-pressed="false">動きを止める</button>
+  </div>
 </section>
 
 <!-- TRUST BAR -->
@@ -1321,17 +1330,7 @@ lb.addEventListener('touchend', function(e){
   if(Math.abs(dx) > 60){ showImage(currentIdx + (dx < 0 ? 1 : -1)); }
 }, {passive: true});
 
-/* ============ HERO BG SLIDES ============ */
-(function(){
-  var slides = document.querySelectorAll('.hero-bg-slide');
-  if(slides.length < 2) return;
-  var cur = 0;
-  setInterval(function(){
-    slides[cur].classList.remove('active');
-    cur = (cur + 1) % slides.length;
-    slides[cur].classList.add('active');
-  }, 5500);
-})();
+/* Hero slideshow and motion are managed together in cinematic.js. */
 
 /* ============ NAV ============ */
 (function(){
@@ -1426,82 +1425,7 @@ lb.addEventListener('touchend', function(e){
   if(document.readyState!=="loading") init(); else document.addEventListener("DOMContentLoaded", init);
 })();
 </script>
-<script>
-(function(){
-  var hero=document.getElementById('hero'), canvas=document.getElementById('hero-water');
-  if(!hero||!canvas) return;
-  var ctx=canvas.getContext('2d');
-  var cols,rows,cur,prev,off,offCtx,offImg,offData, damping=0.973, W=0,H=0, t0=Date.now();
-  function build(){
-    var dpr=Math.min(window.devicePixelRatio||1,2);
-    W=hero.clientWidth||window.innerWidth; H=hero.clientHeight||window.innerHeight;
-    canvas.width=W*dpr; canvas.height=H*dpr;
-    canvas.style.width=W+'px'; canvas.style.height=H+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    var target=150;
-    if(H>=W){rows=target;cols=Math.max(40,Math.round(target*(W/H)));}
-    else{cols=target;rows=Math.max(40,Math.round(target*(H/W)));}
-    cur=new Float32Array(cols*rows); prev=new Float32Array(cols*rows);
-    off=document.createElement('canvas'); off.width=cols; off.height=rows;
-    offCtx=off.getContext('2d'); offImg=offCtx.createImageData(cols,rows); offData=offImg.data;
-  }
-  build();
-  var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(build,200); });
-  addEventListener('load', build);
-  function drop(lx,ly,s){
-    var gx=Math.floor(lx/W*cols), gy=Math.floor(ly/H*rows), R=3;
-    for(var y=-R;y<=R;y++)for(var x=-R;x<=R;x++){
-      var nx=gx+x,ny=gy+y;
-      if(nx<1||ny<1||nx>=cols-1||ny>=rows-1)continue;
-      var d2=x*x+y*y; if(d2>R*R)continue;
-      cur[nx+ny*cols]+=s*(1-Math.sqrt(d2)/R);
-    }
-  }
-  function step(){
-    for(var y=1;y<rows-1;y++){var r=y*cols;
-      for(var x=1;x<cols-1;x++){var i=r+x;
-        var n=(cur[i-1]+cur[i+1]+cur[i-cols]+cur[i+cols])*0.5-prev[i]; n*=damping; prev[i]=n;}}
-    var t=cur;cur=prev;prev=t;
-  }
-  function render(){
-    var d=offData, N=cols*rows, t=(Date.now()-t0)/1000;
-    for(var i=0,p=0;i<N;i++,p+=4){
-      var x=i%cols, y=(i/cols)|0, nx=x/cols, ny=y/rows;
-      var sx=(x>0&&x<cols-1)?(cur[i-1]-cur[i+1]):0;
-      var sy=(i>=cols&&i<N-cols)?(cur[i-cols]-cur[i+cols]):0;
-      var spec=sx*0.7+sy*0.7;
-      var glint=spec>0?(spec/32):0; if(glint>1)glint=1;
-      var energy=Math.abs(cur[i])/65; if(energy>1)energy=1;
-      // 風：水面全体がゆっくり流れる光の帯
-      var w=Math.sin(nx*4.2 + t*0.55)*Math.sin(ny*3.0 - t*0.42);
-      var wind = w>0 ? Math.pow(w,1.6)*0.13 : 0;
-      var a=glint*0.5+energy*0.14+wind; if(a>0.5)a=0.5;
-      d[p]=240; d[p+1]=230; d[p+2]=206; d[p+3]=a*255;
-    }
-    offCtx.putImageData(offImg,0,0);
-    ctx.clearRect(0,0,W,H);
-    ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
-    ctx.drawImage(off,0,0,W,H);
-  }
-  function loop(){ if(hero.getBoundingClientRect().bottom>0){ step(); render(); } requestAnimationFrame(loop); }
-  loop();
-  setTimeout(function(){ drop(W*0.5,H*0.44,200); }, 500);
-  var lastMove=0;
-  function pt(e){
-    var t=e.touches?e.touches[0]:e, r=hero.getBoundingClientRect();
-    var lx=t.clientX-r.left, ly=t.clientY-r.top;
-    if(lx<0||ly<0||lx>W||ly>H)return;
-    if(e.type==='mousemove'){ var now=Date.now(); if(now-lastMove<60)return; lastMove=now; drop(lx,ly,26); }
-    else drop(lx,ly,115);
-  }
-  addEventListener('mousemove',pt,{passive:true});
-  addEventListener('touchstart',pt,{passive:true});
-  setInterval(function(){
-    if(hero.getBoundingClientRect().bottom<=0)return;
-    drop(W*(0.15+Math.random()*0.7), H*(0.2+Math.random()*0.6), 45+Math.random()*30);
-  }, 5500);
-})();
-</script>
+<script src="cinematic.js"></script>
 <script src="mirai.js"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "544778460112444680d89fb7cb171e9f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
