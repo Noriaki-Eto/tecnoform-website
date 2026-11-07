@@ -1152,12 +1152,18 @@ footer {
 </footer>
 
 <!-- MIRAI CONCIERGE v2 -->
-<button class="mirai-launcher" id="miraiLauncher" type="button" aria-controls="miraiPanel" aria-expanded="false"><span class="mirai-launcher-mark">M</span><span>AIコンシェルジュに相談</span></button>
-<aside class="mirai-panel" id="miraiPanel" aria-hidden="true" aria-label="ミライ AIコンシェルジュ">
- <div class="mirai-head"><div><div class="mirai-kicker">MIRAI / AI CONCIERGE</div><div class="mirai-title">ミライ｜作品案内・空間づくりのご相談</div></div><button class="mirai-close" id="miraiClose" type="button" aria-label="閉じる">×</button></div>
- <div class="mirai-stream" id="miraiStream">
-  <div class="mirai-msg bot">こんにちは。atelier TECNOFORMのAIコンシェルジュ「ミライ」です。<br><br>作品を探す、素材や技術について聞く、空間づくりを相談する——その入口をお手伝いします。<br><br>「ホテルの事例」「和紙で何ができる？」「エントランスを相談したい」など、そのまま入力してください。</div>
-  <div class="mirai-quick"><button class="mirai-chip" type="button" data-q="ホテルの事例を見たい">ホテルの事例</button><button class="mirai-chip" type="button" data-q="和紙で何ができますか">和紙について</button><button class="mirai-chip" type="button" data-q="ガラスアートの事例">ガラスアート</button><button class="mirai-chip" type="button" data-q="空間デザインを相談したい">相談を始める</button></div>
+<button class="mirai-launcher" id="miraiLauncher" type="button" aria-controls="miraiPanel" aria-expanded="false"><span class="mirai-launcher-mark">M</span><span>作品案内・よくある質問</span></button>
+<aside class="mirai-panel" id="miraiPanel" aria-hidden="true" aria-label="ミライ 作品案内・よくある質問">
+ <div class="mirai-head"><div><div class="mirai-kicker">MIRAI / 作品案内・FAQ</div><div class="mirai-title">ミライ｜作品案内・空間づくりのご相談</div></div><button class="mirai-close" id="miraiClose" type="button" aria-label="閉じる">×</button></div>
+ <div class="mirai-stream" id="miraiStream" aria-label="相談の会話">
+  <section id="miraiFAQ" aria-label="よくある質問">
+   <p class="mirai-faq-intro">用意した質問と回答を探す窓口です。AIが自由に回答する機能ではありません。検索は候補を探し、自由入力は相談メモに残せます。メモやフォームへの転記だけでは送信されません。</p>
+   <div class="mirai-routes" aria-label="ご用件"><button type="button" class="mirai-chip" data-mirai-route="new" disabled>新しい制作の相談</button><button type="button" class="mirai-chip" data-mirai-route="existing" disabled>依頼中・納品済みの件</button><button type="button" class="mirai-chip" data-mirai-route="issue" disabled>不具合・仕上がりの相談</button><button type="button" class="mirai-chip" data-mirai-route="emergency" disabled>安全に関わる異常</button></div>
+   <label for="miraiFAQCategory">分類で探す</label><select id="miraiFAQCategory" disabled><option value="">すべての分類</option></select>
+   <label for="miraiFAQSearch">言葉で探す</label><input id="miraiFAQSearch" type="search" maxlength="1200" placeholder="例：和紙のライトはいくら？" disabled>
+   <p id="miraiFAQStatus" class="mirai-note" role="status" aria-live="polite">質問一覧を読み込んでいます。</p>
+   <div id="miraiFAQResults"></div><article id="miraiFAQAnswer" tabindex="-1" hidden></article>
+  </section>
   <form class="mirai-lead" id="miraiLead">
    <div class="mirai-lead-title">ご相談内容をまとめます。</div>
    <div class="mirai-field"><label for="miraiKind">ご相談の種類</label><input id="miraiKind" value="建築・空間デザイン／作品制作"></div>
@@ -1168,10 +1174,14 @@ footer {
    <div class="mirai-field"><label for="miraiName">会社名・お名前</label><input id="miraiName" required></div>
    <div class="mirai-field"><label for="miraiContact">返信先メールまたは電話番号</label><input id="miraiContact" required></div>
    <button class="mirai-send" type="submit">内容を確認してメールを作成</button>
-   <p class="mirai-note">入力内容はこの画面で整理し、送信時にメールアプリを開きます。ミライが見積・契約・納期・仕様を自動確定することはありません。</p>
+   <button class="mirai-chip" type="button" id="miraiCopyMail">相談文をコピー</button>
+   <p id="miraiMailStatus" role="status" aria-live="polite" class="mirai-note">まだ送信されていません。メールアプリからご自身で送信してください。開かない場合は相談文をコピーできます。</p>
+   <textarea id="miraiMailText" aria-label="コピー用の相談文（未送信）" readonly hidden></textarea>
+   <p class="mirai-note">通常のお問い合わせ：<a href="mailto:info@atelier-tecnoform.com">info@atelier-tecnoform.com</a> ／ <a href="tel:0788217551">078-821-7551</a>。この画面では送信・受領を確認できません。見積・契約・納期・仕様を自動確定することはありません。</p>
   </form>
  </div>
- <form class="mirai-compose" id="miraiCompose"><input class="mirai-input" id="miraiInput" autocomplete="off" placeholder="作品・素材・ご相談について質問"><button class="mirai-submit" type="submit">送信</button></form>
+ <p class="mirai-note mirai-disclosure">この窓口は用意したFAQを表示します。AIによる回答生成は行いません。相談メモは再読み込みで消去されます。</p><button class="mirai-chip" id="miraiReview" type="button">相談内容を確認する</button><div id="miraiStatus" class="mirai-note" role="status" aria-live="polite"></div>
+ <form class="mirai-compose" id="miraiCompose"><input class="mirai-input" id="miraiInput" autocomplete="off" aria-label="問い合わせに残したい内容" placeholder="問い合わせに残したい内容"><button class="mirai-submit" type="submit">メモに追加</button></form>
 </aside>
 
 <!-- LIGHTBOX -->
@@ -1432,6 +1442,7 @@ lb.addEventListener('touchend', function(e){
 </script>
 <script src="cinematic.js"></script>
 <script src="mirai.js"></script>
+<script type="module" src="faq-ui.mjs"></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "544778460112444680d89fb7cb171e9f"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
