@@ -1,0 +1,16 @@
+﻿column,meaning
+ward,行政区名（神戸市9区）
+jis_code,行政区JISコード（文字列）
+registered_population_2025_09,2025年9月末 住民基本台帳人口（人）
+registered_population_2026_09,2026年9月末 住民基本台帳人口（人）
+population_delta,人口差（2026−2025、人）
+households_2025_09,2025年9月末 総世帯数（世帯）
+households_2026_09,2026年9月末 総世帯数（世帯）
+households_delta,総世帯数の差（世帯）
+single_person_households_2025_09,2025年9月末 1人世帯（世帯）
+single_person_households_2026_09,2026年9月末 1人世帯（世帯）
+single_person_delta,1人世帯の差（世帯）
+single_person_share_2025_pct,2025年1人世帯構成比（％、小数4桁）
+single_person_share_2026_pct,2026年1人世帯構成比（％、小数4桁）
+single_person_share_delta_pp,構成比の前年差（パーセントポイント）
+other_households_delta,2人以上世帯数の前年差＝households_delta−single_person_delta（世帯）
