@@ -1,0 +1,80 @@
+name: UDC189 city Kobe official 4-CSV byte audit
+on:
+  push:
+    branches: [verification/udc189-official-csv-20261122]
+    paths:
+      - '.github/workflows/udc189-official-csv-20261122.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  raw-official-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and inspect four raw city CSV files without altering publication
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, hashlib, io, json, os, pathlib, urllib.request
+          urls = [
+            'https://www.city.kobe.lg.jp/documents/30092/2025-eurf325004.csv',
+            'https://www.city.kobe.lg.jp/documents/30092/2026-eurf325004.csv',
+            'https://www.city.kobe.lg.jp/documents/30092/2025-eurf323000.csv',
+            'https://www.city.kobe.lg.jp/documents/30092/2026-eurf323000.csv'
+          ]
+          output = pathlib.Path('udc189-official-raw-only')
+          output.mkdir(exist_ok=False)
+          report = []
+          for url in urls:
+              name = url.rsplit('/', 1)[-1]
+              request = urllib.request.Request(url, headers={'User-Agent':'UDC2026-Public-Statistics-Verification/1.0', 'Accept':'text/csv,*/*;q=0.1'})
+              with urllib.request.urlopen(request,timeout=35) as response:
+                  status = response.status
+                  mime = response.headers.get('Content-Type','')
+                  raw = response.read(1_000_001)
+              if status != 200 or not 1000 <= len(raw) <= 1000000 or raw[:256].lstrip().lower().startswith((b'<html',b'<!doctype')):
+                  raise RuntimeError(f'FAILED OFFICIAL RAW FETCH {name}: HTTP {status}, bytes {len(raw)}, content-type {mime}')
+              encoding = 'utf-8-sig'
+              try:
+                  decoded = raw.decode(encoding)
+              except UnicodeDecodeError:
+                  encoding = 'cp932'
+                  decoded = raw.decode(encoding)
+              rows = list(csv.reader(io.StringIO(decoded)))
+              if len(rows)<30 or max(map(len,rows))<3:
+                  raise RuntimeError('OFFICIAL CSV STRUCTURE FAILED: '+name)
+              sha = hashlib.sha256(raw).hexdigest()
+              (output/name).write_bytes(raw)
+              report.append({'filename':name,'source_url':url,'sha256':sha,'bytes':len(raw),'encoding':encoding,'rows':len(rows),'max_columns':max(map(len,rows)),'content_type':mime})
+              print('OFFICIAL_RAW_CAPTURE',json.dumps(report[-1],ensure_ascii=False))
+              print('OFFICIAL_FIRST_3_ROWS',name,json.dumps(rows[:3],ensure_ascii=False)[:3500])
+              lookfor = name.split('-')[0]
+              sample=[r for r in rows if any(lookfor in str(c) for c in r[:3]) and any('09' in str(c) or '9月' in str(c) for c in r[:3])]
+              print('OFFICIAL_SEPTEMBER_ROWS_FIRST_12',name,'matched=',len(sample),json.dumps(sample[:12],ensure_ascii=False)[:7500])
+          source=pathlib.Path('udc2026-entry189/KOBE_9_WARDS_2025_2026.csv').read_bytes()
+          src_sha=hashlib.sha256(source).hexdigest()
+          expected='a34ae3f6d293122e83548708f6aa09ff63e4b80cbf07ffe917d5a6bec44ec858'
+          if src_sha != expected: raise RuntimeError('PUBLIC WORK PRODUCT SHA CHANGED; stop before comparison')
+          wards=list(csv.DictReader(io.StringIO(source.decode('utf-8-sig'))))
+          if len(wards)!=9 or len({w['jis_code'] for w in wards})!=9: raise RuntimeError('EXPECTED WARD CARDINALITY FAIL')
+          for w in wards:
+              for label,a,b,d in [
+                 ('population','registered_population_2025_09','registered_population_2026_09','population_delta'),
+                 ('total_households','households_2025_09','households_2026_09','households_delta'),
+                 ('single_households','single_person_households_2025_09','single_person_households_2026_09','single_person_delta')]:
+                  if int(w[b])-int(w[a]) != int(w[d]):raise RuntimeError('DERIVED DELTA MISMATCH '+w['ward']+' '+label)
+          counts={k:sum(int(w[k]) for w in wards) for k in ('population_delta','households_delta','single_person_delta')}
+          if counts!={'population_delta':-5576,'households_delta':5160,'single_person_delta':8815}:raise RuntimeError('PUBLIC TOTAL MISMATCH')
+          print('PUBLIC_SOURCE_SHA_AND_9_WARD_DELTA_CHECK_PASSED',src_sha,counts)
+          print('RAW_CAPTURE_STATUS: 4/4 OFFICIAL RAW BYTES ACQUIRED. OFFICIAL FIELD-BY-FIELD 54/54 CHECK NOT YET CLAIMED.')
+          (output/'manifest.json').write_text(json.dumps({'raw_csv':report,'public_work_product_sha256':src_sha,'public_totals':counts,'official_54_cells_verified':False,'limitations':'No 54-cell official original-table comparison yet; hsrc elevation redistribution not addressed.'},ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+      - name: Keep bounded public-source evidence for independent retrieval
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: udc189-public-kobe-official-4csv-raw-20261122
+          path: udc189-official-raw-only
+          retention-days: 7
