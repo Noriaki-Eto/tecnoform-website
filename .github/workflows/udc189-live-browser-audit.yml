@@ -1,0 +1,72 @@
+name: UDC189 public browser render verification (one-off)
+on:
+  push:
+    branches:
+      - verification/udc189-live-browser-20261121
+permissions:
+  contents: read
+jobs:
+  browser-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Install isolated Playwright browser
+        run: |
+          npm install --prefix /tmp/udc189-browser --no-save playwright@1.58.2
+          /tmp/udc189-browser/node_modules/.bin/playwright install chromium --with-deps
+      - name: Test actual HTTPS page, sorting and CSV download
+        shell: bash
+        run: |
+          cat > /tmp/udc189-browser/verify.cjs <<'JS'
+          const {chromium}=require('playwright'), fs=require('fs'), crypto=require('crypto');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            const results=[];
+            for (const w of [390,1280]) {
+              const ctx=await browser.newContext({viewport:{width:w,height:850},deviceScaleFactor:1,acceptDownloads:true});
+              const page=await ctx.newPage();
+              const errors=[];
+              page.on('pageerror',e=>errors.push(String(e).slice(0,200)));
+              const response=await page.goto('https://atelier-tecnoform.com/udc2026-entry189/',{waitUntil:'networkidle',timeout:45000});
+              const h1=(await page.locator('h1').first().innerText()).replace(/\s+/g,' ').trim();
+              const count=await page.locator('.row').count();
+              const sort=page.locator('#sort');
+              await sort.selectOption('single');
+              const firstSingle=(await page.locator('.row .wardname').first().innerText()).trim();
+              await sort.selectOption('order');
+              const firstOrder=(await page.locator('.row .wardname').first().innerText()).trim();
+              const overflow=await page.evaluate(()=>document.documentElement.scrollWidth > innerWidth + 2);
+              let csv={ok:false};
+              if(w===390){
+                const promise=page.waitForEvent('download',{timeout:10000});
+                await page.locator('#csvW').click();
+                const dl=await promise;
+                const f=await dl.path();
+                const data=fs.readFileSync(f);
+                const text=data.toString('utf8').replace(/^\uFEFF/,'');
+                csv={ok:data.length>500 && /東灘区/.test(text),bytes:data.length,sha256:crypto.createHash('sha256').update(data).digest('hex'),filename:dl.suggestedFilename()};
+              }
+              await page.screenshot({path:'/tmp/udc189-browser/live-'+w+'.png',fullPage:true});
+              const obj={width:w,http:response.status(),finalUrl:page.url(),h1,wardCards:count,firstSingle,firstOrder,overflow,errors,csv};
+              results.push(obj);
+              console.log('LIVE_BROWSER_RESULT',JSON.stringify(obj));
+              await ctx.close();
+            }
+            await browser.close();
+            fs.writeFileSync('/tmp/udc189-browser/result.json',JSON.stringify(results,null,2));
+            if(results.some(r=>r.http!==200||r.wardCards!==9||r.overflow||r.errors.length||r.firstSingle===''
+                  ||r.firstOrder===''||r.firstSingle===r.firstOrder)
+                ||!results[0].csv.ok){process.exitCode=1;}
+          })().catch(e=>{console.error('LIVE_BROWSER_ERROR',e);process.exitCode=2;});
+          JS
+          node /tmp/udc189-browser/verify.cjs
+      - name: Preserve browser screenshots and test result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: udc189-live-browser-readonly-evidence
+          path: |
+            /tmp/udc189-browser/live-390.png
+            /tmp/udc189-browser/live-1280.png
+            /tmp/udc189-browser/result.json
+          retention-days: 7
