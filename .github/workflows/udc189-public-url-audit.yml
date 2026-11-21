@@ -1,0 +1,68 @@
+name: UDC189 public HTTPS verification (one-off branch)
+
+on:
+  push:
+    branches:
+      - verification/udc189-public-url-20261121
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-website:
+    name: Third-party HTTPS GET + exact content checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check actual live public site from GitHub-hosted runner
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import os
+          import sys
+          import urllib.error
+          import urllib.request
+          from urllib.parse import urlparse
+
+          base = "https://atelier-tecnoform.com/udc2026-entry189/"
+          known = {
+              "index.html": ("c19f255bd79b96e75e8390dcc8f2d30c4bb179231cf39b8c6828bf500ee57ce4", b"KOBE OPEN TERRAIN ATLAS"),
+              "KOBE_9_WARDS_2025_2026.csv": ("a34ae3f6d293122e83548708f6aa09ff63e4b80cbf07ffe917d5a6bec44ec858", None),
+              "KOBE_DATA_DICTIONARY_JP.csv": ("ccfa6883d8c4678404d64ad9de5b72d89eb9595fb42aef8f2c01f8d2f9d5e11b", None),
+              "SOURCE_AND_METHODS_JP.txt": ("15e9fa7408c727cacba5c1f04eb4a98ce2a099e2469a90fa7616aad93e6cd023", None),
+          }
+          results = []
+          for name, (expected_sha, marker) in known.items():
+              url = base + name if name != "index.html" else base
+              try:
+                  req = urllib.request.Request(url, headers={"User-Agent": "TECNOFORM-Public-URL-Check/1.0"})
+                  with urllib.request.urlopen(req, timeout=20) as response:
+                      data = response.read(1024 * 1024)
+                      status = response.status
+                      final_url = response.geturl()
+                      mime = response.headers.get("Content-Type", "")
+                  digest = hashlib.sha256(data).hexdigest()
+                  is_valid = (
+                      status == 200
+                      and urlparse(final_url).hostname == "atelier-tecnoform.com"
+                      and digest == expected_sha
+                      and (marker is None or marker in data)
+                  )
+                  detail = f"HTTP {status}; bytes={len(data)}; SHA256={digest}; MIME={mime}; final={final_url}"
+              except Exception as exc:
+                  is_valid = False
+                  detail = f"{type(exc).__name__}: {exc}"
+              print(f"{'PASS' if is_valid else 'FAIL'} {name}: {detail}", flush=True)
+              results.append((name, is_valid, detail))
+          summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+          if summary_path:
+              with open(summary_path, "a", encoding="utf-8") as f:
+                  f.write("## UDC2026 entry 189: live HTTPS verification\n\n")
+                  f.write("Independent HTTP GET by a public GitHub-hosted standard runner. Original archived 4-file SHA256s are the comparison baseline; this is not a browser rendering test or an application submission.\n\n")
+                  for name, ok, detail in results:
+                      f.write(f"- {'PASS' if ok else 'FAIL'} **{name}** — {detail}\n")
+          if not all(ok for _, ok, _ in results):
+              sys.exit(1)
+          PY
