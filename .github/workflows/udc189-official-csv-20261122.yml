@@ -95,7 +95,7 @@ jobs:
                   for metric,kind,col in [
                     ('population','人口(計)','registered_population_'+yr+'_09'),
                     ('households','世帯数','households_'+yr+'_09')]:
-                      matches=[(line,r) for line,r in pop if norm(r['対象年月'])==period and norm(r['区CD'])==jis and norm(r['種別'])==kind and norm(r['行政区CD'])=='00000' and norm(r['支所等'])=='合計' and norm(r['旧連絡所'])=='']
+                      matches=[(line,r) for line,r in pop if norm(r['対象年月'])==period and norm(r['区CD'])==jis and norm(r['種別'])==kind and ((r['行政区CD']=='00000' and norm(r['支所等'])=='合計') if ward in ('北区','須磨区','西区') else (norm(r['支所等'])=='本区' and r['行政区CD'].startswith('000'))) and norm(r['旧連絡所'])=='']
                       if len(matches)!=1:
                           raise RuntimeError('UNIQUE OFFICIAL AGGREGATE ROW MISSING '+yr+' '+ward+' '+kind+' matches='+str(len(matches)))
                       line,r=matches[0];got=int(r['値']);expect=int(entry[col])
