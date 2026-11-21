@@ -71,6 +71,53 @@ jobs:
           print('RAW_CAPTURE_STATUS: 4/4 OFFICIAL RAW BYTES ACQUIRED. OFFICIAL FIELD-BY-FIELD 54/54 CHECK NOT YET CLAIMED.')
           (output/'manifest.json').write_text(json.dumps({'raw_csv':report,'public_work_product_sha256':src_sha,'public_totals':counts,'official_54_cells_verified':False,'limitations':'No 54-cell official original-table comparison yet; hsrc elevation redistribution not addressed.'},ensure_ascii=False,indent=2),encoding='utf-8')
           PY
+      - name: Compare 54 public ward-year-metric values to acquired official physical CSV rows
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,io,json,pathlib,unicodedata,hashlib
+          base=pathlib.Path('udc189-official-raw-only')
+          public=list(csv.DictReader(io.StringIO(pathlib.Path('udc2026-entry189/KOBE_9_WARDS_2025_2026.csv').read_text(encoding='utf-8-sig'))))
+          assert len(public)==9
+          def norm(v): return unicodedata.normalize('NFKC',str(v)).strip()
+          def load(name):
+              raw=(base/name).read_bytes()
+              try: t=raw.decode('utf-8-sig')
+              except UnicodeDecodeError: t=raw.decode('cp932')
+              return [(n,r) for n,r in enumerate(csv.DictReader(io.StringIO(t)),2)]
+          evidence=[]; mismatches=[]
+          for yr in ('2025','2026'):
+              pop=load(yr+'-eurf325004.csv')
+              homes=load(yr+'-eurf323000.csv')
+              period=yr+'09'
+              for entry in public:
+                  ward=entry['ward']; jis=entry['jis_code']
+                  for metric,kind,col in [
+                    ('population','人口(計)','registered_population_'+yr+'_09'),
+                    ('households','世帯数','households_'+yr+'_09')]:
+                      matches=[(line,r) for line,r in pop if norm(r['対象年月'])==period and norm(r['区CD'])==jis and norm(r['種別'])==kind and norm(r['行政区CD'])=='00000' and norm(r['支所等'])=='合計' and norm(r['旧連絡所'])=='']
+                      if len(matches)!=1:
+                          raise RuntimeError('UNIQUE OFFICIAL AGGREGATE ROW MISSING '+yr+' '+ward+' '+kind+' matches='+str(len(matches)))
+                      line,r=matches[0];got=int(r['値']);expect=int(entry[col])
+                      evidence.append({'year':yr,'ward':ward,'metric':metric,'expected':expect,'official':got,'raw_rows':[line],'source':yr+'-eurf325004.csv'})
+                      if got!=expect: mismatches.append(evidence[-1])
+                  one=[(line,r) for line,r in homes if norm(r['対象年月'])==period and norm(r['世帯構成'])=='1人世帯' and norm(r['区名']) in ((ward,) if ward!='須磨区' else ('須磨本区','北須磨支所'))]
+                  needed=2 if ward=='須磨区' else 1
+                  if len(one)!=needed:
+                      raise RuntimeError('OFFICIAL SINGLE-HOUSEHOLD SOURCE COUNT FAIL '+yr+' '+ward+' rows='+str(len(one)))
+                  got=sum(int(r['世帯数']) for line,r in one)
+                  expect=int(entry['single_person_households_'+yr+'_09'])
+                  ev={'year':yr,'ward':ward,'metric':'single_person_households','expected':expect,'official':got,'raw_rows':[line for line,_ in one],'source':yr+'-eurf323000.csv'}
+                  evidence.append(ev)
+                  if got!=expect:mismatches.append(ev)
+          if len(evidence)!=54:raise RuntimeError('DIRECT COMPARISON CARDINALITY IS NOT 54')
+          print('OFFICIAL_ROW_COMPARISONS',json.dumps(evidence,ensure_ascii=False))
+          print('OFFICIAL_MISMATCHES',json.dumps(mismatches,ensure_ascii=False))
+          if mismatches:raise RuntimeError(str(len(mismatches))+' official source vs fixed published values differ')
+          result={'comparison_count':len(evidence),'status':'PASS','raw_physical_cell_count':sum(len(e['raw_rows']) for e in evidence),'note':'須磨区の1人世帯は須磨本区と北須磨支所の正規集計を使用。','details':evidence}
+          (base/'OFFICIAL_54_ROWS_AUDIT.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('UDC189_OFFICIAL_54_OF_54_ALL_MATCHED; raw physical cells=',result['raw_physical_cell_count'])
+          PY
       - name: Keep bounded public-source evidence for independent retrieval
         if: success()
         uses: actions/upload-artifact@v4
