@@ -1,0 +1,70 @@
+name: UDC189 public application form question inspection (read only)
+on:
+  push:
+    branches:
+      - verification/udc189-form-read-20261121
+permissions:
+  contents: read
+jobs:
+  inspect-form:
+    name: Read publicly accessible Google Form questions without submitting
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check official form and print public question metadata
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, re, json, html, sys, hashlib
+          url = 'https://forms.gle/aqpzywjTeK48mchj6'
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; TECNOFORM-FormReadOnly/1.0)'})
+          try:
+              with urllib.request.urlopen(req, timeout=25) as res:
+                  raw = res.read(3*1024*1024)
+                  status = res.status
+                  final = res.geturl()
+                  content_type = res.headers.get('Content-Type', '')
+          except Exception as e:
+              print('FETCH_ERROR', repr(e), flush=True); sys.exit(2)
+          page = raw.decode('utf-8','replace')
+          print('HTTP',status,'FINAL',final,'BYTES',len(raw),'SHA256',hashlib.sha256(raw).hexdigest(),'CONTENT_TYPE',content_type,flush=True)
+          print('TITLE',html.unescape(re.search(r'<title[^>]*>(.*?)</title>',page,re.S|re.I).group(1)).strip()[:300] if re.search(r'<title[^>]*>(.*?)</title>',page,re.S|re.I) else '[not available]',flush=True)
+          if 'accounts.google.com' in final or 'ServiceLogin' in final:
+              print('BLOCKED authentication required; no attempt to bypass.',flush=True);sys.exit(3)
+          m=re.search(r'FB_PUBLIC_LOAD_DATA_\s*=\s*(\[.*?\]);',page,re.S)
+          if not m:
+              print('NO_PUBLIC_FORM_DATA detected; HTML_SNIPPET',re.sub(r'\s+',' ',page[:600]),flush=True);sys.exit(4)
+          try:
+              data=json.loads(m.group(1))
+              blocks=data[1][1]
+          except Exception as e:
+              print('PARSE_ERROR',repr(e),flush=True);sys.exit(5)
+          print('QUESTION_COUNT',len(blocks),flush=True)
+          def clean(s,lim=400):
+              return html.unescape(re.sub(r'\s+',' ',str(s or ''))).strip()[:lim]
+          def allowed_opts(entry):
+              vals=[]
+              if not isinstance(entry,list):return vals
+              for el in entry:
+                  if isinstance(el,list):
+                      for v in el:
+                          if isinstance(v,list):
+                              for opt in v:
+                                  if isinstance(opt,list) and opt and isinstance(opt[0],str):
+                                      vals.append(clean(opt[0],170))
+              return list(dict.fromkeys(vals))[:25]
+          for i,q in enumerate(blocks[:150],1):
+              if not isinstance(q,list):continue
+              title=clean(q[1] if len(q)>1 else '',500)
+              desc=clean(q[2] if len(q)>2 else '',650)
+              typ=q[3] if len(q)>3 else None
+              required=None
+              if len(q)>4 and isinstance(q[4],list):
+                  flags=[]
+                  for el in q[4]:
+                      if isinstance(el,list) and len(el)>2 and isinstance(el[2],int):
+                          flags.append(el[2])
+                  required=flags
+              print('Q',i,'TYPE',typ,'REQUIRED_FLAGS',str(required)[:120],'TITLE',json.dumps(title,ensure_ascii=False),'DESCRIPTION',json.dumps(desc,ensure_ascii=False),'OPTIONS',json.dumps(allowed_opts(q[4] if len(q)>4 else []),ensure_ascii=False),flush=True)
+          print('READ_ONLY_NO_SUBMISSION',True,flush=True)
+          PY
