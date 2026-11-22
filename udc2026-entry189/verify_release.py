@@ -69,6 +69,10 @@ def verify(path):
     require(dictionary and source and "神戸市" in source.decode("utf-8-sig"), "source/dictionary missing")
     require(hashlib.sha256(csv_bytes).hexdigest() == EXPECTED_CSV_SHA256,
             "public CSV byte hash differs from the officially checked freeze")
+    require(csv_bytes == Path(path).with_name("KOBE_9_WARDS_2025_2026.csv").read_bytes(),
+            "ZIP population CSV and standalone public CSV differ")
+    require(dictionary == Path(path).with_name("KOBE_DATA_DICTIONARY_JP.csv").read_bytes(),
+            "ZIP dictionary CSV and standalone public dictionary differ")
     require(source == Path(path).with_name("SOURCE_AND_METHODS_JP.txt").read_bytes(),
             "ZIP source note and published standalone source note differ")
     require(not re.search(rb"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", dictionary + b"\n" + source),
