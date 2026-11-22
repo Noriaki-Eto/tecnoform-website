@@ -141,6 +141,18 @@ def verify(path):
             "+'\\r\\n';const blob=" in html, "browser CSV export CRLF contract changed; manual check required")
     require('id="csvW"' in html and 'id="sort"' in html, "download/sort controls missing")
     require(not re.search(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", html), "email address in public page")
+    # Prevent accidental release of the separately frozen R43 terrain sample or
+    # private entry metadata. This is a known-marker safeguard, not a rights clearance.
+    private_markers = (
+        b"KOBE_GSI_THREE_TRANSECTS_SOURCE_R41.csv",
+        b"longitude_deg,latitude_deg,sample_index,elevation_m",
+        b"ENTRY_FIELDS_PRIVATE.json",
+        b"canonical_R43/",
+    )
+    for label, payload in (("HTML", data), ("public population CSV", csv_bytes),
+                           ("public dictionary", dictionary), ("public source note", source)):
+        require(not any(marker in payload for marker in private_markers),
+                "frozen private terrain or entry metadata marker in "+label)
     return {"status": "PASS", "ward_count": 9, "column_count": len(HEADERS),
             "totals": TOTALS, "zip_members": sorted(NAMES),
             "html_sha256": hashlib.sha256(data).hexdigest(),
