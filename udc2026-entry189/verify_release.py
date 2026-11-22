@@ -20,6 +20,8 @@ NAMES = {
     "SOURCE_AND_METHODS_JP.txt",
 }
 WARDS = {"東灘区", "灘区", "中央区", "兵庫区", "北区", "長田区", "須磨区", "垂水区", "西区"}
+# Freeze of the 9-ward public population CSV, checked against 4 official CSV files.
+EXPECTED_CSV_SHA256 = "a34ae3f6d293122e83548708f6aa09ff63e4b80cbf07ffe917d5a6bec44ec858"
 TOTALS = {"population_delta": -5576, "households_delta": 5160,
           "single_person_delta": 8815, "other_households_delta": -3655}
 HEADERS = [
@@ -65,6 +67,12 @@ def verify(path):
         dictionary = z.read("KOBE_DATA_DICTIONARY_JP.csv")
         source = z.read("SOURCE_AND_METHODS_JP.txt")
     require(dictionary and source and "神戸市" in source.decode("utf-8-sig"), "source/dictionary missing")
+    require(hashlib.sha256(csv_bytes).hexdigest() == EXPECTED_CSV_SHA256,
+            "public CSV byte hash differs from the officially checked freeze")
+    require(source == Path(path).with_name("SOURCE_AND_METHODS_JP.txt").read_bytes(),
+            "ZIP source note and published standalone source note differ")
+    require(not re.search(rb"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", dictionary + b"\n" + source),
+            "email address found in ZIP supporting documents")
     header = list(rows[0])
     output = io.StringIO(newline="")
     writer = csv.writer(output, lineterminator="\r\n", quoting=csv.QUOTE_MINIMAL)
