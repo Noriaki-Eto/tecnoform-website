@@ -110,6 +110,30 @@ def verify(path):
                 css == ("plus" if value >= 0 else "minus"),
                 "visible citywide summary differs from 9-ward total: "+field)
 
+    # Match the front-page editorial highlight to the actual highest-ranked wards.
+    # This covers the two prominent insights outside the 9 ward cards.
+    # value-case highest-value claims: changes here must remain data-backed.
+    case = re.search(r'<div class="value-grid">(.+?)</div>\s*<p class="value-caption">', html, re.S)
+    require(case is not None, "value-case highlight section absent")
+    number_top = max(rows, key=lambda r: int(r["single_person_delta"]))
+    share_top = max(rows, key=lambda r: float(r["single_person_share_delta_pp"]))
+    number_claim = re.search(
+        r'1人世帯の増加数が最大</div><strong>([^<]+)</strong>'
+        r'<div class="big [^"]+">(\+[\d,]+)\s*<span[^>]*>世帯</span>',
+        case.group(1))
+    share_claim = re.search(
+        r'1人世帯の構成比上昇が最大</div><strong>([^<]+)</strong>'
+        r'<div class="big [^"]+">(\+[\d.]+)\s*<span[^>]*>pt</span>',
+        case.group(1))
+    require(number_claim is not None and share_claim is not None,
+            "highlighted comparisons missing or mislabelled")
+    require(number_claim.group(1) == number_top["ward"] and
+            int(number_claim.group(2).replace(",", "")) == int(number_top["single_person_delta"]),
+            "largest single-person household gain claim differs from 9-ward data")
+    require(share_claim.group(1) == share_top["ward"] and
+            abs(float(share_claim.group(2)) - float(share_top["single_person_share_delta_pp"])) <= 0.0051,
+            "largest single-person share increase claim differs from 9-ward data")
+
     anchor = re.search(r'<a\b[^>]*\bid="dataPack"[^>]*\bhref="data:application/zip;base64,([^\"]+)"', html, re.S)
     require(anchor is not None, "ZIP data link missing")
     raw_zip = base64.b64decode(anchor.group(1), validate=True)
