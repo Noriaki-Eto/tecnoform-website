@@ -57,6 +57,59 @@ def verify(path):
     for key, value in TOTALS.items():
         require(sum(int(r[key]) for r in rows) == value, "total mismatch: "+key)
 
+    # Fail if HTML cards or summary labels drift from the frozen 9-ward data.
+    card_pat = (r'<article class="row" data-order="(\d+)" data-other="(-?\d+)" '
+                r'data-pop="(-?\d+)" data-share="([\d.]+)" data-single="(-?\d+)">'
+                r'(.+?)</article>')
+    cards = re.findall(card_pat, html, re.S)
+    require(len(cards) == 9, "visible ward-card count invalid")
+    fields = [
+        ("single_person_delta", "1人世帯"),
+        ("other_households_delta", "2人以上"),
+        ("population_delta", "人口"),
+    ]
+    for index, (order, other, pop, share, single, markup) in enumerate(cards):
+        row = rows[index]
+        require(int(order) == index, "visual ward order differs from CSV order")
+        name = re.search(r'<div class="wardname">([^<]+)</div>', markup)
+        require(name is not None and name.group(1) == row["ward"], "visible ward name mismatch")
+        for displayed, field in [(other, "other_households_delta"),
+                                 (pop, "population_delta"),
+                                 (share, "single_person_share_delta_pp"),
+                                 (single, "single_person_delta")]:
+            require(float(displayed) == float(row[field]), row["ward"]+": sort data mismatch")
+        visible = re.findall(
+            r'<div class="v (plus|minus)">([+-][\d,]+)<small>([^<]+)</small></div>',
+            markup)
+        require(len(visible) == 3, row["ward"]+": visible metrics missing")
+        for (css, value, label), (field, expected_label) in zip(visible, fields):
+            actual = int(value.replace(",", ""))
+            require(actual == int(row[field]) and label == expected_label and
+                    css == ("plus" if actual >= 0 else "minus"),
+                    row["ward"]+": visible metric mismatch: "+field)
+        percent = re.search(
+            r'<div class="share">1人世帯比率 <strong>([+-][\d.]+)pt</strong>',
+            markup)
+        require(percent is not None and
+                abs(float(percent.group(1)) - float(row["single_person_share_delta_pp"])) < 0.0051,
+                row["ward"]+": visible share label mismatch")
+
+    summary = re.findall(
+        r'<div class="summary"><div class="label">([^<]+)</div>'
+        r'<div class="big (plus|minus)">([−+][\d,]+)</div>', html)
+    require(len(summary) == 4, "visible citywide summary count invalid")
+    summary_fields = [
+        ("登録人口の増減", "population_delta"),
+        ("総世帯数の増減", "households_delta"),
+        ("1人世帯の増減", "single_person_delta"),
+        ("2人以上世帯の増減", "other_households_delta"),
+    ]
+    for (label, css, visual), (expected_label, field) in zip(summary, summary_fields):
+        value = int(visual.replace("−", "-").replace(",", ""))
+        require(label == expected_label and value == TOTALS[field] and
+                css == ("plus" if value >= 0 else "minus"),
+                "visible citywide summary differs from 9-ward total: "+field)
+
     anchor = re.search(r'<a\b[^>]*\bid="dataPack"[^>]*\bhref="data:application/zip;base64,([^\"]+)"', html, re.S)
     require(anchor is not None, "ZIP data link missing")
     raw_zip = base64.b64decode(anchor.group(1), validate=True)
